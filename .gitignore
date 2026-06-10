@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Lab data files: keep raw and processed data out of the repo.
+# Helpers are code, not data. Commit scripts, not the .h5 files they read.
+*.h5
+*.hdf5
+*.nc
+*.tif
+*.tiff
+
