@@ -44,15 +44,39 @@ moves to your home folder.
 
 ## Which directory should I be in?
 
-This trips up everyone at first. When you run a script, your current directory matters because the script may look for input files using relative paths. Rule of thumb: be in the directory the script expects, which for our helpers is usually the directory containing the data file you want to inspect. The script itself can live anywhere as long as Python can find it.
+This trips up everyone at first, and the answer depends on understanding what "current directory" actually controls.
+
+**Your current directory does not control where the script lives.** As long as you give Python the full path to the script (or call it by name through other mechanisms covered later), the script can live anywhere on your machine.
+
+**Your current directory *does* control where the script writes its output**, and it controls tab-completion for any file paths you type. Anything the script saves (a plot, a derived data file, a log) usually lands in your current directory unless the script is written to save elsewhere.
+
+So the practical rule for DENNIS Lab helpers is:
+
+**Stand in the directory containing your data. Call the script by its full path.**
 
 ## Running a script
 
 ```
-python /path/to/show_h5_keys.py mydata.h5
+cd /Volumes/lab_data/swir_run42
+python ~/code/DENNIS_helpers/scripts/show_h5_keys.py imaging.h5
 ```
 
 This command has two parts after `python`. The first, `/path/to/show_h5_keys.py`, is the path to the script you want to run. The second, `mydata.h5`, is an *argument*: a value handed to the script, here the data file you want it to inspect. The script reads that argument and acts on it.
+
+You're in the data directory, so:
+- Tab-completion works when you type `imaging.h5`
+- Any outputs the script generates land alongside the input data
+- The data path you pass is short (just the filename) instead of a long absolute path
+
+The script's path is long, but you only type it once per session — and tools like shell aliases or putting `~/code/DENNIS_helpers/scripts/` on your `PATH` can shorten that too (we'll cover those later).
+
+### A note on writing scripts that don't care about the working directory
+
+Well-written helper scripts take file paths as arguments and open exactly those paths, with no assumptions about where the user is standing. If you find yourself writing a script that only works when run from a specific directory, that's usually a sign to refactor: take the path as an argument instead of hardcoding it or assuming a relative location.
+
+### Why we don't put data inside the repo
+
+You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data will be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this helper script repo, no. Much of our real datasets are imaging files that don't belong in version control. `CLAUDE.md` and our naming guide both prohibit committing data files. Data lives on lab storage; scripts live in the repo; you stand near the data and call the script.
 
 ## Conda environment commands
 

@@ -6,9 +6,17 @@ This doc covers what goes where, how to name and document a helper, and how to t
 
 Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipynb` files) go in `notebooks/`. Keep the two separate so it is always clear which files are importable tools and which are exploration.
 
-## Naming
+## Naming conventions
 
-Name scripts `verb_noun.py`: a verb saying what it does, a noun saying what it acts on. `show_h5_keys.py` shows the keys of an HDF5 file. `plot_qd_spectra.py` plots QD spectra. A name read aloud should tell a labmate what the script does before they open it. Use lowercase words joined by underscores.
+All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (`hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
+
+Beyond that, we use two grammatical patterns depending on what the file does.
+
+**Verb-first names for action scripts.** If the file's purpose is to *do* a task, name it with a verb followed by what it acts on, so the name reads like a command. Examples: `show_h5_keys.py` (shows the keys of an HDF5 file), `plot_spectra.py` (plots spectra), `convert_units.py` (converts units), `clean_metadata.py` (cleans metadata).
+
+**Noun-phrase names for functionality modules.** If the file's purpose is to *contain* code that other scripts import and use, name it with a noun or adjective-noun phrase describing what is inside, so the name reads like a topic. Examples: `ratio_analysis.py` (contains ratio analysis code), `hdr_processing.py` (contains HDR processing code), `broadband_segmentation.py` (contains broadband segmentation code).
+
+If you are unsure which category a file falls into, ask whether a colleague seeing it at the top of their screen will more often think "I want to run this" (verb) or "I want to import from this" (noun), and pick accordingly. If it is genuinely both, lean toward the verb form and import from it when needed.
 
 ## Minimum docstring
 
@@ -30,11 +38,11 @@ Open `scripts/show_h5_keys.py` and read it top to bottom. It is short and follow
 
 The **module docstring** explains the script and defines the HDF5 vocabulary (groups, datasets, attributes) on first use, then shows how to run it and how to import it.
 
-The **imports** are `sys` (to read the command-line argument) and `h5py` (to open the file).
+The **imports** are `argparse` (to define and read the command-line argument) and `h5py` (to open the file).
 
 `show_keys(path: str) -> None` is the **importable function** that does the real work. It opens the file and walks its tree. Because the logic lives in a named function with a type-hinted signature, another script can reuse it with `from scripts.show_h5_keys import show_keys` rather than copying code. The two private helpers, `_print_group` and `_print_attrs`, keep the recursion readable; the leading underscore signals "internal detail, not part of the public interface."
 
-`main()` reads the file path from the command line and calls `show_keys`. If the argument is missing, it prints a usage line and exits rather than failing with a confusing error.
+`main()` uses `argparse` to define one argument, the file path, then reads it and calls `show_keys`. We use `argparse` rather than reading `sys.argv` by hand because it gives a clear error and usage message for free when the argument is missing, and a `--help` flag automatically. Try `python scripts/show_h5_keys.py --help` to see it.
 
 The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work. `docs/00_python_code_basics.md` explains that block in full.
 
