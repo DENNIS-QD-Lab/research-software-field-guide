@@ -20,7 +20,7 @@ If you are unsure which category a file falls into, ask whether a colleague seei
 
 ## Minimum docstring
 
-Every script needs a docstring at the top of the file. If you are unsure what a docstring is, see `docs/00_python_code_basics.md`. At minimum it states three things:
+Every script needs a docstring at the top of the file. If you are unsure what a docstring is, see `docs/onboarding/00_python_code_basics.md`. At minimum it states three things:
 
 - **Purpose:** what the script does, in a sentence or two.
 - **Inputs:** what it expects, for example the command-line arguments.
@@ -44,6 +44,6 @@ The **imports** are `argparse` (to define and read the command-line argument) an
 
 `main()` uses `argparse` to define one argument, the file path, then reads it and calls `show_keys`. We use `argparse` rather than reading `sys.argv` by hand because it gives a clear error and usage message for free when the argument is missing, and a `--help` flag automatically. Try `python scripts/show_h5_keys.py --help` to see it.
 
-The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work. `docs/00_python_code_basics.md` explains that block in full.
+The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work. `docs/onboarding/00_python_code_basics.md` explains that block in full.
 
 Copy this shape for new helpers: a module docstring, imports, one or more well-named functions with type hints and docstrings, a `main()` for the command line, and the `if __name__` block to wire it up.
