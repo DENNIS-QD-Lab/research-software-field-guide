@@ -2,6 +2,30 @@
 
 This is the loop you repeat for every change. It is shown with the VS Code Source Control panel first, which is the path the lab recommends, and the equivalent terminal commands second. Use whichever you prefer; they do the same thing.
 
+If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see `../reference/git_recovery.md`. Don't panic and don't delete anything until you've checked your options.
+
+## Before you start new work
+
+Whether you just finished merging a PR or you're sitting down for a fresh session, run these three commands before making any changes:
+
+```
+git checkout main
+git pull
+git checkout -b <descriptive-branch-name>
+```
+
+What each does:
+1. Switch to the `main` branch.
+2. Pull the latest changes from GitHub into your local `main`. This catches anything your labmates merged while you were away.
+3. Create a new branch off the now-up-to-date `main`, and switch to it.
+
+This three-step ritual prevents the most common Git problems before they happen. Skipping step 2 is how branches end up "behind main" and merge conflicts proliferate.
+
+**Branch naming:** short, descriptive, kebab-case (hyphens). Examples: `add-show-keys`, `fix-hdf5-pathing`, `clarify-notebook-docs`. The branch name will appear in the PR title and in your Git history forever, so make it informative.
+
+**Don't reuse branch names from merged PRs.** Once `add-show-keys` has been merged, delete it (`git branch -d add-show-keys`) and start a new branch for the next change. Each branch corresponds to one logical change.
+
+
 ## The five-step loop
 
 **1. Pull the latest changes.** Start current so you are not building on stale code.
@@ -65,7 +89,7 @@ We branch for every change, even a one-line fix. Two reasons. It keeps `main` wo
 
 A *pull request* (PR) proposes merging your branch into `main` and is where review happens. After you push a branch, GitHub shows a prompt to open a PR for it; click it, or go to the repository's Pull Requests tab and click "New pull request."
 
-In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. `docs/08_code_review.md` covers the review itself.
+In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. `docs/onboarding/08_code_review.md` covers the review itself.
 
 ## Merge conflicts
 

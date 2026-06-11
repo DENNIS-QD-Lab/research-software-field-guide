@@ -225,5 +225,21 @@ __marimo__/
 *.tif
 *.tiff
 
-# macOS metadata
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# VS Code (mostly)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Jupyter
+.ipynb_checkpoints/
