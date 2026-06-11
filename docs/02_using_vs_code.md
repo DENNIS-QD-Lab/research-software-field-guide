@@ -20,6 +20,14 @@ The file tree on the left is the Explorer. Files marked with a colored letter ca
 
 At the bottom of the Explorer sidebar is the Outline view (expand the "Outline" header if it is collapsed). For a Python file it lists the functions and classes in that file. Click an entry to jump to it. This is useful for navigating longer scripts.
 
+## Setting up the `code` command (one-time setup)
+
+Before you can open VS Code from the terminal with `code .`, you need to 
+install the shell command once. Press Cmd+Shift+P, type "shell command", 
+and select "Shell Command: Install 'code' command in PATH". You only do 
+this once. After that, typing `code .` in any terminal folder opens that 
+folder in VS Code.
+
 ## The integrated terminal
 
 Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown. Cmd+\` (Mac) or Ctrl+\` (Windows) toggles the terminal panel open and closed.
