@@ -225,3 +225,5 @@ __marimo__/
 *.tif
 *.tiff
 
+# macOS metadata
+.DS_Store
