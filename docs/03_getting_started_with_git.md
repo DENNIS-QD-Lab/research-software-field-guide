@@ -24,4 +24,16 @@ Four words: pull, work, commit, push. Pull the latest changes from GitHub so you
 
 ## A word on branches
 
-You will not work directly on the main line of history, called the `main` branch. Instead you will make a *branch*, which is a parallel line where you can work without disturbing `main`, then merge it back when it is ready. This keeps `main` working at all times. `docs/05_daily_workflow.md` shows how to make and use a branch.
+A *branch* is a parallel timeline of the entire repository, not a flag on a single file. Every file in the repo is "on" your current branch. When you make a branch, you are making a separate line of history for the whole project that you can change without disturbing the main one.
+
+The main line of history is called the `main` branch. You will not work directly on it. Instead you make your own branch, do the work there, and merge it back into `main` when it is ready.
+
+Three consequences follow from "a branch is the whole repository," and they are worth holding onto:
+
+Switching branches changes the contents of your working directory to match that timeline. Files may appear, disappear, or change content when you switch. This is normal. Git is swapping in the state that branch records, not damaging your work.
+
+When you commit on a branch, the commit is recorded only on that branch until you merge it. Your changes are invisible to `main`, and to anyone working from `main`, until the merge happens.
+
+"Adding a new file on a branch" is shorthand for a sequence: switch to the branch, create the file in your working directory, then stage and commit it. The branch itself does not hold just that one file. It holds the whole repository state, now including your new file.
+
+We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. `docs/05_daily_workflow.md` shows the mechanics of making, using, and merging a branch.

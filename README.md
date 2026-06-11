@@ -47,3 +47,7 @@ These steps assume you have already cloned the repository and have Miniconda and
 ## Contributing
 
 Read `CONTRIBUTING.md` before adding a script or opening a pull request. The short version: make a branch, keep helpers small and well-named, write a docstring, and have one person review the change.
+
+## The `dev/` folder
+
+The `dev/` folder contains the design briefs used to build these docs and is kept for historical reference.

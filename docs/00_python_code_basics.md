@@ -18,7 +18,7 @@ A notebook has two kinds of cells. A *code cell* holds Python and runs when you 
 
 Read `scripts/show_h5_keys.py` from the top. Most files have these parts in this order.
 
-**Imports** bring in code written elsewhere. `import h5py` makes the `h5py` library available under the name `h5py`. `import sys` does the same for a built-in module. Imports go at the top.
+**Imports** bring in code written elsewhere. `import h5py` makes the `h5py` library available under the name `h5py`. `import argparse` does the same for a module from Python's standard library. Imports go at the top.
 
 **Variables** are names that hold values. Inside `show_keys`, the line `pad = "  " * indent` creates a variable named `pad`. The name on the left points at the value on the right.
 
@@ -56,7 +56,7 @@ This block runs when you execute the file directly from the command line, but no
 In `scripts/show_h5_keys.py`:
 
 - The triple-quoted text at the very top is the **module docstring**.
-- `import sys` and `import h5py` are the **imports**.
+- `import argparse` and `import h5py` are the **imports**.
 - `def show_keys(path: str) -> None:` is a **function** with **type hints** and its own **docstring**.
 - `pad = "  " * indent` inside it is a **variable**.
 - The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
