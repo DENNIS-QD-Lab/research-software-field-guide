@@ -1,5 +1,16 @@
 repos:
+  # Strip notebook outputs and execution counts before commit.
+  # See docs/onboarding/07_notebooks.md for why.
   - repo: https://github.com/kynan/nbstripout
     rev: 0.9.1
     hooks:
       - id: nbstripout
+
+  # Lint and format Python to the standards in CLAUDE.md.
+  # ruff-check fixes what it safely can; ruff-format applies the layout.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.20
+    hooks:
+      - id: ruff-check
+        args: ["--fix"]
+      - id: ruff-format
