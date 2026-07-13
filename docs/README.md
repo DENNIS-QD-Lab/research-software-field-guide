@@ -1,6 +1,6 @@
 # DENNIS_helpers documentation
 
-This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **practices track** (docs 10–20) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines.
+This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–20) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines.
 
 ## Onboarding sequence
 
@@ -33,18 +33,18 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 - [notebook_sync_alternatives.md](reference/notebook_sync_alternatives.md) — Notebook version control approaches the lab considered and why we picked nbstripout for now.
 - [vs_code_extensions.md](reference/vs_code_extensions.md) — Recommended VS Code extensions for this repo, with notes on what each does.
 
-## Practices track
+## Implementing track
 
-The practices track ([`practices/`](practices/)) picks up where onboarding leaves off: the intermediate research-software-engineering skills for when your scripts grow into real pipelines. Read the onboarding track first. Doc 10 is the bridge from scripts to pipelines and sets up the workflow the rest of the track assumes. Documentation and doc sites (16) are treated as a core practice, not a publishing afterthought. The distribution-tier docs (17–19) are optional until a project is actually being published.
+The implementing track ([`implementing/`](implementing/)) picks up where onboarding leaves off: the intermediate research-software-engineering skills for when your scripts grow into real pipelines. Read the onboarding track first. Doc 10 is the bridge from scripts to pipelines and sets up the workflow the rest of the track assumes. Documentation and doc sites (16) are treated as a core practice, not a publishing afterthought. The distribution-tier docs (17–19) are optional until a project is actually being published.
 
-- [10_from_scripts_to_pipelines.md](practices/10_from_scripts_to_pipelines.md) — The bridge doc: signs you've outgrown the simple workflow, feature-branch and multi-root-workspace habits for pipeline-scale work, and when *not* to add complexity.
-- [11_code_quality_tools.md](practices/11_code_quality_tools.md) — Linting, formatting, and type checking: `ruff check`, `ruff format`, and `mypy`, run by hand and via pre-commit.
-- [12_testing_with_pytest.md](practices/12_testing_with_pytest.md) — Why and how to test: `test_*` functions, `np.testing.assert_allclose` for floats, `parametrize`, fixtures, and turning validation experiments into regression tests.
-- [13_software_design.md](practices/13_software_design.md) — Keeping code easy to follow: decomposition, cohesion and single responsibility, and when a function, module, or class earns its keep.
-- [14_experiments_and_shipping.md](practices/14_experiments_and_shipping.md) — One repo, two jobs: a `src/` library plus dated `experiments/`, with graduation and pinning so a paper stays reproducible while the library stays clean.
-- [15_continuous_integration.md](practices/15_continuous_integration.md) — Running your checks automatically on every push with GitHub Actions, across a macOS/Windows matrix, and reading a failed run.
-- [16_documentation_and_doc_sites.md](practices/16_documentation_and_doc_sites.md) — Turning docstrings into a browsable Sphinx site as a core review-and-communication tool: NumPy docstrings, autodoc, and local preview.
-- [17_packaging.md](practices/17_packaging.md) — *(optional)* When a folder of scripts should become an installable package: `pyproject.toml`, the `src/` layout, and editable installs.
-- [18_versioning_and_releases.md](practices/18_versioning_and_releases.md) — *(optional)* Semantic versioning, git tags and releases, a single source of truth for the version, and CHANGELOGs.
-- [19_citation_and_open_science.md](practices/19_citation_and_open_science.md) — *(optional)* Making research software citable and reusable: LICENSE, CITATION.cff, Zenodo DOIs, and JOSS.
-- [20_ai_assisted_development.md](practices/20_ai_assisted_development.md) — Using AI coding assistants responsibly: the standards file, reviewing every change, never trusting numbers without a test, and what to delegate versus keep.
+- [10_from_scripts_to_pipelines.md](implementing/10_from_scripts_to_pipelines.md) — The bridge doc: signs you've outgrown the simple workflow, feature-branch and multi-root-workspace habits for pipeline-scale work, and when *not* to add complexity.
+- [11_code_quality_tools.md](implementing/11_code_quality_tools.md) — Linting, formatting, and type checking: `ruff check`, `ruff format`, and `mypy`, run by hand and via pre-commit.
+- [12_testing_with_pytest.md](implementing/12_testing_with_pytest.md) — Why and how to test: `test_*` functions, `np.testing.assert_allclose` for floats, `parametrize`, fixtures, and turning validation experiments into regression tests.
+- [13_software_design.md](implementing/13_software_design.md) — Keeping code easy to follow: decomposition, cohesion and single responsibility, and when a function, module, or class earns its keep.
+- [14_experiments_and_shipping.md](implementing/14_experiments_and_shipping.md) — One repo, two jobs: a `src/` library plus dated `experiments/`, with graduation and pinning so a paper stays reproducible while the library stays clean.
+- [15_continuous_integration.md](implementing/15_continuous_integration.md) — Running your checks automatically on every push with GitHub Actions, across a macOS/Windows matrix, and reading a failed run.
+- [16_documentation_and_doc_sites.md](implementing/16_documentation_and_doc_sites.md) — Turning docstrings into a browsable Sphinx site as a core review-and-communication tool: NumPy docstrings, autodoc, and local preview.
+- [17_packaging.md](implementing/17_packaging.md) — *(optional)* When a folder of scripts should become an installable package: `pyproject.toml`, the `src/` layout, and editable installs.
+- [18_versioning_and_releases.md](implementing/18_versioning_and_releases.md) — *(optional)* Semantic versioning, git tags and releases, a single source of truth for the version, and CHANGELOGs.
+- [19_citation_and_open_science.md](implementing/19_citation_and_open_science.md) — *(optional)* Making research software citable and reusable: LICENSE, CITATION.cff, Zenodo DOIs, and JOSS.
+- [20_ai_assisted_development.md](implementing/20_ai_assisted_development.md) — Using AI coding assistants responsibly: the standards file, reviewing every change, never trusting numbers without a test, and what to delegate versus keep.

@@ -1,6 +1,6 @@
 # Advanced Git: tools for when the daily workflow is not enough
 
-The daily workflow (`../onboarding/05_daily_workflow.md`) and `git_recovery.md` cover the common cases. This doc catalogs the sharper tools you reach for occasionally, mostly on the longer-lived feature branches described in `../practices/10_from_scripts_to_pipelines.md`.
+The daily workflow (`../onboarding/05_daily_workflow.md`) and `git_recovery.md` cover the common cases. This doc catalogs the sharper tools you reach for occasionally, mostly on the longer-lived feature branches described in `../implementing/10_from_scripts_to_pipelines.md`.
 
 ## How to read this doc
 

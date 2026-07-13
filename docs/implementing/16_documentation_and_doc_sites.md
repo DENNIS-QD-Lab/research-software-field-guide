@@ -1,6 +1,6 @@
 # Documentation and doc sites
 
-You already write docstrings (`../../CLAUDE.md` requires them). This doc turns them into a browsable site the whole team can read. That is not a publishing afterthought; it is a **review-and-communication tool for the lab.** A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. Frame it alongside `../onboarding/08_code_review.md` and the draft-PR habit from `10_from_scripts_to_pipelines.md`: the doc site is another surface for looking at each other's work.
+You already write docstrings (your project's coding-standards file, here `../../CLAUDE.md`, requires them). This doc turns them into a browsable site the whole team can read. That is not a publishing afterthought; it is a **review-and-communication tool for your team.** A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. Frame it alongside `../onboarding/08_code_review.md` and the draft-PR habit from `10_from_scripts_to_pipelines.md`: the doc site is another surface for looking at each other's work.
 
 ## The documentation hierarchy
 
@@ -16,7 +16,7 @@ Each layer builds on the one below. The site is only as good as the docstrings u
 
 ## Docstrings: pick one style
 
-The lab uses **NumPy-style** docstrings: a one-line summary, then structured `Parameters`, `Returns`, and `Examples` sections. It is the scientific-Python norm and reads well both in the source and on a generated site. One full example:
+This guide recommends **NumPy-style** docstrings: a one-line summary, then structured `Parameters`, `Returns`, and `Examples` sections. It is the scientific-Python norm and reads well both in the source and on a generated site. One full example:
 
 ```python
 def normalize(values: np.ndarray) -> np.ndarray:
@@ -47,9 +47,9 @@ This is the same information `../../CLAUDE.md` already asks for, in a structure 
 
 ## The tool: Sphinx
 
-The lab uses **Sphinx**. It is the documentation generator the scientific-Python ecosystem is built on (NumPy, SciPy, pandas, matplotlib, and scikit-learn all use it), and for documentation, which is long-lived infrastructure, that maturity matters. Choose tools you can depend on for years: Sphinx is community-governed and stable, it cross-links into other projects' documentation through **intersphinx** (a reference to `numpy.ndarray` becomes a link to NumPy's own docs), and it is the native format for **Read the Docs**. Tool governance is a real engineering criterion, not a detail; a generator with open, stable stewardship is worth more than a marginally prettier default.
+This guide recommends **Sphinx**. It is the documentation generator the scientific-Python ecosystem is built on (NumPy, SciPy, pandas, matplotlib, and scikit-learn all use it), and for documentation, which is long-lived infrastructure, that maturity matters. Choose tools you can depend on for years: Sphinx is community-governed and stable, it cross-links into other projects' documentation through **intersphinx** (a reference to `numpy.ndarray` becomes a link to NumPy's own docs), and it is the native format for **Read the Docs**. Tool governance is a real engineering criterion, not a detail; a generator with open, stable stewardship is worth more than a marginally prettier default.
 
-Two extensions make Sphinx fit the way the lab already works:
+Two extensions make Sphinx fit the way your team already works:
 
 - **napoleon** teaches Sphinx to read your NumPy-style docstrings.
 - **MyST** lets you author narrative pages in **Markdown**, so adopting Sphinx does not mean rewriting your prose in reStructuredText.

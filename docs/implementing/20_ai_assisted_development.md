@@ -1,10 +1,10 @@
 # AI-assisted development
 
-The lab uses AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the principles here are vendor-neutral, but the examples are the lab's actual setup.
+Many research teams use AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the principles here are vendor-neutral, but the examples reflect this repo's actual setup.
 
 ## The standards file does the heavy lifting
 
-`../../CLAUDE.md` is the project's coding standards, and the assistant reads it automatically at the start of every session. That is why generated code already follows PEP 8, uses NumPy-style docstrings and type hints, and respects the data-handling rules, without anyone re-explaining them. Keeping standards in a file the assistant reads means the whole team gets consistent output and you are not re-typing the rules each time. Most assistants support a project-instructions file of some kind; the principle carries over even if the tool does not.
+Your project's coding-standards file (here, `../../CLAUDE.md`) states the standards, and the assistant reads it automatically at the start of every session. That is why generated code already follows PEP 8, uses NumPy-style docstrings and type hints, and respects the data-handling rules, without anyone re-explaining them. Keeping standards in a file the assistant reads means the whole team gets consistent output and you are not re-typing the rules each time. Most assistants support a project-instructions file of some kind; the principle carries over even if the tool does not.
 
 ## Review every generated change
 

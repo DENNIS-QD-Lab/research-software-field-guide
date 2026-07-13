@@ -15,7 +15,7 @@ Two reasons, both aimed at how research code actually goes wrong.
 - **Integration test:** checks several pieces working together, such as load then calibrate then compute.
 - **Regression test:** pins a specific known-good result so that a bug, once fixed, stays fixed, or a validated approach stays validated.
 
-Most lab tests are unit and regression tests. Do not overthink the taxonomy.
+Most of your tests will be unit and regression tests. Do not overthink the taxonomy.
 
 ## Anatomy of a test
 

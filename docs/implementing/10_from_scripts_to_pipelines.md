@@ -2,7 +2,7 @@
 
 You learned the daily workflow in `../onboarding/05_daily_workflow.md` on small changes: one branch, one edit, one PR, one repo per window. That workflow is correct, and you should keep using it. But as your scripts grow into a *pipeline* (several files that depend on each other, work that takes days, more than one idea in flight) a few of its defaults start to strain.
 
-This doc names that transition and sets up the two things the rest of the practices track assumes: a branching model that scales, and a workspace that holds more than one repo. It is the bridge from the onboarding track to everything after it, so it comes first.
+This doc names that transition and sets up the two things the rest of the implementing track assumes: a branching model that scales, and a workspace that holds more than one repo. It is the bridge from the onboarding track to everything after it, so it comes first.
 
 ## Signs you have outgrown the simple workflow
 
@@ -52,11 +52,11 @@ The first line makes sure you are on your feature branch; the second brings `mai
 
 There is a heavier model called **Git Flow**, built around a permanent second branch (often named `dev` or `develop`) that work piles onto before it is released. You have probably seen it mentioned. Do not adopt it here.
 
-That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal lab pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. Keep `main` as the single source of truth and use short-lived feature branches off it.
+That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. Keep `main` as the single source of truth and use short-lived feature branches off it.
 
-Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. The `SWIR_HDR_v2` exemplar did exactly this. Its `v2-dev` branch carried in-progress experiment work, and once that work settled we fast-forwarded it onto `main` and retired the branch. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is `14_experiments_and_shipping.md`.
+Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. For example, the SWIR_HDR project did exactly this: a `v2-dev` branch carried in-progress experiment work, and once that work settled it was fast-forwarded onto `main` and the branch retired. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is `14_experiments_and_shipping.md`.
 
-The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project like `SWIR_HDR`. That is `18_versioning_and_releases.md`, and it is not now.
+The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is `18_versioning_and_releases.md`, and it is not now.
 
 ## The multi-root workspace
 

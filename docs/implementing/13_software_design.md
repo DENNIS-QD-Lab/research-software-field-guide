@@ -6,7 +6,7 @@ This doc is about design *within* a codebase, at the level of functions and modu
 
 ## Decomposition: one function, one job
 
-The most useful move you can make is to split a function that does several things into small functions that each do one. `../../CLAUDE.md` states the rule ("keep functions short; if a function is doing more than one thing, split it"). Here is why it matters, concretely. This function does four jobs at once:
+The most useful move you can make is to split a function that does several things into small functions that each do one. Your project's coding-standards file (here, `../../CLAUDE.md`) states the rule ("keep functions short; if a function is doing more than one thing, split it"). Here is why it matters, concretely. This function does four jobs at once:
 
 ```python
 def process_spectrum(path):
@@ -58,13 +58,13 @@ Every piece is now clear on its own, `normalize` and `peak_wavelength` are pure 
 
 ## Cohesion and single responsibility
 
-Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. The weighting functions in the `SWIR_HDR_v2` exemplar are a good positive example: each one takes a pixel value and a range and returns a weight, nothing else, which is exactly why they were straightforward to unit-test.
+Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: for example, the weighting functions in the SWIR_HDR project each take a pixel value and a range and return a weight, nothing else, which is exactly why they were straightforward to unit-test.
 
 ## When a function, when a module, when a class
 
 - **A function** is the default unit. Reach for one whenever you can name a job.
 - **A module** (a `.py` file) groups related functions, such as all the radiance math in one file. Name it for what it contains, a noun phrase like `ratio_analysis.py` (`../../CLAUDE.md`).
-- **A class** earns its keep only when data and the behavior that acts on it genuinely travel together, or when you need several independent instances each carrying their own state. Most lab code does not need classes; functions and modules cover the large majority of cases. Reach for a class when passing the same cluster of values into function after function starts to feel awkward, not before.
+- **A class** earns its keep only when data and the behavior that acts on it genuinely travel together, or when you need several independent instances each carrying their own state. Most research code does not need classes; functions and modules cover the large majority of cases. Reach for a class when passing the same cluster of values into function after function starts to feel awkward, not before.
 
 ## Two tools you will grow into
 
@@ -75,4 +75,4 @@ These are pointers, not lessons. Learn them when you hit the situation they solv
 
 ## Design and tests reinforce each other
 
-The two habits feed each other. Decomposing code into small, single-purpose functions is what makes it testable, and having tests is what gives you the confidence to decompose without fear of silently changing a result. That loop, refactor freely because the tests will catch a mistake, is the practical payoff of both docs together. When doc 14 restructures the exemplar, the tests written in doc 12 are exactly what will prove the restructure changed the shape without changing the behavior.
+The two habits feed each other. Decomposing code into small, single-purpose functions is what makes it testable, and having tests is what gives you the confidence to decompose without fear of silently changing a result. That loop, refactor freely because the tests will catch a mistake, is the practical payoff of both docs together. When doc 14 restructures your package, the tests written in doc 12 are exactly what will prove the restructure changed the shape without changing the behavior.

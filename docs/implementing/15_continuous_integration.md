@@ -8,7 +8,7 @@ CI runs your checks on a clean virtual machine that has only what your environme
 
 ## GitHub Actions basics
 
-The lab uses **GitHub Actions**, GitHub's built-in CI. The vocabulary, defined once:
+This guide uses **GitHub Actions**, GitHub's built-in CI. The vocabulary, defined once:
 
 - A **workflow** is a YAML file in `.github/workflows/`. A repo can have several.
 - A workflow has **triggers** (when it runs) and **jobs** (what it does).
@@ -56,7 +56,7 @@ Each step must succeed for the job to pass. `ruff format --check` reports format
 
 ## Test on more than one operating system
 
-Lab members work on both macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. So a matrix over operating systems is **recommended here, not optional.** A *matrix* runs the same job once per combination you list:
+Teammates often work on a mix of macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. So a matrix over operating systems is **recommended here, not optional.** A *matrix* runs the same job once per combination you list:
 
 ```yaml
 jobs:
@@ -79,4 +79,4 @@ When CI fails, a red X appears next to the commit or on the PR. To find out why:
 2. Click the job that failed (for example `test (windows-latest)`).
 3. Expand the step with the red X. The log shows exactly what your terminal would have shown, including the pytest or ruff output.
 
-The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file (`../../CLAUDE.md`), not to install it on the runner by hand.
+The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file, as your project's coding-standards file (here, `../../CLAUDE.md`) requires, not to install it on the runner by hand.

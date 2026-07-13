@@ -1,6 +1,6 @@
 # Notebooks
 
-Notebooks are great for exploration and awkward for version control. This doc explains the one problem they cause with Git and the one-time setup that fixes it, then describes how the lab pairs notebooks with scripts.
+Notebooks are great for exploration and awkward for version control. This doc explains the one problem they cause with Git and the one-time setup that fixes it, then describes an approach to pairing notebooks with scripts.
 
 ## The problem notebooks cause
 

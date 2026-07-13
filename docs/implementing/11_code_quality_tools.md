@@ -1,6 +1,6 @@
 # Code quality tools: linting, formatting, and type checking
 
-`../../CLAUDE.md` says lab code follows PEP 8 and is formatted with ruff, and you have probably seen ruff run when you commit. This doc explains what that tooling actually does, how to run it yourself, and adds one more tool: mypy, for type checking.
+Your project's coding-standards file (here, `../../CLAUDE.md`) says code follows PEP 8 and is formatted with ruff, and you have probably seen ruff run when you commit. This doc explains what that tooling actually does, how to run it yourself, and adds one more tool: mypy, for type checking.
 
 ## Three tools, three jobs
 
@@ -10,7 +10,7 @@ These three words get used interchangeably and should not be. They do different 
 - **Formatting** rewrites *layout*: indentation, spacing, line length, quote style. It does not change what the code does, only how it looks, and it ends every argument about style by having a tool decide.
 - **Type checking** reads your *type hints* and flags mismatches, such as passing a string where a function expects an integer, before you ever run the code.
 
-In this lab, **ruff** does the linting and formatting, and **mypy** does the type checking.
+This guide uses **ruff** for the linting and formatting, and **mypy** for the type checking.
 
 ## ruff format: fix the layout
 
@@ -90,4 +90,4 @@ A caveat for real codebases: on code that is not fully type-hinted yet, mypy can
 
 - **Formatting:** let it reformat. Do not fight it.
 - **A lint problem ruff can fix:** run `ruff check --fix .`.
-- **A lint problem it cannot fix, or a mypy error:** read the message. It is almost always pointing at something real. If a rule is unclear, run `ruff rule <code>` or ask in lab Teams.
+- **A lint problem it cannot fix, or a mypy error:** read the message. It is almost always pointing at something real. If a rule is unclear, run `ruff rule <code>` or ask a teammate.
