@@ -1,6 +1,6 @@
 # Notebooks
 
-Notebooks are great for exploration and awkward for version control. This doc explains the one problem they cause with Git and the one-time setup that fixes it, then describes an approach to pairing notebooks with scripts.
+Notebooks are critical for developing scientific analysis approaches. They are great for data exploration and analysis testing, but awkward for version control. This doc explains a problem they cause with Git and a one-time setup that fixes it, then describes an approach to pairing notebooks with scripts.
 
 ## The problem notebooks cause
 
@@ -20,7 +20,7 @@ This installs the `pre-commit` tool.
 pre-commit install
 ```
 
-This activates the check in this repository, using the configuration in `.pre-commit-config.yaml`. You do this once per cloned copy.
+This activates the check in this repository, using the configuration in `.pre-commit-config.yaml`. You do this once per repository.
 
 ## What you will see when committing
 
@@ -40,4 +40,29 @@ Some helpers exist as a single file. Some exist as both a `.py` and a `.ipynb`. 
 
 **Promoting notebook code to a script.** When you notice yourself reusing a chunk of notebook code, or wanting to call it from another notebook, move it into a script and import it back. This is the natural evolution: explore in a notebook, extract the stable parts into a script, keep using the notebook as the interactive surface.
 
-**A note on drift.** Because the script and notebook are two separate files in this repo, they *can* get out of sync if you duplicate logic across both rather than importing. The discipline is to keep the script as the single source of truth for any function that appears in both. Tools exist that synchronize the two automatically (see `reference/notebook_sync_alternatives.md`); we've chosen not to use them for now in favor of a simpler stack.
+**A note on drift.** Because the script and notebook are two separate files in this repo, they *can* get out of sync if you duplicate logic across both rather than importing. The discipline is to keep the script as the single source of truth for any function that appears in both. Tools exist that synchronize the two automatically (see `../reference/notebook_sync_alternatives.md`); we've chosen not to use them for now in favor of a simpler stack.
+
+
+## Running a paired notebook
+
+The notebook imports its function with `from scripts.show_h5_keys import show_keys`. For that import to work, Python must be able to find the `scripts/` folder, which means the notebook has to run from the **repository root**, not from inside `notebooks/`. This repo ships a committed `.vscode/settings.json` that sets `jupyter.notebookFileRoot` to the workspace root, so VS Code runs notebooks from the repo root for you. If you just added or pulled that setting, reload the window (Command Palette > "Developer: Reload Window") so it takes effect.
+
+If you see this error:
+
+```
+ModuleNotFoundError: No module named 'scripts'
+```
+
+it means the notebook is running from the wrong directory. In VS Code, the committed setting fixes it. If you run notebooks another way (plain `jupyter lab`, say), start it from the repository root so `scripts/` is importable.
+
+## Pointing at your own data without committing paths
+
+The example notebook defaults to the committed `sample_data/example.h5`, so it runs immediately. To inspect your own file, do not type your path into a code cell: a path in a cell gets committed (nbstripout strips *outputs*, not code), which leaks machine-specific paths into the repo and churns the file every run. Instead copy `local_paths_example.py` (in the repo root) to `local_paths.py` (which is gitignored), set `DATA_ROOT` there, and read it in the notebook:
+
+```python
+from local_paths import DATA_ROOT
+
+h5_file = f"{DATA_ROOT}/your_file.h5"
+```
+
+Your machine-specific paths stay out of Git while the notebook stays runnable for everyone.

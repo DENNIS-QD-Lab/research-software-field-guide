@@ -1,6 +1,6 @@
 # Adding a script
 
-This doc covers what goes where, how to name and document a helper, and how to tell whether a piece of code belongs in this repository at all. It uses `scripts/show_h5_keys.py` as the model.
+This doc covers what goes where, how to name and document a helper, and how to tell whether a piece of code belongs in this repository at all. It uses `scripts/show_h5_keys.py` as a model.
 
 ## Where things go
 
@@ -8,11 +8,11 @@ Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipy
 
 ## Naming conventions
 
-All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (`hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
+All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., for the Dennis lab (QD Imaging), `hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
 
 Beyond that, we use two grammatical patterns depending on what the file does.
 
-**Verb-first names for action scripts.** If the file's purpose is to *do* a task, name it with a verb followed by what it acts on, so the name reads like a command. Examples: `show_h5_keys.py` (shows the keys of an HDF5 file), `plot_spectra.py` (plots spectra), `convert_units.py` (converts units), `clean_metadata.py` (cleans metadata).
+**Verb-first names for action scripts.** If the file's purpose is to *do* a task, name it with a verb followed by what it acts on, so the name reads like a command. Examples: `show_h5_keys.py` (shows the metadata (a.k.a. keys) of an HDF5 file), `plot_spectra.py` (plots spectra), `convert_units.py` (converts units), `clean_metadata.py` (cleans metadata).
 
 **Noun-phrase names for functionality modules.** If the file's purpose is to *contain* code that other scripts import and use, name it with a noun or adjective-noun phrase describing what is inside, so the name reads like a topic. Examples: `ratio_analysis.py` (contains ratio analysis code), `hdr_processing.py` (contains HDR processing code), `broadband_segmentation.py` (contains broadband segmentation code).
 
@@ -20,7 +20,7 @@ If you are unsure which category a file falls into, ask whether a colleague seei
 
 ## Minimum docstring
 
-Every script needs a docstring at the top of the file. If you are unsure what a docstring is, see `docs/onboarding/00_python_code_basics.md`. At minimum it states three things:
+Every script needs a docstring at the top of the file. If you are unsure what a docstring is, see `00_python_code_basics.md`. At minimum it states three things:
 
 - **Purpose:** what the script does, in a sentence or two.
 - **Inputs:** what it expects, for example the command-line arguments.
@@ -44,6 +44,6 @@ The **imports** are `argparse` (to define and read the command-line argument) an
 
 `main()` uses `argparse` to define one argument, the file path, then reads it and calls `show_keys`. We use `argparse` rather than reading `sys.argv` by hand because it gives a clear error and usage message for free when the argument is missing, and a `--help` flag automatically. Try `python scripts/show_h5_keys.py --help` to see it.
 
-The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work. `docs/onboarding/00_python_code_basics.md` explains that block in full.
+The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work, as was described in `00_python_code_basics.md`.
 
 Copy this shape for new helpers: a module docstring, imports, one or more well-named functions with type hints and docstrings, a `main()` for the command line, and the `if __name__` block to wire it up.

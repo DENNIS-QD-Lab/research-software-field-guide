@@ -2,9 +2,9 @@
 
 ## Why environments exist
 
-Different projects need different packages, sometimes different versions of the same package. If everything shares one global Python, installing what one project needs can break another, and code that runs on your machine fails on a colleague's because the two machines have different packages. This is the "it works on my machine" problem. An *environment* is an isolated set of packages for one purpose. The lab shares one named `helper`, defined in `environment.yml`, so everyone runs the same software.
+Different projects need different packages, sometimes different versions of the same package. If everything shares one global Python, installing what one project needs can break another, and code that runs on your machine fails on a colleague's because the two machines have different packages. This is the "it works on my machine (and _only_ my machine)" problem. An *environment* is an isolated set of packages for one purpose. This repo shares one named `helper`, defined in `environment.yml`, so everyone runs the same software when running through the learning modules.
 
-## Create the lab environment
+## Create the environment
 
 From the repository root, run:
 
@@ -40,4 +40,4 @@ A notebook keeps everything you have run in memory, which is convenient until th
 - After editing a module you imported, so the notebook loads the new version instead of the old one held in memory.
 - When variables are in a confusing state and you cannot tell why.
 
-The "Restart and Run All" button restarts the kernel and re-runs every cell from a clean slate. When something seems wrong for no clear reason, reach for it. It is your friend.
+The "Restart and Run All" button restarts the kernel and re-runs every cell from a clean slate. This is akin to the troubleshooting advice 'turn it off and turn it back on again'-- resets help. When something seems wrong for no clear reason, try restarting the kernel. 

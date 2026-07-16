@@ -1,6 +1,6 @@
 # Python code basics
 
-This doc explains how a Python file is put together and how it differs from a notebook. It refernces an example, `scripts/show_h5_keys.py`, to point at each piece. Open that file alongside this one.
+This doc explains how a Python file is put together and how it differs from a notebook. It references an example, `scripts/show_h5_keys.py`, to point at each piece. Open that file alongside this one.
 
 ## `.py` files versus `.ipynb` files
 
@@ -8,11 +8,13 @@ A `.py` file is a plain text file of Python code. You run the whole thing at onc
 
 A `.ipynb` file is a Jupyter notebook. A notebook is a document made of *cells* that you run one at a time, in any order, keeping the results visible in between. Notebooks are for interactive exploration: trying things, looking at data, making a quick plot.
 
-Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. The lab keeps both, paired, and `docs/onboarding/07_notebooks.md` explains that convention.
+Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. You may use either or both of these file types, and `07_notebooks.md` describes ways to manage them in parallel.
 
 ## Cells inside a notebook
 
-A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing.
+A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing. 
+
+(**Tip:** if reading/editing a markdown file (.md) like this one in an IDE (integrated development environment like visual studio code (VS Code)), use Cmd+Shift+V to toggle between code and formatted view of the text.)
 
 ## Anatomy of a Python file
 
@@ -38,7 +40,7 @@ Docstrings are not comments for you alone. Python stores them, so anyone can rea
 
 A *type hint* is an annotation saying what kind of value something is expected to be. In `def show_keys(path: str) -> None:`, the `: str` says `path` should be a string, and the `-> None` says the function returns nothing.
 
-Type hints are documentation that tools can read. They help your editor catch mistakes and help readers understand the code. They do one thing worth saying clearly: Python does not enforce them at runtime. If you pass a number where a hint says `str`, Python will not stop you. Hints describe intent; they do not police it.
+Type hints are documentation that tools can read. They help your editor catch mistakes and help readers understand the code. It's worth noting that **Python does not enforce types at runtime.** If you pass a number where a hint says `str`, Python will not stop you. Hints describe intent; they do not police it.
 
 ## `if __name__ == "__main__":`
 
@@ -49,7 +51,7 @@ if __name__ == "__main__":
     main()
 ```
 
-This block runs when you execute the file directly from the command line, but not when you `import` it from another script. It is the standard way to make a file usable both as a library and as a script. Running `python scripts/show_h5_keys.py data.h5` triggers the block and calls `main()`. Writing `from scripts.show_h5_keys import show_keys` in another file imports `show_keys` without running it.
+This block runs when you execute the file directly from the command line, but not when you `import` it from another script. It is the standard way to make a file usable both as a library and as a script. Running `python scripts/show_h5_keys.py data.h5` triggers the block and calls `main()`, thereby running the module show_h5_keys.py on the file data.h5. Writing `from scripts.show_h5_keys import show_keys` in another file imports the function `show_keys` without running it.
 
 ## The whole example, mapped
 
@@ -61,4 +63,4 @@ In `scripts/show_h5_keys.py`:
 - `pad = "  " * indent` inside it is a **variable**.
 - The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
-`docs/onboarding/06_adding_a_script.md` walks through how this script does its job.
+`06_adding_a_script.md` walks through how this script does its job.

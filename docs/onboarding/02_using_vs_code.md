@@ -1,6 +1,6 @@
 # Using VS Code
 
-VS Code is the lab's editor. This doc assumes you have it installed with the Python and Jupyter extensions, and that you have just opened the `DENNIS_helpers` repository. It covers the conventions you need and nothing more.
+VS Code is a common integrated development environment (IDE)-- i.e., code editor. This doc assumes you have it installed with the Python and Jupyter extensions, and that you have opened the `DENNIS_helpers` repository. It covers the conventions you need and nothing more.
 
 ## One folder, one window
 
@@ -14,7 +14,7 @@ After opening a repository folder, File > Save Workspace As lets you save a `.co
 
 ## The Explorer sidebar
 
-The file tree on the left is the Explorer. Files marked with a colored letter carry a Git status: M means modified since the last commit, U means untracked (Git does not know about this file yet), and A means staged to be added. Files shown dimmed are being ignored by Git per `.gitignore`. They are still on your disk and you can still open them; Git simply is not tracking them.
+The file tree on the left is the Explorer. Files marked with a colored letter carry a Git status: a yellow **M** means modified since the last commit, a green **U** means untracked (Git does not know about this file yet), and a green **A** means staged to be added. Files shown dimmed are being ignored by Git per `.gitignore`. They are still on your disk and you can still open them; Git simply is not tracking them.
 
 ## The Outline view
 
@@ -22,23 +22,23 @@ At the bottom of the Explorer sidebar is the Outline view (expand the "Outline" 
 
 ## The integrated terminal
 
-Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown. Cmd+\` (Mac) or Ctrl+\` (Windows) toggles the terminal panel open and closed.
+Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown. 
 
 ## The Source Control panel
 
-The third icon down on the far-left activity bar, shaped like a branch, is the Source Control panel. This is VS Code's Git interface. It shows the files that have changed since the last commit and lets you stage them, write a commit message, and commit. This is the path the lab recommends for daily work. The equivalent terminal commands are in `docs/onboarding/05_daily_workflow.md`.
+The third icon down on the far-left activity bar, shaped like a branch, is the Source Control panel. This is VS Code's Git interface. It shows the files that have changed since the last commit and lets you stage them, write a commit message, and commit. This is the recommended path for daily work. The equivalent terminal commands are in `05_daily_workflow.md`.
 
 ## Selecting the Python interpreter
 
-Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) opens the Command Palette, which runs any VS Code command by name. Type "Python: Select Interpreter" and choose the `helper` conda environment. VS Code remembers this choice per workspace. There is more on this in `docs/onboarding/04_environments.md`.
+Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) opens the Command Palette, which runs any VS Code command by name. Type "Python: Select Interpreter" and choose the `helper` conda environment. VS Code remembers this choice per workspace. There is more on this in `04_environments.md`.
 
 ## Selecting the Jupyter kernel
 
-When you open a `.ipynb` file, the kernel selector sits in the top-right of the notebook editor. It must show the `helper` environment. If it does not, click it and choose the right one. The kernel is selected separately from the Python interpreter, and the two can be mismatched. That mismatch is a common source of "I installed the package but the notebook says it is missing." See `docs/onboaring/04_environments.md` and `docs/onboarding/07_notebooks.md`.
+When you open a `.ipynb` file, the kernel selector sits in the top-right of the notebook editor. It must show the `helper` environment. If it does not, click it and choose the right one. The kernel is selected separately from the Python interpreter, and the two can be mismatched. That mismatch is a common source of "I installed the package but the notebook says it is missing." See `04_environments.md` and `07_notebooks.md`.
 
 ## Markdown preview
 
-For any `.md` file, including these docs, right-click the file tab and choose "Open Preview," or press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows). This renders the markdown instead of showing raw text.
+For any `.md` file, including these docs, right-click the file tab and choose "Open Preview" to render the markdown instead of showing raw text. The hot key Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) helpfully toggles between the rendered preview and the editable raw text view. 
 
 ## Do not drag tracked files between folders
 

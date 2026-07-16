@@ -225,6 +225,13 @@ __marimo__/
 *.tif
 *.tiff
 
+# Exception: small synthetic teaching fixtures ARE committed (see CLAUDE.md).
+!sample_data/
+!sample_data/**
+
+# Personal, machine-specific paths — never committed (copy local_paths_example.py).
+/local_paths.py
+
 # macOS
 .DS_Store
 .AppleDouble
