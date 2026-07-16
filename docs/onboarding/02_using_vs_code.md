@@ -53,5 +53,5 @@ Cmd+B (Mac) or Ctrl+B (Windows) hides and shows the sidebar. This is useful when
 - Cmd+P / Ctrl+P: Go to File (fuzzy file search across the workspace)
 - Cmd+Shift+F / Ctrl+Shift+F: Find in Files (search file contents across the workspace)
 - Cmd+Shift+P / Ctrl+Shift+P: Command Palette (run any VS Code command by name)
-- Cmd+\` / Ctrl+\`: toggle the terminal
+- Ctrl+\` / Ctrl+\`: toggle the terminal
 - Cmd+B / Ctrl+B: toggle the sidebar
