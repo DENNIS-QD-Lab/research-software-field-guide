@@ -1,8 +1,8 @@
 # Getting started with Git
 
-If you have just cloned this repository, you used several tools and terms that deserve definitions. This doc gives them, states one rule that matters more than the rest, and sets up the daily workflow covered in `docs/onboarding/05_daily_workflow.md`.
+If you have just cloned this repository, you used several tools and terms that deserve definitions. This doc gives the definitions, states one rule that matters more than the rest, and sets up the daily workflow covered in `05_daily_workflow.md`.
 
-## The words, defined
+## Definitions
 
 A *repository* (or *repo*) is a project folder whose entire history Git tracks: every change, who made it, and when.
 
@@ -16,13 +16,17 @@ Your *local* copy is the repository on your machine. The *remote* is the shared 
 
 ## One rule: keep the repository out of synced folders
 
-Do not put the repository inside OneDrive, iCloud Drive, or Dropbox. Those services sync files in the background on their own schedule. Git also manages those same files, and the two fight, which corrupts the repository's history in ways that are hard to undo. Keep the repository in a plain folder, for example `~/code/` or `Documents/code/`, that no cloud service is syncing. This is worth saying twice because it is easy to do by accident and painful to fix.
+Do not put the repository inside OneDrive, iCloud Drive, or Dropbox. Those services sync files in the background on their own schedule. Git also manages those same files, and the two fight, which corrupts the repository's history in ways that are hard to undo. Keep the repository in a plain folder, for example `~/code/` or `Documents/code/`, that no cloud service is syncing. This is worth saying twice because it is easy to do by accident and painful to fix. It's worth saying a third time because it seems like it works... until it doesn't. Best to never get in the habit. **Sync data to the cloud using a cloud storage server like OneDrive or Dropbox; sync code to the cloud via GitHub.**
 
 ## The daily mental model
 
-Four words: pull, work, commit, push. Pull the latest changes from GitHub so you start current. Work on the files. Commit to record your changes in Git's history with a short message. Push to send those commits up to GitHub so others have them.
+Four words: pull, work, commit, push.   
+**Pull** the latest changes from GitHub so you start current.  
+**Work** on the files.  
+**Commit** to record your changes in Git's history with a short message.  
+**Push** to send those commits up to GitHub so others have them.  
 
-## A word on branches
+## Branches
 
 A *branch* is a parallel timeline of the entire repository, not a flag on a single file. Every file in the repo is "on" your current branch. When you make a branch, you are making a separate line of history for the whole project that you can change without disturbing the main one.
 
@@ -36,4 +40,4 @@ When you commit on a branch, the commit is recorded only on that branch until yo
 
 "Adding a new file on a branch" is shorthand for a sequence: switch to the branch, create the file in your working directory, then stage and commit it. The branch itself does not hold just that one file. It holds the whole repository state, now including your new file.
 
-We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. `docs/onboarding/05_daily_workflow.md` shows the mechanics of making, using, and merging a branch.
+We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. `05_daily_workflow.md` shows the mechanics of making, using, and merging a branch.

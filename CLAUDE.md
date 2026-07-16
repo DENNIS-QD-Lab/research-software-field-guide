@@ -36,6 +36,8 @@ This is the DENNIS Lab's internal repository of small helper scripts and noteboo
 ## Data handling
 - Never commit data files to this repo. Data lives outside the repo; scripts take paths as arguments.
 - If you generate intermediate files for testing, put them in a directory listed in `.gitignore` and clean them up.
+- One exception: small, synthetic *teaching fixtures* (a few KB, used by tutorials and examples) may be committed under `sample_data/`. Real or large research data never is.
+- Keep machine-specific paths out of committed code and notebooks. Put them in a gitignored `local_paths.py` (copy `local_paths_example.py`) and import from it.
 
 ## Dependencies
 - Ask before adding new dependencies. If approved, update `environment.yml` and explain why in the PR description.

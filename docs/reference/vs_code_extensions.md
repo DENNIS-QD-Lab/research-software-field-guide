@@ -8,48 +8,28 @@ To install an extension: click the Extensions icon in the left sidebar (four squ
 
 These are baseline for working in this repo.
 
-**Python** (publisher: Microsoft)
-The official Python extension. Provides syntax highlighting, linting integration, the "Python: Select Interpreter" command, debugging, and integration with `ruff`. Required for VS Code to understand Python files at all.
-
-**Jupyter** (publisher: Microsoft)
-Lets VS Code open and run `.ipynb` files directly. Required if you want notebooks. Includes the kernel selector in the top-right of any open notebook.
-
-**Pylance** (publisher: Microsoft)
-Auto-installed when you install Python, but worth knowing it exists. Provides smart autocomplete, function signatures while typing, type-checking, and "go to definition" (Cmd+click a function name to jump to where it's defined).
-
-**Ruff** (publisher: Astral Software)
-Surface `ruff check` and `ruff format` results inline in your editor — squiggles under problem lines, format-on-save if you turn it on. The pre-commit hook will run ruff anyway, but seeing the warnings while you type is much better than discovering them at commit time.
+| Extension | What it does |
+|-----------|--------------|
+| **Python** (publisher: Microsoft) | The official Python extension. Provides syntax highlighting, linting integration, the "Python: Select Interpreter" command, debugging, and integration with `ruff`. Required for VS Code to understand Python files at all. |
+| **Jupyter** (publisher: Microsoft) | Lets VS Code open and run `.ipynb` files directly. Required if you want notebooks. Includes the kernel selector in the top-right of any open notebook. |
+| **Pylance** (publisher: Microsoft) | Auto-installed when you install Python, but worth knowing it exists. Provides smart autocomplete, function signatures while typing, type-checking, and "go to definition" (Cmd+click a function name to jump to where it's defined). |
+| **Ruff** (publisher: Astral Software) | Surface `ruff check` and `ruff format` results inline in your editor — squiggles under problem lines, format-on-save if you turn it on. The pre-commit hook will run ruff anyway, but seeing the warnings while you type is much better than discovering them at commit time. |
 
 ## Consider these
 
 These are useful for specific situations or workflows. Skim the descriptions; install if a description matches a pain point you actually have.
 
-**GitLens** (publisher: GitKraken)
-Adds Git context throughout the editor: shows you "this line last changed by X, 3 months ago, in commit Y" inline. Useful for understanding why code is the way it is. Some people find it too noisy; you can turn off individual features in settings.
-
-**GitHub Pull Requests** (publisher: GitHub)
-Lets you review and comment on PRs from inside VS Code, without bouncing to the browser. Worth it if you find yourself reviewing PRs often.
-
-**Markdown All in One** (publisher: Yu Zhang)
-Adds keyboard shortcuts for common markdown tasks (bold, italic, list creation, table formatting), plus auto-updates table-of-contents blocks. Pleasant for writing docs.
-
-**markdownlint** (publisher: David Anson)
-Flags markdown style issues (inconsistent header levels, missing blank lines around lists, etc.). Helpful if you care about clean markdown; safely skippable.
-
-**Even Better TOML** (publisher: tamasfe)
-Syntax highlighting and validation for `.toml` files. Useful because `pyproject.toml` is TOML, and the default support is mediocre.
-
-**YAML** (publisher: Red Hat)
-Same idea for `.yaml` / `.yml` files like `environment.yml` and `.pre-commit-config.yaml`. Highlights errors and validates structure.
-
-**Path Intellisense** (publisher: Christian Kohler)
-Autocompletes file paths as you type them in code or markdown. Saves typos when referencing files.
-
-**Rainbow CSV** (publisher: mechatroner)
-Colors columns in CSV files so they're readable. Saves you from squinting at comma-separated text when previewing a data file.
-
-**Excalidraw** (publisher: pomdtr)
-Lets you create and edit hand-drawn-style diagrams directly in VS Code, saved as `.excalidraw` files. Useful for sketching flow diagrams or system architecture for docs.
+| Extension | What it does |
+|-----------|--------------|
+| **GitLens** (publisher: GitKraken) | Adds Git context throughout the editor: shows you "this line last changed by X, 3 months ago, in commit Y" inline. Useful for understanding why code is the way it is. Some people find it too noisy; you can turn off individual features in settings. |
+| **GitHub Pull Requests** (publisher: GitHub) | Lets you review and comment on PRs from inside VS Code, without bouncing to the browser. Worth it if you find yourself reviewing PRs often. |
+| **Markdown All in One** (publisher: Yu Zhang) | Adds keyboard shortcuts for common markdown tasks (bold, italic, list creation, table formatting), plus auto-updates table-of-contents blocks. Pleasant for writing docs. |
+| **markdownlint** (publisher: David Anson) | Flags markdown style issues (inconsistent header levels, missing blank lines around lists, etc.). Helpful if you care about clean markdown; safely skippable. |
+| **Even Better TOML** (publisher: tamasfe) | Syntax highlighting and validation for `.toml` files. Useful because `pyproject.toml` is TOML, and the default support is mediocre. |
+| **YAML** (publisher: Red Hat) | Same idea for `.yaml` / `.yml` files like `environment.yml` and `.pre-commit-config.yaml`. Highlights errors and validates structure. |
+| **Path Intellisense** (publisher: Christian Kohler) | Autocompletes file paths as you type them in code or markdown. Saves typos when referencing files. |
+| **Rainbow CSV** (publisher: mechatroner) | Colors columns in CSV files so they're readable. Saves you from squinting at comma-separated text when previewing a data file. |
+| **Excalidraw** (publisher: pomdtr) | Lets you create and edit hand-drawn-style diagrams directly in VS Code, saved as `.excalidraw` files. Useful for sketching flow diagrams or system architecture for docs. |
 
 ## Settings worth turning on
 
