@@ -36,7 +36,7 @@ This is the DENNIS Lab's internal repository of small helper scripts and noteboo
 ## Data handling
 - Never commit data files to this repo. Data lives outside the repo; scripts take paths as arguments.
 - If you generate intermediate files for testing, put them in a directory listed in `.gitignore` and clean them up.
-- One exception: small, synthetic *teaching fixtures* (a few KB, used by tutorials and examples) may be committed under `sample_data/`. Real or large research data never is.
+- One exception: small *teaching and test fixtures* (used by tutorials, examples, and tests) may be committed, synthetic ones under `sample_data/` and test fixtures alongside the tests. A fixture may be synthetic *or* a small, curated handful of real samples — enough to exercise the code and show a realistic case, not the full depth of acquired data. The guiding line is size and purpose, not synthetic-versus-real: a few KB up to a few MB that a reader or a test actually needs is fine; an entire acquired dataset bloats history permanently and stays out of the repo.
 - Keep machine-specific paths out of committed code and notebooks. Put them in a gitignored `local_paths.py` (copy `local_paths_example.py`) and import from it.
 
 ## Dependencies
