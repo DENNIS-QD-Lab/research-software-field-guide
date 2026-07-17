@@ -57,7 +57,7 @@ The stripped code is not lost: it lives on in the tag and in git history. An exp
 
 ## Data still stays out of the repo
 
-Nothing here changes the data rule (`../../CLAUDE.md`, `../onboarding/04_environments.md`). Experiments reference their data by path or by DOI; they never commit it. A committed dataset bloats history permanently and is not what makes an experiment reproducible. A pinned code state plus an archived, referenced dataset is.
+Nothing here changes the data rule (`../../CLAUDE.md`, `../onboarding/04_environments.md`): experiments reference their data by path or by DOI rather than committing the dataset. The carve-out is deliberately small — a curated handful of real frames kept as a test or teaching fixture is genuinely useful and allowed; what stays out is the full depth of acquired data. A committed dataset bloats history permanently and is not what makes an experiment reproducible; a pinned code state plus an archived, referenced dataset is.
 
 ## How this connects
 
