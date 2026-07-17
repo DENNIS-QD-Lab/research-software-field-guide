@@ -6,6 +6,7 @@ This repository holds general-purpose tools, not project-specific analysis. A he
 
 ## What's here
 
+- `GETTING_STARTED.md` — the from-scratch setup sheet: install the tools, make a GitHub account, and clone the repository. Start here if none of that is done yet.
 - `docs/` — the onboarding guide, numbered in reading order. Start at `docs/onboarding/00_python_code_basics.md` and work up.
 - `scripts/` — runnable Python helpers (`.py` files). The worked example is `scripts/show_h5_keys.py`.
 - `notebooks/` — Jupyter notebooks (`.ipynb` files) for interactive exploration.
@@ -14,11 +15,13 @@ This repository holds general-purpose tools, not project-specific analysis. A he
 
 ## New here? Read the docs first
 
+If nothing is installed yet — no VS Code, no Git, no conda, and you have not cloned this repository — start with [GETTING_STARTED.md](GETTING_STARTED.md). It takes you from nothing installed to an open workspace, then hands off to the docs below.
+
 If you have never used Git, the command line, or conda, do not start by typing commands. Read the docs in order. They define every term on first use and assume no prior tooling. The whole set is short. At minimum, read `00` through `05` before you make your first change.
 
 ## Quick start
 
-These steps assume you have already cloned the repository and have Miniconda and VS Code installed. If any of that is unfamiliar, `docs/onboarding/03_getting_started_with_git.md` and `docs/onboarding/04_environments.md` cover it from the beginning.
+These steps assume you have already cloned the repository and have Miniconda and VS Code installed. If any of that is not yet done, [GETTING_STARTED.md](GETTING_STARTED.md) walks through it from scratch; `docs/onboarding/03_getting_started_with_git.md` and `docs/onboarding/04_environments.md` cover the concepts in more depth.
 
 1. Create the shared environment from the definition file:
 

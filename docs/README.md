@@ -2,6 +2,10 @@
 
 This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–20) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines.
 
+## Before you start
+
+The onboarding docs assume VS Code, Git, and conda are installed and that you have already cloned the repository. If that is not yet true, work through [`GETTING_STARTED.md`](../GETTING_STARTED.md) at the repository root first — it is the from-scratch setup sheet that gets you to an open workspace.
+
 ## Onboarding sequence
 
 Read these in order. They live in [`onboarding/`](onboarding/).
