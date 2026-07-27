@@ -18,13 +18,13 @@ SWIR_HDR_v2/
 ├── tests/              tests for the library (seeded from validation experiments)
 ├── experiments/        exploratory comparisons; import from src
 │   └── <dated_topic>/    README (question + conclusion), code, pinned environment
-├── docs/               autodoc doc site for the library (16_documentation_and_doc_sites.md)
+├── docs/               autodoc doc site for the library (19_documentation_and_doc_sites.md)
 └── pyproject.toml
 ```
 
 `src/swir_hdr/` is the library: the pipeline code that experiments and analyses import. `experiments/` holds dated, self-describing studies. Crucially, **experiments import from `src`**; they use the library rather than carrying their own copy of it, so an experiment is a thin script that calls the library with particular inputs and records what happened. This is what keeps a comparison honest: while you are still deciding between approaches, the competing options all live in `src` together, so the experiment tests exactly the code the library ships and never drifts out of sync with a private copy.
 
-Each experiment folder is self-contained: a `README` stating the question it asked and the conclusion it reached, the code that ran it, and a note pinning the environment it needs (see Pinning, below).
+Each experiment folder is self-contained: a `README` stating the question it asked and the conclusion it reached, the code that ran it, and a note pinning the environment it needs (see Pinning, below). *How* you actually run one of these experiments and record its state so it reproduces — the research log, the folder template, and per-run provenance — is `16_running_a_dry_lab_experiment.md`.
 
 ## Two phases, then two disciplines
 
@@ -48,16 +48,16 @@ That does not work, and it is worth understanding why. **`__init__.py` controls 
 
 The real resolution keeps the two goals separate:
 
-1. Tag the exact state used for the paper, for example `paper-v1`, and archive that tag to Zenodo for a DOI. The paper cites the DOI.
+1. Tag the exact state used for the paper, for example `paper-v1`, so that state is frozen. (Archiving that tag for a citable DOI is `22_concluding_a_project.md`; here it is enough that the state is pinned.)
 2. Then strip the non-preferred approaches out of `src/` on `main` and release the clean library.
 
-The stripped code is not lost: it lives on in the tag and in git history. An experiment that needs the old approach reproduces it by checking out the tag, not by running against the latest `main`. The library on `main` stays clean, and the paper stays reproducible, because each is anchored to its own point in history. (Tags and releases are `18_versioning_and_releases.md`; Zenodo and DOIs are `19_citation_and_open_science.md`. Both are the "when you publish" tier.)
+The stripped code is not lost: it lives on in the tag and in git history. An experiment that needs the old approach reproduces it by checking out the tag, not by running against the latest `main`. The library on `main` stays clean, and the paper stays reproducible, because each is anchored to its own point in history. (Tags and releases are `21_versioning_and_releases.md`; Zenodo and DOIs are `22_concluding_a_project.md`. Both are the "when you publish" tier.)
 
 **The one exception.** If an alternative approach will be *deliberately used going forward* (not just preserved for the record), then it is a supported option, not dead code. Make it first-class: tested and documented, perhaps in a clearly named `legacy` subpackage. The rule is against *gated-off clutter*, not against genuinely supporting more than one method when you mean to.
 
 ## Data still stays out of the repo
 
-Nothing here changes the data rule (`../../CLAUDE.md`, `../onboarding/04_environments.md`): experiments reference their data by path or by DOI rather than committing the dataset. The carve-out is deliberately small — a curated handful of real frames kept as a test or teaching fixture is genuinely useful and allowed; what stays out is the full depth of acquired data. A committed dataset bloats history permanently and is not what makes an experiment reproducible; a pinned code state plus an archived, referenced dataset is.
+Nothing here changes the data rule (`../../CLAUDE.md`, `../onboarding/04_environments.md`): experiments reference their data by path or by DOI rather than committing the dataset. The carve-out is deliberately small — a curated handful of real frames kept as a test or teaching fixture is genuinely useful and allowed; what stays out is the full depth of acquired data. A committed dataset bloats history permanently and is not what makes an experiment reproducible; a pinned code state plus an archived, referenced dataset is. The mechanics for data too big to commit — machine-local roots, DOIs, and checksums that pin *which* data a run used — are `17_working_with_large_data.md`.
 
 ## How this connects
 

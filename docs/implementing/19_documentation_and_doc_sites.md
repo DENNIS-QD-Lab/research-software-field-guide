@@ -73,7 +73,7 @@ intersphinx_mapping = {
 }
 ```
 
-Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from `17_packaging.md`, `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
+Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from `20_packaging.md`, `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
 
 ````markdown
 # API reference
@@ -96,7 +96,7 @@ This builds the HTML into `docs/_build/html`. For a live-reloading preview while
 sphinx-autobuild docs docs/_build/html
 ```
 
-This serves the site at `http://localhost:8000` and rebuilds as you save a docstring or page. To publish, connect the repo to **Read the Docs** (which builds Sphinx sites on every push automatically) or build in a GitHub Actions workflow (`15_continuous_integration.md`) and deploy to GitHub Pages.
+This serves the site at `http://localhost:8000` and rebuilds as you save a docstring or page. To publish, connect the repo to **Read the Docs** (which builds Sphinx sites on every push automatically) or build in a GitHub Actions workflow (`14_continuous_integration.md`) and deploy to GitHub Pages.
 
 ## A dependency note
 

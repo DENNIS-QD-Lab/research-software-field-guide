@@ -84,7 +84,7 @@ This checks the types in that file. It catches a whole class of bug statically: 
 
 For now, **run mypy by hand.** It is not part of the pre-commit hook, so it will not block a commit; point it at the file or module you are working on. And do not add runtime type assertions just to satisfy it (`../../CLAUDE.md` says so): the hints plus mypy are the mechanism, and the checking happens before the code runs, not during.
 
-A caveat for real codebases: on code that is not fully type-hinted yet, mypy can be noisy at first. Do not try to fix everything at once. Start with the one module you are hardening, add hints until that module is clean, and move on. This mirrors the advice in `14_experiments_and_shipping.md`: harden what has stabilized, not the whole repo in a single push.
+A caveat for real codebases: on code that is not fully type-hinted yet, mypy can be noisy at first. Do not try to fix everything at once. Start with the one module you are hardening, add hints until that module is clean, and move on. This mirrors the advice in `15_experiments_and_shipping.md`: harden what has stabilized, not the whole repo in a single push.
 
 ## When a tool flags something
 

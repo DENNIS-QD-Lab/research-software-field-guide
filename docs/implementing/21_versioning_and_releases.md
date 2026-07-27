@@ -21,7 +21,7 @@ git tag -a v2.1.0 -m "Release 2.1.0"
 git push origin v2.1.0
 ```
 
-A **GitHub release** builds on a tag, adding release notes and downloadable archives. Tags are also how you freeze a *scientific* result: the `paper-v1` snapshot tag from `14_experiments_and_shipping.md` marks the exact state used for a manuscript, so it stays reproducible no matter how the code changes afterward.
+A **GitHub release** builds on a tag, adding release notes and downloadable archives. Tags are also how you freeze a *scientific* result: the `paper-v1` snapshot tag from `15_experiments_and_shipping.md` marks the exact state used for a manuscript, so it stays reproducible no matter how the code changes afterward.
 
 ## A single source of truth for the version
 

@@ -46,7 +46,7 @@ git merge main
 
 The first line makes sure you are on your feature branch; the second brings `main`'s new commits into it. Small, frequent merges mean small conflicts you can resolve in a minute, instead of one enormous conflict at the end. When a conflict does appear, `../reference/git_recovery.md` walks through it.
 
-**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in `16_documentation_and_doc_sites.md`.
+**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in `19_documentation_and_doc_sites.md`.
 
 ## When not to add complexity
 
@@ -54,9 +54,9 @@ There is a heavier model called **Git Flow**, built around a permanent second br
 
 That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. Keep `main` as the single source of truth and use short-lived feature branches off it.
 
-Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. For example, the SWIR_HDR project did exactly this: a `v2-dev` branch carried in-progress experiment work, and once that work settled it was fast-forwarded onto `main` and the branch retired. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is `14_experiments_and_shipping.md`.
+Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. For example, the SWIR_HDR project did exactly this: a `v2-dev` branch carried in-progress experiment work, and once that work settled it was fast-forwarded onto `main` and the branch retired. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is `15_experiments_and_shipping.md`.
 
-The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is `18_versioning_and_releases.md`, and it is not now.
+The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is `21_versioning_and_releases.md`, and it is not now.
 
 ## The multi-root workspace
 

@@ -2,7 +2,7 @@
 
 There is one goal behind everything in this doc: **keep the code easy to follow.** When a script grows into a tangle you feel the cost directly. To change one line you have to hold the whole file in your head, and every edit risks breaking something three functions away. Good design is what keeps code clean and clear as it grows.
 
-This doc is about design *within* a codebase, at the level of functions and modules. Organizing a whole repo into a shipped library plus one-off experiments is a related but separate topic, and it is `14_experiments_and_shipping.md`.
+This doc is about design *within* a codebase, at the level of functions and modules. Organizing a whole repo into a shipped library plus one-off experiments is a related but separate topic, and it is `15_experiments_and_shipping.md`.
 
 ## Decomposition: one function, one job
 
@@ -71,7 +71,7 @@ Two words name the idea. **Cohesion** is how much the parts of a function or mod
 These are pointers, not lessons. Learn them when you hit the situation they solve.
 
 - **Dataclasses** group related values that always travel together into one named object. If you find yourself passing `Sd, Smax, b, bias, exposure_times` into function after function, a small `@dataclass` holding them turns five arguments into one and gives the bundle a name. That is the moment to look them up.
-- **Abstract base classes** define a shared interface that several variants must all provide, so the rest of the code can treat them interchangeably. If you have multiple data sources, or multiple interchangeable methods that must expose the same call, an ABC pins down the shape they share. This connects to the multiple-approaches problem in `14_experiments_and_shipping.md`. One paragraph is all it deserves here; do not turn a two-source problem into a class hierarchy.
+- **Abstract base classes** define a shared interface that several variants must all provide, so the rest of the code can treat them interchangeably. If you have multiple data sources, or multiple interchangeable methods that must expose the same call, an ABC pins down the shape they share. This connects to the multiple-approaches problem in `15_experiments_and_shipping.md`. One paragraph is all it deserves here; do not turn a two-source problem into a class hierarchy.
 
 ## Design and tests reinforce each other
 
