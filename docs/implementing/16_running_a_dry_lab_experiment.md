@@ -24,16 +24,15 @@ It is the index over everything else, and it holds four things:
   progress, or answered, and the one-line current answer.
 - **What's next** — the current focus, so you always know the next move.
 - **A dated decision log** — newest first: what you decided and *why* ("switched to the joint solve
-  because…", "stopped pursuing the weighting comparison because…"). This is the record you read
-  *instead of* `git log`.
+  because…", "stopped pursuing the weighting comparison because…"). This is the experimental record you read to understand the scientific progress, which is often intellectually distinct from the code history in the `git log`.
 
-The log is state: it changes almost every session. Keeping it in one committed file means the
-project's status is never trapped in your head, a chat transcript, or a commit message nobody will
-find.
+The experimental log is state: it is updated almost every session. Keeping it in one committed file means the
+project's status is always clear and can be understood by consulting this one document.
 
 ## The experiment folder: idea → test → outcome
 
-Each distinct study gets its own dated, self-contained folder (`experiments/2026-07-crf-necessity/`)
+Each distinct study gets its own dated, self-contained folder (`experiments/260722-crf-necessity/` —
+a `YYMMDD` date prefix so folders sort chronologically)
 built from a **template** so every experiment reads the same way. The exemplar's template
 (`experiments/_TEMPLATE.md`) has a fixed set of headings:
 
@@ -48,6 +47,29 @@ built from a **template** so every experiment reads the same way. The exemplar's
 Copy the template to start a new experiment, and add a row to the research log so it shows up in the
 status table. That is the whole ritual.
 
+## Validation: designing an experiment you can trust
+
+An experiment can only be satisfactorily concluded if its result can actually be believed. A **validation experiment** is one designed so its answer can be checked against something you already trust — a comparison to ground truth, to an independent method, or to a synthetic dataset with a known answer. That check is what confirms the analysis does what you *intend*, as opposed to merely running without error (the verification-versus-validation distinction in `18_ai_assisted_development.md`).
+
+Build the check in when you design the experiment, not after:
+
+- **A known answer.** Run on an input whose correct output you already know, from theory or a hand calculation.
+- **Synthetic data.** Generate inputs with the answer built in, so any deviation from it is visible and quantifiable.
+- **An independent method.** Compare against a second, unrelated route to the same quantity.
+
+A validation experiment that concludes cleanly does double duty: it answers today's question, and — once you trust it — freezing it as a regression test (`12_testing_with_pytest.md`) is what keeps that result true as the code keeps changing.
+
+## Look at the data at every step
+
+In the exploratory phase you often do not yet have a test for every step — so *looking* is the method.
+Manually examining the data as it moves through the pipeline builds intuition for both the data and the
+analysis, and catches problems early, while they are cheap to fix. Design your code to generate *and
+present* its intermediate outputs often, not only the final number. For image work, look at the image
+**and** a histogram of its intensities, and check how each step changes both — when a step excludes pixels
+(say, a threshold), watch what it does to the image and the histogram together. This is the exploratory
+companion to the validation checks in `18_ai_assisted_development.md` ("a clean run is not a correct
+analysis"): the same eyes-on-the-data instinct, applied continuously before you have tests to encode it.
+
 ## Save the state of every run
 
 A result you cannot reproduce is an anecdote, not a measurement. Reproducibility does not happen by
@@ -55,7 +77,7 @@ remembering — it happens because each run **records the state that produced it
 have it write a small **manifest** next to its outputs:
 
 ```yaml
-# outputs/2026-07-15_crf-necessity/manifest.yaml
+# outputs/260715_crf-necessity/manifest.yaml   (one subdirectory per run)
 git_commit: 4f7675a
 git_dirty: false            # were there uncommitted changes? (honest, not aspirational)
 timestamp: 2026-07-15T14:02:11
@@ -68,10 +90,9 @@ parameters:
 ```
 
 The commit hash says *which code*, the dirty flag is honest about whether that code was actually
-committed, the parameters say *how* it was configured, and the inputs say *what it ran on*. With
-those four, "reproduce the run behind Figure 3" is a real instruction, not a hope. Seeding any
-randomness (`10_from_scripts_to_pipelines.md`, `12_testing_with_pytest.md`) is what lets a rerun
-return the *same* numbers rather than merely similar ones.
+committed or if the run used uncommitted changes (which may hinder reproduction), the parameters say *how* it was configured, and the inputs say *what it ran on*. With those four, "reproduce the run behind Figure 3" is a real instruction, not a hope. Seeding any
+randomness is what lets a rerun return the *same* numbers rather than merely similar ones — the same
+determinism a regression test relies on (`12_testing_with_pytest.md`).
 
 ## Repeat runs, and track quality, without bloating the repo
 
@@ -85,20 +106,25 @@ the repo small:
   scratch data. A deterministic, seeded run *reproduces* these from the committed code and manifest,
   so you are keeping the recipe, not the cake.
 
-Give each run its own output directory and **preserve runs by default** — a new run writes a new
-dated folder rather than overwriting the last one, so you can watch a metric move across runs and
-catch a regression. (In the exemplar this is handled by a tiny `runlog.py` helper, but the idea is
-independent of any code: one directory per run, small provenance committed, heavy artifacts ignored.)
-The small carve-out for committing a figure — when it *cannot* be regenerated in CI because it needs
-real data — is covered in `17_working_with_large_data.md`.
+Keep the two levels straight: the **experiment folder is per *study***, and each **run** writes its own
+subdirectory *inside* that folder's `outputs/`, named by date and slug (`outputs/YYMMDD_slug/`). Runs
+accumulate in the same experiment folder — you do not make a new experiment folder to re-run. **Preserve
+runs by default:** re-running the same study does not overwrite the last result — the first run is
+`outputs/YYMMDD_slug/` and each rerun writes the next numbered variant (`…_02/`, `…_03/`), so you can
+watch a metric move across reruns and catch a regression. Overwrite in place only for a throwaway cosmetic
+re-run of a deterministic result. (In the exemplar a tiny `runlog.py` helper does this, but the idea is
+independent of any code: one experiment folder per study, one numbered subdirectory per run, small
+provenance committed, heavy artifacts ignored.) The small carve-out for committing a figure — when it
+*cannot* be regenerated in CI because it needs real data — is covered in `17_working_with_large_data.md`.
 
 ## Interpretation stays with the scientist
 
-Automate the recording, never the conclusion. In the exemplar, the run report has an
-`## Interpretation (scientist)` section that tooling is written to **never overwrite** — the machine
-fills in the provenance and the metrics, and the human writes what the result *means*. That boundary
-is the whole point: the framework exists to make your judgment reproducible and reviewable, not to
-replace it. (This division of labor is exactly the subject of `18_ai_assisted_development.md`, and it
+Automate the recording, never the conclusion. In the exemplar, each run's report opens with a one-line
+**Summary** (what the run was) and the scientist's **`## Interpretation (scientist)`** — a section tooling
+is written to **never overwrite** — *before* the auto-filled provenance and metrics. Putting them first
+means you can flip through a folder of reports and read "we did X, we found Y" from the opening lines; the
+machine records the numbers, the human writes what they *mean*. That boundary is the whole point: the
+framework exists to make your judgment reproducible and reviewable, not to replace it. (This division of labor is exactly the subject of `18_ai_assisted_development.md`, and it
 matters most when an assistant wrote the driver.)
 
 ## How this connects
