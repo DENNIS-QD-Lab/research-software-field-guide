@@ -27,6 +27,7 @@ This is the DENNIS Lab's internal repository of small helper scripts and noteboo
 - Verb-first for action scripts that *do* something when run: `show_keys.py`, `plot_spectra.py`, `convert_units.py`.
 - Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`, `hdr_processing.py`, `broadband_segmentation.py`.
 - Avoid abbreviations except universally understood domain terms (`hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` is not).
+- **Dated experiment and run directories** are the exception to the "no hyphens" rule above: prefix them with a `YYMMDD` date so they sort chronologically. Experiment folders are `YYMMDD-<slug>/` (e.g. `260717-crf-necessity/`, using the study's start date); per-run output directories are `YYMMDD_<slug>[_NN]/` (the run date, with `_02`, `_03`, … preserving reruns). This applies to dated directories, not to importable `.py` module names.
 
 ## Command line interfaces
 - Any script that can be run from the command line uses `if __name__ == "__main__":` to wire up its CLI.
