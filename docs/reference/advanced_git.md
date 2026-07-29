@@ -80,6 +80,27 @@ This copies the change from that commit onto your current branch as a new commit
 
 ---
 
+## Work on two branches at once: `git worktree`
+
+You want a second branch checked out *at the same time* as your current one — to compare two versions side by side, run a long job on one branch while you keep editing another, or let an AI assistant work on a change in an isolated copy without disturbing your main checkout. Switching branches in place would churn your working directory; a **worktree** gives you a second working directory for the same repository instead.
+
+```
+git worktree add ../myrepo-feature some-branch
+```
+
+This creates the folder `../myrepo-feature` with the same repository checked out to `some-branch`. Both folders are live at once — edit, commit, and run in either — and they share one history and `.git` database, so a worktree is far cheaper than a second `git clone`. Use an existing branch, or add `-b new-branch` to create one as you go.
+
+List and remove them:
+
+```
+git worktree list
+git worktree remove ../myrepo-feature
+```
+
+`list` shows every working directory attached to the repo; `remove` deletes one when you are done with it (commit or move anything you want to keep first). A branch can be checked out in only one worktree at a time.
+
+---
+
 ## Rewrite history, carefully: `git rebase`
 
 **The one rule: never rebase commits you have already pushed and shared.** Rebasing rewrites history, replacing your commits with new ones that have new hashes. If you rewrite commits other people already have, their copy and yours disagree, and untangling that is a mess for everyone. Only rebase local commits you have not pushed.
