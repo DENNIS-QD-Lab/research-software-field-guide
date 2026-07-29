@@ -2,7 +2,7 @@
 
 Many research teams use AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the principles here are vendor-neutral, but the examples reflect this repo's actual setup.
 
-Using AI appropriately in reserch is about the division of labor: **the assistant writes code; you do the science.** Designing the experiment, judging whether a result is real, and drawing the conclusion is the respondibility of the scientist; AI is a tool that can be leveraged to make building the tools to *run* the experiment more efficient. That split is not a nicety — it is what keeps the work trustworthy, and it matters *more*, not less, the more of the implementation you hand over.
+Using AI appropriately in research comes down to the division of labor: **the assistant writes code; you do the science.** Designing the experiment, judging whether a result is real, and drawing the conclusion are the scientist's responsibility; the assistant is a tool that makes building and running the experiment more efficient. That split is not a nicety — it is what keeps the work trustworthy, and it matters *more*, not less, the more of the implementation you hand over.
 
 ## The standards file does the heavy lifting
 

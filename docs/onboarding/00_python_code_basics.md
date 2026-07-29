@@ -14,7 +14,7 @@ Use a notebook while you are figuring something out. Once the logic is settled a
 
 A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing. 
 
-(**Tip:** if reading/editing a markdown file (.md) like this one in an IDE (integrated development environment like visual studio code (VS Code)), use Cmd+Shift+V to toggle between code and formatted view of the text.)
+**Tip:** These docs are markdown (`.md`) files. If you are reading this as raw text in an editor like VS Code, press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) to toggle between the raw text and the formatted preview.
 
 ## Anatomy of a Python file
 

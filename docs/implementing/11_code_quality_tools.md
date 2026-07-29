@@ -41,7 +41,7 @@ This fixes the safe, automatic cases (removing an unused import, sorting imports
 A message looks like this:
 
 ```
-Step2_radiance.py:42:5: F841 Local variable 'result' is assigned to but never used
+analysis.py:42:5: F841 Local variable 'result' is assigned to but never used
 ```
 
 Read it left to right: the file, the line number, the column, then a **rule code** (`F841`), then a plain description. The rule code is a stable identifier you can look up:
@@ -75,7 +75,7 @@ This runs every hook over every file, instead of only the files you changed. Use
 `../onboarding/00_python_code_basics.md` introduced type hints such as `list[int]` and `str | None`. Those hints are for human readers and for checkers; Python does not enforce them when the code runs. **mypy is the checker.** It reads your hints and reports where the types do not line up, before you run anything.
 
 ```
-mypy Step2_radiance.py
+mypy analysis.py
 ```
 
 This checks the types in that file. It catches a whole class of bug statically: passing the wrong type into a function, or using a value that might be `None` without handling the `None` case. That is a bug you would otherwise only find at runtime, maybe only on the input that triggers it.

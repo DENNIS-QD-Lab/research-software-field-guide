@@ -6,7 +6,7 @@ The daily workflow (`../onboarding/05_daily_workflow.md`) and `git_recovery.md` 
 
 Do not read it front to back. Find the tool that matches what you need, use it, and get back to work. It is a reference, not a tutorial.
 
-One safety rule, the same as `git_recovery.md`: before running any command with `--force` in it, or any command that rewrites history (the `git rebase` section below), ask in lab Teams if you are not sure. Those are the commands that can affect other people's work. The rest are safe to experiment with.
+One safety rule, the same as `git_recovery.md`: before running any command with `--force` in it, or any command that rewrites history (the `git rebase` section below), ask in your team's chat if you are not sure. Those are the commands that can affect other people's work. The rest are safe to experiment with.
 
 ---
 

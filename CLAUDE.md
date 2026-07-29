@@ -59,4 +59,3 @@ This is the DENNIS Lab's internal repository of small helper scripts and noteboo
 - Run `ruff check` and `ruff format` and fix what they flag.
 - Prefer simple code over clever code.
 - If style or convention is ambiguous, ask before guessing.
-````

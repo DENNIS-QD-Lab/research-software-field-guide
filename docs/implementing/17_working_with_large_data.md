@@ -30,7 +30,7 @@ prove a later run used the *same* input. Record, in the run's `manifest.yaml`
 
 ```yaml
 inputs:
-  dataset: mouse_qd_2026-06-30
+  dataset: run_2026-06-30
   dataset_sha256: 9c1f2a…          # hash of the file (or a manifest of the files)
 ```
 
@@ -45,8 +45,8 @@ The exception to "data stays out" is deliberately narrow: a **curated handful of
 as a test or teaching fixture (`15_experiments_and_shipping.md`, `../../CLAUDE.md`). That is enough
 to exercise the code and show a realistic case; the full acquired dataset stays out because it bloats
 history permanently. This carve-out is also what lets a figure built from real data be committed
-rather than regenerated: a synthetic, deterministic run can be rebuilt in CI, but a run over a
-gigabyte of mouse data cannot, so its (small) figure and provenance are committed as a fixture and
+rather than regenerated: a synthetic, deterministic run can be rebuilt in CI, but a run over
+gigabytes of acquired data cannot, so its (small) figure and provenance are committed as a fixture and
 the report points at them.
 
 ## The bottom line

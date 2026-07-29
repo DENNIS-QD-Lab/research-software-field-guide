@@ -36,7 +36,7 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 |-----|----------------|
 | [advanced_git.md](reference/advanced_git.md) | Sharp Git tools for longer-lived branches: `git stash`, `git rebase` (defensively), `git cherry-pick`, and keeping a feature branch current. A catalog to look things up in, not a tutorial. |
 | [cs_jargon.md](reference/cs_jargon.md) | Programming terms of art (snake_case, mutable, parse, refactor, etc.) defined briefly. |
-| [git_recovery.md](reference/git_recovery.md) | what to do when your GitHub commit/push/pull routine is out of sync |
+| [git_recovery.md](reference/git_recovery.md) | Recovering from common Git mistakes: work done on the wrong branch, a bad commit, a file you need back, and other "what just happened" moments. |
 | [git_vocabulary.md](reference/git_vocabulary.md) | Git and GitHub terms (fetch, pull, push, HEAD, origin, upstream, conflict, and others) you'll encounter. |
 | [keyboard_shortcuts.md](reference/keyboard_shortcuts.md) | VS Code shortcuts worth memorizing, organized by category. |
 | [markdown_formatting.md](reference/markdown_formatting.md) | Markdown syntax for docs, README files, PR descriptions, and notebook cells. |

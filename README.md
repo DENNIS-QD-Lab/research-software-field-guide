@@ -8,6 +8,7 @@ This repository holds general-purpose tools, not project-specific analysis. A he
 
 - `GETTING_STARTED.md` — the from-scratch setup sheet: install the tools, make a GitHub account, and clone the repository. Start here if none of that is done yet.
 - `docs/` — the onboarding guide, numbered in reading order. Start at `docs/onboarding/00_python_code_basics.md` and work up.
+- `CONTRIBUTING.md` — the short checklist you return to each time you add a script or open a pull request.
 - `scripts/` — runnable Python helpers (`.py` files). The worked example is `scripts/show_h5_keys.py`.
 - `notebooks/` — Jupyter notebooks (`.ipynb` files) for interactive exploration.
 - `environment.yml` — the definition of the shared conda environment, named `helper`.
@@ -50,7 +51,3 @@ These steps assume you have already cloned the repository and have Miniconda and
 ## Contributing
 
 Read `CONTRIBUTING.md` before adding a script or opening a pull request. The short version: make a branch, keep helpers small and well-named, write a docstring, and have one person review the change.
-
-## The `dev/` folder
-
-The `dev/` folder contains the design briefs used to build these docs and is kept for historical reference.

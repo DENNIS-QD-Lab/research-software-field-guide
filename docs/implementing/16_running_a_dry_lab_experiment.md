@@ -23,15 +23,16 @@ It is the index over everything else, and it holds four things:
 - **Status of the open questions / hypotheses** — a table: each question, whether it is open, in
   progress, or answered, and the one-line current answer.
 - **What's next** — the current focus, so you always know the next move.
-- **A dated decision log** — newest first: what you decided and *why* ("switched to the joint solve
-  because…", "stopped pursuing the weighting comparison because…"). This is the experimental record you read to understand the scientific progress, which is often intellectually distinct from the code history in the `git log`.
+- **A dated decision log** — newest first: what you decided and *why* ("switched to method B
+  because it removed the artifact", "stopped pursuing the third approach because it did not change
+  the result"). This is the experimental record you read to understand the scientific progress, which is often intellectually distinct from the code history in the `git log`.
 
 The experimental log is state: it is updated almost every session. Keeping it in one committed file means the
 project's status is always clear and can be understood by consulting this one document.
 
 ## The experiment folder: idea → test → outcome
 
-Each distinct study gets its own dated, self-contained folder (`experiments/260722-crf-necessity/` —
+Each distinct study gets its own dated, self-contained folder (`experiments/260717-crf-necessity/` —
 a `YYMMDD` date prefix so folders sort chronologically)
 built from a **template** so every experiment reads the same way. The exemplar's template
 (`experiments/_TEMPLATE.md`) has a fixed set of headings:
@@ -64,10 +65,11 @@ A validation experiment that concludes cleanly does double duty: it answers toda
 In the exploratory phase you often do not yet have a test for every step — so *looking* is the method.
 Manually examining the data as it moves through the pipeline builds intuition for both the data and the
 analysis, and catches problems early, while they are cheap to fix. Design your code to generate *and
-present* its intermediate outputs often, not only the final number. For image work, look at the image
-**and** a histogram of its intensities, and check how each step changes both — when a step excludes pixels
-(say, a threshold), watch what it does to the image and the histogram together. This is the exploratory
-companion to the validation checks in `18_ai_assisted_development.md` ("a clean run is not a correct
+present* its intermediate outputs often, not only the final number. Plot the intermediate arrays, their
+distributions, or the residuals — whatever shows the *shape* of the data at that step — and check how each
+step changes them. (For image work, for instance, look at the image **and** a histogram of its intensities
+together, so that when a step excludes data — say, a threshold — you see what it does to both.) This is the
+exploratory companion to the validation checks in `18_ai_assisted_development.md` ("a clean run is not a correct
 analysis"): the same eyes-on-the-data instinct, applied continuously before you have tests to encode it.
 
 ## Save the state of every run
@@ -77,15 +79,15 @@ remembering — it happens because each run **records the state that produced it
 have it write a small **manifest** next to its outputs:
 
 ```yaml
-# outputs/260715_crf-necessity/manifest.yaml   (one subdirectory per run)
+# outputs/260717_crf-necessity/manifest.yaml   (one subdirectory per run)
 git_commit: 4f7675a
 git_dirty: false            # were there uncommitted changes? (honest, not aspirational)
-timestamp: 2026-07-15T14:02:11
+timestamp: 2026-07-17T14:02:11
 inputs:
-  dataset: mouse_qd_2026-06-30   # which data (see 17_working_with_large_data.md)
+  dataset: run_2026-06-30        # which data (see 17_working_with_large_data.md)
   dataset_sha256: 9c1f…          # so you can prove two runs used the same input
 parameters:
-  saturation_fraction: 0.85
+  threshold: 0.85
   seed: 0
 ```
 

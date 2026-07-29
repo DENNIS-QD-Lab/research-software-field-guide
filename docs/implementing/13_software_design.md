@@ -58,7 +58,7 @@ Every piece is now clear on its own, `normalize` and `peak_wavelength` are pure 
 
 ## Cohesion and single responsibility
 
-Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: for example, the weighting functions in the SWIR_HDR project each take a pixel value and a range and return a weight, nothing else, which is exactly why they were straightforward to unit-test.
+Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: a function that takes a couple of inputs and returns a single number, with no side effects, is trivial to unit-test. In the SWIR_HDR exemplar the weighting functions (one small step of the imaging math) are exactly this shape — each takes a pixel value and a range and returns one weight, nothing else — which is why they were straightforward to test.
 
 ## When a function, when a module, when a class
 
@@ -70,7 +70,7 @@ Two words name the idea. **Cohesion** is how much the parts of a function or mod
 
 These are pointers, not lessons. Learn them when you hit the situation they solve.
 
-- **Dataclasses** group related values that always travel together into one named object. If you find yourself passing `Sd, Smax, b, bias, exposure_times` into function after function, a small `@dataclass` holding them turns five arguments into one and gives the bundle a name. That is the moment to look them up.
+- **Dataclasses** group related values that always travel together into one named object. If you find yourself passing the same cluster of calibration values (say `gain, offset, dark_level, exposure_times`) into function after function, a small `@dataclass` holding them turns four arguments into one and gives the bundle a name. That is the moment to look them up.
 - **Abstract base classes** define a shared interface that several variants must all provide, so the rest of the code can treat them interchangeably. If you have multiple data sources, or multiple interchangeable methods that must expose the same call, an ABC pins down the shape they share. One paragraph is all it deserves here; do not turn a two-source problem into a class hierarchy.
 
 ## Design and tests reinforce each other

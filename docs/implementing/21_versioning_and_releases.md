@@ -10,7 +10,7 @@ Version numbers are **MAJOR.MINOR.PATCH** (for example `2.1.0`), and each part c
 - **MINOR** (`2.1.0` → `2.2.0`): new features, but existing usage still works (backward-compatible).
 - **MAJOR** (`2.1.0` → `3.0.0`): breaking changes; code using the old version may need updating.
 
-The scheme tells a user, at a glance, whether upgrading is safe. There is also the **0.x convention**: while a project is below `1.0.0`, it is signaling "still unstable, anything may change." For example, the SWIR_HDR project is past that: its `v1.0` was the published release, and current work is on the `2.x` line.
+The scheme tells a user, at a glance, whether upgrading is safe. There is also the **0.x convention**: while a project is below `1.0.0`, it is signaling "still unstable, anything may change." For example, the SWIR_HDR exemplar is past that: its `v1.0` was the published release, and later work continued on the `2.x` line.
 
 ## Tags and releases
 

@@ -30,7 +30,7 @@ Each experiment folder is self-contained: a `README` stating the question it ask
 
 The library moves through two phases, and conflating them is the usual mistake.
 
-**While you are comparing (the phase the exemplar is in now):** the competing approaches all live in `src` together. They are not clutter, they are live candidates, and keeping them in one place is exactly what lets an experiment import and compare them without drift. All four weighting methods sit in `src/swir_hdr/radiance.py`, and the comparison in `experiments/` imports them from there.
+**While you are comparing:** the competing approaches all live in `src` together. They are not clutter, they are live candidates, and keeping them in one place is exactly what lets an experiment import and compare them without drift. In the SWIR_HDR exemplar, for instance, the several competing methods sit together in one library module (`src/swir_hdr/radiance.py`), and the comparison in `experiments/` imports them from there.
 
 **When you ship the clean package:** you commit to a winner and trim the library to it. "The library carries only the blessed approach" describes that shipped end state — not something true from day one, and not the state the *paper* reproduces from. The paper is reproduced from a tag of the full pre-trim code (every approach still present); you trim `main` only *after* cutting that tag (see the decision below).
 

@@ -10,11 +10,11 @@ Don't read it front to back. Find the situation that matches what you did, follo
 
 If a situation feels broken and you're not sure what's happening, **stop and run `git status` first**. Git status tells you, in plain English, what branch you're on, what files have changed, and what state things are in. It's the single most useful command for diagnosing "wait, what just happened."
 
-```python
+```
 git status
 ```
 
-If after reading the output you're still unsure, **ask in lab Teams before running any command that contains `--force`, `--hard`, or `rm`**. Those flags can destroy work. Almost nothing else in Git can.
+If after reading the output you're still unsure, **ask in your team's chat before running any command that contains `--force`, `--hard`, or `rm`**. Those flags can destroy work. Almost nothing else in Git can.
 
 ---
 
@@ -26,7 +26,7 @@ The fix depends on whether you've already committed.
 
 This is the easy case. Your edits aren't yet attached to any branch; they're just sitting in your working directory. Create a branch from where you are, and the edits come along:
 
-```python
+```
 git checkout -b descriptive-branch-name
 ```
 
@@ -36,7 +36,7 @@ Now you're on the new branch with all your edits, exactly as they were. Stage an
 
 Two steps. First, create a branch at your current state so the work is captured somewhere:
 
-```python
+```
 git branch descriptive-branch-name
 ```
 
@@ -44,7 +44,7 @@ This makes a branch pointing at your current commit but doesn't switch to it. Yo
 
 Then rewind your local `main` back to where GitHub thinks it should be:
 
-```python
+```
 git reset --hard origin/main
 ```
 
@@ -52,7 +52,7 @@ This is the scary command (it has `--hard` in it), so read carefully: it discard
 
 Switch to your branch and continue working:
 
-```python
+```
 git checkout descriptive-branch-name
 ```
 
@@ -68,7 +68,7 @@ You meant to commit to `add-show-keys` but you were still on `fix-pathing-bug`. 
 
 If you haven't pushed yet, move the most recent commit to the right branch:
 
-```python
+```
 git log --oneline -1                          # confirm the commit you want to move
 git checkout add-show-keys                    # switch to the branch you wanted
 git cherry-pick fix-pathing-bug               # copy the commit over
@@ -86,7 +86,7 @@ A password, a data file, a `.env` file, a path with your username in it — some
 
 **If you haven't pushed yet**, you can rewrite history:
 
-```python
+```
 git reset --soft HEAD~1                       # undo the commit, keep the changes
 ```
 
@@ -100,7 +100,7 @@ Now the bad file is still in your working directory. Delete it (or move it elsew
 
 If the commit is just on your machine (not pushed):
 
-```python
+```
 git reset --soft HEAD~1
 ```
 
@@ -108,7 +108,7 @@ The commit is undone; the changes from it are back in your working directory as 
 
 If you want to throw away the changes entirely (not just the commit):
 
-```python
+```
 git reset --hard HEAD~1
 ```
 
@@ -122,7 +122,7 @@ If you `git checkout other-branch` while you have uncommitted changes, Git will 
 
 The safe option: stash your changes, switch, then bring them back if you want:
 
-```python
+```
 git stash                                     # set changes aside
 git checkout other-branch
 git stash pop                                 # bring the changes here
@@ -136,7 +136,7 @@ git stash pop                                 # bring the changes here
 
 If you deleted it but haven't committed the deletion:
 
-```python
+```
 git checkout HEAD -- path/to/file
 ```
 
@@ -144,7 +144,7 @@ This restores the file to whatever the last commit had.
 
 If you committed the deletion and want to undo it:
 
-```python
+```
 git checkout HEAD~1 -- path/to/file           # restore from the previous commit
 git commit -m "Restore accidentally deleted file"
 ```
@@ -155,7 +155,7 @@ git commit -m "Restore accidentally deleted file"
 
 Three commands to run, in order:
 
-```python
+```
 git status
 git log --oneline -10
 git branch
@@ -163,7 +163,7 @@ git branch
 
 `status` shows your current state. `log --oneline -10` shows the last 10 commits. `branch` shows what branches exist locally.
 
-Then either fix it yourself if the pattern matches one above, or paste all three outputs into lab Teams and ask. Git problems are usually faster to fix with a second pair of eyes than to thrash through alone.
+Then either fix it yourself if the pattern matches one above, or paste all three outputs into your team's chat and ask. Git problems are usually faster to fix with a second pair of eyes than to thrash through alone.
 
 ---
 

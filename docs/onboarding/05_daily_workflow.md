@@ -19,6 +19,8 @@ What each does:
 2. Pull the latest changes from GitHub into your local `main`. This catches anything your labmates merged while you were away.
 3. Create a new branch off the now-up-to-date `main`, and switch to it.
 
+(`git checkout -b <name>` and `git switch -c <name>` do exactly the same thing — create a branch and switch to it. You will see both in these docs and online; use whichever you prefer.)
+
 This three-step ritual prevents the most common Git problems before they happen. Skipping step 2 is how branches end up "behind main" and merge conflicts proliferate.
 
 **Branch naming:** short, descriptive, kebab-case (hyphens). Examples: `add-show-keys`, `fix-hdf5-pathing`, `clarify-notebook-docs`. The branch name will appear in the PR title and in your Git history forever, so make it informative.
@@ -103,4 +105,4 @@ the other version of the lines
 >>>>>>> main
 ```
 
-The 90% case is simple: ask for help. Conflicts are routine and not a sign you did anything wrong, and an experienced colleague can resolve one with you in a couple of minutes. Do not delete the markers at random hoping it sorts itself out.
+The 90% case is simple: ask for help. Conflicts are routine and not a sign you did anything wrong, and an experienced colleague can resolve one with you in a couple of minutes. Do not delete the markers at random hoping it sorts itself out. (VS Code shows "Accept Current Change" / "Accept Incoming Change" buttons above each conflict, but *which* to keep is a judgment call — when you are unsure, ask before accepting.)
