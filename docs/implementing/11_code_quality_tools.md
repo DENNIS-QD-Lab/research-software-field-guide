@@ -4,8 +4,6 @@ Your project's coding-standards file (here, `../../CLAUDE.md`) says code follows
 
 ## Three tools, three jobs
 
-These three words get used interchangeably and should not be. They do different things.
-
 - **Linting** finds likely *mistakes and bad patterns*: an unused variable, a name that is never defined, a shadowed import. A linter reads your code and reports problems.
 - **Formatting** rewrites *layout*: indentation, spacing, line length, quote style. It does not change what the code does, only how it looks, and it ends every argument about style by having a tool decide.
 - **Type checking** reads your *type hints* and flags mismatches, such as passing a string where a function expects an integer, before you ever run the code.
