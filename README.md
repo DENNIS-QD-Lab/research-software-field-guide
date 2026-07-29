@@ -6,13 +6,13 @@ This repository holds general-purpose tools, not project-specific analysis. A he
 
 ## What's here
 
-- `GETTING_STARTED.md` — the from-scratch setup sheet: install the tools, make a GitHub account, and clone the repository. Start here if none of that is done yet.
-- `docs/` — the onboarding guide, numbered in reading order. Start at `docs/onboarding/00_python_code_basics.md` and work up.
-- `CONTRIBUTING.md` — the short checklist you return to each time you add a script or open a pull request.
+- [GETTING_STARTED.md](GETTING_STARTED.md) — the from-scratch setup sheet: install the tools, make a GitHub account, and clone the repository. Start here if none of that is done yet.
+- `docs/` — the onboarding guide, numbered in reading order. Start at [00_python_code_basics.md](docs/onboarding/00_python_code_basics.md) and work up.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — the short checklist you return to each time you add a script or open a pull request.
 - `scripts/` — runnable Python helpers (`.py` files). The worked example is `scripts/show_h5_keys.py`.
 - `notebooks/` — Jupyter notebooks (`.ipynb` files) for interactive exploration.
 - `environment.yml` — the definition of the shared conda environment, named `helper`.
-- `.pre-commit-config.yaml` — automatic notebook cleanup before each commit (see `docs/onboarding/07_notebooks.md`).
+- `.pre-commit-config.yaml` — automatic notebook cleanup before each commit (see [07_notebooks.md](docs/onboarding/07_notebooks.md)).
 
 ## New here? Read the docs first
 
@@ -22,7 +22,7 @@ If you have never used Git, the command line, or conda, do not start by typing c
 
 ## Quick start
 
-These steps assume you have already cloned the repository and have Miniconda and VS Code installed. If any of that is not yet done, [GETTING_STARTED.md](GETTING_STARTED.md) walks through it from scratch; `docs/onboarding/03_getting_started_with_git.md` and `docs/onboarding/04_environments.md` cover the concepts in more depth.
+These steps assume you have already cloned the repository and have Miniconda and VS Code installed. If any of that is not yet done, [GETTING_STARTED.md](GETTING_STARTED.md) walks through it from scratch; [03_getting_started_with_git.md](docs/onboarding/03_getting_started_with_git.md) and [04_environments.md](docs/onboarding/04_environments.md) cover the concepts in more depth.
 
 1. Create the shared environment from the definition file:
 
@@ -50,4 +50,4 @@ These steps assume you have already cloned the repository and have Miniconda and
 
 ## Contributing
 
-Read `CONTRIBUTING.md` before adding a script or opening a pull request. The short version: make a branch, keep helpers small and well-named, write a docstring, and have one person review the change.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding a script or opening a pull request. The short version: make a branch, keep helpers small and well-named, write a docstring, and have one person review the change.

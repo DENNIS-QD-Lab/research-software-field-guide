@@ -8,7 +8,7 @@ A `.py` file is a plain text file of Python code. You run the whole thing at onc
 
 A `.ipynb` file is a Jupyter notebook. A notebook is a document made of *cells* that you run one at a time, in any order, keeping the results visible in between. Notebooks are for interactive exploration: trying things, looking at data, making a quick plot.
 
-Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. You may use either or both of these file types, and `07_notebooks.md` describes ways to manage them in parallel.
+Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. You may use either or both of these file types, and [07_notebooks.md](07_notebooks.md) describes ways to manage them in parallel.
 
 ## Cells inside a notebook
 
@@ -63,4 +63,4 @@ In `scripts/show_h5_keys.py`:
 - `pad = "  " * indent` inside it is a **variable**.
 - The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
-`06_adding_a_script.md` walks through how this script does its job.
+[06_adding_a_script.md](06_adding_a_script.md) walks through how this script does its job.

@@ -40,7 +40,7 @@ Some helpers exist as a single file. Some exist as both a `.py` and a `.ipynb`. 
 
 **Promoting notebook code to a script.** When you notice yourself reusing a chunk of notebook code, or wanting to call it from another notebook, move it into a script and import it back. This is the natural evolution: explore in a notebook, extract the stable parts into a script, keep using the notebook as the interactive surface.
 
-**A note on drift.** Because the script and notebook are two separate files in this repo, they *can* get out of sync if you duplicate logic across both rather than importing. The discipline is to keep the script as the single source of truth for any function that appears in both. Tools exist that synchronize the two automatically (see `../reference/notebook_sync_alternatives.md`); we've chosen not to use them for now in favor of a simpler stack.
+**A note on drift.** Because the script and notebook are two separate files in this repo, they *can* get out of sync if you duplicate logic across both rather than importing. The discipline is to keep the script as the single source of truth for any function that appears in both. Tools exist that synchronize the two automatically (see [notebook_sync_alternatives.md](../reference/notebook_sync_alternatives.md)); we've chosen not to use them for now in favor of a simpler stack.
 
 
 ## Running a paired notebook

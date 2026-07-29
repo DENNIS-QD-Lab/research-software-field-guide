@@ -2,7 +2,7 @@
 
 This is the loop you repeat for every change. This can be managed through the VS Code Source Control panel GUI or the equivalent terminal commands. Use whichever you prefer; they do the same thing.
 
-If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see `../reference/git_recovery.md`. Don't panic and don't delete anything until you've checked your options.
+If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see [git_recovery.md](../reference/git_recovery.md). Don't panic and don't delete anything until you've checked your options.
 
 ## Starting new work
 
@@ -91,7 +91,7 @@ We branch for every change, even a one-line fix. Two reasons. It keeps `main` wo
 
 A *pull request* (PR) proposes merging your branch into `main` and is where review happens. After you push a branch, GitHub shows a prompt to open a PR for it; click it, or go to the repository's Pull Requests tab in GitHub and click "New pull request."
 
-In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. `08_code_review.md` covers the review itself.
+In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. [08_code_review.md](08_code_review.md) covers the review itself.
 
 ## Merge conflicts
 

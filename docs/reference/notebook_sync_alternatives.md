@@ -1,6 +1,6 @@
 # Notebook version control: approaches we considered
 
-This is a reference doc, not onboarding. It records the three approaches the team weighed for keeping notebooks in version control, and why we chose the one we use, so a returning lab member wondering "could we be doing this better?" can see the tradeoffs without rediscovering them. For the setup you actually run, see `../onboarding/07_notebooks.md`.
+This is a reference doc, not onboarding. It records the three approaches the team weighed for keeping notebooks in version control, and why we chose the one we use, so a returning lab member wondering "could we be doing this better?" can see the tradeoffs without rediscovering them. For the setup you actually run, see [07_notebooks.md](../onboarding/07_notebooks.md).
 
 ## Why notebooks fight with version control
 
@@ -8,7 +8,7 @@ A `.ipynb` file is JSON that stores not just code but also every cell's outputs 
 
 ## Option 1: Strip outputs and metadata with nbstripout (what we use)
 
-The committed `.ipynb` has no outputs and minimal metadata. Your local working copy keeps everything, so your screen does not change. Setup is a pre-commit hook, covered in `../onboarding/07_notebooks.md`.
+The committed `.ipynb` has no outputs and minimal metadata. Your local working copy keeps everything, so your screen does not change. Setup is a pre-commit hook, covered in [07_notebooks.md](../onboarding/07_notebooks.md).
 
 - Pros: simple, one tool, and students keep working in notebooks exactly as they already do.
 - Cons: the committed format is still `.ipynb`, so diffs are JSON, better than before but still not pleasant to read. There is no way to import a notebook's functions into another script without converting it first.
