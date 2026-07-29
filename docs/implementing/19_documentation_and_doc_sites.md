@@ -96,7 +96,19 @@ This builds the HTML into `docs/_build/html`. For a live-reloading preview while
 sphinx-autobuild docs docs/_build/html
 ```
 
-This serves the site at `http://localhost:8000` and rebuilds as you save a docstring or page. To publish, connect the repo to **Read the Docs** (which builds Sphinx sites on every push automatically) or build in a GitHub Actions workflow (`14_continuous_integration.md`) and deploy to GitHub Pages.
+This serves the site at `http://localhost:8000` and rebuilds as you save a docstring or page. How to open a static build, and how to share the site (including from a private repo), is the next section.
+
+## Previewing and sharing the site (including private repos)
+
+**Viewing a build locally.** `sphinx-autobuild` (above) is the easiest path — it serves the site and reloads as you save; add `--host 127.0.0.1 --port 8000` if you need to pin the address. If you ran a plain `sphinx-build` instead, the output is just a folder of files, not a server: open `docs/_build/html/index.html`. One catch that gets everyone — pasting that path into a browser's address bar usually triggers a *search*, not a page load. Prefix it with `file:///` (three slashes), e.g. `file:///Users/you/project/docs/_build/html/index.html`, or just use `sphinx-autobuild` and sidestep it.
+
+**Sharing it — mind the "private" part.** The obvious answer, GitHub Pages, has a trap for a private repo: on a GitHub **Pro** plan (including the educator plan), a Pages site built from a *private* repo is **still publicly reachable** — access-controlled Pages is an Enterprise-only feature. For unpublished work, such as a methods paper still in progress, that is usually not what you want. Private-safe ways to let teammates see the site:
+
+- **A CI artifact (what the exemplar does).** Build the site in your GitHub Actions workflow (`14_continuous_integration.md`) and upload `docs/_build/html` with `actions/upload-artifact`. Anyone with **read access** to the repo gets it from the run's Summary page, or with `gh run download -n <artifact-name>`, then unzips and opens `index.html`. It is not a live URL and artifacts expire (set a retention period), but nothing is ever public.
+- **Read the Docs** has a paid tier that serves private, access-controlled docs if you want a real hosted URL.
+- **Cloudflare Pages** (or similar) can host with its own access control if you outgrow the artifact.
+
+Rule of thumb: **public project → GitHub Pages or Read the Docs; private project → the CI artifact**, until you have a reason for hosted, access-controlled docs.
 
 ## A dependency note
 
