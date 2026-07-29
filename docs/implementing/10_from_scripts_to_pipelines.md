@@ -1,6 +1,6 @@
 # From scripts to pipelines
 
-You learned the daily workflow in `../onboarding/05_daily_workflow.md` on small changes: one branch, one edit, one PR, one repo per window. That workflow is correct, and you should keep using it. But as your scripts grow into a *pipeline* (several files that depend on each other, work that takes days, more than one idea in flight) a few of its defaults start to strain.
+You learned the daily workflow in `../onboarding/05_daily_workflow.md` on small changes: one branch, one edit, one PR, one repo per window. That workflow is correct, and you should keep using it. But as your scripts grow into a *pipeline* (a series of computational or analysis steps that build on each other, code development that takes days, working on multiple developments in parallel) a few of its defaults start to strain.
 
 This doc names that transition and sets up the two things the rest of the implementing track assumes: a branching model that scales, and a workspace that holds more than one repo. It is the bridge from the onboarding track to everything after it, so it comes first.
 
@@ -10,7 +10,7 @@ Nothing here needs to change until you feel it. The triggers:
 
 - **Many files.** A change touches several modules that depend on each other, not one script.
 - **Work that spans days.** A feature is not done in one sitting; you commit, stop, and come back.
-- **More than one thing in flight.** You are mid-feature when a bug needs a quick fix, and you do not want them tangled together.
+- **More than one thing in development.** You are mid-feature when a bug needs a quick fix, and you do not want them tangled together.
 - **More than one repo open.** Your pipeline imports helpers from another repo, and you are editing both.
 
 If none of these describe you yet, `../onboarding/05_daily_workflow.md` is still all you need. Come back when they do.
@@ -46,7 +46,7 @@ git merge main
 
 The first line makes sure you are on your feature branch; the second brings `main`'s new commits into it. Small, frequent merges mean small conflicts you can resolve in a minute, instead of one enormous conflict at the end. When a conflict does appear, `../reference/git_recovery.md` walks through it.
 
-**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in `16_documentation_and_doc_sites.md`.
+**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in `19_documentation_and_doc_sites.md`.
 
 ## When not to add complexity
 
@@ -54,15 +54,15 @@ There is a heavier model called **Git Flow**, built around a permanent second br
 
 That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. Keep `main` as the single source of truth and use short-lived feature branches off it.
 
-Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. For example, the SWIR_HDR project did exactly this: a `v2-dev` branch carried in-progress experiment work, and once that work settled it was fast-forwarded onto `main` and the branch retired. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is `14_experiments_and_shipping.md`.
+Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main`. It does not live on the branch forever. For example, the SWIR_HDR project did exactly this: a `v2-dev` branch carried in-progress experiment work, and once that work settled it was fast-forwarded onto `main` and the branch retired. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is discussed in `15_experiments_and_shipping.md`.
 
-The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is `18_versioning_and_releases.md`, and it is not now.
+The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is `21_versioning_and_releases.md`, and it is not now.
 
 ## The multi-root workspace
 
-`../onboarding/02_using_vs_code.md` taught one folder, one window: open a single repo so VS Code's terminal, search, and Source Control all point at it. That is still the right default for single-repo work. But a pipeline plus the helper repo it imports needs both open at once, and opening their shared parent folder is the wrong way to do it. A bare parent folder muddies the Python interpreter, the terminal's working directory, and the search scope across repos.
+`../onboarding/02_using_vs_code.md` taught one folder, one window: open a single repo so VS Code's terminal, search, and Source Control all point at it. That is still the right default for single-repo work. But you sometimes need two repos open at once — not when one merely *consumes the other's output* (that is a data hand-off: you need the output files, not the other repo), but when you are actually **reading or editing both repos' code in the same sitting**. Common cases: scaffolding a new repo while keeping an existing one open as a template to mirror; developing the next version of a project while consulting the previous one; documenting a generic pattern in one repo from its concrete implementation in another; or co-developing a shared library alongside a repo that installs it. Do _not_ open their shared parent folder to get both in one window as this can confound the Python interpreter, the terminal's working directory, and the search scope across repos. Instead set up a **multi-root workspace**: one VS Code window holding several folders, each keeping its own identity.
 
-The right tool is a **multi-root workspace**: one VS Code window holding several folders, each keeping its own identity.
+[Note: the workspace governs which repos you *see* and edit together. The structure of how one repo may depend on another is seperate and could involve one repo generating output files that are then the input for the next repo's process (`17_working_with_large_data.md`) or one repo installing the code from another repo as a pinned package (`20_packaging.md`). Either of these options is preferred to importing code live across sibling folders.]
 
 In VS Code:
 
@@ -70,7 +70,7 @@ In VS Code:
 2. Choose **File > Save Workspace As**. VS Code saves the list of folders into a `.code-workspace` file. Save it *outside* all the repos, so it is not committed into any of them.
 3. Reopen it anytime with **File > Open Workspace from File**.
 
-The `.code-workspace` file is just a local list of which folders to open together; the name and grouping are your choice. For example, you might group your pipeline and the helper repo it imports into one workspace file named for your project, saved beside the repo folders. Any grouping that matches what you work on together is fine.
+A `.code-workspace` file is just a local list of which folders to open together; the name and grouping are your choice. For example, you might group your analysis repo and the upstream stage it builds on into one workspace file named for your project, saved beside the repo folders. Any grouping that matches what you work on together is fine.
 
 Why this beats a bare parent folder: each folder in a multi-root workspace stays its **own Source Control root**, so you see and commit each repo's changes separately, and keeps its **own Python interpreter**.
 

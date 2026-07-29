@@ -56,7 +56,7 @@ Each step must succeed for the job to pass. `ruff format --check` reports format
 
 ## Test on more than one operating system
 
-Teammates often work on a mix of macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. So a matrix over operating systems is **recommended here, not optional.** A *matrix* runs the same job once per combination you list:
+Teammates often work on a mix of macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. So a matrix over operating systems is **strongly recommended, not optional.** A *matrix* runs the same job once per combination you list:
 
 ```yaml
 jobs:

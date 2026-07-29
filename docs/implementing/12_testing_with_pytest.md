@@ -7,13 +7,13 @@ You cleaned up a function to make it faster, or clearer, or you updated a packag
 Two reasons, both aimed at how research code actually goes wrong.
 
 - **Silent breakage.** A refactor, a dependency update, or a "harmless" tweak quietly changes a result, and nothing warns you. A test that pins the expected number catches it the moment it happens, not three months later in review.
-- **Confidence to change.** With tests in place you can restructure code (`13_software_design.md`) and *know* you did not alter its behavior. The scientist's version of that fear has a name: "did my refactor change the numbers?" A test is the answer.
+- **Confidence to change.** With tests in place you can restructure code (`13_software_design.md`) and *know* you did not alter its behavior. When you're worrying "did my refactor change the numbers?" a test is the answer.
 
 ## The kinds of tests, briefly
 
 - **Unit test:** checks one function in isolation. Most of your tests will be these.
 - **Integration test:** checks several pieces working together, such as load then calibrate then compute.
-- **Regression test:** pins a specific known-good result so that a bug, once fixed, stays fixed, or a validated approach stays validated.
+- **Regression test:** pins a specific known-good result so that a bug, once fixed, stays fixed, or a verified approach stays verified.
 
 Most of your tests will be unit and regression tests. Do not overthink the taxonomy.
 
@@ -116,4 +116,4 @@ Fixtures needed across more than one test file go in a file named `conftest.py` 
 
 - Tests live in a `tests/` directory at the repo root. Test files are named `test_*.py` and test functions `test_*`; pytest discovers them by those names.
 - **When you fix a bug, add a test that would have caught it.** That regression test keeps the bug from creeping back.
-- **When an experiment establishes that an approach is correct, turn it into a test.** "This input should produce this result" becomes a `test_` function guarding the shipped code forever. This is how a validation experiment graduates into a permanent safeguard, and it depends on the experiment being reproducible in the first place (the seeding and pinning discussed in `10_from_scripts_to_pipelines.md` and `14_experiments_and_shipping.md`). It is the doc-14 exercise done on real, meaningful code.
+- **When an experiment establishes that an approach is correct, turn it into a test.** "This input should produce this result" becomes a `test_` function guarding the shipped code forever. This is how a validation experiment graduates into a permanent safeguard, and it depends on the experiment being reproducible in the first place — the seeding (`16_running_a_dry_lab_experiment.md`) and pinning (`15_experiments_and_shipping.md`) that make a run repeatable.

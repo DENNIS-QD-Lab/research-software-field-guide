@@ -57,7 +57,7 @@ it means the notebook is running from the wrong directory. In VS Code, the commi
 
 ## Pointing at your own data without committing paths
 
-The example notebook defaults to the committed `sample_data/example.h5`, so it runs immediately. To inspect your own file, do not type your path into a code cell: a path in a cell gets committed (nbstripout strips *outputs*, not code), which leaks machine-specific paths into the repo and churns the file every run. Instead copy `local_paths_example.py` (in the repo root) to `local_paths.py` (which is gitignored), set `DATA_ROOT` there, and read it in the notebook:
+The example notebook defaults to the committed `sample_data/example.h5`, so it runs immediately. To inspect your own file, do not type your path into a code cell: a path in a cell gets committed (nbstripout strips *outputs*, not code), which leaks machine-specific paths into the repo and churns the file every run. Instead follow the template in `local_paths_example.py` (in the repo root) to make your own file `local_paths.py` (which is gitignored), define `DATA_ROOT` there as the folder your data lives in, and read it in the notebook:
 
 ```python
 from local_paths import DATA_ROOT
@@ -65,4 +65,4 @@ from local_paths import DATA_ROOT
 h5_file = f"{DATA_ROOT}/your_file.h5"
 ```
 
-Your machine-specific paths stay out of Git while the notebook stays runnable for everyone.
+`DATA_ROOT` is the folder, not the full path to one file, on purpose: the machine-specific *location* is set once in the gitignored `local_paths.py`, while each notebook names the file it reads (`your_file.h5`) in the cell. So your machine-specific paths stay out of Git, *which* file an analysis uses stays visible in the committed notebook, and the same notebook runs for everyone.
