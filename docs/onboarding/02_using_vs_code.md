@@ -26,15 +26,15 @@ Terminal > New Terminal opens a shell at the repository root. This is the same t
 
 ## The Source Control panel
 
-The third icon down on the far-left activity bar, shaped like a branch, is the Source Control panel. This is VS Code's Git interface. It shows the files that have changed since the last commit and lets you stage them, write a commit message, and commit. This is the recommended path for daily work. The equivalent terminal commands are in `05_daily_workflow.md`.
+The third icon down on the far-left activity bar, shaped like a branch, is the Source Control panel. This is VS Code's Git interface. It shows the files that have changed since the last commit and lets you stage them, write a commit message, and commit. This is the recommended path for daily work. The equivalent terminal commands are in [05_daily_workflow.md](05_daily_workflow.md).
 
 ## Selecting the Python interpreter
 
-Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) opens the Command Palette, which runs any VS Code command by name. Type "Python: Select Interpreter" and choose the `helper` conda environment. VS Code remembers this choice per workspace. There is more on this in `04_environments.md`.
+Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) opens the Command Palette, which runs any VS Code command by name. Type "Python: Select Interpreter" and choose the `helper` conda environment. VS Code remembers this choice per workspace. There is more on this in [04_environments.md](04_environments.md).
 
 ## Selecting the Jupyter kernel
 
-When you open a `.ipynb` file, the kernel selector sits in the top-right of the notebook editor. It must show the `helper` environment. If it does not, click it and choose the right one. The kernel is selected separately from the Python interpreter, and the two can be mismatched. That mismatch is a common source of "I installed the package but the notebook says it is missing." See `04_environments.md` and `07_notebooks.md`.
+When you open a `.ipynb` file, the kernel selector sits in the top-right of the notebook editor. It must show the `helper` environment. If it does not, click it and choose the right one. The kernel is selected separately from the Python interpreter, and the two can be mismatched. That mismatch is a common source of "I installed the package but the notebook says it is missing." See [04_environments.md](04_environments.md) and [07_notebooks.md](07_notebooks.md).
 
 ## Markdown preview
 

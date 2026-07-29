@@ -1,12 +1,12 @@
 # Advanced Git: tools for when the daily workflow is not enough
 
-The daily workflow (`../onboarding/05_daily_workflow.md`) and `git_recovery.md` cover the common cases. This doc catalogs the sharper tools you reach for occasionally, mostly on the longer-lived feature branches described in `../implementing/10_from_scripts_to_pipelines.md`.
+The daily workflow ([05_daily_workflow.md](../onboarding/05_daily_workflow.md)) and [git_recovery.md](git_recovery.md) cover the common cases. This doc catalogs the sharper tools you reach for occasionally, mostly on the longer-lived feature branches described in [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md).
 
 ## How to read this doc
 
 Do not read it front to back. Find the tool that matches what you need, use it, and get back to work. It is a reference, not a tutorial.
 
-One safety rule, the same as `git_recovery.md`: before running any command with `--force` in it, or any command that rewrites history (the `git rebase` section below), ask in lab Teams if you are not sure. Those are the commands that can affect other people's work. The rest are safe to experiment with.
+One safety rule, the same as [git_recovery.md](git_recovery.md): before running any command with `--force` in it, or any command that rewrites history (the `git rebase` section below), ask in your team's chat if you are not sure. Those are the commands that can affect other people's work. The rest are safe to experiment with.
 
 ---
 
@@ -42,7 +42,7 @@ git stash drop
 
 Discards the most recent stash without reapplying it, when you decide you do not want those changes after all.
 
-By default `git stash` leaves *untracked* files (brand-new files git is not tracking yet) in place. To stash those too, use `git stash -u`. There is a worked example of using stash to switch branches safely in `git_recovery.md`.
+By default `git stash` leaves *untracked* files (brand-new files git is not tracking yet) in place. To stash those too, use `git stash -u`. There is a worked example of using stash to switch branches safely in [git_recovery.md](git_recovery.md).
 
 ---
 
@@ -55,7 +55,7 @@ git switch my-feature-branch
 git merge main
 ```
 
-The first line makes sure you are on your own branch; the second pulls `main`'s new commits into it. Do this often. Small, frequent merges produce small conflicts. If a merge does report a conflict, `git_recovery.md` has the section on reading and resolving the conflict markers.
+The first line makes sure you are on your own branch; the second pulls `main`'s new commits into it. Do this often. Small, frequent merges produce small conflicts. If a merge does report a conflict, [git_recovery.md](git_recovery.md) has the section on reading and resolving the conflict markers.
 
 ---
 
@@ -76,7 +76,7 @@ git switch target-branch
 git cherry-pick a1b2c3d
 ```
 
-This copies the change from that commit onto your current branch as a new commit. `git_recovery.md` uses this in its "I committed to the wrong branch" fix.
+This copies the change from that commit onto your current branch as a new commit. [git_recovery.md](git_recovery.md) uses this in its "I committed to the wrong branch" fix.
 
 ---
 
@@ -132,4 +132,4 @@ When in doubt, prefer `git merge main` (the section above) over rebasing. Merge 
 
 ## When it breaks
 
-If a command here leaves you somewhere confusing, stop and go to `git_recovery.md`. Run `git status` first; it almost always tells you what state you are in. For plain-language definitions of Git terms, see `git_vocabulary.md`.
+If a command here leaves you somewhere confusing, stop and go to [git_recovery.md](git_recovery.md). Run `git status` first; it almost always tells you what state you are in. For plain-language definitions of Git terms, see [git_vocabulary.md](git_vocabulary.md).

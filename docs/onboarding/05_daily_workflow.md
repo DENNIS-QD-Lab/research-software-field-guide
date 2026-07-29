@@ -2,7 +2,7 @@
 
 This is the loop you repeat for every change. This can be managed through the VS Code Source Control panel GUI or the equivalent terminal commands. Use whichever you prefer; they do the same thing.
 
-If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see `../reference/git_recovery.md`. Don't panic and don't delete anything until you've checked your options.
+If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see [git_recovery.md](../reference/git_recovery.md). Don't panic and don't delete anything until you've checked your options.
 
 ## Starting new work
 
@@ -18,6 +18,8 @@ What each does:
 1. Switch to the `main` branch.
 2. Pull the latest changes from GitHub into your local `main`. This catches anything your labmates merged while you were away.
 3. Create a new branch off the now-up-to-date `main`, and switch to it.
+
+(`git checkout -b <name>` and `git switch -c <name>` do exactly the same thing — create a branch and switch to it. You will see both in these docs and online; use whichever you prefer.)
 
 This three-step ritual prevents the most common Git problems before they happen. Skipping step 2 is how branches end up "behind main" and merge conflicts proliferate.
 
@@ -89,7 +91,7 @@ We branch for every change, even a one-line fix. Two reasons. It keeps `main` wo
 
 A *pull request* (PR) proposes merging your branch into `main` and is where review happens. After you push a branch, GitHub shows a prompt to open a PR for it; click it, or go to the repository's Pull Requests tab in GitHub and click "New pull request."
 
-In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. `08_code_review.md` covers the review itself.
+In the description, write what the change does and why, in a few sentences. If it adds a script, say what the script is for and give an example call. Then request a reviewer. [08_code_review.md](08_code_review.md) covers the review itself.
 
 ## Merge conflicts
 
@@ -103,4 +105,4 @@ the other version of the lines
 >>>>>>> main
 ```
 
-The 90% case is simple: ask for help. Conflicts are routine and not a sign you did anything wrong, and an experienced colleague can resolve one with you in a couple of minutes. Do not delete the markers at random hoping it sorts itself out.
+The 90% case is simple: ask for help. Conflicts are routine and not a sign you did anything wrong, and an experienced colleague can resolve one with you in a couple of minutes. Do not delete the markers at random hoping it sorts itself out. (VS Code shows "Accept Current Change" / "Accept Incoming Change" buttons above each conflict, but *which* to keep is a judgment call — when you are unsure, ask before accepting.)

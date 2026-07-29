@@ -1,6 +1,6 @@
 # Code quality tools: linting, formatting, and type checking
 
-Your project's coding-standards file (here, `../../CLAUDE.md`) says code follows PEP 8 and is formatted with ruff, and you have probably seen ruff run when you commit. This doc explains what that tooling actually does, how to run it yourself, and adds one more tool: mypy, for type checking.
+Your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) says code follows PEP 8 and is formatted with ruff, and you have probably seen ruff run when you commit. This doc explains what that tooling actually does, how to run it yourself, and adds one more tool: mypy, for type checking.
 
 ## Three tools, three jobs
 
@@ -16,7 +16,7 @@ This guide uses **ruff** for the linting and formatting, and **mypy** for the ty
 ruff format .
 ```
 
-This rewrites every Python file in the current directory and below to the standard layout. The `.` means "here." It changes only appearance, never behavior. Per `../../CLAUDE.md`, do not hand-format code; let this do it. To see what it *would* change without changing anything:
+This rewrites every Python file in the current directory and below to the standard layout. The `.` means "here." It changes only appearance, never behavior. Per [CLAUDE.md](../../CLAUDE.md), do not hand-format code; let this do it. To see what it *would* change without changing anything:
 
 ```
 ruff format --diff .
@@ -41,7 +41,7 @@ This fixes the safe, automatic cases (removing an unused import, sorting imports
 A message looks like this:
 
 ```
-Step2_radiance.py:42:5: F841 Local variable 'result' is assigned to but never used
+analysis.py:42:5: F841 Local variable 'result' is assigned to but never used
 ```
 
 Read it left to right: the file, the line number, the column, then a **rule code** (`F841`), then a plain description. The rule code is a stable identifier you can look up:
@@ -72,17 +72,17 @@ This runs every hook over every file, instead of only the files you changed. Use
 
 ## mypy: type checking
 
-`../onboarding/00_python_code_basics.md` introduced type hints such as `list[int]` and `str | None`. Those hints are for human readers and for checkers; Python does not enforce them when the code runs. **mypy is the checker.** It reads your hints and reports where the types do not line up, before you run anything.
+[00_python_code_basics.md](../onboarding/00_python_code_basics.md) introduced type hints such as `list[int]` and `str | None`. Those hints are for human readers and for checkers; Python does not enforce them when the code runs. **mypy is the checker.** It reads your hints and reports where the types do not line up, before you run anything.
 
 ```
-mypy Step2_radiance.py
+mypy analysis.py
 ```
 
 This checks the types in that file. It catches a whole class of bug statically: passing the wrong type into a function, or using a value that might be `None` without handling the `None` case. That is a bug you would otherwise only find at runtime, maybe only on the input that triggers it.
 
-For now, **run mypy by hand.** It is not part of the pre-commit hook, so it will not block a commit; point it at the file or module you are working on. And do not add runtime type assertions just to satisfy it (`../../CLAUDE.md` says so): the hints plus mypy are the mechanism, and the checking happens before the code runs, not during.
+For now, **run mypy by hand.** It is not part of the pre-commit hook, so it will not block a commit; point it at the file or module you are working on. And do not add runtime type assertions just to satisfy it ([CLAUDE.md](../../CLAUDE.md) says so): the hints plus mypy are the mechanism, and the checking happens before the code runs, not during.
 
-A caveat for real codebases: on code that is not fully type-hinted yet, mypy can be noisy at first. Do not try to fix everything at once. Start with the one module you are hardening, add hints until that module is clean, and move on. This mirrors the advice in `15_experiments_and_shipping.md`: harden what has stabilized, not the whole repo in a single push.
+A caveat for real codebases: on code that is not fully type-hinted yet, mypy can be noisy at first. Do not try to fix everything at once. Start with the one module you are hardening, add hints until that module is clean, and move on. This mirrors the advice in [15_experiments_and_shipping.md](15_experiments_and_shipping.md): harden what has stabilized, not the whole repo in a single push.
 
 ## When a tool flags something
 

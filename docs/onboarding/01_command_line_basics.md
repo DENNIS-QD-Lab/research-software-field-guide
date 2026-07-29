@@ -1,6 +1,6 @@
 # Command line basics
 
-The *command line* is a place where you type commands as text instead of clicking buttons. The words *terminal*, *shell*, and *command line* are close enough to mean the same thing for our purposes. You will use it for Git, conda, and running scripts. In VS Code, open one with Terminal > New Terminal; `02_using_vs_code.md` covers that.
+The *command line* is a place where you type commands as text instead of clicking buttons. The words *terminal*, *shell*, and *command line* are close enough to mean the same thing for our purposes. You will use it for Git, conda, and running scripts. In VS Code, open one with Terminal > New Terminal; [02_using_vs_code.md](02_using_vs_code.md) covers that.
 
 ## Where you are matters
 
@@ -74,11 +74,11 @@ Well-written helper scripts take file paths as arguments and open exactly those 
 
 ### Why we don't put data inside the repo
 
-You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this helper script repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, etc, that don't belong in version control. This repo's `../../CLAUDE.md` and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
+You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this helper script repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, etc, that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
 
 ## Conda environment commands
 
-Conda can be used to manage your software environment. `04_environments.md` explains what an environment is; these are the commands you will type.
+Conda can be used to manage your software environment. [04_environments.md](04_environments.md) explains what an environment is; these are the commands you will type.
 
 ```
 conda env list
@@ -122,4 +122,4 @@ Turns the current environment off.
 
 **"No such file or directory"** means a path you typed does not exist from where you currently are. Check with `pwd` and `ls` that the file is really there, and check the spelling of the path.
 
-**"I installed it, but Python says it is not installed."** This is almost always the wrong environment being active. You installed the package into one environment and are running Python in another. Run `conda activate helper`, confirm with `conda list` that the package is there, and try again. In a notebook, this same problem shows up as a wrong *kernel*; see `04_environments.md`.
+**"I installed it, but Python says it is not installed."** This is almost always the wrong environment being active. You installed the package into one environment and are running Python in another. Run `conda activate helper`, confirm with `conda list` that the package is there, and try again. In a notebook, this same problem shows up as a wrong *kernel*; see [04_environments.md](04_environments.md).

@@ -8,13 +8,13 @@ A `.py` file is a plain text file of Python code. You run the whole thing at onc
 
 A `.ipynb` file is a Jupyter notebook. A notebook is a document made of *cells* that you run one at a time, in any order, keeping the results visible in between. Notebooks are for interactive exploration: trying things, looking at data, making a quick plot.
 
-Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. You may use either or both of these file types, and `07_notebooks.md` describes ways to manage them in parallel.
+Use a notebook while you are figuring something out. Once the logic is settled and you want to reuse it, move it into a `.py` file. You may use either or both of these file types, and [07_notebooks.md](07_notebooks.md) describes ways to manage them in parallel.
 
 ## Cells inside a notebook
 
 A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing. 
 
-(**Tip:** if reading/editing a markdown file (.md) like this one in an IDE (integrated development environment like visual studio code (VS Code)), use Cmd+Shift+V to toggle between code and formatted view of the text.)
+**Tip:** These docs are markdown (`.md`) files. If you are reading this as raw text in an editor like VS Code, press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) to toggle between the raw text and the formatted preview.
 
 ## Anatomy of a Python file
 
@@ -63,4 +63,4 @@ In `scripts/show_h5_keys.py`:
 - `pad = "  " * indent` inside it is a **variable**.
 - The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
-`06_adding_a_script.md` walks through how this script does its job.
+[06_adding_a_script.md](06_adding_a_script.md) walks through how this script does its job.

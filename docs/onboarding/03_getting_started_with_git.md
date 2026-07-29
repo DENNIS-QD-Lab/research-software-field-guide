@@ -1,6 +1,6 @@
 # Getting started with Git
 
-If you have just cloned this repository, you used several tools and terms that deserve definitions. This doc gives the definitions, states one rule that matters more than the rest, and sets up the daily workflow covered in `05_daily_workflow.md`.
+If you have just cloned this repository, you used several tools and terms that deserve definitions. This doc gives the definitions, states one rule that matters more than the rest, and sets up the daily workflow covered in [05_daily_workflow.md](05_daily_workflow.md).
 
 ## Definitions
 
@@ -40,4 +40,4 @@ When you commit on a branch, the commit is recorded only on that branch until yo
 
 "Adding a new file on a branch" is shorthand for a sequence: switch to the branch, create the file in your working directory, then stage and commit it. The branch itself does not hold just that one file. It holds the whole repository state, now including your new file.
 
-We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. `05_daily_workflow.md` shows the mechanics of making, using, and merging a branch.
+We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. [05_daily_workflow.md](05_daily_workflow.md) shows the mechanics of making, using, and merging a branch.

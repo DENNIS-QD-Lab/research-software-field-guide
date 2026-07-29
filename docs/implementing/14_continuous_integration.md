@@ -4,7 +4,7 @@ You now run tests and ruff on your own machine. **Continuous integration (CI)** 
 
 ## What CI catches, and how it pairs with review
 
-CI runs your checks on a clean virtual machine that has only what your environment file declares. So it catches the gap between "my setup" and "a fresh clone," and, with a matrix (below), bugs that only appear on another operating system. `../onboarding/08_code_review.md` is the human half of the same job: CI checks the mechanical things automatically so a reviewer can spend their attention on judgment, not on "did the tests pass."
+CI runs your checks on a clean virtual machine that has only what your environment file declares. So it catches the gap between "my setup" and "a fresh clone," and, with a matrix (below), bugs that only appear on another operating system. [08_code_review.md](../onboarding/08_code_review.md) is the human half of the same job: CI checks the mechanical things automatically so a reviewer can spend their attention on judgment, not on "did the tests pass."
 
 ## GitHub Actions basics
 
@@ -79,4 +79,4 @@ When CI fails, a red X appears next to the commit or on the PR. To find out why:
 2. Click the job that failed (for example `test (windows-latest)`).
 3. Expand the step with the red X. The log shows exactly what your terminal would have shown, including the pytest or ruff output.
 
-The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file, as your project's coding-standards file (here, `../../CLAUDE.md`) requires, not to install it on the runner by hand.
+The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file, as your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) requires, not to install it on the runner by hand.

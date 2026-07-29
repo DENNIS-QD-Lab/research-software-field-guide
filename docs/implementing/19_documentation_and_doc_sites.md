@@ -1,13 +1,13 @@
 # Documentation and doc sites
 
-You already write docstrings (your project's coding-standards file, here `../../CLAUDE.md`, requires them). This doc turns them into a browsable site the whole team can read. That is not a publishing afterthought; it is a **review-and-communication tool for your team.** A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. Frame it alongside `../onboarding/08_code_review.md` and the draft-PR habit from `10_from_scripts_to_pipelines.md`: the doc site is another surface for looking at each other's work — the fastest way to grasp the shape of an analysis, and a shared vocabulary for talking about it.
+You already write docstrings (your project's coding-standards file, here [CLAUDE.md](../../CLAUDE.md), requires them). This doc turns them into a browsable site the whole team can read. That is not a publishing afterthought; it is a **review-and-communication tool for your team.** A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. Frame it alongside [08_code_review.md](../onboarding/08_code_review.md) and the draft-PR habit from [10_from_scripts_to_pipelines.md](10_from_scripts_to_pipelines.md): the doc site is another surface for looking at each other's work — the fastest way to grasp the shape of an analysis, and a shared vocabulary for talking about it.
 
 ## The documentation hierarchy
 
 Documentation is layered onto normal work, not a separate project. From smallest to largest:
 
 - **Self-documenting names.** A well-named function needs less explanation.
-- **Comments that explain why**, not what (`../../CLAUDE.md`).
+- **Comments that explain why**, not what ([CLAUDE.md](../../CLAUDE.md)).
 - **Docstrings** on every function and module.
 - **A README** that orients a newcomer to the whole repo.
 - **A generated site** that turns the docstrings into a browsable reference.
@@ -39,7 +39,7 @@ def normalize(values: np.ndarray) -> np.ndarray:
     """
 ```
 
-This is the same information `../../CLAUDE.md` already asks for, in a structure a tool can parse.
+This is the same information [CLAUDE.md](../../CLAUDE.md) already asks for, in a structure a tool can parse.
 
 ## Autodocumentation
 
@@ -73,7 +73,7 @@ intersphinx_mapping = {
 }
 ```
 
-Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from `20_packaging.md`, `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
+Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from [20_packaging.md](20_packaging.md), `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
 
 ````markdown
 # API reference
@@ -106,11 +106,11 @@ To let others see it, publish it with **Read the Docs**, which builds and hosts 
 
 ## A dependency note
 
-`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies. Per `../../CLAUDE.md`, adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
+`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies. Per [CLAUDE.md](../../CLAUDE.md), adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
 
 ## Appendix: building the doc site in CI
 
-Once the site builds locally, a CI job can build it automatically on every push — which catches a docstring that breaks the build, and (for a private repo) puts the HTML somewhere the team can reach it. This builds on the CI basics in `14_continuous_integration.md`; add a second job to that same `ci.yml`, or a separate `.github/workflows/docs.yml`:
+Once the site builds locally, a CI job can build it automatically on every push — which catches a docstring that breaks the build, and (for a private repo) puts the HTML somewhere the team can reach it. This builds on the CI basics in [14_continuous_integration.md](14_continuous_integration.md); add a second job to that same `ci.yml`, or a separate `.github/workflows/docs.yml`:
 
 ```yaml
 jobs:
