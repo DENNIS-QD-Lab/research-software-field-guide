@@ -58,10 +58,10 @@ So practically it's helpful to:
 
 ```
 cd /Volumes/data/swir_run42
-python ~/code/DENNIS_helpers/scripts/show_h5_keys.py imaging.h5
+python ~/code/research-software-field-guide/scripts/show_h5_keys.py imaging.h5
 ```
 
-This command has two parts after `python`. The first, `~/code/DENNIS_helpers/scripts/show_h5_keys.py`, is the path to the script you want to run. The second, `imaging.h5`, is an *argument*: a value handed to the script, here the data file you want it to inspect. The script reads that argument and acts on it.
+This command has two parts after `python`. The first, `~/code/research-software-field-guide/scripts/show_h5_keys.py`, is the path to the script you want to run. The second, `imaging.h5`, is an *argument*: a value handed to the script, here the data file you want it to inspect. The script reads that argument and acts on it.
 
 You're in the data directory, so:
 - Tab-completion works when you type `imaging.h5`

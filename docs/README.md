@@ -1,4 +1,4 @@
-# DENNIS_helpers documentation
+# research-software-field-guide documentation
 
 This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–22) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines and research projects. If you are already an experienced developer and just want to apply this standard to a repository, the [`repo_kit/`](../repo_kit/) folder at the repository root is a portable kit for exactly that: setting up a new repo, or bringing an existing one up to standard.
 

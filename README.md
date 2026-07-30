@@ -1,8 +1,12 @@
-# DENNIS_helpers
+# research-software-field-guide
 
-Small, reusable helper scripts for the DENNIS Lab (quantum-dot synthesis and SWIR imaging), plus the documentation that gets new lab members from zero software experience to confident contributor.
+A practical guide to writing trustworthy research software, aimed at scientists who didn't train as software developers — especially now that AI coding assistants make it easy to generate code faster than anyone can review it by hand. It walks from "I have never used a terminal" through version control, testing, code review, running rigorous experiments, and citable releases, and it doubles as a portable standard (`repo_kit/`) for bringing any existing research repository up to the same practices.
 
 This repository holds general-purpose tools, not project-specific analysis. A helper is something you would reach for across many projects, like a script that inspects an HDF5 data file. Code that only makes sense for one study belongs in that study's own repository.
+
+## Origin and credits
+
+This guide began as Allison Dennis's response to the curriculum for the [URSSI Responsible Research Software Development summer school, June 2026](https://github.com/si2-urssi/summerschool-June2026). It was then substantially expanded as training material for the Dennis Lab, and has since grown into a general-purpose resource for any researcher writing analytical software. Written by Allison Dennis with Claude and Claude Code.
 
 ## What's here
 
@@ -31,7 +35,7 @@ These steps assume you have already cloned the repository and have Miniconda and
    conda env create -f environment.yml
    ```
 
-   This reads `environment.yml` and builds a conda environment named `helper` with the packages the lab uses.
+   This reads `environment.yml` and builds a conda environment named `helper` with the packages this project uses.
 
 2. Turn the environment on:
 

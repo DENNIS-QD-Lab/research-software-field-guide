@@ -1,9 +1,9 @@
-# CLAUDE.md — DENNIS Lab coding standards
+# CLAUDE.md — coding standards for this repository
 
 This file is read automatically at the start of every Claude session in this repository. Follow these instructions for all code you write or edit here.
 
 ## Project context
-This is the DENNIS Lab's internal repository of small helper scripts and notebooks for semiconductor quantum dot synthesis and SWIR imaging work. Contributors are graduate students who are scientists first, software developers second. Code in this repo will be read and modified by people with varying levels of experience, so prioritize readability over cleverness.
+This repository is a teaching tool and portable standard for research software practices, aimed at scientists writing analytical code — often with an AI coding assistant doing much of the typing — who didn't train as software developers. Contributors and readers range from complete beginners to experienced researchers, so prioritize readability and explicitness over cleverness. The worked examples in `scripts/` and `sample_data/` are teaching fixtures, not project-specific analysis.
 
 ## Code style
 - Follow PEP 8, enforced by `ruff format` and `ruff check`. Do not hand-format. If you're unsure how something should be formatted, run ruff or write it however and let the pre-commit hook fix it.

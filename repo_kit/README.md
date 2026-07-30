@@ -1,7 +1,7 @@
 # repo_kit — a portable research-software standard
 
-A small, reusable kit for bringing *any* research repository up to the standard the DENNIS_helpers
-[implementing track](../docs/implementing/) teaches — not just image-processing pipelines. It distills
+A small, reusable kit for bringing *any* research repository up to the standard the
+research-software-field-guide [implementing track](../docs/implementing/) teaches — not just image-processing pipelines. It distills
 that tutorial into three single-purpose files (plus fill-in templates) so a repo can adopt the standard
 without walking the whole track.
 
