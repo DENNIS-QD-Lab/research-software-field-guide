@@ -1,6 +1,6 @@
 # Experiments and shipping: one repo, two jobs
 
-Your repo has started holding two kinds of code that pull in opposite directions. There is **exploratory work** that compares approaches to decide which is best, some of which may become paper figures. And there is **the code you intend to ship** (i.e., share with others for their own use), which should present only the one reliable approach. This doc gives a structure that keeps the exploratory work (and the paper) reproducible while the shipped library stays focused on the blessed approach.
+Your repo has started holding two kinds of code that pull in opposite directions. There is **exploratory work** that compares approaches to decide which is best, some of which may become paper figures. And there is **the code you intend to ship** (i.e., share with others for their own use), which should present only the one reliable approach. This doc gives a structure that keeps the exploratory work (and the paper) reproducible while the shipped library stays focused on the one preferred approach.
 
 This is the repo-level counterpart to [13_software_design.md](13_software_design.md): the same "one job per unit" idea, scaled up from functions to the whole repository.
 
@@ -14,7 +14,7 @@ Separate the two jobs into two places:
 
 ```
 SWIR_HDR_v2/
-├── src/swir_hdr/       the code library (includes all candidate approaches while comparing; trimmed to the blessed one when shipped)
+├── src/swir_hdr/       the code library (includes all candidate approaches while comparing; trimmed to the preferred one when shipped)
 ├── tests/              tests for the library (seeded from validation experiments)
 ├── experiments/        exploratory comparisons; import from src
 │   └── <YYMMDD-topic>/   README (question + conclusion), code, pinned environment
@@ -32,7 +32,7 @@ The library moves through two phases, and conflating them is the usual mistake.
 
 **While you are comparing:** the competing approaches all live in `src` together. They are not clutter, they are live candidates, and keeping them in one place is exactly what lets an experiment import and compare them without drift. In the SWIR_HDR exemplar, for instance, the several competing methods sit together in one library module (`src/swir_hdr/radiance.py`), and the comparison in `experiments/` imports them from there.
 
-**When you ship the clean package:** you commit to a winner and trim the library to it. "The library carries only the blessed approach" describes that shipped end state — not something true from day one, and not the state the *paper* reproduces from. The paper is reproduced from a tag of the full pre-trim code (every approach still present); you trim `main` only *after* cutting that tag (see the decision below).
+**When you ship the clean package:** you commit to a winner and trim the library to it. "The library carries only the proven/preferred approach" describes that shipped end state — not something true from day one, and not the state the *paper* reproduces from. The paper is reproduced from a tag of the full pre-trim code (every approach still present); you trim `main` only *after* cutting that tag (see the decision below).
 
 Two disciplines make the phases work:
 

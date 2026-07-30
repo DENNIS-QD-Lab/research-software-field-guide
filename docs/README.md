@@ -1,6 +1,6 @@
 # DENNIS_helpers documentation
 
-This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–22) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines and research projects.
+This folder onboards new lab members from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–22) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines and research projects. If you are already an experienced developer and just want to apply this standard to a repository, the [`repo_kit/`](../repo_kit/) folder at the repository root is a portable kit for exactly that: setting up a new repo, or bringing an existing one up to standard.
 
 ## Before you start
 
@@ -46,6 +46,8 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 ## Implementing track
 
 The implementing track ([`implementing/`](implementing/)) picks up where onboarding leaves off: the intermediate research-software-engineering skills for when your scripts grow into real pipelines and research projects. Read the onboarding track first. It is organized in three parts, read in order: **build code you can trust**, **run experiments rigorously**, and **share, sustain, and conclude**. Doc 10 is the bridge from scripts to pipelines and sets up the workflow the rest of the track assumes, so it comes first. The middle part (16–18) is the lab's dry-lab research framework — how to run and record experiments so they stay reproducible, and how to use AI assistants responsibly within it. Documentation and doc sites (19) is a core practice, not a publishing afterthought. The distribution-tier docs (20–22) are optional until a project is actually being published.
+
+Once you know the track, the [`repo_kit/`](../repo_kit/) folder at the repository root distills it into a portable kit — a summary of the decisions, an AI setup/upgrade playbook, and a `CLAUDE.md` template — that you can drop into another repository to bring it up to the same standard.
 
 ### Part I — Build code you can trust
 
