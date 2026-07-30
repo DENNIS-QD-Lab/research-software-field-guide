@@ -129,5 +129,5 @@ disseminate — if disseminating a clean library is even a goal. The tag keeps t
 - **Just want the rules?** [CLAUDE.template.md](CLAUDE.template.md) is the standing coding standard; copy
   it in, fill the placeholders, and the assistant follows it every session.
 
-The full, worked tutorial behind every decision above is the DENNIS_helpers
+The full, worked tutorial behind every decision above is the research-software-field-guide
 [implementing track](../docs/implementing/) (docs 10–22). This page is its executive summary.

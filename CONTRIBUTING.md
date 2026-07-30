@@ -1,4 +1,4 @@
-# Contributing to DENNIS_helpers
+# Contributing to research-software-field-guide
 
 This guide is the short version. The full reasoning behind each step lives in the numbered docs, linked below. If a step is unfamiliar, follow the link before doing it.
 

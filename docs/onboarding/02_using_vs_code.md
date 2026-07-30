@@ -1,6 +1,6 @@
 # Using VS Code
 
-VS Code is a common integrated development environment (IDE)-- i.e., code editor. This doc assumes you have it installed with the Python and Jupyter extensions, and that you have opened the `DENNIS_helpers` repository. It covers the conventions you need and nothing more.
+VS Code is a common integrated development environment (IDE)-- i.e., code editor. This doc assumes you have it installed with the Python and Jupyter extensions, and that you have opened the `research-software-field-guide` repository. It covers the conventions you need and nothing more.
 
 ## One folder, one window
 
