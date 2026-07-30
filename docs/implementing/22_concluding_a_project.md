@@ -59,7 +59,7 @@ toward being citable.
 Concluding a project is also where the two jobs of the repo ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)) part
 ways cleanly. The **experimental record** — the research log, the dated `experiments/` folders, and
 the paper tag — is now frozen history: it documents what was done and stays reproducible via the tag
-and DOI. The **shipped library** on `main`, meanwhile, keeps moving: it is trimmed to the blessed
+and DOI. The **shipped library** on `main`, meanwhile, keeps moving: it is trimmed to the preferred
 approach and released for the next users. A reader reproduces the paper from the frozen snapshot; a
 new user builds on the live library. Neither has to compromise the other, because each is anchored to
 its own point in history.

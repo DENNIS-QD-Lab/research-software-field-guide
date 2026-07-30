@@ -13,6 +13,7 @@ This repository holds general-purpose tools, not project-specific analysis. A he
 - `notebooks/` — Jupyter notebooks (`.ipynb` files) for interactive exploration.
 - `environment.yml` — the definition of the shared conda environment, named `helper`.
 - `.pre-commit-config.yaml` — automatic notebook cleanup before each commit (see [07_notebooks.md](docs/onboarding/07_notebooks.md)).
+- `repo_kit/` — a portable kit for bringing *another* repository up to the standard these docs teach: a one-page summary of the decisions, an AI setup/upgrade playbook, and a `CLAUDE.md` template. See [repo_kit/README.md](repo_kit/README.md).
 
 ## New here? Read the docs first
 
