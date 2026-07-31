@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: >-
+  If you use this guide, its docs, or repo_kit's templates, please cite it using the
+  metadata below.
+title: research-software-field-guide
+version: 0.1.0
+abstract: >-
+  A practical guide to writing trustworthy research software, aimed at scientists who
+  didn't train as software developers. Walks from first terminal use through version
+  control, testing, code review, running rigorous experiments, and citable releases,
+  and includes a portable standard (repo_kit/) for bringing any existing research
+  repository up to the same practices.
+authors:
+  - family-names: Dennis
+    given-names: Allison
+    affiliation: Northeastern University
+    email: a.dennis@northeastern.edu
+repository-code: "https://github.com/AllisonMDennis/research-software-field-guide"
+license: MIT
+keywords:
+  - research software
+  - reproducibility
+  - open science
+  - scientific computing
+  - software engineering education
