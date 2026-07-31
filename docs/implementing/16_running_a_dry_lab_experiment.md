@@ -11,7 +11,7 @@ not a pile of scripts is this: any run can be reproduced, and the whole line of 
 followed, **without reading the git history**. Someone (including future-you) should be able to open
 the folder and see what you asked, what you found, and what to do next.
 
-Everything below is illustrated by the lab's exemplar, `SWIR_HDR_v2`, which is set up exactly this
+Everything below is illustrated by an example repo built to this standard, `SWIR_HDR_v2`, which is set up exactly this
 way.
 
 ## The research log: one place that holds the state

@@ -1,6 +1,6 @@
 # Notebook version control: approaches we considered
 
-This is a reference doc, not onboarding. It records the three approaches the team weighed for keeping notebooks in version control, and why we chose the one we use, so a returning lab member wondering "could we be doing this better?" can see the tradeoffs without rediscovering them. For the setup you actually run, see [07_notebooks.md](../onboarding/07_notebooks.md).
+This is a reference doc, not onboarding. It records the three approaches the team weighed for keeping notebooks in version control, and why we chose the one we use, so a returning team member wondering "could we be doing this better?" can see the tradeoffs without rediscovering them. For the setup you actually run, see [07_notebooks.md](../onboarding/07_notebooks.md).
 
 ## Why notebooks fight with version control
 

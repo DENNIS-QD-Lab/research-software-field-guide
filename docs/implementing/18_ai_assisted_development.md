@@ -27,7 +27,7 @@ The assistant's working scope is the set of folders open to it — in the VS Cod
 
 ## Review every generated change
 
-The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read every change before it lands, exactly as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a labmate without reading it, do not merge it from an assistant.
+The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read every change before it lands, exactly as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a colleague without reading it, do not merge it from an assistant.
 
 ## Never trust numbers without a test
 
@@ -72,7 +72,7 @@ The assistant accelerates the typing, not the thinking. It is a very fast pair o
 - **Seed and record.** AI-generated code is no exception to the seeding and provenance rules ([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)). Determinism does not care who wrote the code.
 - **The standards apply to AI output too.** Generated code does not get to commit data, add a silent dependency, or skip a docstring ([CLAUDE.md](../../CLAUDE.md)). Review holds it to the same bar as yours.
 - **Verify, do not trust.** An assistant can invent an API that does not exist, a citation that was never written, or a number that looks right. Check against reality: run it, test it, read the docs it claims to use.
-- **Be honest about its role.** Disclose AI assistance where the norms of your field or venue ask for it, the same as any other methods detail. Be explicit about the AI contributions in discussions with your PI and labmates-- co-authors on manuscripts, for example, should be aware of AI contributions. 
+- **Be honest about its role.** Disclose AI assistance where the norms of your field or venue ask for it, the same as any other methods detail. Be explicit about the AI contributions in discussions with your PI and collaborators-- co-authors on manuscripts, for example, should be aware of AI contributions. 
 
 ## The bottom line
 

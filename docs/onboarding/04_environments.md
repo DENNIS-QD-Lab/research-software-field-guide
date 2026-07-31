@@ -20,7 +20,7 @@ This reads `environment.yml` and builds an environment named `helper` containing
 conda activate helper
 ```
 
-This turns the environment on. Your prompt will show `(helper)`. Activate it in every new terminal before running lab code.
+This turns the environment on. Your prompt will show `(helper)`. Activate it in every new terminal before running any code in this repo.
 
 ## Tell VS Code about it
 

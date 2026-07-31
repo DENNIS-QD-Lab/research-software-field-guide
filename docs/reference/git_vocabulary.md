@@ -5,7 +5,7 @@ A reference for the terms you'll encounter while using Git and GitHub. You don't
 ## The basics
 
 **Repository (repo)**
-A project tracked by Git. A folder on your computer that Git is watching, plus the history of every change made to it. The same repo can exist in multiple places (your laptop, GitHub, a labmate's laptop) and Git keeps them in sync when you ask.
+A project tracked by Git. A folder on your computer that Git is watching, plus the history of every change made to it. The same repo can exist in multiple places (your laptop, GitHub, a collaborator's laptop) and Git keeps them in sync when you ask.
 
 **Local**
 On your computer. Your local repo is the copy of the project in a folder on your machine.

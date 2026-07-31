@@ -16,7 +16,7 @@ git checkout -b <descriptive-branch-name>
 
 What each does:
 1. Switch to the `main` branch.
-2. Pull the latest changes from GitHub into your local `main`. This catches anything your labmates merged while you were away.
+2. Pull the latest changes from GitHub into your local `main`. This catches anything your collaborators merged while you were away.
 3. Create a new branch off the now-up-to-date `main`, and switch to it.
 
 (`git checkout -b <name>` and `git switch -c <name>` do exactly the same thing — create a branch and switch to it. You will see both in these docs and online; use whichever you prefer.)
