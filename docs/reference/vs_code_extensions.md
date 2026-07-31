@@ -1,6 +1,6 @@
 # VS Code Extensions
 
-VS Code has thousands of extensions. Most of them you don't need. This is the lab's curated list, in two tiers: install these, and consider these.
+VS Code has thousands of extensions. Most of them you don't need. This is a curated list, in two tiers: install these, and consider these.
 
 To install an extension: click the Extensions icon in the left sidebar (four squares), search by name, click Install.
 

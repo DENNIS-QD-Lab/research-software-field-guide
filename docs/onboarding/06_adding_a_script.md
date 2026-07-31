@@ -8,7 +8,7 @@ Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipy
 
 ## Naming conventions
 
-All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., for the Dennis lab (QD Imaging), `hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
+All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., in image-processing research like the SWIR_HDR exemplar, `hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
 
 Beyond that, we use two grammatical patterns depending on what the file does.
 

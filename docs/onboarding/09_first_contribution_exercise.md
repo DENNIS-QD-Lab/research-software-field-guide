@@ -2,7 +2,7 @@
 
 This is practice, not a test. Nobody grades it and nothing breaks if you get a step wrong. The goal is to put every concept from docs 00 through 08 through your hands once, using code you already understand, before you need the workflow under pressure. Plan on 30 to 60 minutes once you have read those docs.
 
-Pick something small and real. The best candidate is a script or notebook you have already written that a labmate might find useful. You understand it already, so your attention stays on the workflow rather than the code.
+Pick something small and real. The best candidate is a script or notebook you have already written that a collaborator might find useful. You understand it already, so your attention stays on the workflow rather than the code.
 
 ## The exercise
 
@@ -18,7 +18,7 @@ Pick something small and real. The best candidate is a script or notebook you ha
 
 6. **Commit, push, and open a pull request.** Write a description that explains what the helper does and includes an example invocation. The format is in [05_daily_workflow.md](05_daily_workflow.md).
 
-7. **Review a labmate before merging your own.** Find one open pull request from someone else and leave one substantive comment: a question, a suggestion, or "looks good, and here is why." This is the other half of the workflow, and [08_code_review.md](08_code_review.md) covers how to do it well.
+7. **Review a collaborator before merging your own.** Find one open pull request from someone else and leave one substantive comment: a question, a suggestion, or "looks good, and here is why." This is the other half of the workflow, and [08_code_review.md](08_code_review.md) covers how to do it well.
 
 8. **Merge your own.** Once your pull request has at least one approval, merge it yourself in the GitHub interface and delete the branch.
 

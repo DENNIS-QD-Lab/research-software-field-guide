@@ -5,7 +5,7 @@ still moving. This one is about the other end of the arc: a line of inquiry has 
 is going out, or the software is becoming something others depend on — and the job now is to **freeze
 the result, archive it, and make it citable**, so it stays findable and reproducible after you move
 on. It orients you; it is not a submission guide. The concrete example throughout is a project
-reaching a citable public release — in the lab, `SWIR_HDR` (v1).
+reaching a citable public release — for example, `SWIR_HDR` (v1).
 
 ## Concluding: freeze, archive, cite
 

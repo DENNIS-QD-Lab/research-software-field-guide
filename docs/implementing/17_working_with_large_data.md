@@ -2,7 +2,7 @@
 
 The data rule ([CLAUDE.md](../../CLAUDE.md), [04_environments.md](../onboarding/04_environments.md)) is simple: **data lives outside
 the repo, and scripts take paths.** A real experiment, though, runs on gigabytes of acquired data
-that live on a lab server or an external drive and sit in a different place on every machine. That
+that live on a shared server or an external drive and sit in a different place on every machine. That
 raises the question [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md) depends on: if the inputs are not in git,
 how is a run reproducible? The answer is to reference the data by a **stable identifier** and to
 **pin which data a run used** — not to drag the data into the repo.
