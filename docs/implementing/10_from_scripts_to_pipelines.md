@@ -46,7 +46,7 @@ git merge main
 
 The first line makes sure you are on your feature branch; the second brings `main`'s new commits into it. Small, frequent merges mean small conflicts you can resolve in a minute, instead of one enormous conflict at the end. When a conflict does appear, [git_recovery.md](../reference/git_recovery.md) walks through it.
 
-**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in [19_documentation_and_doc_sites.md](19_documentation_and_doc_sites.md).
+**Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a teammate can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in [20_documentation_and_doc_sites.md](20_documentation_and_doc_sites.md).
 
 ## When not to add complexity
 
@@ -56,13 +56,13 @@ That machinery exists to manage **scheduled, versioned releases to outside users
 
 Put plainly: **a long-running branch is a workspace, not an archive.** When an experiment on such a branch reaches a conclusion, it graduates onto `main` (in the SWIR_HDR exemplar, a longer-lived experiment branch was merged to `main` and then retired once the work settled). It does not live on the branch forever. Where those graduated experiments *land* on `main`, in a dedicated `experiments/` folder, is discussed in [15_experiments_and_shipping.md](15_experiments_and_shipping.md).
 
-The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is [21_versioning_and_releases.md](21_versioning_and_releases.md), and it is not now.
+The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project. That is [22_versioning_and_releases.md](22_versioning_and_releases.md), and it is not now.
 
 ## The multi-root workspace
 
 [02_using_vs_code.md](../onboarding/02_using_vs_code.md) taught one folder, one window: open a single repo so VS Code's terminal, search, and Source Control all point at it. That is still the right default for single-repo work. But you sometimes need two repos open at once — not when one merely *consumes the other's output* (that is a data hand-off: you need the output files, not the other repo), but when you are actually **reading or editing both repos' code in the same sitting**. Common cases: scaffolding a new repo while keeping an existing one open as a template to mirror; developing the next version of a project while consulting the previous one; documenting a generic pattern in one repo from its concrete implementation in another; or co-developing a shared library alongside a repo that installs it. Do _not_ open their shared parent folder to get both in one window as this can confound the Python interpreter, the terminal's working directory, and the search scope across repos. Instead set up a **multi-root workspace**: one VS Code window holding several folders, each keeping its own identity.
 
-**Note:** the workspace governs which repos you *see* and edit together. How one repo *depends* on another is a separate question: one repo may generate output files that become the next repo's input ([17_working_with_large_data.md](17_working_with_large_data.md)), or one repo may install another's code as a pinned package ([20_packaging.md](20_packaging.md)). Either is preferred to importing code live across sibling folders.
+**Note:** the workspace governs which repos you *see* and edit together. How one repo *depends* on another is a separate question: one repo may generate output files that become the next repo's input ([17_working_with_large_data.md](17_working_with_large_data.md)), or one repo may install another's code as a pinned package ([21_packaging.md](21_packaging.md)). Either is preferred to importing code live across sibling folders.
 
 In VS Code:
 

@@ -38,7 +38,7 @@ Do these in order; stop wherever the project's maturity stops. Early projects of
    `.pre-commit-config.yaml` (ruff check + ruff format; nbstripout for notebooks, excluding `.ipynb`
    from ruff); `pre-commit install`. ([11](../docs/implementing/11_code_quality_tools.md))
 3. **Package layout.** `src/<pkg>/` for method code + `pyproject.toml`; `pip install -e . --no-deps`.
-   ([20](../docs/implementing/20_packaging.md))
+   ([21](../docs/implementing/21_packaging.md))
 4. **Tests.** `tests/` + `pytest.ini` (or `[tool.pytest]`); one real test that runs the code on a
    known input. ([12](../docs/implementing/12_testing_with_pytest.md))
 5. **Experiments framework.** See recipe *B5* below — this is the core of the research-notebook job and
@@ -78,7 +78,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** move modules under `src/<pkg>/`; add `pyproject.toml`; `pip install -e . --no-deps`; update
   the tests' import lines. Tests are the safety net — if behavior is unchanged, **only import lines
   change and the suite stays green**. ([15](../docs/implementing/15_experiments_and_shipping.md),
-  [20](../docs/implementing/20_packaging.md))
+  [21](../docs/implementing/21_packaging.md))
 - **Verify:** `pytest` green after the move; `import <pkg>` works from any directory.
 - **Don't:** do this without tests in place first (add B3 first); change logic during the move.
 
@@ -107,14 +107,14 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 ### B6 · Normalize docstrings to NumPy style
 - **When:** docstrings are missing or mixed-style (blocks a clean doc site).
 - **Steps:** add/convert to NumPy-style (summary, `Parameters`, `Returns`, `Examples`) on every public
-  function and module. ([19](../docs/implementing/19_documentation_and_doc_sites.md))
+  function and module. ([20](../docs/implementing/20_documentation_and_doc_sites.md))
 - **Verify:** `sphinx-build -W` produces no docstring warnings.
 - **Don't:** rewrite what a function does while documenting it.
 
 ### B7 · Stand up the Sphinx doc site
 - **When:** no browsable API docs.
 - **Steps:** `docs/conf.py` with `autodoc` + `napoleon` + `intersphinx` + `myst_parser`, `furo` theme
-  (skeleton in [19](../docs/implementing/19_documentation_and_doc_sites.md)); autodoc imports the
+  (skeleton in [20](../docs/implementing/20_documentation_and_doc_sites.md)); autodoc imports the
   package, so `pip install -e .` first; add an API page via an `automodule` directive; preview with
   `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file.
 - **Verify:** `sphinx-build -W -b html docs docs/_build/html` builds clean.
@@ -125,7 +125,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** `.github/workflows/ci.yml` — recreate the env, `pip install -e . --no-deps`, `ruff check` +
   `ruff format --check`, `pytest`, and (if there is a doc site) `sphinx-build -W`. Use an OS matrix
   (`macos-latest`, `windows-latest`). Skeleton in
-  [14](../docs/implementing/14_continuous_integration.md) / [19](../docs/implementing/19_documentation_and_doc_sites.md).
+  [14](../docs/implementing/14_continuous_integration.md) / [20](../docs/implementing/20_documentation_and_doc_sites.md).
 - **Verify:** the run is green on every matrix leg; a deliberately-missing dependency fails it (that is
   the point).
 - **Don't:** install packages on the runner by hand to make it pass — add them to the environment file.
@@ -134,7 +134,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** other repos import this code, or you want versioned installs.
 - **Steps:** `pyproject.toml` (name, version, deps, build backend); `src/` layout; `pip install -e .`;
   a single source of truth for the version (read back via `importlib.metadata`).
-  ([20](../docs/implementing/20_packaging.md), [21](../docs/implementing/21_versioning_and_releases.md))
+  ([21](../docs/implementing/21_packaging.md), [22](../docs/implementing/22_versioning_and_releases.md))
 - **Verify:** a fresh `pip install -e .` works; `import <pkg>` and `<pkg>.__version__` resolve.
 - **Don't:** package a loose helper/script collection that nothing imports.
 
@@ -142,8 +142,8 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.
 - **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared approach
   still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`. *Only after
-  the tag*, trim `src/` on `main` to the disseminated method. ([22](../docs/implementing/22_concluding_a_project.md),
-  [21](../docs/implementing/21_versioning_and_releases.md))
+  the tag*, trim `src/` on `main` to the disseminated method. ([23](../docs/implementing/23_concluding_a_project.md),
+  [22](../docs/implementing/22_versioning_and_releases.md))
 - **Verify:** the tag checks out and reproduces a figure; `main` still builds and tests green after the trim.
 - **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging (it
   still installs and still costs maintenance).

@@ -38,5 +38,5 @@ implementing-track doc that teaches it in full.
 ## Scope
 
 This kit is the *summary and operational form* of the implementing track — it never contradicts it. When
-in doubt, the track (docs 10–22) is the source of truth, and the config skeletons (`pyproject.toml`,
+in doubt, the track (docs 10–23) is the source of truth, and the config skeletons (`pyproject.toml`,
 `ci.yml`, `conf.py`) live there rather than being duplicated here, so the two cannot drift.
