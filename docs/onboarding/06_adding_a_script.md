@@ -47,3 +47,7 @@ The **imports** are `argparse` (to define and read the command-line argument) an
 The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work, as was described in [00_python_code_basics.md](00_python_code_basics.md).
 
 Copy this shape for new helpers: a module docstring, imports, one or more well-named functions with type hints and docstrings, a `main()` for the command line, and the `if __name__` block to wire it up.
+
+## Further reading
+
+These conventions are one implementation of a broader idea: code organized so someone else (including future you) can find and reuse it. For the general case across data management, software, and project organization, see ["Good Enough Practices in Scientific Computing"](https://doi.org/10.1371/journal.pcbi.1005510) (Wilson et al., PLOS Computational Biology, 2017).

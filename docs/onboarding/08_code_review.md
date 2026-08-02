@@ -26,3 +26,7 @@ Assume good intent. The author did their best with what they knew. Review is col
 When the change looks good, approve it in the GitHub interface: open the pull request, go to the Files changed tab, click "Review changes," select "Approve," and submit.
 
 To merge, return to the Conversation tab and click "Merge pull request," then "Confirm merge." Delete the branch when GitHub offers, since its work now lives in `main`. The author then pulls `main` to bring the merged change back to their machine, and the loop in [05_daily_workflow.md](05_daily_workflow.md) starts again.
+
+## Further reading
+
+This doc covers what to check and how to say it in this repo. For the broader rationale and workflows for reviewing research code, see The Turing Way's [Code Reviewing Process](https://book.the-turing-way.org/reproducible-research/reviewing/).

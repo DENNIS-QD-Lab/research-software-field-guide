@@ -64,3 +64,7 @@ In `scripts/show_h5_keys.py`:
 - The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
 [06_adding_a_script.md](06_adding_a_script.md) walks through how this script does its job.
+
+## Further reading
+
+This doc is a fast on-ramp for what you need in this repo. For a full self-paced lesson on Python fundamentals with more practice exercises, see Software Carpentry's [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/).
