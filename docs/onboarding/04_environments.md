@@ -41,3 +41,7 @@ A notebook keeps everything you have run in memory, which is convenient until th
 - When variables are in a confusing state and you cannot tell why.
 
 The "Restart and Run All" button restarts the kernel and re-runs every cell from a clean slate. This is akin to the troubleshooting advice 'turn it off and turn it back on again'-- resets help. When something seems wrong for no clear reason, try restarting the kernel. 
+
+## Further reading
+
+This doc covers conda and Jupyter kernels as used in this repo. For the broader reproducibility case for capturing computational environments (conda, containers, and beyond), see The Turing Way's [Reproducible Environments](https://book.the-turing-way.org/reproducible-research/renv/) chapter.

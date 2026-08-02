@@ -41,3 +41,7 @@ When you commit on a branch, the commit is recorded only on that branch until yo
 "Adding a new file on a branch" is shorthand for a sequence: switch to the branch, create the file in your working directory, then stage and commit it. The branch itself does not hold just that one file. It holds the whole repository state, now including your new file.
 
 We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. [05_daily_workflow.md](05_daily_workflow.md) shows the mechanics of making, using, and merging a branch.
+
+## Further reading
+
+This doc covers what you need to get moving in this repo. For a deeper, general treatment of version control, see Software Carpentry's [Version Control with Git](https://swcarpentry.github.io/git-novice/) (a full self-paced lesson) or The Turing Way's [Version Control](https://book.the-turing-way.org/reproducible-research/vcs/) chapter (why it matters for reproducible research).

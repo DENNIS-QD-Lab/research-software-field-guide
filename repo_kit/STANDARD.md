@@ -92,7 +92,7 @@ into a reference you can read — useful for your own navigation during explorat
 reviewer to grasp the shape of an analysis at the module level without reading every line. It cannot
 drift from the code because it *is* the docstrings. Use NumPy-style docstrings; Sphinx is the
 scientific-Python norm (NumPy, SciPy, pandas all use it).
-→ [19_documentation_and_doc_sites.md](../docs/implementing/19_documentation_and_doc_sites.md)
+→ [20_documentation_and_doc_sites.md](../docs/implementing/20_documentation_and_doc_sites.md)
 
 **Instructions are split into three files so no one file sprawls.** A research repo keeps three kinds of
 written guidance, and mixing them is what turns a guide into an unreadable pile:
@@ -116,7 +116,7 @@ compared approach still present), archive that tag for a permanent **DOI** (Zeno
 and `CITATION.cff`. Only after freezing do you trim `src/` on `main` down to the one approach you
 disseminate — if disseminating a clean library is even a goal. The tag keeps the paper reproducible;
 `main` keeps moving. A tag is not a fork: it costs nothing and cannot rot.
-→ [22_concluding_a_project.md](../docs/implementing/22_concluding_a_project.md),
+→ [23_concluding_a_project.md](../docs/implementing/23_concluding_a_project.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
 
 ## Adopting it
@@ -130,4 +130,4 @@ disseminate — if disseminating a clean library is even a goal. The tag keeps t
   it in, fill the placeholders, and the assistant follows it every session.
 
 The full, worked tutorial behind every decision above is the research-software-field-guide
-[implementing track](../docs/implementing/) (docs 10–22). This page is its executive summary.
+[implementing track](../docs/implementing/) (docs 10–23). This page is its executive summary.

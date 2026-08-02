@@ -12,7 +12,7 @@ reaching a citable public release — for example, `SWIR_HDR` (v1).
 The end-to-end pattern, and the single place it is defined in this track:
 
 1. **Freeze** the exact state behind the result. Tag it (`paper-v1`;
-   [21_versioning_and_releases.md](21_versioning_and_releases.md)) so that commit is pinned no matter how the code moves afterward.
+   [22_versioning_and_releases.md](22_versioning_and_releases.md)) so that commit is pinned no matter how the code moves afterward.
 2. **Archive** that tag for a permanent identifier. Connect the repo to **Zenodo** once, and each
    tagged release is archived and assigned its own **DOI**.
 3. **Cite** the DOI in the manuscript.
@@ -48,7 +48,7 @@ toward being citable.
 
 - **Zenodo** mints a **DOI** (a permanent identifier) for a snapshot of your repository. Connect the
   repo once, and each tagged release, such as the `paper-v1` tag from
-  [21_versioning_and_releases.md](21_versioning_and_releases.md), is archived and assigned its own DOI. The paper cites the DOI of
+  [22_versioning_and_releases.md](22_versioning_and_releases.md), is archived and assigned its own DOI. The paper cites the DOI of
   that exact tagged state.
 - **JOSS**, the Journal of Open Source Software, is a route to a short, peer-reviewed **software
   paper**: a citable publication about the software itself. It is more work than a Zenodo DOI, and

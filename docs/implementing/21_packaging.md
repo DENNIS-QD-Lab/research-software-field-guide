@@ -27,7 +27,7 @@ For example, a pipeline organized this way puts its importable code under `src/<
 pip install -e .
 ```
 
-This installs the package in **editable** mode: `import yourpkg` works from anywhere, but your edits to the source take effect immediately, with no reinstall. It is the standard local-development setup, and it is what lets the tests, the experiments, and the doc site ([19_documentation_and_doc_sites.md](19_documentation_and_doc_sites.md)) all import the library the same way. In a conda environment, add `--no-deps` so pip installs only your package and leaves the conda-managed dependencies alone.
+This installs the package in **editable** mode: `import yourpkg` works from anywhere, but your edits to the source take effect immediately, with no reinstall. It is the standard local-development setup, and it is what lets the tests, the experiments, and the doc site ([20_documentation_and_doc_sites.md](20_documentation_and_doc_sites.md)) all import the library the same way. In a conda environment, add `--no-deps` so pip installs only your package and leaves the conda-managed dependencies alone.
 
 A package can also declare a **command-line entry point** in `pyproject.toml`, so that a name like `your-tool` becomes a command you can run from any directory. That is the polished form of "run it where the data lives": the user works in their data folder and calls the command, with no `cd` into the code and no path juggling.
 
@@ -37,4 +37,4 @@ A collection of standalone helper scripts and training docs is not a library tha
 
 ## The next step, out of scope here
 
-Once a project is packaged, versioned ([21_versioning_and_releases.md](21_versioning_and_releases.md)), and licensed and citable ([22_concluding_a_project.md](22_concluding_a_project.md)), the further step is publishing to **PyPI** so anyone can `pip install` it. That is deliberately out of scope for this track; it is named here only so you know it is the next thing that exists when you get there.
+Once a project is packaged, versioned ([22_versioning_and_releases.md](22_versioning_and_releases.md)), and licensed and citable ([23_concluding_a_project.md](23_concluding_a_project.md)), the further step is publishing to **PyPI** so anyone can `pip install` it. That is deliberately out of scope for this track; it is named here only so you know it is the next thing that exists when you get there.

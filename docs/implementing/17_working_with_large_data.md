@@ -53,5 +53,5 @@ the report points at them.
 
 Reproducibility does not come from committing the data — a committed dataset bloats the repo forever
 and still does not prove *which* version a result used. It comes from **a pinned code state** (a tag;
-[21_versioning_and_releases.md](21_versioning_and_releases.md)) **plus a referenced, checksummed dataset**. Freeze the code, name
+[22_versioning_and_releases.md](22_versioning_and_releases.md)) **plus a referenced, checksummed dataset**. Freeze the code, name
 and hash the data, and the result is reproducible without a single gigabyte in git.

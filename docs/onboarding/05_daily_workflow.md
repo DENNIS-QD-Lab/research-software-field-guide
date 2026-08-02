@@ -106,3 +106,7 @@ the other version of the lines
 ```
 
 The 90% case is simple: ask for help. Conflicts are routine and not a sign you did anything wrong, and an experienced colleague can resolve one with you in a couple of minutes. Do not delete the markers at random hoping it sorts itself out. (VS Code shows "Accept Current Change" / "Accept Incoming Change" buttons above each conflict, but *which* to keep is a judgment call — when you are unsure, ask before accepting.)
+
+## Further reading
+
+This doc covers the specific loop used in this repo. For the general case for GitHub-based collaboration, see The Turing Way's [Motivation for Using GitHub](https://book.the-turing-way.org/collaboration/github-novice/github-novice-motivation/).

@@ -77,3 +77,5 @@ The assistant accelerates the typing, not the thinking. It is a very fast pair o
 ## The bottom line
 
 AI assistants are powerful accelerators for the mechanical parts of research software, *under* human judgment and *behind* a test suite. The standards file, human review, and tests are exactly what make leaning on them safe.
+
+For the session-to-session mechanics of applying these principles — writing a standards file that actually gets followed, scoping what the assistant can touch, and a playbook for catching specific ways confident output fails silently — see [19_driving_an_ai_assistant.md](19_driving_an_ai_assistant.md).

@@ -123,3 +123,7 @@ Turns the current environment off.
 **"No such file or directory"** means a path you typed does not exist from where you currently are. Check with `pwd` and `ls` that the file is really there, and check the spelling of the path.
 
 **"I installed it, but Python says it is not installed."** This is almost always the wrong environment being active. You installed the package into one environment and are running Python in another. Run `conda activate helper`, confirm with `conda list` that the package is there, and try again. In a notebook, this same problem shows up as a wrong *kernel*; see [04_environments.md](04_environments.md).
+
+## Further reading
+
+This doc covers the commands you need in this repo. For a full self-paced lesson on the shell, see Software Carpentry's [The Unix Shell](https://swcarpentry.github.io/shell-novice/).
