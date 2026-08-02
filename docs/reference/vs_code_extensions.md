@@ -30,6 +30,7 @@ These are useful for specific situations or workflows. Skim the descriptions; in
 | **Path Intellisense** (publisher: Christian Kohler) | Autocompletes file paths as you type them in code or markdown. Saves typos when referencing files. |
 | **Rainbow CSV** (publisher: mechatroner) | Colors columns in CSV files so they're readable. Saves you from squinting at comma-separated text when previewing a data file. |
 | **Excalidraw** (publisher: pomdtr) | Lets you create and edit hand-drawn-style diagrams directly in VS Code, saved as `.excalidraw` files. Useful for sketching flow diagrams or system architecture for docs. |
+| **Claude Code** (publisher: Anthropic) | Sidebar panel and inline diff review for the Claude Code AI assistant. If you're using an AI assistant in this repo, install and setup are covered in [ai_coding_assistants.md](ai_coding_assistants.md). Other AI-assistant extensions (GitHub Copilot, Cursor, and similar) work differently but solve the same problem; that doc's mechanics apply regardless of which one you pick. |
 
 ## Settings worth turning on
 
