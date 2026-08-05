@@ -33,7 +33,7 @@ project's status is always clear and can be understood by consulting this one do
 ## The reference ledger: the knowledge behind the decisions
 
 The decision log records *what* you decided and *why* — the internal reasoning. But research decisions
-also rest on **external knowledge**: a method from a paper, a published threshold, a noise model off a
+also build on **external knowledge**: a method from a paper, a published threshold, a noise model off a
 spec sheet, a standard you chose to follow. A **reference ledger** — a `references.md` at the repo root —
 records that prior knowledge alongside the work that used it. One row per source: the citation, a link
 or DOI, the date accessed (web pages change), and — the part that matters most — the **key relevant
@@ -41,9 +41,9 @@ points for *this* project**: why the source mattered *here*, not a general summa
 
 Keep it current as sources come up, not reconstructed at the end, for two reasons. First, the
 "why it mattered here" note is cheap to write while the decision is fresh and expensive to recover
-months later. Second, research code is usually headed for a manuscript: a ledger that already pairs
-each source with the decision it informed is most of a methods section and a bibliography, accrued as
-you went rather than reverse-engineered under deadline. The ledger is the outward-facing companion to
+months later. Second, research code may be headed for a manuscript: a ledger that already pairs
+each source with the decision it informed is a huge help when compiling your methods section and bibliography, and is more likely to be complete when accrued as
+you went rather than reverse-engineered at the end. The ledger is the outward-facing companion to
 the decision log — the decision log says *we switched to method B because it removed the artifact*; the
 ledger says *method B is Granados et al. (2010), and here is the equation and why it applies to our
 detector*. This is a convention worth keeping in **every** research repo, so the "source + why it
