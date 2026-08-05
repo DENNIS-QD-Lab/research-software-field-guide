@@ -40,6 +40,7 @@ your_repo/
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
 ├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
+├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments
 ├── config / local_paths.py  parameters and machine-local data paths (paths stay out of git)
 └── pyproject.toml           declares the package, once the code is worth installing
@@ -55,7 +56,9 @@ the status of every open question, what's next, and a dated decision log, so the
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
 each run is at the top of the experiment run report in a protected section that the AI assistant never overwrites. The code structure ensures that the numbers are recorded; you write what
-they mean.
+they mean. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
+external source the work builds on with *why it mattered here*, kept current as you go so the
+manuscript's methods and bibliography are accrued rather than reconstructed at write-up.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
 **Look at the data at every step, and document as you explore.** Before you have a test for every step,

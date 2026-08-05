@@ -21,6 +21,12 @@ That is how a paper stays reproducible against a specific, frozen version while 
 moving forward on `main` ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)). Reproducibility comes from the archived
 snapshot, not from freezing the live code. Everything below supports these three steps.
 
+This is also where the **reference ledger** pays off. If you kept a `references.md` current as you went
+([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)) — each source paired with why it
+mattered for a decision — then the manuscript's methods and bibliography are largely already assembled,
+rather than reconstructed from memory under deadline. The freeze captures the code; the ledger captures
+the prior work it was built on.
+
 ## Why software citation matters
 
 Software is a research output, like a dataset or a figure. Citing it does two things: it gives
