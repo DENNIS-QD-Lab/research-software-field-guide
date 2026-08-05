@@ -24,6 +24,10 @@ At the bottom of the Explorer sidebar is the Outline view (expand the "Outline" 
 
 Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown. 
 
+## Opening VS Code from the terminal with `code`
+
+Once you can run `code` from a terminal, `code .` opens the current folder in VS Code and `code path/to/folder` opens any folder. This is the reverse of the "Open with VS Code" pattern above and is handy when you are already in a terminal. On Mac you enable it once: open the Command Palette (Cmd+Shift+P), type "Shell Command", and choose "Shell Command: Install 'code' command in PATH". On Windows the installer adds `code` to your PATH automatically, as long as the "Add to PATH" option was left checked during installation.
+
 ## The Source Control panel
 
 The third icon down on the far-left activity bar, shaped like a branch, is the Source Control panel. This is VS Code's Git interface. It shows the files that have changed since the last commit and lets you stage them, write a commit message, and commit. This is the recommended path for daily work. The equivalent terminal commands are in [05_daily_workflow.md](05_daily_workflow.md).
