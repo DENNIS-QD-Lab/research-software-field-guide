@@ -110,6 +110,17 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 parameters, the published method, calibration constants. Delete this section if the repo has no frozen
 baseline to protect.>
 
+## Session hygiene — context and continuity
+
+- At natural break points — an experiment concluded, a commit landed, a task finished — proactively
+  remind the scientist to `/compact` or `/clear`, whichever fits: `/compact` to keep going once the
+  transcript has grown large, `/clear` when moving on to unrelated work. This is responsible token
+  usage; make it a regular, gentle prompt, not a one-time note.
+- **Before recommending it, make sure a sudden clear would lose nothing.** Update the research log
+  (`experiments/README.md`), the reference ledger (`references.md`), and any auto-memory, and commit or
+  explicitly flag work in progress, *first* — then suggest compacting or clearing. Anything that must
+  survive the session belongs in a file in the repo, never only in the conversation.
+
 ## When in doubt
 
 - Run `ruff check` and `ruff format` and fix what they flag.

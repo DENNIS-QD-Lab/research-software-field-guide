@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /Users/allisondennis/Documents/ClaudeCode1 *)",
+      "Read(//Users/allisondennis/Documents/ClaudeCode1/**)",
+      "Bash(python3 -c 'import numpy as np,glob; *)"
+    ]
+  }
+}

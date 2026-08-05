@@ -55,6 +55,10 @@ This repository is a teaching tool and portable standard for research software p
 - If it adds a new category of functionality worth indexing, update `docs/README.md`.
 - The PR description should include what the helper does and an example invocation.
 
+## Session hygiene — context and continuity
+- At natural break points — a task finished, a PR merged, a doc section done — proactively remind the contributor to `/compact` or `/clear`, whichever fits: `/compact` to keep going once a session's transcript has grown large, `/clear` when moving on to unrelated work. This is responsible token usage ([docs/reference/ai_coding_assistants.md](docs/reference/ai_coding_assistants.md)); make it a regular, gentle prompt, not a one-time note.
+- **Before recommending it, make sure a sudden clear would lose nothing.** Update the docs and any auto-memory, and commit or explicitly flag work in progress, *first* — then suggest compacting or clearing. Anything that must survive the session belongs in a file in the repo or in memory, never only in the conversation.
+
 ## When in doubt
 - Run `ruff check` and `ruff format` and fix what they flag.
 - Prefer simple code over clever code.
