@@ -71,7 +71,9 @@ When an experiment is a keeper, **finalize** it so its stamp points at real, che
 4. **Commit the refreshed run** (manifest/metrics/report), and `git tag` it if it backs a paper figure.
 
 Your AI assistant can drive steps 2–4 — re-run the driver, diff the metrics, and hand back the commit
-(and tag) for you to run; you commit the code in step 1 and review what it prepares.
+(and tag) for you to run; you commit the code in step 1 and review what it prepares. A reproduce
+helper must diff *every* metrics file a run writes, not just `metrics.csv` — drivers often emit
+several under custom names, and checking only one gives a false pass.
 
 ## Retention policy
 
