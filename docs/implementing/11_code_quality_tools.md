@@ -70,6 +70,19 @@ pre-commit run --all-files
 
 This runs every hook over every file, instead of only the files you changed. Use it the first time you adopt the hooks on an existing codebase, to bring the whole thing up to standard in one pass.
 
+## Pin the tool version, or its defaults will drift under you
+
+A linter is only reproducible if everyone runs the *same version* of it. ruff's default set of rules is not fixed forever: it grows between releases. If you list ruff in your environment file unpinned (just `ruff`, with no version), then every fresh install grabs the newest release — and the newest release can enforce rules yours never did.
+
+This is not hypothetical. ruff 0.16 expanded its default rule set from about 119 rules to about 827. A project that pinned nothing kept passing on developers' laptops, where an older ruff sat in the conda cache, while its CI — which builds a clean environment every run — floated onto 0.16 and suddenly reported over a hundred "errors." Nothing in the code had changed. The tool had.
+
+The fix is to pin the version in both places the tool is declared, and keep them in lockstep:
+
+- In the environment file (`environment.yml` / the conda `.yml`), pin exactly: `ruff=0.15.21`, not `ruff`.
+- In `.pre-commit-config.yaml`, set the hook `rev:` to the matching tag: `rev: v0.15.21`.
+
+Now your laptop, your teammate's laptop, the pre-commit hook, and CI all run the identical linter with the identical rules. When you *want* a newer ruff, you bump both pins together, deliberately, and deal with any new findings in that one commit — instead of being ambushed by a release you never chose. The same reasoning applies to any tool whose behavior can change between versions; pin it.
+
 ## mypy: type checking
 
 [00_python_code_basics.md](../onboarding/00_python_code_basics.md) introduced type hints such as `list[int]` and `str | None`. Those hints are for human readers and for checkers; Python does not enforce them when the code runs. **mypy is the checker.** It reads your hints and reports where the types do not line up, before you run anything.
