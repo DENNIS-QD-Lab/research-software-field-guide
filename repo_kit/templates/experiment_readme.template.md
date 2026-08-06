@@ -57,6 +57,10 @@ checksum (see the research log and `experiments_playbook.md`). Figures and metri
 `outputs/` (git-ignored unless committed as a fixture). To reproduce the exact state behind a paper
 figure, check out the corresponding tag (e.g. `paper-v1`) rather than the latest `main`.
 
+A run you keep is *finalized* on committed code: commit the driver and any `src/` change, re-run so the
+manifest records a clean commit (`dirty: false`), confirm the metrics reproduce, then commit the
+refreshed run. See `experiments_playbook.md` → *Finalizing an experiment*.
+
 ## Status & decisions
 
 What is settled, what is still open, what has been tagged, and any decision to stop pursuing a

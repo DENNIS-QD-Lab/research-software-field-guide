@@ -41,7 +41,9 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
 
 Every run writes one directory: `experiments/<YYMMDD-slug>/outputs/<YYMMDD_slug>[_NN]/` containing
 
-- `manifest.yaml` — git commit + dirty flag, timestamp, parameters, inputs (dataset name + checksum).
+- `manifest.yaml` — git commit + `dirty` flag (dirty = the *tracked code* had uncommitted changes at
+  run time; the run's own `outputs/` are excluded, so writing the manifest never trips it), timestamp,
+  parameters, inputs (dataset name + checksum).
 - `metrics.csv` — the numeric read-out.
 - `run_report.md` — a scan-first report: a one-line `## Summary` and the **`## Interpretation
   (scientist)`** (between protected markers, **never overwritten** by tooling — the scientist owns it)
@@ -49,6 +51,29 @@ Every run writes one directory: `experiments/<YYMMDD-slug>/outputs/<YYMMDD_slug>
 
 Default is **PRESERVE** — a new run gets a fresh `_NN` suffix and never clobbers a prior run. Use
 `--overwrite` only for throwaway cosmetic re-runs of a deterministic result.
+
+## Finalizing an experiment — clean-commit reproducibility
+
+A run is only reproducible if someone can `git checkout` its recorded commit and regenerate it. The
+`dirty` flag in `manifest.yaml` is the signal: it is true when the tracked code had uncommitted changes
+when the run executed. Exploring is dirty by nature — edit, run, look, repeat — and those runs honestly
+stamp `dirty: true`. Every run is still preserved (a losing experiment is evidence, not waste); dirtiness
+is about *code provenance*, not whether a result is worth keeping.
+
+When an experiment is a keeper, **finalize** it so its stamp points at real, checkout-able code:
+
+1. **Commit the code** that produced it — the driver, any `src/` change, the experiment README.
+2. **Re-run the driver** on the now-clean tree. The refreshed manifest records `dirty: false` and the
+   real commit SHA.
+3. **Confirm it reproduces.** For a seeded/synthetic run the refreshed `metrics.csv` must match the
+   previous one exactly; a mismatch means the committed code is not what produced the logged numbers —
+   a real finding, not a nuisance. (Real-data runs match to their documented tolerance.)
+4. **Commit the refreshed run** (manifest/metrics/report), and `git tag` it if it backs a paper figure.
+
+Your AI assistant can drive steps 2–4 — re-run the driver, diff the metrics, and hand back the commit
+(and tag) for you to run; you commit the code in step 1 and review what it prepares. A reproduce
+helper must diff *every* metrics file a run writes, not just `metrics.csv` — drivers often emit
+several under custom names, and checking only one gives a false pass.
 
 ## Retention policy
 
