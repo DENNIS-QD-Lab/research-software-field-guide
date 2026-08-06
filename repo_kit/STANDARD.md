@@ -56,7 +56,9 @@ the status of every open question, what's next, and a dated decision log, so the
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
 each run is at the top of the experiment run report in a protected section that the AI assistant never overwrites. The code structure ensures that the numbers are recorded; you write what
-they mean. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
+they mean. The `dirty` flag records whether the tracked code was committed when a run executed; a run you
+keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
+check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
 external source the work builds on with *why it mattered here*, kept current as you go so the
 manuscript's methods and bibliography are accrued rather than reconstructed at write-up.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
