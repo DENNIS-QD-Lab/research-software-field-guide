@@ -1,14 +1,16 @@
 <!--
 PER-EXPERIMENT README TEMPLATE — copy to experiments/_TEMPLATE.md in the target repo. Starting a new
-study then means: copy _TEMPLATE.md to experiments/<YYMMDD-slug>/README.md, fill the sections, and add a
-row to experiments/README.md (the research log) so the study shows up in the status table.
+study then means: copy _TEMPLATE.md to experiments/<slug>/README.md (no date — this folder is a standing
+address for the line of inquiry, revisited for as long as it stays open; dates live on the runs inside
+it), fill the sections, and add a row to experiments/README.md (the research log) so the study shows up
+in the status table.
 
 Keep the section order and headings — every experiment folder reads the same way, so a reader (or your
 future self) always knows where to look: idea (Question / Hypotheses) -> test (Tests) -> outcome
 (Findings). Delete this comment block in the copy.
 -->
 
-# <Study title> (YYMMDD)
+# <Study title>
 
 One or two sentences: what this study is about and which part of the analysis it interrogates.
 
@@ -50,12 +52,14 @@ retention note below. Date each finding.)*
 
 From the repo root, in the project environment:
 
-    python experiments/<YYMMDD-slug>/run_<name>.py
+    python experiments/<slug>/run_<name>.py
 
 Seeded/synthetic data reproduces exactly; real-data inputs are referenced by their stable identifier and
-checksum (see the research log and `experiments_playbook.md`). Figures and metric dumps land in
-`outputs/` (git-ignored unless committed as a fixture). To reproduce the exact state behind a paper
-figure, check out the corresponding tag (e.g. `paper-v1`) rather than the latest `main`.
+checksum (see the research log and `experiments_playbook.md`). The run's report lands directly in this
+folder (`<YYMMDD_slug>[_NN].md`); its manifest, metrics, and figures land in `details/<YYMMDD_slug>[_NN]/`
+(git-ignored except for the manifest/metrics, unless a figure is committed as a fixture). To reproduce the
+exact state behind a paper figure, check out the corresponding tag (e.g. `paper-v1`) rather than the
+latest `main`.
 
 A run you keep is *finalized* on committed code: commit the driver and any `src/` change, re-run so the
 manifest records a clean commit (`dirty: false`), confirm the metrics reproduce, then commit the

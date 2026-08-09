@@ -39,7 +39,9 @@ Statuses: ✅ answered · 🟡 partial · 🔲 open · ⛔ not pursued.
 
 <Optional: if the questions group into themes, add a themes table pointing at each experiment folder and
 its report(s). Planned themes can be listed with no folder yet — the roadmap lives here. Start one by
-copying `_TEMPLATE.md` to `<YYMMDD-slug>/README.md` and adding its questions to the table above.>
+copying `_TEMPLATE.md` to `<slug>/README.md` and adding its questions to the table above. The theme
+folder is undated and permanent — you keep adding to it for as long as that line of inquiry stays open;
+only the runs inside it are dated.>
 
 ---
 
@@ -65,10 +67,13 @@ current state.
 - **`_TEMPLATE.md`** — copy it to start a new experiment folder (idea → test → outcome headings).
 - **`_common/`** — the shared harness the drivers reuse (run logging, comparison/plot helpers, report
   embedding). Harness only — no method code; drivers import methods from `src/`.
-- **`<YYMMDD-slug>/outputs/<YYMMDD_slug>[_NN]/`** — one directory per run, written by the runlog helper:
-  `manifest.yaml` (git commit + dirty flag, params, inputs), `metrics.csv`, `run_report.md` (its
-  `## Interpretation (scientist)` section is never overwritten by tooling). Preserved by default; heavy
-  artifacts (figures, arrays) are git-ignored unless committed as a small report fixture.
+- **`<slug>/<YYMMDD_slug>[_NN].md`** — one report per run, written by the runlog helper, sitting directly
+  in the theme folder so it's visible without opening a subfolder. Its `## Interpretation (scientist)`
+  section is never overwritten by tooling.
+- **`<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind that same report, name-matched to it:
+  `manifest.yaml` (git commit + dirty flag, params, inputs), `metrics.csv`. Present for reproducibility,
+  rarely opened on a normal read-through. Preserved by default; heavy artifacts (figures, arrays) are
+  git-ignored unless committed as a small report fixture.
 - **Tags** — a paper's exact state is tagged (e.g. `paper-v1`). Reproduce a figure by checking out its
   tag, not the latest `main`.
 - **Procedure details** (retention policy, what may be committed, CI regeneration) are in
