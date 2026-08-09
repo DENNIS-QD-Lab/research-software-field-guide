@@ -1,58 +1,38 @@
 # research-software-field-guide
 
-A practical guide to writing trustworthy research software, aimed at scientists who didn't train as software developers — especially now that AI coding assistants make it easy to generate code faster than anyone can review it by hand. It walks from "I have never used a terminal" through version control, testing, code review, running rigorous experiments, and citable releases, and it doubles as a portable standard (`repo_kit/`) for bringing any existing research repository up to the same practices.
+The goal of this repo is to provide a resource to (wetlab) scientists who are performing an increasing amount of code-driven data analysis. Keeping a record of the steps taken to analyze data is as important to keeping a detailed record of how data is acquired. Whether the experiments involve running simulations, exploring data analysis and data presentation approaches, or developing, testing, and implementing involved data processing pipelines, keeping an effective record of the experimental premise, process, and results will make you a more efficient and effective scientist. This guide and its templates are intended to onboard scientists to some standard coding tools, introduce some CS jargon and best practices, provide a framework for documenting data exploration and pipeline development, and outline important steps to disseminating results and new analytical tools. It is written with the assumption that many scientists will pursue increasingly sophisticated code-driven analyses using AI coding assistants to speed the process; these AI coders will handle many details of code structure and syntax, while the scientist must retain scientific leadership as well as responsibility for the integrity of the process and the data interpretation. In that context, the guide docs are written to be human-facing overviews, while the portable standard (`repo_kit/`) has templates and instructions to help the scientist and their AI assistants initiate new projects or update an existing research repository to the same practices. 
 
-This repository holds general-purpose tools, not project-specific analysis. A helper is something you would reach for across many projects, like a script that inspects an HDF5 data file. Code that only makes sense for one study belongs in that study's own repository.
+The structure and standard that this repo teaches is summarized in `repo_kit/STANDARD.md`.
+
+## Where to start...
+
+If you need to start from scratch, go to [GETTING_STARTED.md](GETTING_STARTED.md) to install the tools (VS Code, miniconda), make a GitHub account, and clone the repository.
+
+If you have the tools, but need more background on how to use VS Code, environments, and GitHub best practices, read through the onboarding guide in `docs/`. Start at [00_python_code_basics.md](docs/onboarding/00_python_code_basics.md) and work up; they are numbered in reading order. Quick-look refreshers on jargon, hotkeys, and tips can be found in `reference/` notes.
+
+If you're comfortable working in VS Code and making regular commits to GitHub, then the series of documents discussing how to implement a scientific workflow (`docs/implementing`) may be helpful for setting up a structured repo for both exploratory analysis and keeping a record of larger data analysis runs and results. Start with [10_from_scripts_to_pipelines.md](docs/implementing/10_from_scripts_to_pipelines.md).
+
+If your project is ready for publishing and/or you have code that you want to make publicly installable for others to use as well, then read the disseminating ([`docs/disseminating`](docs/disseminating/)) notes.
+
+If you are ready to start a new repo or update an existing repo with this structure and documentation standard, then go to the `repo_kit` folder; read the `README.md` and `STANDARD.md`, then follow the steps in the `SETUP_PLAYBOOK.md`.
+
+```mermaid
+flowchart TD
+    Q1{Have VS Code, conda,<br>and a GitHub account?}
+    Q1 -->|Not yet| GS[GETTING_STARTED.md]
+    Q1 -->|Yes| Q2{Comfortable with VS Code,<br>environments, and GitHub?}
+    GS --> Q2
+    Q2 -->|Not yet| OB["docs/onboarding/<br>00 → 08, in order"]
+    Q2 -->|Yes| Q3{Structuring a real pipeline:<br>experiments, tests, a doc site?}
+    OB --> Q3
+    Q3 -->|Teach me| IM["docs/implementing/<br>10 → 20"]
+    Q3 -->|Just want the rules| RK["repo_kit/<br>STANDARD.md → SETUP_PLAYBOOK.md"]
+    IM --> Q4{Heading toward publication<br>or a public release?}
+    RK --> Q4
+    Q4 -->|Yes| DS["docs/disseminating/<br>21 → 23"]
+    Q4 -->|Not yet| Keep[Keep running experiments —<br>come back to this later]
+```
 
 ## Origin and credits
 
 This guide began as Allison Dennis's response to the curriculum for the [URSSI Responsible Research Software Development summer school, June 2026](https://github.com/si2-urssi/summerschool-June2026). It was then substantially expanded as training material for the Dennis Lab, and has since grown into a general-purpose resource for any researcher writing analytical software. Written by Allison Dennis with Claude and Claude Code.
-
-## What's here
-
-- [GETTING_STARTED.md](GETTING_STARTED.md) — the from-scratch setup sheet: install the tools, make a GitHub account, and clone the repository. Start here if none of that is done yet.
-- `docs/` — the onboarding guide, numbered in reading order. Start at [00_python_code_basics.md](docs/onboarding/00_python_code_basics.md) and work up.
-- [CONTRIBUTING.md](CONTRIBUTING.md) — the short checklist you return to each time you add a script or open a pull request.
-- `scripts/` — runnable Python helpers (`.py` files). The worked example is `scripts/show_h5_keys.py`.
-- `notebooks/` — Jupyter notebooks (`.ipynb` files) for interactive exploration.
-- `environment.yml` — the definition of the shared conda environment, named `helper`.
-- `.pre-commit-config.yaml` — automatic notebook cleanup before each commit (see [07_notebooks.md](docs/onboarding/07_notebooks.md)).
-- `repo_kit/` — a portable kit for bringing *another* repository up to the standard these docs teach: a one-page summary of the decisions, an AI setup/upgrade playbook, and a `CLAUDE.md` template. See [repo_kit/README.md](repo_kit/README.md).
-
-## New here? Read the docs first
-
-If nothing is installed yet — no VS Code, no Git, no conda, and you have not cloned this repository — start with [GETTING_STARTED.md](GETTING_STARTED.md). It takes you from nothing installed to an open workspace, then hands off to the docs below.
-
-If you have never used Git, the command line, or conda, do not start by typing commands. Read the docs in order. They define every term on first use and assume no prior tooling. The whole set is short. At minimum, read `00` through `05` before you make your first change.
-
-## Quick start
-
-These steps assume you have already cloned the repository and have Miniconda and VS Code installed. If any of that is not yet done, [GETTING_STARTED.md](GETTING_STARTED.md) walks through it from scratch; [03_getting_started_with_git.md](docs/onboarding/03_getting_started_with_git.md) and [04_environments.md](docs/onboarding/04_environments.md) cover the concepts in more depth.
-
-1. Create the shared environment from the definition file:
-
-   ```
-   conda env create -f environment.yml
-   ```
-
-   This reads `environment.yml` and builds a conda environment named `helper` with the packages this project uses.
-
-2. Turn the environment on:
-
-   ```
-   conda activate helper
-   ```
-
-   Your terminal prompt will now show `(helper)`. Every command in the docs assumes this environment is active.
-
-3. Try the worked example on one of your own data files:
-
-   ```
-   python scripts/show_h5_keys.py path/to/data.h5
-   ```
-
-   This prints the structure of an HDF5 file: every group, every dataset with its shape and dtype, and any attached metadata. It is the example used throughout `docs/onboarding/00`, `docs/onboarding/01`, and `docs/onboarding/06`.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding a script or opening a pull request. The short version: make a branch, keep helpers small and well-named, write a docstring, and have one person review the change.
