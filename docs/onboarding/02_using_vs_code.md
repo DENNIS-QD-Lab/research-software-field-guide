@@ -6,6 +6,8 @@ VS Code is a common integrated development environment (IDE)-- i.e., code editor
 
 Open the repository folder itself, not a parent folder that contains several repositories. The Source Control panel, the integrated terminal's starting directory, the Python interpreter selection, and the search scope are all tied to the open folder. With multiple repositories in one window, all of these become ambiguous or wrong.
 
+This is the default for as long as you're working in one repo at a time. [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md#the-multi-root-workspace) covers the deliberate exception, once you actually need two repos open together.
+
 The standard pattern is one VS Code window per repository. Switch between windows with the OS window switcher. The quickest way to open a repository correctly is to right-click its folder in Finder (Mac) or File Explorer (Windows) and choose "Open with VS Code," which opens it in its own window.
 
 ## Workspaces (optional but helpful)

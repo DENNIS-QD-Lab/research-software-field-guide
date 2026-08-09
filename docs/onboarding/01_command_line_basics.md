@@ -76,53 +76,13 @@ Well-written helper scripts take file paths as arguments and open exactly those 
 
 You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this tutorial repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, spectra, genomics data, etc, that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
 
-## Conda environment commands
-
-Conda can be used to manage your software environment. [04_environments.md](04_environments.md) explains what an environment is; these are the commands you will type.
-
-```
-conda env list
-```
-
-Lists every environment on your machine and marks the active one.
-
-```
-conda activate helper
-```
-
-Turns on the `helper` environment. Your prompt will then show `(helper)`. Do this before installing software or running code. Absent activating an environment, you will be in your `base` environment (note the `(base)` at the beginning of your terminal prompt); avoid installing software into your `base` environment as it can lead to future conflicts between different software versions in base vs other environments.
-
-```
-conda list
-```
-
-Lists the packages installed in the active environment.
-
-```
-conda install package_name
-```
-
-Installs a package into the active environment from conda's repositories.
-
-```
-pip install package_name
-```
-
-Installs a package using pip, Python's other installer. Prefer `conda install` first, because conda manages compatibility between packages. Fall back to `pip install` only when a package is not available through conda. Whichever you use, make sure the right environment is active first.
-
-```
-conda deactivate
-```
-
-Turns the current environment off.
-
 ## Troubleshooting
 
-**"command not found"** means the shell does not recognize the command. Usually the environment is not active (run `conda activate helper`) or the command is misspelled.
+**"command not found"** means the shell does not recognize the command. Usually the environment is not active (see [04_environments.md](04_environments.md) for how to check) or the command is misspelled.
 
 **"No such file or directory"** means a path you typed does not exist from where you currently are. Check with `pwd` and `ls` that the file is really there, and check the spelling of the path.
 
-**"I installed it, but Python says it is not installed."** This is almost always the wrong environment being active. You installed the package into one environment and are running Python in another. Run `conda activate helper`, confirm with `conda list` that the package is there, and try again. In a notebook, this same problem shows up as a wrong *kernel*; see [04_environments.md](04_environments.md).
+**"I installed it, but Python says it is not installed."** This is almost always the wrong environment active — [04_environments.md](04_environments.md) covers how to check and fix it. In a notebook, this same problem shows up as a wrong *kernel*, also covered there.
 
 ## Further reading
 

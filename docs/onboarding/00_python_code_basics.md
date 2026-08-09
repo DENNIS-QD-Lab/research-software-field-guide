@@ -1,5 +1,8 @@
 # Python code basics
 
+*(Wondering why this doc is numbered 00, not 01? Most programming languages, including Python, count
+from zero — this guide does too, starting here.)*
+
 This doc explains how a Python file is put together and how it differs from a notebook. It references an example, `scripts/show_h5_keys.py`, to point at each piece. Open that file alongside this one.
 
 ## `.py` files versus `.ipynb` files
