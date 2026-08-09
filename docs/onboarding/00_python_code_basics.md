@@ -32,7 +32,7 @@ Read `scripts/show_h5_keys.py` from the top. Most files have these parts in this
 
 ## Docstrings
 
-A *docstring* is a string written as the first line inside a file, function, or class, wrapped in triple quotes (`"""like this"""`). It documents what the thing does. The example file opens with a module docstring describing the whole script, and `show_keys` has its own docstring describing that function.
+A *docstring* is text (a string) written as the first line inside a file, function, or class, wrapped in triple quotes (`"""like this"""`). It documents what the thing does. The example file opens with a module docstring describing the whole script, and the function `show_keys` has its own docstring describing that function.
 
 Docstrings are not comments for you alone. Python stores them, so anyone can read them later by running `help(show_keys)` in a Python session. Writing a clear docstring is the single most useful habit for code other people (including future you) will read.
 

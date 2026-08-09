@@ -2,7 +2,7 @@
 
 ## Why environments exist
 
-Different projects need different packages, sometimes different versions of the same package. If everything shares one global Python, installing what one project needs can break another, and code that runs on your machine fails on a colleague's because the two machines have different packages. This is the "it works on my machine (and _only_ my machine)" problem. An *environment* is an isolated set of packages for one purpose. This repo shares one named `helper`, defined in `environment.yml`, so everyone runs the same software when running through the learning modules.
+Different projects need different software packages, sometimes different versions of the same package. If everything shares one global Python, installing what one project needs can break another, and code that runs on your machine fails on a colleague's because the two machines have different packages. This is the "it works on my machine (and _only_ my machine)" problem. An *environment* is an isolated set of packages for one purpose. This repo shares one named `helper`, defined in `environment.yml`, so everyone runs the same software when running through the learning modules.
 
 ## Create the environment
 
@@ -28,7 +28,7 @@ VS Code needs to know which environment to use for `.py` files. Open the Command
 
 ## Select the Jupyter kernel
 
-This is where people get stuck, so read it carefully. When you open a `.ipynb` file, look at the top-right corner of the notebook. It shows the *kernel*: the Python environment the notebook will actually execute in. It must say `helper`. If it does not, click it and choose the right one.
+When you open a `.ipynb` file, look at the top-right corner of the notebook. It shows the *kernel*: the Python environment the notebook will actually execute in. It must say `helper`. If it does not, click it and choose the right one.
 
 The kernel is separate from the interpreter you picked above. The interpreter setting governs `.py` files; the kernel governs the notebook. They can be mismatched, and when they are, you get the classic confusion: you installed a package, the interpreter can see it, but the notebook cannot, because the notebook is running on a different environment. If a notebook says a package is missing that you know you installed, check the kernel first.
 

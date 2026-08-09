@@ -10,7 +10,7 @@ A terminal is always sitting in some folder, called the *current working directo
 pwd
 ```
 
-This prints the working directory ("print working directory").
+This _prints_ the _working directory_.
 
 ## Listing files
 
@@ -20,7 +20,7 @@ To see what is in the current folder:
 ls
 ```
 
-This lists the files and folders. On Windows the classic command is `dir`, but VS Code's terminal on Windows usually runs PowerShell or Git Bash, where `ls` also works. Use `ls`.
+This _lists_ the files and folders. On Windows the classic command is `dir`, but VS Code's terminal on Windows usually runs PowerShell or Git Bash, where `ls` also works. Use `ls`.
 
 ## Moving around
 
@@ -74,7 +74,7 @@ Well-written helper scripts take file paths as arguments and open exactly those 
 
 ### Why we don't put data inside the repo
 
-You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this helper script repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, etc, that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
+You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this tutorial repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, spectra, genomics data, etc, that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
 
 ## Conda environment commands
 
