@@ -42,7 +42,20 @@ When you open a `.ipynb` file, the kernel selector sits in the top-right of the 
 
 ## Markdown preview
 
-For any `.md` file, including these docs, right-click the file tab and choose "Open Preview" to render the markdown instead of showing raw text. The hot key Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) helpfully toggles between the rendered preview and the editable raw text view. 
+For any `.md` file, including these docs, right-click the file tab and choose "Open Preview" to render the markdown instead of showing raw text. The hot key Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) helpfully toggles between the rendered preview and the editable raw text view.
+
+You'll read far more markdown than you write, so it's worth flipping the default so `.md` files open *already rendered*, using Cmd+Shift+V only when you actually want to edit one:
+
+1. Command Palette (Cmd+Shift+P / Ctrl+Shift+P) → "Preferences: Open User Settings (JSON)".
+2. Add:
+   ```json
+   "workbench.editorAssociations": {
+       "*.md": "vscode.markdown.preview.editor"
+   }
+   ```
+3. Close and reopen any `.md` tabs that were already open — the association only applies the next time a file is opened, not retroactively to an open tab.
+
+This has to go in your **User** settings, not a repo's `.vscode/settings.json`. It's a window-scoped setting, so per-repo settings files are silently ignored if you're using a multi-root workspace (several repos opened together, as in [one folder, one window](#one-folder-one-window) above). That also means each person has to set it for themselves once; it doesn't travel with the repo.
 
 ## Do not drag tracked files between folders
 
