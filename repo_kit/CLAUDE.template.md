@@ -22,13 +22,19 @@ so **prioritize readability over cleverness**.
 
 ```
 src/<yourpkg>/     the importable library — all method/analysis code (installed with `pip install -e .`)
-experiments/       dated, hypothesis-driven studies; experiments/README.md is the research log,
-                     _common/ the shared harness, <YYMMDD-slug>/ one folder per study
+experiments/       hypothesis-driven studies; experiments/README.md is the research log,
+                     _common/ the shared harness, <slug>/ one undated, permanent folder per theme
+                     (revisited over the project's life) holding:
+                       - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
+                       - details/<YYMMDD_slug>[_NN]/         manifest/metrics/figures behind each report
 tests/             pytest suite (unit + regression) with committed fixtures
 docs/              Sphinx doc site (API reference generated from docstrings)
-notebooks/         exploratory Jupyter notebooks (outputs stripped by nbstripout)
+references.md      the reference ledger: external sources + why each mattered here
 config / local_paths.py   parameters and machine-local data paths (paths stay out of git)
 ```
+
+Exploratory notebooks live inside the relevant `experiments/<slug>/` folder alongside its driver(s) — see
+[16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md#exploratory-notebooks-the-same-discipline-without-a-manifest).
 
 ## The three homes for instructions
 
@@ -69,9 +75,14 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Verb-first for action scripts that *do* something: `show_keys.py`, `plot_spectra.py`.
 - Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`.
 - Avoid abbreviations except universally understood domain terms (<list the ones your field accepts>).
-- **Dated directories are the exception to "no hyphens":** experiment folders are `YYMMDD-<slug>/`
-  (study start date); per-run output directories are `YYMMDD_<slug>[_NN]/` (run date, `_02`/`_03` for
-  reruns). This applies to dated directories, not to importable `.py` module names.
+- **Dated *runs* are the exception to "no hyphens" and "no dates in filenames"** — but the *theme*
+  folder that holds them is not: `experiments/<slug>/` (no hyphenated date prefix) is a standing address
+  for one line of inquiry, revisited for as long as that inquiry stays open (a theme is not "done" the
+  day it starts). Inside it, each run's report carries the date: `YYMMDD_<slug>[_NN].md` (or `.ipynb`),
+  `_02`/`_03` for reruns, sitting directly in the theme folder so it's visible without opening a
+  subfolder. The provenance that produced it (`manifest.yaml`, `metrics.csv`, figures) lives one level
+  down in `details/<YYMMDD>_<slug>[_NN]/`, name-matched to its report — present for reproducibility, not
+  meant to be opened on a normal read-through.
 
 ## Command line interfaces
 
