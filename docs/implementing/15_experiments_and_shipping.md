@@ -17,12 +17,14 @@ SWIR_HDR_v2/
 ├── src/swir_hdr/       the code library (includes all candidate approaches while comparing; trimmed to the preferred one when shipped)
 ├── tests/              tests for the library (seeded from validation experiments)
 ├── experiments/        exploratory comparisons; import from src
-│   └── <YYMMDD-topic>/   README (question + conclusion), code, pinned environment
+│   └── <topic>/          README (question + conclusion), code, pinned environment — undated and
+│                           permanent; revisited for as long as the topic stays open, with dated run
+│                           reports inside it
 ├── docs/               autodoc doc site for the library (20_documentation_and_doc_sites.md)
 └── pyproject.toml
 ```
 
-`src/swir_hdr/` is the library: the pipeline code that experiments and analyses import. `experiments/` holds dated, self-describing studies. Crucially, **experiments import from `src`**; they use the library rather than carrying their own copy of it, so an experiment is a thin script that calls the library with particular inputs and records what happened. This is what keeps a comparison honest: while you are still deciding between approaches, the competing options all live in `src` together, so the experiment tests exactly the code the library ships and never drifts out of sync with a private copy.
+`src/swir_hdr/` is the library: the pipeline code that experiments and analyses import. `experiments/` holds self-describing studies, each a standing folder you keep adding dated runs to rather than a folder you make once and leave. Crucially, **experiments import from `src`**; they use the library rather than carrying their own copy of it, so an experiment is a thin script that calls the library with particular inputs and records what happened. This is what keeps a comparison honest: while you are still deciding between approaches, the competing options all live in `src` together, so the experiment tests exactly the code the library ships and never drifts out of sync with a private copy.
 
 Each experiment folder is self-contained: a `README` stating the question it asked and the conclusion it reached, the code that ran it, and a note pinning the environment it needs (see Pinning, below). *How* you actually run one of these experiments and record its state so it reproduces — the research log, the folder template, and per-run provenance — is covered in [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md).
 
@@ -48,10 +50,10 @@ That does not work, and it is worth understanding why. **`__init__.py` controls 
 
 The real resolution keeps the two goals separate:
 
-1. Tag the exact state used for the paper, for example `paper-v1`, so it is frozen. This snapshot still contains *every compared approach* (in `src/`) and the experiment drivers (in `experiments/`) — which is what reproduces the paper's comparison figures, not merely the winning result. (Archiving that tag for a citable DOI is [23_concluding_a_project.md](23_concluding_a_project.md); here it is enough that the state is pinned.)
+1. Tag the exact state used for the paper, for example `paper-v1`, so it is frozen. This snapshot still contains *every compared approach* (in `src/`) and the experiment drivers (in `experiments/`) — which is what reproduces the paper's comparison figures, not merely the winning result. (Archiving that tag for a citable DOI is [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md); here it is enough that the state is pinned.)
 2. Then strip the non-preferred approaches out of `src/` on `main` and release the clean library.
 
-The stripped code is not lost: it lives on in the tag and in git history. An experiment that needs the old approach reproduces it by checking out the tag, not by running against the latest `main`. The library on `main` stays clean, and the paper stays reproducible, because each is anchored to its own point in history. (Tags and releases are [22_versioning_and_releases.md](22_versioning_and_releases.md); Zenodo and DOIs are [23_concluding_a_project.md](23_concluding_a_project.md). Both are the "when you publish" tier.)
+The stripped code is not lost: it lives on in the tag and in git history. An experiment that needs the old approach reproduces it by checking out the tag, not by running against the latest `main`. The library on `main` stays clean, and the paper stays reproducible, because each is anchored to its own point in history. (Tags and releases are [22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md); Zenodo and DOIs are [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md). Both are the "when you publish" tier.)
 
 So two artifacts diverge at this point, preserved differently. The **shipped library** is the trimmed `main`, which keeps evolving for new users. The **publication snapshot** is the `paper-v1` tag, which keeps every compared approach and the experiment drivers, and reproduces every figure. Both live in the *same* repository: the snapshot is a tag — a named, immutable point in history — not a separate fork. A fork would be heavier and would drift out of sync; the tag costs nothing and cannot rot. Reach for a separate repo only if the paper code and the shipped package genuinely become different projects, which is rare.
 
