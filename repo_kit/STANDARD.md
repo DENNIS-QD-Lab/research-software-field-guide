@@ -34,14 +34,20 @@ your_repo/
 │   ├── README.md            the research log: goal, open questions, decisions (read this first)
 │   ├── _TEMPLATE.md         copy it to start a new theme
 │   ├── _common/             shared harness (run logging, comparison plots, reporting) — never method code
-│   └── <slug>/              one undated, permanent folder per theme (revisited for as long as that
+│   └── <theme-slug>/        one undated, permanent folder per theme (hyphens allowed — a multi-word
+│                              theme name reads better hyphenated; revisited for as long as that
 │                              line of inquiry stays open): its README, driver(s), and
 │                              - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
 │                              - details/<YYMMDD_slug>[_NN]/   the manifest/metrics/figures behind
 │                                each report, name-matched to it, rarely opened directly
 ├── src/yourpkg/             your method code — the importable library; studies import from here and never copy it
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
-├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings
+├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings,
+│                              plus rendered experiment reports:
+│                              - experiment_overviews/<theme>_overview.md   one per theme, includes its
+│                                README and a toctree of that theme's reports
+│                              - experiment_summaries/*.md   the reports themselves (hand-authored and/or
+│                                promoted run stubs), flat so a glob toctree can pick them up
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
 ├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments

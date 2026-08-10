@@ -98,6 +98,47 @@ sphinx-autobuild docs docs/_build/html
 
 This serves the site at `http://localhost:8000` and rebuilds as you save. Viewing a one-off build, and sharing the site, are covered next.
 
+## Rendering experiment reports into the same site
+
+The API reference above is one half of the doc site; the other half is the experiment reports from
+[16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md) — the same `docs/` build, a
+second kind of page. Two folders keep the two kinds of report apart without either one drifting from
+`experiments/`:
+
+- **`docs/experiment_overviews/<theme>_overview.md`** — one thin page per theme. Its body is a MyST
+  `{include}` of that theme's `experiments/<theme-slug>/README.md` (so the overview text is never a
+  second copy to keep in sync), followed by a `toctree` that lists — or `:glob:`s — that theme's reports.
+- **`docs/experiment_summaries/*.md`** — the reports themselves, flat in one folder (not nested per
+  theme) so a single `:glob:` entry in each theme's overview page can pick them all up. A report here can
+  be hand-authored (a full-circle write-up that embeds a preserved `runlog` run via a helper like
+  `report_embed.py`) or a thin stub auto-written by promotion (see below) — both live side by side.
+
+Wire `docs/index.md` with a `toctree` pointing at the overview pages (one per theme), not at
+`experiment_summaries/` directly — a reader lands on the theme's framing before the individual reports.
+
+````markdown
+```{toctree}
+:maxdepth: 2
+:caption: Experiments
+
+experiment_overviews/theme_a_overview
+experiment_overviews/theme_b_overview
+```
+````
+
+**Promoted run stubs.** When a run resolves `promote=True` (the `DOCUMENT_EVERYTHING` mechanism from
+doc 16), `runlog` writes a stub page straight into `docs/experiment_summaries/<theme-slug>-<run-id>.md` —
+a MyST `{include}` pointing back at the run's own report in `experiments/<theme-slug>/`, so the doc site
+never holds a second copy of the content. The theme-slug prefix keeps every promoted stub's filename
+unique in that flat folder, and lets the theme's overview page glob them without picking up another
+theme's runs. Full mechanics: [documentation_promotion.md](../reference/documentation_promotion.md).
+
+**Executable reports.** A hand-authored report can go further than a static include: with `myst-nb`
+added to `extensions` in `conf.py`, a `docs/experiment_summaries/*.md` page can carry executable code
+cells that render figures at *build* time — useful for a report that recomputes a cheap plot from a
+preserved run's saved metrics rather than embedding a static image. Keep expensive computation in the
+driver script and the run's `details/`; the report cell should load and display, not re-run the analysis.
+
 ## Viewing and sharing the site
 
 `sphinx-autobuild` (above) is the easiest way to look at the site while you work: it serves it at `http://127.0.0.1:8000` and reloads on save. If you instead ran a plain `sphinx-build`, open `docs/_build/html/index.html` — but note that pasting that path into a browser's address bar often triggers a *search* rather than opening the page, so prefix it with `file:///` (three slashes), or just use `sphinx-autobuild`.
@@ -106,7 +147,7 @@ To let others see it, publish it with **Read the Docs**, which builds and hosts 
 
 ## A dependency note
 
-`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies. Per [CLAUDE.md](../../CLAUDE.md), adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
+`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies; add `myst-nb` too if any experiment report needs executable cells (*Rendering experiment reports into the same site*, above). Per [CLAUDE.md](../../CLAUDE.md), adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
 
 ## Appendix: building the doc site in CI
 

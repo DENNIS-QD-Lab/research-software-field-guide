@@ -28,7 +28,8 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
   folder.
 - **Shared harness** → `experiments/_common/` — the scaffolding drivers compose (run logging, comparison
   and plotting helpers, report embedding). **Harness only — never method code.**
-- **Rendered reports** → `docs/experiments/*.md` (Sphinx, optionally executable via myst-nb).
+- **Rendered reports** → `docs/experiment_summaries/*.md` (Sphinx, optionally executable via myst-nb),
+  nested under each theme's page in `docs/experiment_overviews/<theme>_overview.md` in the built site.
 
 ## Harness discipline
 
@@ -79,6 +80,14 @@ rerun. Two cheap habits close most of that gap:
 
 Since exploratory notebooks don't call `runlog`, they have no `details/` counterpart — a run only gets
 one once it's promoted to a driver script that writes a manifest.
+
+## Documentation promotion (`DOCUMENT_EVERYTHING`)
+
+Promotion follows whatever `DOCUMENT_EVERYTHING` is set to in your own environment — unset means nothing
+is auto-promoted; `1` promotes every run (gets it a page in the built doc site and, once exported, a PDF
+in the shared archive). Override per run with `promote=True`/`False` in `start_run`. Full mechanics:
+`docs/reference/documentation_promotion.md` in the research-software-field-guide; this repo follows that
+convention as written, with the archive folder pointed at your own `local_paths.py`-style setting.
 
 ## Finalizing an experiment — clean-commit reproducibility
 

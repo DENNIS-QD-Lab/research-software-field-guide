@@ -18,7 +18,8 @@ All method code is imported from the `<yourpkg>` library and the shared harness 
 `experiments/_common/`; the drivers here only compose those pieces, record results, and render figures,
 so the study tests exactly what the library provides.
 
-If this study has a rendered report, link it here (e.g. `docs/experiments/<name>.md`).
+If this study has a rendered report, link it here (e.g. `docs/experiment_summaries/<name>.md`, nested
+under this theme's `docs/experiment_overviews/<theme>_overview.md` in the built site).
 
 ## Question / motivation
 

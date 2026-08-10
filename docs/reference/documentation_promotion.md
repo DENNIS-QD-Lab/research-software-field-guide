@@ -22,8 +22,11 @@ but only archive it once it's a keeper.
 Passing `True` or `False` explicitly overrides the environment variable for that one call.
 
 When a run resolves to `promote=True`, `finalize()` additionally writes a thin stub page under
-`docs/experiments/<theme>/<run-id>.md` whose body is a MyST `{include}` directive pointing back at the
-real report — so the doc site never holds a second copy of the content, just a pointer.
+`docs/experiment_summaries/<theme-slug>-<run-id>.md` whose body is a MyST `{include}` directive pointing
+back at the real report — so the doc site never holds a second copy of the content, just a pointer. Stub
+filenames are flat (not nested under a per-theme subfolder) and carry the theme slug as a prefix so a
+`glob` toctree entry can pick up every run for a theme without a name collision against another theme's
+runs.
 
 ```{note}
 **Confirmed, not just suspected:** MyST/docutils' `{include}` resolves an included file's own
@@ -34,11 +37,12 @@ myst-parser 5.1.0. So the stub-generator cannot include a report verbatim; it mu
 image link to be correct from the stub's own location before writing the stub.
 ```
 
-For a promoted stub page to appear in the built site without hand-editing a toctree every run,
-`docs/index.md`'s "Experiments" toctree needs a `:glob:` entry (`experiments/*`) alongside (or in
-place of) a hand-maintained list of individual pages — also confirmed by spike: a new page dropped
-under `docs/experiments/` appeared in the built nav with no toctree edit, and no duplicate-listing
-warning when mixed with existing explicit entries.
+For a promoted stub page to appear in the built site without hand-editing a toctree every run, that
+theme's `docs/experiment_overviews/<theme>_overview.md` needs a `:glob:` entry
+(`../experiment_summaries/<theme-slug>-*`) alongside (or in place of) a hand-maintained list of individual
+pages — also confirmed by spike: a new page dropped flat under `docs/experiment_summaries/` appeared in
+the built nav with no toctree edit, and no duplicate-listing warning when mixed with existing explicit
+entries (e.g. hand-authored narrative reports for the same theme, which live in the same flat folder).
 
 ## Axis 2 — archiving a promoted page to PDF
 

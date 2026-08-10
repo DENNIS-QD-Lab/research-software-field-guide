@@ -12,7 +12,7 @@ If you have the tools, but need more background on how to use VS Code, environme
 
 If you're comfortable working in VS Code and making regular commits to GitHub, then the series of documents discussing how to implement a scientific workflow (`docs/implementing`) may be helpful for setting up a structured repo for both exploratory analysis and keeping a record of larger data analysis runs and results. Start with [10_from_scripts_to_pipelines.md](docs/implementing/10_from_scripts_to_pipelines.md).
 
-If your project is ready for publishing and/or you have code that you want to make publicly installable for others to use as well, then read the disseminating ([`docs/disseminating`](docs/disseminating/)) notes.
+If your project is ready for publishing and/or you have code that you want to make publicly installable for others to use as well, then read the notes on disseminating your work, starting with [`21_packaging.md`](docs/disseminating/21_packaging.md).
 
 If you are ready to start a new repo or update an existing repo with this structure and documentation standard, then go to the `repo_kit` folder; read the `README.md` and `STANDARD.md`, then follow the steps in the `SETUP_PLAYBOOK.md`.
 
