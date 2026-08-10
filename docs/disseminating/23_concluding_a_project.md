@@ -18,11 +18,11 @@ The end-to-end pattern, and the single place it is defined in this track:
 3. **Cite** the DOI in the manuscript.
 
 That is how a paper stays reproducible against a specific, frozen version while the library keeps
-moving forward on `main` ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)). Reproducibility comes from the archived
+moving forward on `main` ([15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md)). Reproducibility comes from the archived
 snapshot, not from freezing the live code. Everything below supports these three steps.
 
 This is also where the **reference ledger** pays off. If you kept a `references.md` current as you went
-([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)) — each source paired with why it
+([16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md)) — each source paired with why it
 mattered for a decision — that will directly inform the manuscript's methods and bibliography. The freeze captures the code; the ledger captures the prior work it was built on.
 
 ## Why software citation matters
@@ -60,8 +60,8 @@ toward being citable.
 
 ## The experimental record and the shipped library, going forward
 
-Concluding a project is also where the two jobs of the repo ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)) part
-ways cleanly. The **experimental record** — the research log, the dated `experiments/` folders, and
+Concluding a project is also where the two jobs of the repo ([15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md)) part
+ways cleanly. The **experimental record** — the research log, the `experiments/` folders, and
 the paper tag — is now frozen history: it documents what was done and stays reproducible via the tag
 and DOI. The **shipped library** on `main`, meanwhile, keeps moving: it is trimmed to the preferred
 approach and released for the next users. A reader reproduces the paper from the frozen snapshot; a

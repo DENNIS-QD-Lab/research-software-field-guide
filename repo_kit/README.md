@@ -1,7 +1,7 @@
 # repo_kit — a portable research-software standard
 
 A small, reusable kit for bringing *any* research repository up to the standard the
-research-software-field-guide [implementing track](../docs/implementing/) teaches — not just image-processing pipelines. It distills
+research-software-field-guide [implementing track](../docs/implementing/) teaches. It distills
 that tutorial into three single-purpose files (plus fill-in templates) so a repo can adopt the standard
 without walking the whole track.
 
@@ -20,6 +20,8 @@ so they ship as fill-in templates, not static files):
 - [research_log.template.md](templates/research_log.template.md) → target `experiments/README.md` (state)
 - [experiment_readme.template.md](templates/experiment_readme.template.md) → target `experiments/_TEMPLATE.md`
 - [experiments_playbook.template.md](templates/experiments_playbook.template.md) → target `.claude/experiments_playbook.md` (procedure)
+- [vscode_settings.template.json](templates/vscode_settings.template.json) → target `.vscode/settings.json` (Markdown renders by default)
+- [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → target `CONTRIBUTING.md` (only once more than one person works in the repo)
 
 ## How to use it
 
@@ -37,6 +39,7 @@ implementing-track doc that teaches it in full.
 
 ## Scope
 
-This kit is the *summary and operational form* of the implementing track — it never contradicts it. When
-in doubt, the track (docs 10–23) is the source of truth, and the config skeletons (`pyproject.toml`,
-`ci.yml`, `conf.py`) live there rather than being duplicated here, so the two cannot drift.
+This kit is the *summary and operational form* of the implementing and disseminating tracks — it never
+contradicts them. When in doubt, the tracks (docs 10–20, then 21–23) are the source of truth, and the
+config skeletons (`pyproject.toml`, `ci.yml`, `conf.py`) live there rather than being duplicated here, so
+the two cannot drift.

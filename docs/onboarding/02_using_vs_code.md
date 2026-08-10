@@ -6,6 +6,8 @@ VS Code is a common integrated development environment (IDE)-- i.e., code editor
 
 Open the repository folder itself, not a parent folder that contains several repositories. The Source Control panel, the integrated terminal's starting directory, the Python interpreter selection, and the search scope are all tied to the open folder. With multiple repositories in one window, all of these become ambiguous or wrong.
 
+This is the default for as long as you're working in one repo at a time. [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md#the-multi-root-workspace) covers the deliberate exception, once you actually need two repos open together.
+
 The standard pattern is one VS Code window per repository. Switch between windows with the OS window switcher. The quickest way to open a repository correctly is to right-click its folder in Finder (Mac) or File Explorer (Windows) and choose "Open with VS Code," which opens it in its own window.
 
 ## Workspaces (optional but helpful)
@@ -42,7 +44,20 @@ When you open a `.ipynb` file, the kernel selector sits in the top-right of the 
 
 ## Markdown preview
 
-For any `.md` file, including these docs, right-click the file tab and choose "Open Preview" to render the markdown instead of showing raw text. The hot key Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) helpfully toggles between the rendered preview and the editable raw text view. 
+For any `.md` file, including these docs, right-click the file tab and choose "Open Preview" to render the markdown instead of showing raw text. The hot key Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) helpfully toggles between the rendered preview and the editable raw text view.
+
+You'll read far more markdown than you write, so it's worth flipping the default so `.md` files open *already rendered*, using Cmd+Shift+V only when you actually want to edit one:
+
+1. Command Palette (Cmd+Shift+P / Ctrl+Shift+P) → "Preferences: Open User Settings (JSON)".
+2. Add:
+   ```json
+   "workbench.editorAssociations": {
+       "*.md": "vscode.markdown.preview.editor"
+   }
+   ```
+3. Close and reopen any `.md` tabs that were already open — the association only applies the next time a file is opened, not retroactively to an open tab.
+
+This has to go in your **User** settings, not a repo's `.vscode/settings.json`. It's a window-scoped setting, so per-repo settings files are silently ignored if you're using a multi-root workspace (several repos opened together, as in [one folder, one window](#one-folder-one-window) above). That also means each person has to set it for themselves once; it doesn't travel with the repo.
 
 ## Do not drag tracked files between folders
 

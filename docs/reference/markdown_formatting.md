@@ -2,7 +2,7 @@
 
 Markdown is the text format used for `.md` files, GitHub PR descriptions, GitHub issue comments, and notebook markdown cells. This reference covers what you'll actually use.
 
-To see markdown rendered in VS Code: right-click a `.md` file tab and choose "Open Preview," or press `Cmd+Shift+V` (Mac) / `Ctrl+Shift+V` (Windows).
+To see markdown rendered in VS Code: right-click a `.md` file tab and choose "Open Preview," or press `Cmd+Shift+V` (Mac) / `Ctrl+Shift+V` (Windows). To make preview the default instead of toggling it every time, see [Markdown preview](../onboarding/02_using_vs_code.md#markdown-preview).
 
 ## Headers
 

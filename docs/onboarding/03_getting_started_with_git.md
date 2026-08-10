@@ -1,6 +1,6 @@
 # Getting started with Git
 
-If you have just cloned this repository, you used several tools and terms that deserve definitions. This doc gives the definitions, states one rule that matters more than the rest, and sets up the daily workflow covered in [05_daily_workflow.md](05_daily_workflow.md).
+If you cloned this repository (see [GETTING_STARTED.md](../../GETTING_STARTED.md) if you need instructions), you used several tools and terms that deserve definitions. This doc gives the definitions, states one rule that matters more than the rest, and sets up the daily workflow covered in [05_daily_workflow.md](05_daily_workflow.md).
 
 ## Definitions
 

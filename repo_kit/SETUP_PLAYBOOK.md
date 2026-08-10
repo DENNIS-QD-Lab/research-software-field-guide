@@ -8,8 +8,9 @@ Use it two ways:
 - **New repo** → follow *Mode A · Scaffold*, in order, stopping at the pieces the project actually needs.
 - **Existing repo** → *Mode B · Upgrade recipes*, à la carte — apply only the recipe(s) the scientist asks for.
 
-The config skeletons (`pyproject.toml`, `ci.yml`, `conf.py`) are not duplicated here — use the ones in
-the implementing track (docs 14 / 19 / 20) so this kit never drifts from the tutorial.
+The config skeletons (`ci.yml`, `conf.py`, `pyproject.toml`) are not duplicated here — use the ones in
+[14](../docs/implementing/14_continuous_integration.md), [20](../docs/implementing/20_documentation_and_doc_sites.md),
+and [21](../docs/disseminating/21_packaging.md) so this kit never drifts from the tutorial.
 
 ## Operating rules (every task)
 
@@ -34,11 +35,21 @@ Do these in order; stop wherever the project's maturity stops. Early projects of
 
 1. **Standards file.** Copy [CLAUDE.template.md](CLAUDE.template.md) → `CLAUDE.md`; fill every
    `<PLACEHOLDER>`. This is what makes every later session follow the conventions automatically.
+   Also copy [vscode_settings.template.json](templates/vscode_settings.template.json) →
+   `.vscode/settings.json` (merge if one already exists) so Markdown opens rendered by default
+   when this repo is opened on its own. `workbench.editorAssociations` turns out to be
+   window-scoped: it is silently ignored for anyone who opens this repo as one folder inside a
+   multi-root workspace alongside others, so it is not a substitute for the **User** Settings fix
+   in [02_using_vs_code.md](../docs/onboarding/02_using_vs_code.md#markdown-preview) — point
+   trainees at that doc as the reliable path; this file is a nice-to-have on top of it. If more than
+   one person will work in this repo, also copy
+   [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → `CONTRIBUTING.md` and fill it in
+   from the repo's actual scope; skip it for a solo project.
 2. **Environment + code quality.** Create the environment file; add `ruff` and `pre-commit`; write
    `.pre-commit-config.yaml` (ruff check + ruff format; nbstripout for notebooks, excluding `.ipynb`
    from ruff); `pre-commit install`. ([11](../docs/implementing/11_code_quality_tools.md))
 3. **Package layout.** `src/<pkg>/` for method code + `pyproject.toml`; `pip install -e . --no-deps`.
-   ([21](../docs/implementing/21_packaging.md))
+   ([21](../docs/disseminating/21_packaging.md))
 4. **Tests.** `tests/` + `pytest.ini` (or `[tool.pytest]`); one real test that runs the code on a
    known input. ([12](../docs/implementing/12_testing_with_pytest.md))
 5. **Experiments framework.** See recipe *B5* below — this is the core of the research-notebook job and
@@ -53,7 +64,9 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 ### B1 · Adopt the standards file
 - **When:** the repo has no `CLAUDE.md`, or an ad-hoc one.
 - **Steps:** copy [CLAUDE.template.md](CLAUDE.template.md) → `CLAUDE.md`; fill placeholders from the repo
-  (purpose, structure, package name, domain abbreviations, anything frozen on `main`).
+  (purpose, structure, package name, domain abbreviations, anything frozen on `main`). If more than one
+  person works in the repo and it has no `CONTRIBUTING.md`, also copy
+  [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → `CONTRIBUTING.md` and fill it in.
 - **Verify:** re-read it; confirm it matches the repo's real layout.
 - **Don't:** invent constraints the repo does not actually have.
 
@@ -78,7 +91,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** move modules under `src/<pkg>/`; add `pyproject.toml`; `pip install -e . --no-deps`; update
   the tests' import lines. Tests are the safety net — if behavior is unchanged, **only import lines
   change and the suite stays green**. ([15](../docs/implementing/15_experiments_and_shipping.md),
-  [21](../docs/implementing/21_packaging.md))
+  [21](../docs/disseminating/21_packaging.md))
 - **Verify:** `pytest` green after the move; `import <pkg>` works from any directory.
 - **Don't:** do this without tests in place first (add B3 first); change logic during the move.
 
@@ -92,15 +105,20 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
     `.claude/experiments_playbook.md`. Fill their placeholders.
   - Add `experiments/_common/` for shared **harness only** (run logging, comparison/plot helpers,
     report embedding) — never method code; drivers import methods from `src/`.
-  - Add a small `runlog` helper that writes, per run, `outputs/<YYMMDD_slug>[_NN]/` containing
-    `manifest.yaml` (git commit + dirty flag, params, inputs + checksum), `metrics.csv`, and
-    `run_report.md`. The report opens with a one-line `## Summary` and a **protected
-    `## Interpretation (scientist)`** section that tooling **never overwrites**. **PRESERVE by default**
-    (a rerun gets a fresh `_NN`; never clobber). ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
-  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch); commit only `manifest.yaml`/`metrics.csv`/
-    `run_report.md`.
-- **Verify:** run a driver; confirm the run directory + protected report section appear and a rerun does
-  not overwrite the prior run.
+  - Add a small `runlog` helper that writes, per run, a report at the *theme's* top level —
+    `<YYMMDD_slug>[_NN].md`, immediately visible without opening a subfolder — plus a matching
+    `details/<YYMMDD_slug>[_NN]/` one level down holding `manifest.yaml` (git commit + dirty flag,
+    params, inputs + checksum) and `metrics.csv`. The report opens with a one-line `## Summary` and a
+    **protected `## Interpretation (scientist)`** section that tooling **never overwrites**. **PRESERVE
+    by default** (a rerun gets a fresh `_NN`, kept in sync between the report and its `details/`
+    counterpart; never clobber). Keep the split additive if `runlog` already exists and other drivers
+    depend on today's shape: a new optional parameter (e.g. `report_dir=`), defaulting to the old
+    co-located behavior, lets one driver adopt the split without moving every other driver's runs at the
+    same time. ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
+  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch) under `details/`; commit only the report,
+    `manifest.yaml`, and `metrics.csv`.
+- **Verify:** run a driver; confirm the theme-level report + matching `details/` folder + protected
+  report section appear, and a rerun does not overwrite the prior run.
 - **Don't:** fork method code into a driver; overwrite a preserved run; ever auto-write the
   interpretation section.
 
@@ -134,7 +152,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** other repos import this code, or you want versioned installs.
 - **Steps:** `pyproject.toml` (name, version, deps, build backend); `src/` layout; `pip install -e .`;
   a single source of truth for the version (read back via `importlib.metadata`).
-  ([21](../docs/implementing/21_packaging.md), [22](../docs/implementing/22_versioning_and_releases.md))
+  ([21](../docs/disseminating/21_packaging.md), [22](../docs/disseminating/22_versioning_and_releases.md))
 - **Verify:** a fresh `pip install -e .` works; `import <pkg>` and `<pkg>.__version__` resolve.
 - **Don't:** package a loose helper/script collection that nothing imports.
 
@@ -142,8 +160,8 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.
 - **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared approach
   still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`. *Only after
-  the tag*, trim `src/` on `main` to the disseminated method. ([23](../docs/implementing/23_concluding_a_project.md),
-  [22](../docs/implementing/22_versioning_and_releases.md))
+  the tag*, trim `src/` on `main` to the disseminated method. ([23](../docs/disseminating/23_concluding_a_project.md),
+  [22](../docs/disseminating/22_versioning_and_releases.md))
 - **Verify:** the tag checks out and reproduces a figure; `main` still builds and tests green after the trim.
 - **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging (it
   still installs and still costs maintenance).

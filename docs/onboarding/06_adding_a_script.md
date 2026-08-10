@@ -6,6 +6,8 @@ This doc covers what goes where, how to name and document a helper, and how to t
 
 Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipynb` files) go in `notebooks/`. Keep the two separate so it is always clear which files are importable tools and which are exploration.
 
+This flat layout is the starting tier, and a fine place to stay for a small collection of helpers. Once a project grows into repeated experiments, a package other code imports from, and tests, [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md) covers the structure to grow into.
+
 ## Naming conventions
 
 All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., in image-processing research like the SWIR_HDR exemplar, `hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).

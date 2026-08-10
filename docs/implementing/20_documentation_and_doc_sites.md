@@ -73,7 +73,7 @@ intersphinx_mapping = {
 }
 ```
 
-Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from [21_packaging.md](21_packaging.md), `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
+Sphinx's autodoc *imports* your package to read its docstrings, so the package must be installed (the editable install from [21_packaging.md](../disseminating/21_packaging.md), `pip install -e .`). Then an API page pulls the docstrings in. Because MyST is enabled you can write the page in Markdown and drop in the autodoc directive through an `eval-rst` block:
 
 ````markdown
 # API reference

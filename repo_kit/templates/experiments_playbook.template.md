@@ -21,8 +21,11 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
 
 - **Method code** → `src/<yourpkg>/` (the installable library). This is what the disseminated method
   ships as.
-- **Experiments** → `experiments/<YYMMDD-slug>/` — dated (study start date), question-driven; a driver
-  script per question plus an optional exploration notebook.
+- **Experiments** → `experiments/<slug>/` — undated, permanent, question-driven; revisited for as long as
+  that line of inquiry stays open (pipeline work loops — Stage 0, then Stage 1, back to Stage 0, add
+  Stage 2 — so the theme folder is a standing address, not a snapshot of when it started). A driver
+  script per question plus an optional exploration notebook; dates live on the *runs* inside, not the
+  folder.
 - **Shared harness** → `experiments/_common/` — the scaffolding drivers compose (run logging, comparison
   and plotting helpers, report embedding). **Harness only — never method code.**
 - **Rendered reports** → `docs/experiments/*.md` (Sphinx, optionally executable via myst-nb).
@@ -39,18 +42,43 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
 
 ## Runlog protocol
 
-Every run writes one directory: `experiments/<YYMMDD-slug>/outputs/<YYMMDD_slug>[_NN]/` containing
+Every run writes to two places, name-matched by the same `<YYMMDD_slug>[_NN]` id:
 
-- `manifest.yaml` — git commit + `dirty` flag (dirty = the *tracked code* had uncommitted changes at
-  run time; the run's own `outputs/` are excluded, so writing the manifest never trips it), timestamp,
-  parameters, inputs (dataset name + checksum).
-- `metrics.csv` — the numeric read-out.
-- `run_report.md` — a scan-first report: a one-line `## Summary` and the **`## Interpretation
-  (scientist)`** (between protected markers, **never overwritten** by tooling — the scientist owns it)
-  sit at the *top*, then provenance and metrics, so the opening lines read "we did X, we found Y."
+- **`experiments/<slug>/<YYMMDD_slug>[_NN].md`** — the report, sitting directly in the theme folder so
+  it's visible without opening a subfolder: a scan-first page with a one-line `## Summary` and the
+  **`## Interpretation (scientist)`** (between protected markers, **never overwritten** by tooling — the
+  scientist owns it) at the *top*, then provenance, metrics, and figures, so the opening lines read "we
+  did X, we found Y."
+- **`experiments/<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind that report, rarely
+  opened directly: `manifest.yaml` (git commit + `dirty` flag — dirty means the *tracked code* had
+  uncommitted changes at run time; the run's own `details/` and report are excluded from that check, so
+  writing them never trips it — timestamp, parameters, inputs/checksum) and `metrics.csv` (the numeric
+  read-out figures/tables in the report draw from).
 
-Default is **PRESERVE** — a new run gets a fresh `_NN` suffix and never clobbers a prior run. Use
-`--overwrite` only for throwaway cosmetic re-runs of a deterministic result.
+Default is **PRESERVE** — a new run gets a fresh `_NN` suffix, kept in sync between the report and its
+`details/` counterpart, and never clobbers a prior run. Use `--overwrite` only for throwaway cosmetic
+re-runs of a deterministic result. Keep the split **additive** if a runlog helper already exists and
+other drivers depend on today's co-located shape: a new optional parameter (e.g. `report_dir=`),
+defaulting to the old behavior, lets one driver adopt the split without moving every other driver's runs
+at the same time.
+
+## Exploratory notebooks
+
+A notebook exploring an idea has the same reproducibility problem a driver script solves with
+`runlog` — except nothing forces you to notice an observation matters *before* you change something and
+rerun. Two cheap habits close most of that gap:
+
+- **A top-cell "What / why" and "Observed" note**, written *before* you touch anything else — the
+  notebook analog of `runlog`'s protected `## Interpretation` section. The point is to make the habit
+  unconditional: you cannot reliably judge in the moment which run will matter later, so the note has to
+  happen every time, not just when you think it's worth it.
+- **Duplicate the notebook (`_01` → `_02`) once you've written a note you'd be annoyed to lose** —
+  preserves *what code produced what*, the same way `runlog`'s PRESERVE-by-default protects a driver run.
+  The note is the trigger, not a pre-planned sweep; this doesn't fully solve the "I didn't know it'd
+  matter" problem, and that's an honest limit rather than something to over-engineer around.
+
+Since exploratory notebooks don't call `runlog`, they have no `details/` counterpart — a run only gets
+one once it's promoted to a driver script that writes a manifest.
 
 ## Finalizing an experiment — clean-commit reproducibility
 

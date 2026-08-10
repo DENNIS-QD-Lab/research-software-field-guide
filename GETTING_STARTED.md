@@ -12,6 +12,11 @@ team's chat. These tools are finicky, and asking is faster than thrashing.
 > Whoever manages the repository will send you the exact clone command; it looks
 > like the one in step 6.
 
+<!-- TODO(public-launch): once this repo is public, step 2 and step 6 below still
+assume a private, invite-only repo (an org invite, a clone URL sent by a manager).
+Rewrite step 2 to drop the invite language and step 6 to give the real public
+clone URL directly. -->
+
 ## 1. Install VS Code
 
 Download from <https://code.visualstudio.com> and install with the defaults. VS

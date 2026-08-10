@@ -6,7 +6,7 @@ research codebase that stays reproducible, well-documented, and efficient to exp
 links to the implementing-track doc that teaches it in depth, for when you want the long version.
 
 If you want a machine to *apply* this to a repo — scaffold a new one, or upgrade an existing one — hand
-Claude Code [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*; that one is the *how*.
+your coding agent [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*; that one is the *how*.
 
 ## What this is for
 
@@ -17,7 +17,7 @@ documentation here are not bureaucracy. They make the *exploration itself* faste
 you spend less time rediscovering what you already tried, and you can believe your own results.
 
 A second job appears later, and only for some projects. As results head toward publication, the same
-repo can also yield **a tagged version of the code for public release to support a publication** and/or **a library others can install and use** — pared down to the one validated method you choose to disseminate. Many projects never need this, and that is fine. The standard's core move is to let a repo grow into that second job *without either job corroding the other*, while never forcing it on a project that remains exploratory.
+repo can also yield **a tagged version of the code for public release to support a publication** and/or **a library others can install and use** — pared down to the validated methods you choose to disseminate. Many projects never need this, and that is fine. The standard's core move is to let an experimental repo grow into that second job *without either job corroding the other*, while never forcing it on a project that remains exploratory.
 
 Underneath both: **tools may assist with the coding, you do the science.** Linters, formatters, tests, doc
 generators, and AI assistants accelerate the mechanical work; designing experiments, assessing results, and drawing conclusions stay with you. Everything below exists to make your scientific judgment reproducible and reviewable, not to replace it.
@@ -26,16 +26,19 @@ generators, and AI assistants accelerate the mechanical work; designing experime
 
 A repo built to this standard will gradually grow toward this shape (names are conventional, not mandatory). You do
 not need all of it at once — a folder of scripts and a notebook is a fine start, and you add pieces (a
-package, tests, a doc site, CI) as the work earns them. A full pipeline repo with dated experiment tracking will be structured like this:
+package, tests, a doc site, CI) as the work earns them. A full pipeline repo with experiment tracking will be structured like this:
 
 ```
 your_repo/
-├── experiments/             dated, question-driven studies — your reproducible research notebook
+├── experiments/             question-driven studies — your reproducible research notebook
 │   ├── README.md            the research log: goal, open questions, decisions (read this first)
-│   ├── _TEMPLATE.md         copy it to start a new study
+│   ├── _TEMPLATE.md         copy it to start a new theme
 │   ├── _common/             shared harness (run logging, comparison plots, reporting) — never method code
-│   └── <YYMMDD-slug>/       one experiment folder per study: its README, driver(s), and
-│                              outputs/<YYMMDD_slug>/ (manifest, metrics, run report)
+│   └── <slug>/              one undated, permanent folder per theme (revisited for as long as that
+│                              line of inquiry stays open): its README, driver(s), and
+│                              - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
+│                              - details/<YYMMDD_slug>[_NN]/   the manifest/metrics/figures behind
+│                                each report, name-matched to it, rarely opened directly
 ├── src/yourpkg/             your method code — the importable library; studies import from here and never copy it
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
 ├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings
@@ -55,8 +58,8 @@ shape.
 the status of every open question, what's next, and a dated decision log, so the project's state and history is
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
-each run is at the top of the experiment run report in a protected section that the AI assistant never overwrites. The code structure ensures that the numbers are recorded; you write what
-they mean. The `dirty` flag records whether the tracked code was committed when a run executed; a run you
+each run is at the top of the experiment run report in a protected section that AI assistants never overwrite. The code structure ensures that the results are recorded; you write what
+they mean. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
 keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
 check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
 external source the work builds on with *why it mattered here*, kept current as you go so the
@@ -67,7 +70,9 @@ manuscript's methods and bibliography are accrued rather than reconstructed at w
 *manual data examination* is the sanity check: generate and show the intermediate outputs — arrays, distributions, residuals —
 not only the final number, and watch how each step changes them. Docstrings, short run reports, and a
 readable research log are what turn a scattered exploration into a notebook you can actually navigate
-next month. Good documentation here pays off during the work, not just at write-up.
+next month. Good documentation here pays off during the work, not just at write-up. A run's report can
+be a `.md` file or a Jupyter notebook — a notebook that already carries a top-cell what/why and an
+observed note *is* the report; there's no separate write-up step to duplicate it into markdown.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
 **Data stays out of git; runs reference it by a stable identifier.** Real datasets live on a server or
@@ -107,7 +112,7 @@ written guidance, and mixing them is what turns a guide into an unreadable pile:
 
 → [18_ai_assisted_development.md](../docs/implementing/18_ai_assisted_development.md)
 
-**AI writes code; you do the science — and a clean run is not a correct analysis.** An AI assistant can read
+**Even if AI writes code, you do the science — and a clean run is not a correct analysis.** An AI assistant can read
 the standards file and produce conforming code fast, but it clears "does it run" effortlessly and can
 miss "does it run the analysis I want" entirely. So review every generated change like a colleague's
 pull request, never trust a number without a test, and validate beyond the test using a known-good case,
@@ -115,14 +120,47 @@ physical plausibility, an independent method, and the intermediate outputs. The 
 → [18_ai_assisted_development.md](../docs/implementing/18_ai_assisted_development.md)
 
 **If and when a project reaches publication, the experiments become the figure pipeline — then you
-freeze it.** Up to here nothing forces a "final" state. When results are publication-ready, the dated
-experiments are what generate the figures; you then **tag** the exact state behind the paper (with every
+freeze it.** Up to here nothing forces a "final" state. When results are publication-ready, the experiment
+runs are what generate the figures; you then **tag** the exact state behind the paper (with every
 compared approach still present), archive that tag for a permanent **DOI** (Zenodo), and add a `LICENSE`
 and `CITATION.cff`. Only after freezing do you trim `src/` on `main` down to the one approach you
 disseminate — if disseminating a clean library is even a goal. The tag keeps the paper reproducible;
 `main` keeps moving. A tag is not a fork: it costs nothing and cannot rot.
-→ [23_concluding_a_project.md](../docs/implementing/23_concluding_a_project.md),
+→ [23_concluding_a_project.md](../docs/disseminating/23_concluding_a_project.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
+
+## How it fits together
+
+```mermaid
+flowchart LR
+    subgraph Explore
+        NB["Exploratory notebook<br>experiments/&lt;slug&gt;/"]
+    end
+    subgraph "Record & build"
+        EXP["Experiment run<br>report + details/"]
+        SRC["src/yourpkg/<br>method code"]
+    end
+    subgraph Trust
+        TEST[tests/]
+        DOC["docs/<br>Sphinx site"]
+    end
+    subgraph "Disseminate (optional)"
+        TAG["tag + Zenodo DOI"]
+        PKG[installable package]
+    end
+
+    NB -->|"duplicate when you'd be<br>sad to lose a note"| NB
+    NB -->|becomes a driver| EXP
+    EXP -->|"imports, never forks"| SRC
+    SRC --> DOC
+    EXP -.->|"a validation run<br>becomes a regression test"| TEST
+    SRC -->|"when ready to publish"| TAG
+    TAG --> PKG
+```
+
+Nothing above forces you further right than the project needs: a folder of scripts and a notebook is a
+complete, valid state to stay in. Every arrow is a *decision*, not a requirement — the "why" for each
+one is in the bullets above.
 
 ## Adopting it
 
@@ -135,4 +173,6 @@ disseminate — if disseminating a clean library is even a goal. The tag keeps t
   it in, fill the placeholders, and the assistant follows it every session.
 
 The full, worked tutorial behind every decision above is the research-software-field-guide
-[implementing track](../docs/implementing/) (docs 10–23). This page is its executive summary.
+[implementing track](../docs/implementing/) (docs 10–20) plus, once a project is headed for
+publication, the [disseminating track](../docs/disseminating/) (docs 21–23). This page is its
+executive summary.
