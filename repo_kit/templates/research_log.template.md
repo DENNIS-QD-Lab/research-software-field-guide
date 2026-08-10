@@ -16,7 +16,8 @@ is the goal*, *what is settled*, and *what is next* without opening anything els
 - **How to run and record an experiment** (runlog protocol, harness rules, tagging) lives in
   [`.claude/experiments_playbook.md`](../.claude/experiments_playbook.md) — durable procedure, not state.
 - **Coding standards** live in [`CLAUDE.md`](../CLAUDE.md).
-- **Rendered reports** (narrative + code + figures) live in the doc site under `docs/` (build with
+- **Rendered reports** (narrative + code + figures) live in the doc site under
+  `docs/experiment_summaries/`, nested under each theme's page in `docs/experiment_overviews/` (build with
   `sphinx-build docs docs/_build/html`, or serve with `sphinx-autobuild`).
 
 ---

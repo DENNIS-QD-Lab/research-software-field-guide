@@ -28,7 +28,9 @@ experiments/       hypothesis-driven studies; experiments/README.md is the resea
                        - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
                        - details/<YYMMDD_slug>[_NN]/         manifest/metrics/figures behind each report
 tests/             pytest suite (unit + regression) with committed fixtures
-docs/              Sphinx doc site (API reference generated from docstrings)
+docs/              Sphinx doc site: API reference generated from docstrings, plus rendered
+                     experiment reports — experiment_overviews/<theme>_overview.md (one per theme,
+                     includes its README) and experiment_summaries/*.md (the reports themselves)
 references.md      the reference ledger: external sources + why each mattered here
 config / local_paths.py   parameters and machine-local data paths (paths stay out of git)
 ```
@@ -75,14 +77,16 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Verb-first for action scripts that *do* something: `show_keys.py`, `plot_spectra.py`.
 - Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`.
 - Avoid abbreviations except universally understood domain terms (<list the ones your field accepts>).
-- **Dated *runs* are the exception to "no hyphens" and "no dates in filenames"** — but the *theme*
-  folder that holds them is not: `experiments/<slug>/` (no hyphenated date prefix) is a standing address
-  for one line of inquiry, revisited for as long as that inquiry stays open (a theme is not "done" the
-  day it starts). Inside it, each run's report carries the date: `YYMMDD_<slug>[_NN].md` (or `.ipynb`),
-  `_02`/`_03` for reruns, sitting directly in the theme folder so it's visible without opening a
-  subfolder. The provenance that produced it (`manifest.yaml`, `metrics.csv`, figures) lives one level
-  down in `details/<YYMMDD>_<slug>[_NN]/`, name-matched to its report — present for reproducibility, not
-  meant to be opened on a normal read-through.
+- **Theme folders may use hyphens; run files may not.** `experiments/<theme-slug>/` (hyphens allowed —
+  a multi-word theme name reads better as `crf-solve-and-necessity` than as one run-together word) is a
+  standing address for one line of inquiry, revisited for as long as that inquiry stays open (a theme is
+  not "done" the day it starts) — it carries no date. Inside it, each run's report carries the date and
+  follows the normal no-hyphens rule: `YYMMDD_<slug>[_NN].md` (or `.ipynb`), `_02`/`_03` for reruns,
+  sitting directly in the theme folder so it's visible without opening a subfolder. The provenance that
+  produced it (`manifest.yaml`, `metrics.csv`, figures) lives one level down in
+  `details/<YYMMDD>_<slug>[_NN]/`, name-matched to its report — present for reproducibility, not meant to
+  be opened on a normal read-through. A promoted doc-site stub for that run follows the theme's own
+  convention: `<theme-slug>-<YYMMDD_slug>[_NN].md`.
 
 ## Command line interfaces
 
