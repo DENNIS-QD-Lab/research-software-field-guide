@@ -11,9 +11,6 @@ write the manuscript, the docs, or the next grant. This file is both **this guid
 worked example of the convention it teaches in
 [docs/implementing/16_running_a_dry_lab_experiment.md](docs/implementing/16_running_a_dry_lab_experiment.md).
 
-Citation fields marked _(verify)_ were filled from memory and should be confirmed against the source
-before any formal use.
-
 | Resource (citation) | Link / DOI | Accessed | Key relevant points for this project |
 |---|---|---|---|
 | Wilson, Bryan, Cranston, Kitzes, Nederbragt, Teal, "Good Enough Practices in Scientific Computing", *PLOS Computational Biology* 13(6), 2017 | [10.1371/journal.pcbi.1005510](https://doi.org/10.1371/journal.pcbi.1005510) | 2026-08-05 | The closest prior art to this whole guide: minimum-viable practices for data management, software, collaboration, and project organization aimed at working scientists, not developers. Grounds the "organized so future-you can find and reuse it" framing (onboarding doc 06) and the overall stance that structure serves the science. |
@@ -23,6 +20,7 @@ before any formal use.
 | Choose a License | [choosealicense.com](https://choosealicense.com/) | 2026-08-05 | The reference we send readers to for picking a LICENSE (implementing doc 23): permissive (MIT/BSD) vs. copyleft (GPL). Basis for the "no license means *not reusable*" point. |
 | Zenodo | [zenodo.org](https://zenodo.org/) | 2026-08-05 | Mints a permanent DOI for a tagged snapshot of a repository (implementing doc 23). The archival step that makes a paper reproducible against a specific frozen version. |
 | Journal of Open Source Software (JOSS) | [joss.theoj.org](https://joss.theoj.org/) | 2026-08-05 | The short, peer-reviewed software-paper route cited in implementing doc 23, for when the software is a contribution in its own right. |
+| Bridgeford, Campbell, Chen, Lin, Ritz, Vandekerckhove, Poldrack, "Twelve Quick Tips for AI-Assisted Coding in Science", *PLOS Computational Biology*, 2026 | [10.1371/journal.pcbi.1014428](https://doi.org/10.1371/journal.pcbi.1014428) | 2026-08-11 | Independent confirmation of most of this guide's AI-assistant stance (docs 18–19): plan before implementing, keep durable context in external files, review generated code critically, document for reproducibility. One gap it surfaces that our docs don't yet name explicitly: AI-generated tests can be "paper tests" that pass without actually exercising the behavior (e.g. asserting a mock's own return value) — worth a line in doc 19's test-verification guidance. |
 
 <!--
 Cross-repo convention: keep a references.md like this in every research repo, so the "resource + why
