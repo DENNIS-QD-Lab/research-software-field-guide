@@ -122,43 +122,101 @@ determinism a regression test relies on ([12_testing_with_pytest.md](12_testing_
 
 ## Repeat runs, and track quality, without bloating the repo
 
-You will run an experiment many times. If every run committed its figures and arrays, the repo would
-balloon and its history would be permanently heavy. The rule that keeps the record complete *and*
-the repo small:
+You will run an experiment many times. If every run committed its figures and arrays — or generated
+its own markdown report — the repo would balloon, its history would be permanently heavy, and the
+theme folder would fill up with dozens of near-identical files for runs that mostly just re-confirmed
+a driver still reproduced its prior output. The rule that keeps the record complete *and* the repo (and
+the folder listing) small: **a run writes provenance, not prose.**
 
-- **Commit the small, non-regenerable provenance:** the `manifest.yaml`, a `metrics.csv` (the numbers
-  that let you compare runs — RMSE, counts, whatever tracks quality), and the run's report.
+- **Commit the small, non-regenerable provenance:** the `manifest.yaml` and a `metrics.csv` (the
+  numbers that let you compare runs — RMSE, counts, whatever tracks quality). Nothing else is written
+  automatically.
 - **Git-ignore the heavy, regenerable artifacts:** figures (`*.png`), large arrays (`*.npy`), and any
   scratch data. A deterministic, seeded run *reproduces* these from the committed code and manifest,
   so you are keeping the recipe, not the cake.
 
-Keep the two levels straight, and keep a third split straight alongside them: the **experiment folder is
-per *theme***, undated and permanent; each **run** writes a **report** directly into that folder, named
-by date and slug (`crf-necessity/YYMMDD_slug.md`) so it's visible without opening anything; and the
-provenance behind that report — `manifest.yaml`, `metrics.csv`, figures — lives one level down in a
-matching `details/YYMMDD_slug/`, name-matched to its report but rarely opened on a normal read-through.
-Runs accumulate in the same experiment folder — you do not make a new experiment folder to re-run.
-**Preserve runs by default:** re-running the same study does not overwrite the last result — the first
-run is `YYMMDD_slug.md` + `details/YYMMDD_slug/` and each rerun writes the next numbered variant
-(`…_02`, `…_03`, kept in sync between the report and its `details/` counterpart), so you can watch a
-metric move across reruns and catch a regression. Overwrite in place only for a throwaway cosmetic
-re-run of a deterministic result. (In the exemplar a tiny `runlog.py` helper does this, but the idea is
-independent of any code: one experiment folder per theme, one numbered report + matching details
-subdirectory per run, small provenance committed, heavy artifacts ignored.) If a runlog helper already
-exists and other drivers depend on today's co-located shape, keep this split **additive** — a new
-optional parameter defaulting to the old behavior — so one driver can adopt it without moving every
-other driver's runs at the same time. The small carve-out for committing a figure — when it *cannot* be
-regenerated in CI because it needs real data — is covered in [17_working_with_large_data.md](17_working_with_large_data.md).
+Those two rules cover what a *run* writes. The folder layout is a third thing to keep straight:
+
+```
+crf-necessity/                      the theme: undated, permanent, one line of inquiry
+├── README.md                       the one narrative page: question, findings, figures, interpretation
+└── details/
+    ├── 260717_crf-necessity/       one run's provenance: manifest.yaml, metrics.csv, figures
+    └── 260717_crf-necessity_02/    the same study, re-run
+```
+
+The theme folder is undated and permanent, and the dates live on the runs inside `details/`. Runs
+accumulate there — you do not create a new experiment folder to re-run a study, and a run does not get
+its own report file. The theme's `README.md` is the *only* narrative document: written once, updated
+in place as findings accrue, never regenerated per run.
+
+**Preserve runs by default.** Re-running a study does not overwrite the previous result: the first run
+is `details/260717_crf-necessity/`, and each rerun writes the next numbered variant (`…_02`, `…_03`).
+That is what lets you watch a metric move across reruns and catch a regression. Overwrite in place only
+for a throwaway cosmetic re-run of a deterministic result.
+
+When a run's figure is worth keeping visible — because it's the current evidence for a finding, not
+because the driver merely ran again — embed it directly in the README's Findings section, with a short
+*italic* caption noting the run id and the command that reproduces it:
+
+```markdown
+- **H1 (real data, 2026-07-17):** two-step and joint CRF solves agree to three decimals once dark
+  current is subtracted (R² ≈ 0.985 / 0.983).
+
+  ![](details/260717_crf-necessity/crf_fit_twostep.png)
+  *Run `260717_crf-necessity` — reproduce with `python experiments/crf-necessity/run_crf_necessity.py`.*
+```
+
+That caption is deliberately *not* a heading. It exists so the run can be reproduced, not so it can be
+linked to or indexed — a page full of `## Provenance` sections is the same clutter problem in a
+different font. When a rerun supersedes the embedded figure, swap the image path and caption in place;
+the superseded run's own `details/` folder is untouched and still there if you need to compare against
+it directly.
+
+In the exemplar a small `runlog.py` helper writes the manifest/metrics split, but the convention does
+not depend on that code: one folder per theme, one `README.md`, one numbered `details/` subdirectory
+per run, small provenance committed, heavy artifacts ignored. If you already have a runlog helper that
+also writes a per-run report file and other drivers depend on that shape, drop the report-writing call
+one driver at a time rather than all at once — each driver's own README absorbs that driver's findings
+whenever you touch it next, so nothing has to move in a single pass.
+
+[17_working_with_large_data.md](17_working_with_large_data.md) covers the small carve-out for committing
+a figure that cannot be regenerated in CI because it needs real data.
 
 ## Interpretation stays with the scientist
 
-Automate the recording, never the conclusion. In the exemplar, each run's report opens with a one-line
-**Summary** (what the run was) and the scientist's **`## Interpretation (scientist)`** — a section tooling
-is written to **never overwrite** — *before* the auto-filled provenance and metrics. Putting them first
-means you can flip through a folder of reports and read "we did X, we found Y" from the opening lines; the
-machine records the numbers, the human writes what they *mean*. That boundary is the whole point: the
-framework exists to make your judgment reproducible and reviewable, not to replace it. (This division of labor is exactly the subject of [18_ai_assisted_development.md](18_ai_assisted_development.md), and it
+Automate the recording, never the conclusion. A machine can write *what ran and what it measured* —
+the manifest, the metrics, a figure — but it should never write *what a result means*. That judgment
+lives in the theme's `README.md`, in the scientist's own words, right next to the finding it belongs
+to. The machine records the numbers; the human writes what they mean. That boundary is the whole
+point: the framework exists to make your judgment reproducible and reviewable, not to replace it.
+(This division of labor is exactly the subject of [18_ai_assisted_development.md](18_ai_assisted_development.md), and it
 matters most when an assistant wrote the driver.)
+
+A Findings bullet in an experiment README, a line in the research log's decision log, a caveat on a
+theme's Status & decisions — any of these can slide into asserting what a result *means* rather than
+what it *shows*. The lightweight tool that keeps the line visible is a **signed blockquote**, dropped
+in wherever the *why* actually belongs:
+
+> **AMD:** the CRF is adding little here that a calibrated linear model doesn't already capture.
+
+Sign it with your own initials rather than a generic "Scientist" label — nothing in the runlog or
+doc-promotion tooling parses the label text, so this is free to be as specific as a multi-contributor
+repo needs, and it reads identically on GitHub, in an editor, and in a built Sphinx site: a plain
+markdown blockquote, no color-coding or custom syntax required. Two rules keep it worth trusting:
+
+- **Insert it verbatim.** If the scientist writes three words, three words is what goes in the doc — an
+  assistant tightening or rephrasing it quietly substitutes its own voice for theirs, which is exactly
+  what this convention exists to prevent.
+- **Leave a placeholder rather than guess.** When a spot calls for a judgment call nobody has made yet,
+  write `> **AMD:** _Interpretation pending._` instead of filling the gap with a plausible-sounding guess
+  or leaving it silently blank — a visible gap gets noticed and closed; an invisible one doesn't.
+
+An assistant drafting or editing these docs should hold to the same split as the driver code: its own
+prose stays to *method* (what ran, on what data and parameters) and *observed result* (what the numbers
+or a plot show); anywhere the text would otherwise assert what a result implies, what caused it, or what
+to do next, that becomes a signed blockquote instead — filled in if the scientist has already said it, a
+`_pending_` placeholder if not.
 
 ## Exploratory notebooks: the same discipline, without a manifest
 
@@ -171,8 +229,8 @@ Two cheap habits, applied unconditionally, close most of that gap:
 - **A top-cell note, written before you touch anything else.** A markdown cell at the very top of the
   notebook with "What / why" (what you're testing this run, and why) and "Observed" (what you saw) —
   filled in for real *before* the next parameter change and rerun. This is the notebook analog of the
-  protected `## Interpretation` section above, doing the same job: recording judgment a machine cannot
-  write for you, at the moment it is cheapest to write it.
+  signed blockquote above, doing the same job: recording judgment a machine cannot write for you, at
+  the moment it is cheapest to write it.
 - **Duplicate the notebook once you've written a note you'd be annoyed to lose** (`noise_test_01.ipynb`
   → `noise_test_02.ipynb`). This is PRESERVE-by-default, ported to notebooks: it protects *what code
   produced what*, the same way a driver's numbered rerun does. The observation is the trigger, not a
@@ -186,41 +244,28 @@ to engineer around. Because an exploratory notebook has not called a runlog help
 
 ## Choosing how much gets documented
 
-Every run already gets a manifest, metrics, and a report inside `experiments/` — that part is not
-optional, and doesn't change here. What *is* optional is whether a run's report also gets **promoted**:
-given a page in the built Sphinx site, and a PDF copy dropped in the team's shared archive, so someone
-can see it without opening the repo or re-running anything.
+Every run already gets a manifest and metrics inside `experiments/<slug>/details/` — that part is not
+optional, and doesn't change here. What *is* a judgment call is whether a run's figure and numbers are
+worth writing into the theme's `README.md` at all: not every rerun is a new finding, and most reruns
+just confirm a driver still reproduces its prior output. There is no automated switch or environment
+variable that makes this decision for you — "documenting" a run now literally means editing the README,
+so the only question is whether this run changed what you'd write there.
 
-**The default you start with matters, and it's fine to change it.** Early on, you often don't know in
-the moment which run will turn out to matter later — the same problem the exploratory-notebook habit
-above is designed around. So the beginner default is **document everything**: every run gets promoted
-automatically, no decision required. Set:
+**Early on, err toward writing more.** You often don't know in the moment which run will turn out to
+matter later — the same problem the exploratory-notebook habit above is designed around. Because
+embedding a figure is a one-line edit to a file you already have open, not a new file a tool generates,
+the cost of erring toward "write it down" is genuinely small: at worst the README grows a paragraph you
+later trim, not a pile of pages nobody reads.
 
-    export DOCUMENT_EVERYTHING=1
+**As you learn what's worth keeping, prune the README down to the current evidence.** When a rerun
+supersedes an embedded figure, replace it in place rather than adding a second entry beside it — the
+superseded run's own `details/` folder is still there, untouched, if you ever need to go back to it.
+The README should always read as *the current state of the finding*, not a running log of every attempt.
 
-in your shell profile (alongside this repo's other machine-local settings, the way `local_paths.py`
-works), and every run from then on gets a doc page and an archived PDF, whether or not it turns out to
-matter. The cost is a growing pile of pages and PDFs for runs that never mattered — that's a real cost,
-not a free safety net — but it's the same trade the repo already makes for the raw reports themselves:
-`runlog.py` preserves every run rather than overwriting it, because a losing result is still evidence,
-and it's far easier to prune a pile later than to reconstruct something you didn't know to keep.
-
-**Once you've done this enough to know what's worth keeping, flip the default.** Unset
-`DOCUMENT_EVERYTHING` (or set it to `0`), and nothing gets promoted automatically — you decide, run by
-run, which ones earn a doc page. You can still promote (or deliberately skip) any single run regardless
-of your default:
-
-    run = runlog.start_run(..., promote=True)   # promote this one run
-    run = runlog.start_run(..., promote=False)  # skip this one, even if your default is on
-
-Nothing about your manifest, metrics, or report changes either way — you're only choosing whether a run
-*also* gets the extra visibility of a doc page and an archived PDF. Turning "document everything" off
-never loses anything already in the repo.
-
-**This is a personal setting, not a project one.** A trainee still learning to judge what matters, and
-a PI who already knows, can be working in the *same* repo with different defaults at the same time,
-because the setting lives in each person's own environment, not in a file the repo tracks. The full
-mechanics — how promotion and archiving actually work, and how to adapt them to your own repo — are in
+**Sharing outside the repo** (a PDF for a lab meeting, an external collaborator who won't clone the
+repo) is a separate, occasional need from day-to-day documentation, and doesn't require promoting every
+run automatically. Export the theme's README (or a specific figure) to PDF when you actually need to
+share it. Mechanics for that export are in
 [documentation_promotion.md](../reference/documentation_promotion.md).
 
 ## How this connects

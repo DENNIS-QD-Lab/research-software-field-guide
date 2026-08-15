@@ -65,7 +65,7 @@ the status of every open question, what's next, and a dated decision log, so the
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
 each run is at the top of the experiment run report in a protected section that AI assistants never overwrite. The code structure ensures that the results are recorded; you write what
-they mean. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
+they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) rather than the assistant's own paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
 keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
 check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
 external source the work builds on with *why it mattered here*, kept current as you go so the
@@ -74,11 +74,11 @@ manuscript's methods and bibliography are accrued rather than reconstructed at w
 
 **Look at the data at every step, and document as you explore.** Before you have a test for every step,
 *manual data examination* is the sanity check: generate and show the intermediate outputs — arrays, distributions, residuals —
-not only the final number, and watch how each step changes them. Docstrings, short run reports, and a
-readable research log are what turn a scattered exploration into a notebook you can actually navigate
-next month. Good documentation here pays off during the work, not just at write-up. A run's report can
-be a `.md` file or a Jupyter notebook — a notebook that already carries a top-cell what/why and an
-observed note *is* the report; there's no separate write-up step to duplicate it into markdown.
+not only the final number, and watch how each step changes them. Docstrings, an experiment's own README,
+and a readable research log are what turn a scattered exploration into a notebook you can actually
+navigate next month. Good documentation here pays off during the work, not just at write-up. A
+notebook that already carries a top-cell what/why and an observed note *is* its own record; there's no
+separate write-up step to duplicate it into markdown.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
 **Data stays out of git; runs reference it by a stable identifier.** Real datasets live on a server or
@@ -93,7 +93,7 @@ you are still deciding between them, so they can be compared side by side withou
 is a short driver that imports the library and the `_common/` harness, feeds them particular inputs, and
 records what happened; it contains *no method code of its own*. That is what keeps a comparison honest:
 the experiment tests exactly the code the library provides. `_common/` holds only scaffolding — run
-logging, comparison plots, report embedding — not a (drifting) copy of a method.
+logging, comparison plots — not a (drifting) copy of a method.
 → [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
 
 **Tests plus CI are the safety net that lets you change code fearlessly.** A test that pins a known-good

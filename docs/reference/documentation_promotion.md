@@ -1,70 +1,80 @@
-# Documentation promotion: mechanics and how to adapt it
+# Getting a theme's findings onto the doc site
 
-This is the reference for how `DOCUMENT_EVERYTHING` / `promote=` actually work, for anyone who wants
-to understand the mechanism precisely or adapt it to a different repo. The basics — what happens by
-default, and how to change it — are in
+This is the reference for how an experiment theme's `README.md` ends up as a page in the built Sphinx
+site, and how to keep its embedded figures resolving correctly. The practice-level view — why the
+README is the one narrative document, and how to decide what's worth writing into it — is in
 [16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md#choosing-how-much-gets-documented).
 
-## Two independent switches
+## One page per theme, no separate promotion step
 
-"Documentation" here means two separate things that happen to share one default:
+A theme's `experiments/<slug>/README.md` *is* its doc-site page. `docs/experiment_overviews/<slug>_overview.md`
+does nothing but include it:
 
-1. **Promote to the doc site** — does this run's report get a page in the built Sphinx site.
-2. **Archive to PDF** — does a promoted page get exported to the external, git-free archive.
-
-They're controlled separately so you can, for example, promote something to the doc site immediately
-but only archive it once it's a keeper.
-
-## Axis 1 — promoting a run to the doc site
-
-`RunLog`/`start_run` takes `promote: bool | None = None`. When `None` (the default), it reads the
-`DOCUMENT_EVERYTHING` environment variable (`"1"`/`"true"` = on, anything else or unset = off).
-Passing `True` or `False` explicitly overrides the environment variable for that one call.
-
-When a run resolves to `promote=True`, `finalize()` additionally writes a thin stub page under
-`docs/experiment_summaries/<theme-slug>-<run-id>.md` whose body is a MyST `{include}` directive pointing
-back at the real report — so the doc site never holds a second copy of the content, just a pointer. Stub
-filenames are flat (not nested under a per-theme subfolder) and carry the theme slug as a prefix so a
-`glob` toctree entry can pick up every run for a theme without a name collision against another theme's
-runs.
-
-```{note}
-**Confirmed, not just suspected:** MyST/docutils' `{include}` resolves an included file's own
-relative links (e.g. a report's `![...](details/<run-id>/channel_grid.png)`) against the
-*including* file's directory, not the *included* file's — the general `include`-directive gotcha
-does apply here, verified with a throwaway spike against this repo's pinned Sphinx 9.1.0 /
-myst-parser 5.1.0. So the stub-generator cannot include a report verbatim; it must rewrite each
-image link to be correct from the stub's own location before writing the stub.
+````{code-block} markdown
+:caption: docs/experiment_overviews/crf-necessity_overview.md
+```{include} ../../experiments/crf-necessity/README.md
+:relative-docs: ../../experiments/crf-necessity/
+:relative-images:
 ```
+````
 
-For a promoted stub page to appear in the built site without hand-editing a toctree every run, that
-theme's `docs/experiment_overviews/<theme>_overview.md` needs a `:glob:` entry
-(`../experiment_summaries/<theme-slug>-*`) alongside (or in place of) a hand-maintained list of individual
-pages — also confirmed by spike: a new page dropped flat under `docs/experiment_summaries/` appeared in
-the built nav with no toctree edit, and no duplicate-listing warning when mixed with existing explicit
-entries (e.g. hand-authored narrative reports for the same theme, which live in the same flat folder).
+There is no separate "promote this run" step, no per-run stub page, and no environment variable
+gating whether a page exists. If the README has a Findings section with an embedded figure, that
+figure is on the site the next time it's built — the only editorial decision is what you write into
+the README in the first place (see the practice-level doc linked above).
 
-## Axis 2 — archiving a promoted page to PDF
+An earlier version of this mechanism auto-generated a separate stub page under
+`docs/experiment_summaries/` for every promoted run, picked up by a `:glob:` toctree. In practice this
+produced one genuinely useful page for every several near-duplicate ones — a parameter sweep of, say,
+8 conditions became 8 separate nav entries, most never actually interpreted. That mechanism is
+retired; don't rebuild it.
 
-A separate script — not run automatically unless `DOCUMENT_EVERYTHING` is on — walks every promoted
-stub page and, for each, computes the PDF's destination path in the external archive folder (a
-machine-local setting, configured the same way `local_paths.py` configures `DATA_ROOT`). It renders
-and copies only if that destination file does **not already exist**.
+## The `{include}` relative-path gotcha, and its fix
 
-That's the whole idempotency rule, deliberately simple: because runs are PRESERVE-by-default with
-unique, immutable filenames (`<YYMMDD_slug>[_NN]`), "already archived" is just a file-existence check
-— no hashing or timestamps needed. The archive is a frozen, append-only record on purpose: once a run
-is archived, re-running the export step never touches it again, even if the source report changes
-later. Wanting a fresh snapshot is what PRESERVE's numbering is for — rerun, get a new `_NN`, archive
-that as a new file, leave the old one alone.
+MyST's `{include}` directive resolves an included file's own relative links against the *including*
+file's directory by default, not the included file's own — so a README's `![...](details/<run_id>/fig.png)`,
+correct from the README's own location, silently resolves to the wrong path once pulled through
+`{include}` from a file living somewhere else (e.g. `docs/experiment_overviews/`).
 
-## Adapting this to your own repo
+The fix is the `:relative-docs:` / `:relative-images:` options shown above, not rewriting the paths by
+hand:
 
-- `DOCUMENT_EVERYTHING` is a plain environment variable — rename it if you like, but keep it a
-  per-person setting (env var or gitignored local config), never a tracked constant, since the whole
-  point is that two people on the same repo can disagree.
-- The archive folder's location is a `local_paths.py`-style setting, not hardcoded — point it at
-  whatever shared drive your team actually uses.
-- The stub-generator and the export script are both small, separable pieces in
-  `experiments/_common/` — read them before changing them, but neither depends on the other beyond
-  the shared file-naming convention.
+- `:relative-docs: ../../experiments/<slug>/` tells MyST which directory the included file's own
+  relative *links* (to other docs) should resolve against.
+- `:relative-images:` does the same for image paths specifically.
+
+Confirmed empirically (Sphinx 9.1.0, myst-parser 5.1.0 — the versions this guide pins): with both
+options set, a README written with plain paths relative to its own directory renders correctly both
+through the Sphinx include *and* when viewed directly on GitHub or in an editor. Writing the
+`../../experiments/<slug>/details/...` path directly into the README instead avoids the Sphinx-side
+bug but breaks the second case — the path resolves outside the repository when the README is read from
+its own location. Use the include options; don't hand-rewrite the paths.
+
+If your repo pins different Sphinx/myst-parser versions, this is cheap to re-confirm: put a real image
+behind a relative link in a theme README, include it with the options above, and check the built
+page's `<img src>` actually resolves.
+
+## Sharing a page outside the repo (PDF export)
+
+Some teams want an occasional PDF of a theme's current state — for a lab meeting, or a collaborator who
+won't clone the repo. This is a separate, on-demand need from day-to-day documentation and doesn't
+require any change to how runs are logged or how the doc site is built:
+
+- Build the site (`sphinx-build docs docs/_build/html`) and print the theme's page to PDF from a
+  browser, or
+- Use Sphinx's LaTeX/PDF builder on the single page if your repo has that set up.
+
+Point the destination at your team's shared archive location the same way `local_paths.py` configures
+any other machine-local path. There's no "archive every run automatically" mode to configure — export
+when you actually need to share something.
+
+## An optional exception: a standalone deep-dive report
+
+Occasionally a single read-out is genuinely too complex for a README's figure-and-caption pattern — a
+manuscript-figure-quality walkthrough with several panels, each needing its own explanation, meant to
+be a citable, occasionally-updated centerpiece rather than one Findings entry among several. For that
+rare case, a hand-authored page under `docs/experiment_summaries/<name>.md` (optionally executable via
+myst-nb, dynamically locating its run rather than hardcoding a run id — see your repo's
+`experiments/_common/` for a worked example if one exists) is a reasonable, deliberate exception.
+Link to it from the theme's README rather than letting it replace the README's own Findings section,
+and keep it rare: if every finding gets one of these, the clutter this doc describes is back.

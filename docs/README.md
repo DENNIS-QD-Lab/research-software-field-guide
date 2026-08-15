@@ -37,7 +37,7 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 | [advanced_git.md](reference/advanced_git.md) | Sharp Git tools for longer-lived branches: `git stash`, `git rebase` (defensively), `git cherry-pick`, and keeping a feature branch current. A catalog to look things up in, not a tutorial. |
 | [ai_coding_assistants.md](reference/ai_coding_assistants.md) | Installing an AI coding assistant, essential session commands (`/clear`, `/compact`, permissions), managing context and cost, and when multi-agent delegation helps versus adds overhead. |
 | [cs_jargon.md](reference/cs_jargon.md) | Programming terms of art (snake_case, mutable, parse, refactor, etc.) defined briefly. |
-| [documentation_promotion.md](reference/documentation_promotion.md) | Mechanics of promoting a run's report to the doc site and archiving it to PDF (`DOCUMENT_EVERYTHING` / `promote=`), and how to adapt the machinery to your own repo. |
+| [documentation_promotion.md](reference/documentation_promotion.md) | How a theme's README becomes its doc-site page, the `{include}` options that keep embedded figures resolving correctly, and sharing a page as a PDF. |
 | [git_recovery.md](reference/git_recovery.md) | Recovering from common Git mistakes: work done on the wrong branch, a bad commit, a file you need back, and other "what just happened" moments. |
 | [git_vocabulary.md](reference/git_vocabulary.md) | Git and GitHub terms (fetch, pull, push, HEAD, origin, upstream, conflict, and others) you'll encounter. |
 | [keyboard_shortcuts.md](reference/keyboard_shortcuts.md) | VS Code shortcuts worth memorizing, organized by category. |
@@ -80,4 +80,4 @@ Once you know the track, the [`repo_kit/`](../repo_kit/) folder at the repositor
 |-----|----------------|
 | [21_packaging.md](disseminating/21_packaging.md) | When a folder of scripts should become an installable package: `pyproject.toml`, the `src/` layout, and editable installs. |
 | [22_versioning_and_releases.md](disseminating/22_versioning_and_releases.md) | Semantic versioning, git tags and releases, a single source of truth for the version, and CHANGELOGs. |
-| [23_concluding_a_project.md](disseminating/23_concluding_a_project.md) | Concluding and disseminating: freezing the paper state, archiving to a Zenodo DOI, LICENSE and CITATION.cff, and how the frozen record and the shipped library diverge. |
+| [23_concluding_a_project.md](disseminating/23_concluding_a_project.md) | Concluding and disseminating: freezing the paper state, archiving to a Zenodo DOI, LICENSE and CITATION.cff, keeping a private lab notebook out of the public copy, and how the frozen record and the shipped library diverge. |

@@ -27,9 +27,10 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
   script per question plus an optional exploration notebook; dates live on the *runs* inside, not the
   folder.
 - **Shared harness** → `experiments/_common/` — the scaffolding drivers compose (run logging, comparison
-  and plotting helpers, report embedding). **Harness only — never method code.**
-- **Rendered reports** → `docs/experiment_summaries/*.md` (Sphinx, optionally executable via myst-nb),
-  nested under each theme's page in `docs/experiment_overviews/<theme>_overview.md` in the built site.
+  and plotting helpers). **Harness only — never method code.**
+- **Rendered doc site** → `docs/`, built with Sphinx. Each theme's `experiments/<slug>/README.md` is
+  included directly as that theme's overview page — one authored page per experiment, not generated
+  from individual runs.
 
 ## Harness discipline
 
@@ -43,25 +44,27 @@ Coding standards (style, docstrings, type hints, data handling) are in [`CLAUDE.
 
 ## Runlog protocol
 
-Every run writes to two places, name-matched by the same `<YYMMDD_slug>[_NN]` id:
+Every run writes its provenance to **`experiments/<slug>/details/<YYMMDD_slug>[_NN]/`**, rarely opened
+directly: `manifest.yaml` (git commit + `dirty` flag — dirty means the *tracked code* had uncommitted
+changes at run time; the run's own `details/` are excluded from that check, so writing them never trips
+it — timestamp, parameters, inputs/checksum) and `metrics.csv` (the numeric read-out). This is
+provenance only, not a report: it exists so a run can be reproduced, not to be read as a narrative.
 
-- **`experiments/<slug>/<YYMMDD_slug>[_NN].md`** — the report, sitting directly in the theme folder so
-  it's visible without opening a subfolder: a scan-first page with a one-line `## Summary` and the
-  **`## Interpretation (scientist)`** (between protected markers, **never overwritten** by tooling — the
-  scientist owns it) at the *top*, then provenance, metrics, and figures, so the opening lines read "we
-  did X, we found Y."
-- **`experiments/<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind that report, rarely
-  opened directly: `manifest.yaml` (git commit + `dirty` flag — dirty means the *tracked code* had
-  uncommitted changes at run time; the run's own `details/` and report are excluded from that check, so
-  writing them never trips it — timestamp, parameters, inputs/checksum) and `metrics.csv` (the numeric
-  read-out figures/tables in the report draw from).
+Default is **PRESERVE** — a new run gets a fresh `_NN` suffix and never clobbers a prior run. Use
+`--overwrite` only for throwaway cosmetic re-runs of a deterministic result.
 
-Default is **PRESERVE** — a new run gets a fresh `_NN` suffix, kept in sync between the report and its
-`details/` counterpart, and never clobbers a prior run. Use `--overwrite` only for throwaway cosmetic
-re-runs of a deterministic result. Keep the split **additive** if a runlog helper already exists and
-other drivers depend on today's co-located shape: a new optional parameter (e.g. `report_dir=`),
-defaulting to the old behavior, lets one driver adopt the split without moving every other driver's runs
-at the same time.
+The narrative — question, hypotheses, findings, figures, interpretation — lives once in
+**`experiments/<slug>/README.md`**, not regenerated per run. When a run's figure is worth keeping
+visible, embed it directly in the README from `details/<run_id>/`, with a short italic caption noting
+the run id for reproducibility, and swap it in place when a later run supersedes it — don't accumulate
+a second entry beside the first. The signed-blockquote convention (`> **<initials>:** ...`, verbatim,
+with a `_pending_` placeholder when there's no answer yet) carries the *why* wherever it belongs —
+README findings, the research log's decision entries — since there is no longer a separate protected
+section in a per-run report to hold it.
+
+If a runlog helper already exists and writes a per-run report file, drop that write one driver at a
+time rather than all at once: each driver's own README absorbs its findings whenever you next touch
+it, so nothing has to move in a single pass.
 
 ## Exploratory notebooks
 
@@ -70,7 +73,7 @@ A notebook exploring an idea has the same reproducibility problem a driver scrip
 rerun. Two cheap habits close most of that gap:
 
 - **A top-cell "What / why" and "Observed" note**, written *before* you touch anything else — the
-  notebook analog of `runlog`'s protected `## Interpretation` section. The point is to make the habit
+  notebook analog of the signed blockquote a README finding gets. The point is to make the habit
   unconditional: you cannot reliably judge in the moment which run will matter later, so the note has to
   happen every time, not just when you think it's worth it.
 - **Duplicate the notebook (`_01` → `_02`) once you've written a note you'd be annoyed to lose** —
@@ -81,13 +84,14 @@ rerun. Two cheap habits close most of that gap:
 Since exploratory notebooks don't call `runlog`, they have no `details/` counterpart — a run only gets
 one once it's promoted to a driver script that writes a manifest.
 
-## Documentation promotion (`DOCUMENT_EVERYTHING`)
+## Getting a finding onto the doc site
 
-Promotion follows whatever `DOCUMENT_EVERYTHING` is set to in your own environment — unset means nothing
-is auto-promoted; `1` promotes every run (gets it a page in the built doc site and, once exported, a PDF
-in the shared archive). Override per run with `promote=True`/`False` in `start_run`. Full mechanics:
-`docs/reference/documentation_promotion.md` in the research-software-field-guide; this repo follows that
-convention as written, with the archive folder pointed at your own `local_paths.py`-style setting.
+There is no promotion step or environment variable: a theme's `README.md` is included directly as its
+doc-site page (`docs/experiment_overviews/<theme>_overview.md`), so a finding is on the site as soon as
+it's written into the README, with its figure embedded from `details/<run_id>/`. Full mechanics
+(including the `{include}` options that make embedded images resolve correctly) are in
+`docs/reference/documentation_promotion.md` in the research-software-field-guide; this repo follows
+that convention as written.
 
 ## Finalizing an experiment — clean-commit reproducibility
 
@@ -105,7 +109,7 @@ When an experiment is a keeper, **finalize** it so its stamp points at real, che
 3. **Confirm it reproduces.** For a seeded/synthetic run the refreshed `metrics.csv` must match the
    previous one exactly; a mismatch means the committed code is not what produced the logged numbers —
    a real finding, not a nuisance. (Real-data runs match to their documented tolerance.)
-4. **Commit the refreshed run** (manifest/metrics/report), and `git tag` it if it backs a paper figure.
+4. **Commit the refreshed run** (manifest/metrics/figure), and `git tag` it if it backs a paper figure.
 
 Your AI assistant can drive steps 2–4 — re-run the driver, diff the metrics, and hand back the commit
 (and tag) for you to run; you commit the code in step 1 and review what it prepares. A reproduce
@@ -119,10 +123,10 @@ several under custom names, and checking only one gives a false pass.
 - Rewrite a driver only when the **code** is wrong: bad math, wrong range, mis-scaled units.
 - Once a study's design evidence is complete, tag the paper state and carry a pruned copy forward.
 
-## Reports & CI
+## Doc site & CI
 
-- Reports embed a **preserved runlog run** rather than recomputing; expensive cells embed precomputed
-  outputs.
+- A README's embedded figures point at a **preserved runlog run's** `details/<run_id>/` rather than
+  anything recomputed at build time.
 - **Deterministic (synthetic) runs regenerate in CI** before the docs build, so embedded figures exist
   on a fresh checkout.
 - **Real-data runs cannot regenerate in CI** — commit their (small) figures + manifest/metrics as

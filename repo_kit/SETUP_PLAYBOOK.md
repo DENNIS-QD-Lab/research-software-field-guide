@@ -103,24 +103,24 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
     [experiment_readme.template.md](templates/experiment_readme.template.md) → `experiments/_TEMPLATE.md`,
     and [experiments_playbook.template.md](templates/experiments_playbook.template.md) →
     `.claude/experiments_playbook.md`. Fill their placeholders.
-  - Add `experiments/_common/` for shared **harness only** (run logging, comparison/plot helpers,
-    report embedding) — never method code; drivers import methods from `src/`.
-  - Add a small `runlog` helper that writes, per run, a report at the *theme's* top level —
-    `<YYMMDD_slug>[_NN].md`, immediately visible without opening a subfolder — plus a matching
-    `details/<YYMMDD_slug>[_NN]/` one level down holding `manifest.yaml` (git commit + dirty flag,
-    params, inputs + checksum) and `metrics.csv`. The report opens with a one-line `## Summary` and a
-    **protected `## Interpretation (scientist)`** section that tooling **never overwrites**. **PRESERVE
-    by default** (a rerun gets a fresh `_NN`, kept in sync between the report and its `details/`
-    counterpart; never clobber). Keep the split additive if `runlog` already exists and other drivers
-    depend on today's shape: a new optional parameter (e.g. `report_dir=`), defaulting to the old
-    co-located behavior, lets one driver adopt the split without moving every other driver's runs at the
-    same time. ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
-  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch) under `details/`; commit only the report,
-    `manifest.yaml`, and `metrics.csv`.
-- **Verify:** run a driver; confirm the theme-level report + matching `details/` folder + protected
-  report section appear, and a rerun does not overwrite the prior run.
-- **Don't:** fork method code into a driver; overwrite a preserved run; ever auto-write the
-  interpretation section.
+  - Add `experiments/_common/` for shared **harness only** (run logging, comparison/plot helpers) —
+    never method code; drivers import methods from `src/`.
+  - Add a small `runlog` helper that writes, per run, **provenance only** — no report file — to
+    `details/<YYMMDD_slug>[_NN]/` at the theme's top level: `manifest.yaml` (git commit + dirty flag,
+    params, inputs + checksum) and `metrics.csv`. **PRESERVE by default** (a rerun gets a fresh `_NN`;
+    never clobber). The theme's own `experiments/<slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
+    narrative document — findings, embedded figures, interpretation — written once and updated in place,
+    never regenerated per run. A run's figure worth keeping visible gets embedded directly in the
+    README's Findings section, from `details/<run_id>/`, with a short italic caption noting the run id
+    (not a heading — see [documentation_promotion.md](../docs/reference/documentation_promotion.md)).
+    ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
+  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch) under `details/`; commit only `manifest.yaml`
+    and `metrics.csv`.
+- **Verify:** run a driver; confirm the `details/` folder appears with a manifest and metrics, and a
+  rerun gets a fresh `_NN` instead of overwriting it.
+- **Don't:** fork method code into a driver; overwrite a preserved run; have the driver write a
+  per-run report file — the README is the report, and its interpretation stays a signed
+  `> **<initials>:** _pending._` placeholder until the scientist fills it in, never guessed at.
 
 ### B6 · Normalize docstrings to NumPy style
 - **When:** docstrings are missing or mixed-style (blocks a clean doc site).

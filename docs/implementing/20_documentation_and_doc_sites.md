@@ -98,23 +98,33 @@ sphinx-autobuild docs docs/_build/html
 
 This serves the site at `http://localhost:8000` and rebuilds as you save. Viewing a one-off build, and sharing the site, are covered next.
 
-## Rendering experiment reports into the same site
+## Rendering experiment findings into the same site
 
-The API reference above is one half of the doc site; the other half is the experiment reports from
+The API reference above is one half of the doc site; the other half is the experiment findings from
 [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md) — the same `docs/` build, a
-second kind of page. Two folders keep the two kinds of report apart without either one drifting from
-`experiments/`:
+second kind of page. Each theme gets exactly one:
 
-- **`docs/experiment_overviews/<theme>_overview.md`** — one thin page per theme. Its body is a MyST
-  `{include}` of that theme's `experiments/<theme-slug>/README.md` (so the overview text is never a
-  second copy to keep in sync), followed by a `toctree` that lists — or `:glob:`s — that theme's reports.
-- **`docs/experiment_summaries/*.md`** — the reports themselves, flat in one folder (not nested per
-  theme) so a single `:glob:` entry in each theme's overview page can pick them all up. A report here can
-  be hand-authored (a full-circle write-up that embeds a preserved `runlog` run via a helper like
-  `report_embed.py`) or a thin stub auto-written by promotion (see below) — both live side by side.
+- **`docs/experiment_overviews/<theme>_overview.md`** — one page per theme, its entire body a MyST
+  `{include}` of that theme's `experiments/<theme-slug>/README.md`, so the doc site never holds a
+  second copy of the findings:
 
-Wire `docs/index.md` with a `toctree` pointing at the overview pages (one per theme), not at
-`experiment_summaries/` directly — a reader lands on the theme's framing before the individual reports.
+  ````markdown
+  ```{include} ../../experiments/<theme-slug>/README.md
+  :relative-docs: ../../experiments/<theme-slug>/
+  :relative-images:
+  ```
+  ````
+
+  The `:relative-docs:`/`:relative-images:` options matter: without them, MyST resolves the README's
+  own relative image links (`![](details/<run-id>/fig.png)`) against the *overview page's* directory
+  instead of the README's own, and the figure silently fails to render. With them, the README's plain,
+  self-relative paths work both through this include and when the README is viewed directly on GitHub.
+  Full mechanics: [documentation_promotion.md](../reference/documentation_promotion.md).
+
+There is no second folder of per-run report pages to keep in sync — a finding is on the site as soon
+as it's written into the theme's README, figure and all.
+
+Wire `docs/index.md` with a `toctree` pointing at the overview pages, one per theme:
 
 ````markdown
 ```{toctree}
@@ -126,18 +136,16 @@ experiment_overviews/theme_b_overview
 ```
 ````
 
-**Promoted run stubs.** When a run resolves `promote=True` (the `DOCUMENT_EVERYTHING` mechanism from
-doc 16), `runlog` writes a stub page straight into `docs/experiment_summaries/<theme-slug>-<run-id>.md` —
-a MyST `{include}` pointing back at the run's own report in `experiments/<theme-slug>/`, so the doc site
-never holds a second copy of the content. The theme-slug prefix keeps every promoted stub's filename
-unique in that flat folder, and lets the theme's overview page glob them without picking up another
-theme's runs. Full mechanics: [documentation_promotion.md](../reference/documentation_promotion.md).
-
-**Executable reports.** A hand-authored report can go further than a static include: with `myst-nb`
-added to `extensions` in `conf.py`, a `docs/experiment_summaries/*.md` page can carry executable code
-cells that render figures at *build* time — useful for a report that recomputes a cheap plot from a
-preserved run's saved metrics rather than embedding a static image. Keep expensive computation in the
-driver script and the run's `details/`; the report cell should load and display, not re-run the analysis.
+**An optional exception: standalone deep-dive reports.** Occasionally a single read-out is too complex
+for a README's figure-and-caption pattern — a manuscript-figure-quality walkthrough with several panels
+each needing its own explanation. For that rare case, a hand-authored page under
+`docs/experiment_summaries/<name>.md` is a reasonable exception, optionally executable via `myst-nb` so
+it can render a plot from a preserved run's saved metrics at *build* time rather than embedding a static
+image (keep expensive computation in the driver script and the run's `details/`; the report cell should
+load and display, not re-run the analysis). Link to it from the theme's README rather than letting it
+replace the README's own Findings section, and keep it rare — see
+[documentation_promotion.md](../reference/documentation_promotion.md) for why this shouldn't become the
+default path for every finding.
 
 ## Viewing and sharing the site
 

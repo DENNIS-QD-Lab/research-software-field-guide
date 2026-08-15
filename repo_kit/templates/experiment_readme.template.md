@@ -16,10 +16,9 @@ One or two sentences: what this study is about and which part of the analysis it
 
 All method code is imported from the `<yourpkg>` library and the shared harness in
 `experiments/_common/`; the drivers here only compose those pieces, record results, and render figures,
-so the study tests exactly what the library provides.
-
-If this study has a rendered report, link it here (e.g. `docs/experiment_summaries/<name>.md`, nested
-under this theme's `docs/experiment_overviews/<theme>_overview.md` in the built site).
+so the study tests exactly what the library provides. This file is the study's only narrative
+document — it's what's rendered on the doc site (`docs/experiment_overviews/<theme>_overview.md`
+includes it directly) — updated in place as findings accrue, never regenerated per run.
 
 ## Question / motivation
 
@@ -47,7 +46,20 @@ method — so the result can be believed, not just produced.
 *(Filled in as evidence accrues. A poorly-fitting or null result is a finding, not a defect — see the
 retention note below. Date each finding.)*
 
-- **H# (dataset, seed/params, date):** what was observed, in numbers, and what it implies.
+- **H# (dataset, seed/params, date):** what was observed, in numbers.
+
+  ![](details/<YYMMDD_slug>/<figure>.png)
+  *Run `<YYMMDD_slug>` — reproduce with `python experiments/<slug>/run_<name>.py`.*
+
+  > **<initials>:** what it implies — pending.
+
+The embedded figure is the *current* evidence for this finding, not a running log of every attempt —
+when a rerun supersedes it, swap the image path and caption in place rather than adding a second entry
+beside it. The image path is relative to this README's own location (`details/<run>/...`), which
+renders correctly both here and on the doc site — see
+[documentation_promotion.md](../../docs/reference/documentation_promotion.md) for why that only works
+with the right `{include}` options on the overview page. The italic caption is deliberately not a
+heading: it exists so the run can be reproduced, not so it can be linked to or indexed.
 
 ## Reproduce
 
@@ -56,11 +68,11 @@ From the repo root, in the project environment:
     python experiments/<slug>/run_<name>.py
 
 Seeded/synthetic data reproduces exactly; real-data inputs are referenced by their stable identifier and
-checksum (see the research log and `experiments_playbook.md`). The run's report lands directly in this
-folder (`<YYMMDD_slug>[_NN].md`); its manifest, metrics, and figures land in `details/<YYMMDD_slug>[_NN]/`
-(git-ignored except for the manifest/metrics, unless a figure is committed as a fixture). To reproduce the
-exact state behind a paper figure, check out the corresponding tag (e.g. `paper-v1`) rather than the
-latest `main`.
+checksum (see the research log and `experiments_playbook.md`). Each run's manifest, metrics, and
+figures land in `details/<YYMMDD_slug>[_NN]/` (git-ignored except for the manifest/metrics, unless a
+figure is committed as a fixture) — provenance for reproducibility, not a report; the findings above
+are. To reproduce the exact state behind a paper figure, check out the corresponding tag (e.g.
+`paper-v1`) rather than the latest `main`.
 
 A run you keep is *finalized* on committed code: commit the driver and any `src/` change, re-run so the
 manifest records a clean commit (`dirty: false`), confirm the metrics reproduce, then commit the
@@ -68,8 +80,12 @@ refreshed run. See `experiments_playbook.md` → *Finalizing an experiment*.
 
 ## Status & decisions
 
-What is settled, what is still open, what has been tagged, and any decision to stop pursuing a
-hypothesis (with the reason). Drivers are kept even when the *result* is unflattering — that is evidence
-for a design decision. A driver is rewritten only when the *code* is wrong (bad math, wrong range,
-mis-scaled units), not when the result is merely disappointing. Once the design evidence is complete,
-the chosen approach is tagged and a pruned copy carried forward.
+What is settled and what is still open, what has been tagged. Any decision to stop pursuing a
+hypothesis, and why, is the scientist's call:
+
+> **<initials>:** _status and next decision — pending._
+
+Drivers are kept even when the *result* is unflattering — that is evidence for a design decision. A
+driver is rewritten only when the *code* is wrong (bad math, wrong range, mis-scaled units), not when
+the result is merely disappointing. Once the design evidence is complete, the chosen approach is tagged
+and a pruned copy carried forward.

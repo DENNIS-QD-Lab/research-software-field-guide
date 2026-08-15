@@ -56,24 +56,27 @@ only the runs inside it are dated.>
 ## Decision & milestone log
 
 Newest first. This is the historical record to read *instead of* `git log` — the *why* behind the
-current state.
+current state, in the scientist's own words, inserted verbatim rather than paraphrased:
 
-- **<YYYY-MM-DD>** — <what was decided or reached, and why. e.g. "Dropped approach B: it did not change
-  the result on the realistic range; keeping A.">
+> **<initials>, <YYYY-MM-DD>:** <what was decided or reached, and why — e.g. "Dropped approach B: it did
+> not change the result on the realistic range; keeping A.">
+
+Sign with initials, not a generic "Scientist" label — nothing reads or depends on the label text, so
+this stays unambiguous once a repo has more than one contributor.
 
 ---
 
 ## How this folder works
 
 - **`_TEMPLATE.md`** — copy it to start a new experiment folder (idea → test → outcome headings).
-- **`_common/`** — the shared harness the drivers reuse (run logging, comparison/plot helpers, report
-  embedding). Harness only — no method code; drivers import methods from `src/`.
-- **`<slug>/<YYMMDD_slug>[_NN].md`** — one report per run, written by the runlog helper, sitting directly
-  in the theme folder so it's visible without opening a subfolder. Its `## Interpretation (scientist)`
-  section is never overwritten by tooling.
-- **`<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind that same report, name-matched to it:
-  `manifest.yaml` (git commit + dirty flag, params, inputs), `metrics.csv`. Present for reproducibility,
-  rarely opened on a normal read-through. Preserved by default; heavy artifacts (figures, arrays) are
+- **`_common/`** — the shared harness the drivers reuse (run logging, comparison/plot helpers).
+  Harness only — no method code; drivers import methods from `src/`.
+- **`<slug>/README.md`** — the one page for the experiment: motivation, hypotheses, findings with
+  their figures embedded inline, and one interpretation per finding. This is what's rendered on the
+  Sphinx doc site. Written once and updated as findings accrue — not regenerated per run.
+- **`<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind a run: `manifest.yaml` (git commit
+  + dirty flag, params, inputs), `metrics.csv`, and any figures. Present for reproducibility, not meant
+  to be read as a report — the README is. Preserved by default; heavy artifacts (figures, arrays) are
   git-ignored unless committed as a small report fixture.
 - **Tags** — a paper's exact state is tagged (e.g. `paper-v1`). Reproduce a figure by checking out its
   tag, not the latest `main`.
