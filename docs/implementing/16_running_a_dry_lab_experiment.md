@@ -1,6 +1,6 @@
 # Running a dry-lab experiment
 
-[15_experiments_and_shipping.md](15_experiments_and_shipping.md) gave you the *structure*: a `src/` library and a dated
+[15_experiments_and_shipping.md](15_experiments_and_shipping.md) gave you the *structure*: a `src/` library and an
 `experiments/` folder. This doc is about the *practice* — how you actually run a computational
 ("dry-lab") experiment and record it so the result holds up later.
 
@@ -11,8 +11,16 @@ not a pile of scripts is this: any run can be reproduced, and the whole line of 
 followed, **without reading the git history**. Someone (including future-you) should be able to open
 the folder and see what you asked, what you found, and what to do next.
 
-Everything below is illustrated by an example repo built to this standard, `SWIR_HDR_v2`, which is set up exactly this
-way.
+Everything below is illustrated by an example repo built to this standard, set up exactly this way.
+
+## The pieces, at a glance
+
+- **The research log** — one file holding current state: the goal, open questions, what's next.
+- **The reference ledger** — the external knowledge (papers, specs, standards) behind your decisions.
+- **The experiment folder** — one per line of inquiry, built from a template: question → hypotheses → tests → findings.
+- **Validation** — designing an experiment whose answer can actually be trusted.
+- **Saving the state of every run** — what a run writes so it can be reproduced later.
+- **Interpretation stays with the scientist** — what gets recorded automatically, and what only you write.
 
 ## The research log: one place that holds the state
 
@@ -53,12 +61,11 @@ mattered here" pairing always travels with the code that used it; the payoff at 
 
 ## The experiment folder: idea → test → outcome
 
-Each distinct study gets its own self-contained folder (`experiments/crf-necessity/` — no date prefix)
+Each distinct study gets its own self-contained folder (`experiments/crf-necessity/` — add a numbered prefix if you want them to appear in the order they are introduced)
 built from a **template** so every experiment reads the same way. The folder is undated on purpose:
 pipeline work loops — you build one stage, add another, loop back to fix the first, add a third — so a
-theme is a standing address for a line of inquiry, revisited for as long as it stays open, not a snapshot
-of when it happened to start. Chronology instead lives on the *runs* inside the folder (see "Save the
-state of every run," below), where it actually applies. The exemplar's template (`experiments/_TEMPLATE.md`)
+theme is a standing address for a line of inquiry, revisited for as long as it stays open. Specific experiments are dated runs inside the folder (see "Save the
+state of every run," below), documenting the chronological accrual of results or eveidence related to that theme. The exemplar's template (`experiments/_TEMPLATE.md`)
 has a fixed set of headings:
 
 - **Question / motivation** — why this experiment exists.
@@ -71,6 +78,9 @@ has a fixed set of headings:
 
 Copy the template to start a new experiment, and add a row to the research log so it shows up in the
 status table. That is the whole ritual.
+
+[example_repo_structure.md](../reference/example_repo_structure.md) shows what several of these theme
+folders, each with multiple runs, actually look like once a project has been running for a while.
 
 ## Validation: designing an experiment you can trust
 
@@ -91,8 +101,8 @@ Manually examining the data as it moves through the pipeline builds intuition fo
 analysis, and catches problems early, while they are cheap to fix. Design your code to generate *and
 present* its intermediate outputs often, not only the final number. Plot the intermediate arrays, their
 distributions, or the residuals — whatever shows the *shape* of the data at that step — and check how each
-step changes them. (For image work, for instance, look at the image **and** a histogram of its intensities
-together, so that when a step excludes data — say, a threshold — you see what it does to both.) This is the
+step changes them. (For image processing work, for instance, look at the image **and** a histogram of its intensities
+together, so that when a step excludes data — say, by implementing a threshold-based mask — you see what it does to both.) This is the
 exploratory companion to the validation checks in [18_ai_assisted_development.md](18_ai_assisted_development.md) ("a clean run is not a correct
 analysis"): the same eyes-on-the-data instinct, applied continuously before you have tests to encode it.
 
@@ -104,21 +114,38 @@ have it write a small **manifest** next to its outputs:
 
 ```yaml
 # crf-necessity/details/260717_crf-necessity/manifest.yaml   (one subdirectory per run)
-git_commit: 4f7675a
-git_dirty: false            # were there uncommitted changes? (honest, not aspirational)
-timestamp: 2026-07-17T14:02:11
+slug: crf-necessity
+summary: "Two-step and joint CRF solves agree once dark current is subtracted."
+driver: run_crf_necessity.py
+created: 2026-07-17T14:02:11
+git:
+  commit: 4f7675a
+  dirty: false                   # were there uncommitted changes when this run happened?
 inputs:
   dataset: run_2026-06-30        # which data (see 17_working_with_large_data.md)
   dataset_sha256: 9c1f…          # so you can prove two runs used the same input
-parameters:
+experimental_params:
   threshold: 0.85
   seed: 0
 ```
 
-The commit hash says *which code*, the dirty flag is honest about whether that code was actually
-committed or if the run used uncommitted changes (which may hinder reproduction), the parameters say *how* it was configured, and the inputs say *what it ran on*. With those four, "reproduce the run behind Figure 3" is a real instruction, not a hope. Seeding any
-randomness is what lets a rerun return the *same* numbers rather than merely similar ones — the same
-determinism a regression test relies on ([12_testing_with_pytest.md](12_testing_with_pytest.md)).
+`summary` and `driver` make a `details/` folder scannable without opening each file — what this run was
+about, and which script produced it. The commit hash under `git` says *which code*, `dirty` says whether
+that code was actually committed or the run used uncommitted changes instead, `experimental_params` says
+*how* it was configured, and `inputs` says *what it ran on*. With those recorded, reproducing the run
+behind Figure 3 means checking out that commit, restoring that input dataset, and rerunning with those
+parameters. Seeding any randomness is what lets a rerun return the *same* numbers rather than merely
+similar ones — the same determinism a regression test relies on
+([12_testing_with_pytest.md](12_testing_with_pytest.md)).
+
+`git.commit` and `dataset_sha256` pin *which code* and *which
+package versions* executed them — an `environment.yml` install can quietly drift as its dependencies
+release new versions, the same drift [11_code_quality_tools.md](11_code_quality_tools.md) describes
+for a single pinned tool. For a run that needs to reproduce exactly, add a fully-resolved lockfile
+(`conda-lock`, `pip freeze`, or a project tool like Hatch or Pixi) alongside the manifest, so a rerun
+months later installs the identical dependency graph, not just the identical `environment.yml`. Lock a
+run only when it actually needs that guarantee — a lockfile captured once and never revisited just
+pins the project to an aging dependency set nobody wants to build against later.
 
 ## Repeat runs, and track quality, without bloating the repo
 
@@ -270,8 +297,9 @@ share it. Mechanics for that export are in
 
 ## How this connects
 
-- **[15_experiments_and_shipping.md](15_experiments_and_shipping.md)** — where these folders live and how a concluded experiment's
-  code graduates into the shipped library.
+- **[15_experiments_and_shipping.md](15_experiments_and_shipping.md)** — where these folders live, and
+  why method code in `src/` is safe to keep changing freely as long as each run's manifest still points
+  at the commit that produced it.
 - **[12_testing_with_pytest.md](12_testing_with_pytest.md)** — a validation experiment that concludes cleanly becomes a
   regression test, so the result you just established stays true as the code changes.
 - **[17_working_with_large_data.md](17_working_with_large_data.md)** — how the `inputs:` block above points at real data too big to
