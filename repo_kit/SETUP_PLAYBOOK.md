@@ -134,7 +134,10 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** `docs/conf.py` with `autodoc` + `napoleon` + `intersphinx` + `myst_parser`, `furo` theme
   (skeleton in [20](../docs/implementing/20_documentation_and_doc_sites.md)); autodoc imports the
   package, so `pip install -e .` first; add an API page via an `automodule` directive; preview with
-  `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file.
+  `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file. For a private repo,
+  make the built site reachable in CI (20's two appendices): a `workflow artifact` on every push for
+  day-to-day review, a `workflow_dispatch`-triggered tagged **release** for a snapshot that needs to
+  outlive the artifact's retention window.
 - **Verify:** `sphinx-build -W -b html docs docs/_build/html` builds clean.
 - **Don't:** paste a bare build path into a browser (it searches) — serve it or use a `file:///` URL.
 
@@ -160,11 +163,26 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.
 - **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared approach
   still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`. *Only after
-  the tag*, trim `src/` on `main` to the disseminated method. ([23](../docs/disseminating/23_concluding_a_project.md),
+  the tag*, trim `src/` to the disseminated method — directly on `main`, or on a separate branch you
+  tag instead, leaving `main` untouched. ([23](../docs/disseminating/23_concluding_a_project.md),
   [22](../docs/disseminating/22_versioning_and_releases.md))
-- **Verify:** the tag checks out and reproduces a figure; `main` still builds and tests green after the trim.
+- **Verify:** the tag checks out and reproduces a figure; wherever you trimmed (`main` or a branch)
+  still builds and tests green.
 - **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging (it
   still installs and still costs maintenance).
+
+### B11 · Add a `figures/` folder for manuscript drafting
+- **When:** drafting a specific submission; more than a couple of ad hoc figure scripts are floating
+  around.
+- **Steps:** one folder per figure (or figure group) under `figures/`, same theme + `details/`
+  discipline as `experiments/` — a driver that imports from `src/`, dated attempts accumulating in
+  `details/`, the current draft embedded in the folder's `README.md` alongside its caption. Wire the
+  README into the doc site the same way an experiment theme's is.
+  ([23](../docs/disseminating/23_concluding_a_project.md),
+  [16](../docs/implementing/16_running_a_dry_lab_experiment.md))
+- **Verify:** the doc site renders the figures/README page with the current image and caption visible.
+- **Don't:** overwrite a figure in place when it stops earning its spot — let the superseded attempt
+  sit in `details/`, same as any other run.
 
 ## When a repo already diverges from the standard
 

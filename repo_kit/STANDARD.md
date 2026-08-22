@@ -33,21 +33,17 @@ your_repo/
 ├── experiments/             question-driven studies — your reproducible research notebook
 │   ├── README.md            the research log: goal, open questions, decisions (read this first)
 │   ├── _TEMPLATE.md         copy it to start a new theme
-│   ├── _common/             shared harness (run logging, comparison plots, reporting) — never method code
-│   └── <theme-slug>/        one undated, permanent folder per theme (hyphens allowed — a multi-word
-│                              theme name reads better hyphenated; revisited for as long as that
-│                              line of inquiry stays open): its README, driver(s), and
-│                              - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
-│                              - details/<YYMMDD_slug>[_NN]/   the manifest/metrics/figures behind
-│                                each report, name-matched to it, rarely opened directly
-├── src/yourpkg/             your method code — the importable library; studies import from here and never copy it
+│   ├── _common/             shared harness (run logging, comparison plots) — never method code
+│   └── <theme-slug>/        undated, permanent per-theme folder — README, driver(s), dated runs
+│                              in details/; optional leading number for order — see
+│                              16_running_a_dry_lab_experiment.md
+├── src/yourpkg/             your method code — the importable library; studies import it, never copy
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
-├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings,
-│                              plus rendered experiment reports:
-│                              - experiment_overviews/<theme>_overview.md   one per theme, includes its
-│                                README and a toctree of that theme's reports
-│                              - experiment_summaries/*.md   the reports themselves (hand-authored and/or
-│                                promoted run stubs), flat so a glob toctree can pick them up
+├── docs/                    Sphinx site from docstrings, plus rendered experiment reports —
+│                              experiment_overviews/ + experiment_summaries/, see
+│                              20_documentation_and_doc_sites.md
+├── figures/                 (once drafting a manuscript) the figure outline — same theme + details/
+│                              discipline as experiments/, one folder per figure
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
 ├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments
@@ -56,7 +52,9 @@ your_repo/
 ```
 
 The [implementing track](../docs/implementing/) walks the whole progression, from a first script to this
-shape.
+shape. [example_repo_structure.md](../docs/reference/example_repo_structure.md) shows a fully
+fleshed-out (synthetic) instance of it — several themes, multiple runs each, and a `figures/` folder —
+if the abstract tree above is hard to picture filled in.
 
 ## The decisions, and why
 
@@ -125,13 +123,18 @@ pull request, never trust a number without a test, and validate beyond the test 
 physical plausibility, an independent method, and the intermediate outputs. The more you delegate to your AI assistant, the more scrutiny your results will need.
 → [18_ai_assisted_development.md](../docs/implementing/18_ai_assisted_development.md)
 
-**If and when a project reaches publication, the experiments become the figure pipeline — then you
-freeze it.** Up to here nothing forces a "final" state. When results are publication-ready, the experiment
-runs are what generate the figures; you then **tag** the exact state behind the paper (with every
-compared approach still present), archive that tag for a permanent **DOI** (Zenodo), and add a `LICENSE`
-and `CITATION.cff`. Only after freezing do you trim `src/` on `main` down to the one approach you
-disseminate — if disseminating a clean library is even a goal. The tag keeps the paper reproducible;
-`main` keeps moving. A tag is not a fork: it costs nothing and cannot rot.
+**If and when a project reaches publication, a `figures/` folder becomes the figure pipeline — then you
+freeze it.** Up to here nothing forces a "final" state. When you start drafting a specific submission, a
+`figures/` folder joins `experiments/` — same theme + dated-`details/` discipline, one folder per
+figure, its driver importing from `src/` — and its `README.md` becomes the paper's actual figure
+outline, with captions, reviewable by a co-author or PI without opening the repo. You then **tag** the
+exact state behind the paper (with every compared approach still present), archive that tag for a
+permanent **DOI** (Zenodo) — `figures/` is already most of that reproducibility package — and add a
+`LICENSE` and `CITATION.cff`. Only after freezing do you trim down to the one approach you
+disseminate — if disseminating a clean library is even a goal — either directly on `main`, or on a
+separate branch you tag, leaving `main` untouched. The tag keeps the paper reproducible; `main` keeps
+moving regardless of which you choose. A branch or a tag is not a fork: either costs nothing and cannot
+rot.
 → [23_concluding_a_project.md](../docs/disseminating/23_concluding_a_project.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
 
@@ -151,6 +154,7 @@ flowchart LR
         DOC["docs/<br>Sphinx site"]
     end
     subgraph "Disseminate (optional)"
+        FIG["figures/<br>manuscript drafts"]
         TAG["tag + Zenodo DOI"]
         PKG[installable package]
     end
@@ -160,6 +164,8 @@ flowchart LR
     EXP -->|"imports, never forks"| SRC
     SRC --> DOC
     EXP -.->|"a validation run<br>becomes a regression test"| TEST
+    SRC -->|"when drafting a paper"| FIG
+    FIG --> TAG
     SRC -->|"when ready to publish"| TAG
     TAG --> PKG
 ```
