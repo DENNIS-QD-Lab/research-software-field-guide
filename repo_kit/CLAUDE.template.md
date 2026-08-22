@@ -31,6 +31,9 @@ tests/             pytest suite (unit + regression) with committed fixtures
 docs/              Sphinx doc site: API reference generated from docstrings, plus rendered
                      experiment reports — experiment_overviews/<theme>_overview.md (one per theme,
                      includes its README) and experiment_summaries/*.md (the reports themselves)
+figures/           (once drafting a manuscript) the paper's figure outline — same theme +
+                     dated-details/ discipline as experiments/, one folder per figure; see
+                     23_concluding_a_project.md
 references.md      the reference ledger: external sources + why each mattered here
 config / local_paths.py   parameters and machine-local data paths (paths stay out of git)
 ```
@@ -71,6 +74,18 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Hints are for readers and static checkers; Python does not enforce them at runtime. Do not add runtime
   type assertions unless there is a specific reason.
 
+## Testing requirements
+
+- A new function that does real computation (not just wiring, CLI glue, or I/O) gets a test in
+  `tests/`, following
+  [12_testing_with_pytest.md](../docs/implementing/12_testing_with_pytest.md):
+  `np.testing.assert_allclose` for floats, `pytest.mark.parametrize` for multiple cases.
+- When fixing a bug, add a regression test that would have caught it.
+- Tests are part of the function, not optional follow-up work to add later.
+- Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting
+  code with zero tests, not a number to chase. Don't add filler tests just to raise it. See
+  [12_testing_with_pytest.md](../docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
+
 ## Naming conventions for files
 
 - snake_case, lowercase, no hyphens, under about 30 characters.
@@ -80,7 +95,9 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - **Theme folders may use hyphens; run directories may not.** `experiments/<theme-slug>/` (hyphens
   allowed — a multi-word theme name reads better as `crf-solve-and-necessity` than as one run-together
   word) is a standing address for one line of inquiry, revisited for as long as that inquiry stays open
-  (a theme is not "done" the day it starts) — it carries no date. Its `README.md` is the theme's only
+  (a theme is not "done" the day it starts) — it carries no date. A leading number
+  (`01_crf-solve-and-necessity/`) is an optional, encouraged way to order themes by conception once a
+  project has enough of them that folder order stops being obvious; it is not required. Its `README.md` is the theme's only
   narrative document — findings, figures, interpretation — updated in place, never regenerated per run.
   Each run's provenance follows the normal no-hyphens rule and lives one level down, name-matched to
   nothing but itself: `details/<YYMMDD>_<slug>[_NN]/` (`manifest.yaml`, `metrics.csv`, figures) — present

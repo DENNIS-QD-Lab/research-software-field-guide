@@ -1,4 +1,4 @@
-name: helper
+name: fieldguide
 channels:
   - conda-forge
 dependencies:
@@ -8,9 +8,10 @@ dependencies:
   - matplotlib
   - jupyter
   - ipykernel
-  # code-quality tooling (see docs/practices/11_code_quality_tools.md)
+  # code-quality tooling (see docs/implementing/11_code_quality_tools.md)
   - ruff
   - pre-commit
   - mypy
-  # testing (see docs/practices/12_testing_with_pytest.md)
+  # testing (see docs/implementing/12_testing_with_pytest.md)
   - pytest
+  - pytest-cov
