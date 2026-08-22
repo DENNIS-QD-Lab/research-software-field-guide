@@ -37,7 +37,7 @@ inputs:
 For a multi-file dataset, commit a small **data manifest** — a text file listing each file with its
 size and `sha256` — instead of the data itself. The manifest is a few kilobytes, it *is*
 reproducible provenance, and it lets anyone verify their local copy matches the one behind your
-result. This is the large-data analog of seeding: same inputs in, same numbers out.
+result.
 
 ## The small carve-out, and CI
 
@@ -53,5 +53,4 @@ the report points at them.
 
 Reproducibility does not come from committing the data — a committed dataset bloats the repo forever
 and still does not prove *which* version a result used. It comes from **a pinned code state** (a tag;
-[22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md)) **plus a referenced, checksummed dataset**. Freeze the code, name
-and hash the data, and the result is reproducible without a single gigabyte in git.
+[22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md)) **plus a referenced, checksummed dataset**.

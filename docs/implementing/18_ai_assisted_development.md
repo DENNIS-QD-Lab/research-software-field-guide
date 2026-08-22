@@ -22,8 +22,8 @@ Keeping these apart is what stops any one file from sprawling into an unreadable
 
 The assistant's working scope is the set of folders open to it — in the VS Code integration, the repos in your workspace ([10_from_scripts_to_pipelines.md](10_from_scripts_to_pipelines.md)). Use that deliberately:
 
-- **A multi-repo workspace gives context, not a fence.** Opening an exemplar repo beside the one you are building lets the assistant *read* its structure and mirror it — the quickest way to say "follow this repo's layout." But every repo in scope is also one it can *edit*, so include only what you need: a reference to read, or a repo you are genuinely co-editing. Adding repos widens what it can change; it does not wall anything off.
-- **Isolation comes from narrowing, not bundling.** To keep edits out of the wrong place, open only the target repo, or instruct "read X, edit only Y" and review each repo's diff on its own (each is its own git root). For a real sandbox, use a **git worktree** — a second working directory attached to the same repository but checked out to its own branch, so the assistant's changes happen in an isolated copy on disk that you then merge or discard. It shares the repo's history, so it is far cheaper than a full clone (catalogued in [advanced_git.md](../reference/advanced_git.md)).
+- **Every repo open in the workspace is one the assistant can both read and edit.** Opening an exemplar repo beside the one you are building lets the assistant read its structure and mirror it — the quickest way to say "follow this repo's layout." Include only what you actually need open: a reference repo to read, or a repo you are genuinely co-editing, since anything in scope can also be changed.
+- **Narrow what's open to keep edits out of the wrong place.** Open only the target repo, or instruct "read X, edit only Y" and review each repo's diff on its own (each is its own git root). For a real sandbox, use a **git worktree** — a second working directory attached to the same repository but checked out to its own branch, so the assistant's changes happen in an isolated copy on disk that you then merge or discard. It shares the repo's history, so it is far cheaper than a full clone (catalogued in [advanced_git.md](../reference/advanced_git.md)).
 
 ## Review every generated change
 
@@ -31,7 +31,7 @@ The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read ev
 
 ## Never trust numbers without a test
 
-The rule that matters most for *research* code: if generated or edited code produces numbers, a test guards them ([12_testing_with_pytest.md](12_testing_with_pytest.md)). "Did this change the result?" is answered by a test, not by the assistant's reassurance. An assistant can produce code that runs cleanly and returns a plausible, wrong answer; a test on a known-good case is what catches it.
+For research code, if generated or edited code produces numbers, a test guards them ([12_testing_with_pytest.md](12_testing_with_pytest.md)). An assistant can produce code that runs cleanly and returns a plausible, wrong answer; a test on a known-good case is what actually catches that, rather than a description of the diff that sounds right.
 
 ## A clean run is not a correct analysis
 
@@ -47,7 +47,7 @@ An assistant clears the first bar effortlessly and can miss the second entirely 
 - **Cross-check against an independent method** — a second route to the same number is strong evidence; a rough hand calculation often suffices.
 - **Inspect the intermediate outputs**, not only the final figure. Errors hide in the middle. (In exploratory work, before you have tests, this eyes-on-the-data habit is itself the method — see [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md).)
 
-Scale your scrutiny to how much you delegated: the more of the implementation an assistant wrote, the *more* of this the result is owed, precisely because you were not watching each line as it went in. Examining results critically is ordinary research hygiene; it becomes non-negotiable when a machine wrote the code that produced them.
+Scale your scrutiny to how much you delegated: the more of the implementation an assistant wrote, the *more* of this the result is owed, precisely because you were not watching each line as it went in.
 
 ## What to delegate, and what to keep
 
