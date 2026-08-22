@@ -2,7 +2,7 @@
 
 Setup, essential commands, and cost/context management for an AI coding assistant, using Claude Code (this repo's assistant) as the concrete example. [19_driving_an_ai_assistant.md](../implementing/19_driving_an_ai_assistant.md) covers how to work *well* with an assistant once it's running; this doc gets one running and covers the mechanical day-to-day of a session.
 
-**This corner of the tooling moves fast.** Specific commands, menus, and pricing below are a snapshot, not a promise — if something here doesn't match what you see on screen, trust the tool's own docs (`claude --help`, or the equivalent for your assistant) over this page, and send a PR to fix it.
+**This corner of the tooling moves fast.** Specific commands, menus, and pricing below reflect this doc's last update and may already be out of date — if something here doesn't match what you see on screen, trust the tool's own docs (`claude --help`, or the equivalent for your assistant) over this page, and send a PR to fix it.
 
 ## Installing Claude Code
 
@@ -50,7 +50,7 @@ Typed at the prompt, inside a session:
 | `/cost` | Shows token usage and estimated cost for the current session. |
 | Esc | Interrupts whatever the assistant is currently doing — use it the moment output looks wrong, rather than waiting for it to finish. |
 
-Permission prompts (approving a file edit, a command, or a tool call) appear inline as the assistant works; how much it can do without asking is a setting you control, and it is worth starting cautious (approve each change) until you have a feel for what the assistant tends to do.
+Permission prompts (approving a file edit, a command, or a tool call) appear inline as the assistant works; how much it can do without asking is a setting you control, and it is worth starting cautious (approve each change) until you have a feel for what the assistant tends to do. A command prompt shows the literal text it wants to run — [command_line_reference.md](command_line_reference.md) covers how to read one, including compound commands that chain several actions together.
 
 ## Managing context and cost
 
@@ -68,6 +68,4 @@ Some assistants, including Claude Code, can delegate part of a task to a separat
 
 **Helps when:** the sub-tasks are genuinely independent (two unrelated files, a search that doesn't depend on the main conversation's state) and each piece is large enough that the coordination overhead is worth it — a broad codebase search, or an isolated review pass, are good candidates.
 
-**More error-prone or costly when:** the pieces actually depend on each other (agent B needs to see what agent A just decided) or the task is small enough that one focused pass would have been faster and cheaper than orchestrating several. Each sub-agent doing real work consumes its own tokens, so running several at once adds up faster than one focused conversation — it is not free parallelism, even when it saves *your* time.
-
-Treat this as a tool to reach for on large, decomposable tasks, not a default mode — and expect the specifics of when it helps to keep changing as the tools mature.
+**More error-prone or costly when:** the pieces actually depend on each other (agent B needs to see what agent A just decided) or the task is small enough that one focused pass would have been faster and cheaper than orchestrating several. Each sub-agent doing real work consumes its own tokens, so running several at once adds up faster than one focused conversation.
