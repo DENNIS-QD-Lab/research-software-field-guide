@@ -16,7 +16,7 @@ Your *local* copy is the repository on your machine. The *remote* is the shared 
 
 ## One rule: keep the repository out of synced folders
 
-Do not put the repository inside OneDrive, iCloud Drive, or Dropbox. Those services sync files in the background on their own schedule. Git also manages those same files, and the two fight, which corrupts the repository's history in ways that are hard to undo. Keep the repository in a plain folder, for example `~/code/` or `Documents/code/`, that no cloud service is syncing. This is worth saying twice because it is easy to do by accident and painful to fix. It's worth saying a third time because it seems like it works... until it doesn't. Best to never get in the habit. **Sync data to the cloud using a cloud storage server like OneDrive or Dropbox; sync code to the cloud via GitHub.**
+Do not put the repository inside OneDrive, iCloud Drive, or Dropbox. Those services sync files in the background on their own schedule. Git also manages those same files, and the two fight, which corrupts the repository's history in ways that are hard to undo. Keep the repository in a plain folder, for example `~/repos/` or `Documents/repos/`, that no cloud service is syncing. This is worth saying twice because it is easy to do by accident and painful to fix. It's worth saying a third time because it seems like it works... until it doesn't. Best to never get in the habit. **Sync data to the cloud using a cloud storage server like OneDrive or Dropbox; sync code to the cloud via GitHub.**
 
 ## The daily mental model
 
