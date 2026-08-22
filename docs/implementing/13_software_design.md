@@ -58,12 +58,12 @@ Every piece is now clear on its own, `normalize` and `peak_wavelength` are pure 
 
 ## Cohesion and single responsibility
 
-Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: a function that takes a couple of inputs and returns a single number, with no side effects, is trivial to unit-test. In the SWIR_HDR exemplar the weighting functions (one small step of the imaging math) are exactly this shape — each takes a pixel value and a range and returns one weight, nothing else — which is why they were straightforward to test.
+Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: a function that takes a couple of inputs and returns a single number, with no side effects, is trivial to unit-test. 
 
 ## When a function, when a module, when a class
 
 - **A function** is the default unit. Reach for one whenever you can name a job.
-- **A module** (a `.py` file) groups related functions, such as all the radiance math in one file. Name it for what it contains, a noun phrase like `ratio_analysis.py` ([CLAUDE.md](../../CLAUDE.md)).
+- **A module** (a `.py` file) groups related functions, such as all the spectra math in one file. Name it for what it contains, a noun phrase like `ratio_analysis.py` ([CLAUDE.md](../../CLAUDE.md)).
 - **A class** earns its keep only when data and the behavior that acts on it genuinely travel together, or when you need several independent instances each carrying their own state. Most research code does not need classes; functions and modules cover the large majority of cases. Reach for a class when passing the same cluster of values into function after function starts to feel awkward, not before.
 
 ## Two tools you will grow into
@@ -76,3 +76,27 @@ These are pointers, not lessons. Learn them when you hit the situation they solv
 ## Design and tests reinforce each other
 
 The two habits feed each other. Decomposing code into small, single-purpose functions is what makes it testable, and having tests is what gives you the confidence to decompose without fear of silently changing a result. That loop, refactor freely because the tests will catch a mistake, is the practical payoff of both docs together. When you later restructure a package into a library plus experiments ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)), the tests from [12_testing_with_pytest.md](12_testing_with_pytest.md) are exactly what prove the restructure changed the shape without changing the behavior.
+
+## Why this matters even when an AI is doing the typing
+
+The intro's example — "every edit risks breaking something three functions away" — used to be the
+classic complaint about AI coding assistants specifically: ask for a change in one function, and
+something unrelated breaks. Newer models and tools are noticeably better at scoping an edit to what was
+actually asked, so this happens less often than it used to. But the underlying reason decomposition
+helps has not gone away, and it was never really about model quality:
+
+- **Blast radius is a property of the code, not of who is editing it.** A change to a well-isolated,
+  single-purpose function only requires reasoning about that function's own inputs and outputs. A change
+  buried inside a `process_spectrum`-style function that does four things at once requires reasoning
+  about all four — whether the one making the change is a person or a model.
+- **Small functions make small, reviewable diffs.** [18_ai_assisted_development.md](18_ai_assisted_development.md)
+  asks you to review every AI-generated change like a colleague's pull request. That is only realistic
+  if a requested change actually produces a small diff, which it does when the function it touches has
+  one job, and does not when that function is tangled into a larger one.
+- **Tests plus small functions give an assistant a fast, local way to check its own work:** run the one
+  test for the one function it changed, rather than needing a full pipeline run to notice a regression —
+  the AI-assisted instance of the design-and-tests loop above.
+
+None of this replaces reviewing what an assistant produces. It means well-decomposed code keeps an
+assistant's edits where you asked them to be, and keeps your review of that edit small enough to
+actually do carefully — which matters more, not less, the more of the typing you hand off.
