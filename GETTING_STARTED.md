@@ -80,12 +80,12 @@ local** — not inside iCloud Drive, OneDrive, Dropbox, or any other cloud-synce
 folder. Cloud sync and Git fight each other, and some of the most painful,
 hardest-to-diagnose bugs come from this. Just don't.
 
-A good choice is `~/code/` on Mac or `C:\Users\YourName\code\` on Windows. In VS
+A good choice is `~/repos/` on Mac or `C:\Users\YourName\repos\` on Windows. In VS
 Code's terminal, create it and move into it:
 
 ```
-mkdir ~/code
-cd ~/code
+mkdir ~/repos
+cd ~/repos
 ```
 
 `mkdir` makes a directory; `cd` changes into it. More on these commands in
@@ -94,13 +94,13 @@ cd ~/code
 ## 6. Clone the repository
 
 "Cloning" means making a local copy of a GitHub repository on your computer. From
-inside your `code/` folder, run the command you were sent, which will look like:
+inside your `repos/` folder, run the command you were sent, which will look like:
 
 ```
 git clone https://github.com/<owner>/<repo>.git
 ```
 
-This creates a folder named after the repository inside `code/`. Move into it
+This creates a folder named after the repository inside `repos/`. Move into it
 (substitute the real name):
 
 ```

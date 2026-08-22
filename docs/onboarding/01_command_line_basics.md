@@ -58,10 +58,10 @@ So practically it's helpful to:
 
 ```
 cd /Volumes/data/swir_run42
-python ~/code/research-software-field-guide/scripts/show_h5_keys.py imaging.h5
+python ~/repos/research-software-field-guide/scripts/show_h5_keys.py imaging.h5
 ```
 
-This command has two parts after `python`. The first, `~/code/research-software-field-guide/scripts/show_h5_keys.py`, is the path to the script you want to run. The second, `imaging.h5`, is an *argument*: a value handed to the script, here the data file you want it to inspect. The script reads that argument and acts on it.
+This command has two parts after `python`. The first, `~/repos/research-software-field-guide/scripts/show_h5_keys.py`, is the path to the script you want to run — shown here using the `~/repos/` location [GETTING_STARTED.md](../../GETTING_STARTED.md) suggests, but any path to wherever you actually cloned the repo works the same way. The second, `imaging.h5`, is an *argument*: a value handed to the script, here the data file you want it to inspect. The script reads that argument and acts on it.
 
 You're in the data directory, so:
 - Tab-completion works when you type `imaging.h5`
@@ -86,4 +86,7 @@ You might wonder: couldn't we just keep the data in the repo with the scripts? I
 
 ## Further reading
 
-This doc covers the commands you need in this repo. For a full self-paced lesson on the shell, see Software Carpentry's [The Unix Shell](https://swcarpentry.github.io/shell-novice/).
+This doc covers the commands you need in this repo. For more commands than fit here — including ones
+you'll see an AI assistant ask permission to run — see
+[command_line_reference.md](../reference/command_line_reference.md). For a full self-paced lesson on
+the shell, see Software Carpentry's [The Unix Shell](https://swcarpentry.github.io/shell-novice/).
