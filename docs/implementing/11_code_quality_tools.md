@@ -1,6 +1,6 @@
 # Code quality tools: linting, formatting, and type checking
 
-Your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) says code follows PEP 8 and is formatted with ruff, and you have probably seen ruff run when you commit. This doc explains what that tooling actually does, how to run it yourself, and adds one more tool: mypy, for type checking.
+Long before AI, automated tools were helping coders check and fix their code by enforcing certain coding standards. For example, this project's coding-standards file ([CLAUDE.md](../../CLAUDE.md)) says code follows PEP 8 and is formatted with ruff. This doc explains what that tooling actually does, how to run it yourself, and adds mypy, for type checking. If you choose to implement this repo structure and work with an AI agent for your coding, much of this will be implemented automatically each time that you commit code, ensuring that appropriate standards are maintained from early in the repo development and avoiding major rewrites later. 
 
 ## Three tools, three jobs
 
@@ -81,7 +81,7 @@ The fix is to pin the version in both places the tool is declared, and keep them
 - In the environment file (`environment.yml` / the conda `.yml`), pin exactly: `ruff=0.15.21`, not `ruff`.
 - In `.pre-commit-config.yaml`, set the hook `rev:` to the matching tag: `rev: v0.15.21`.
 
-Now your laptop, your teammate's laptop, the pre-commit hook, and CI all run the identical linter with the identical rules. When you *want* a newer ruff, you bump both pins together, deliberately, and deal with any new findings in that one commit — instead of being ambushed by a release you never chose. The same reasoning applies to any tool whose behavior can change between versions; pin it.
+Now your laptop, your colleague's laptop, the pre-commit hook, and CI all run the identical linter with the identical rules. When you *want* a newer ruff, you bump both pins together, deliberately, and deal with any new findings in that one commit — instead of being ambushed by a release you never chose. The same reasoning applies to any tool whose behavior can change between versions; pin it.
 
 ## mypy: type checking
 
@@ -102,3 +102,7 @@ A caveat for real codebases: on code that is not fully type-hinted yet, mypy can
 - **Formatting:** let it reformat. Do not fight it.
 - **A lint problem ruff can fix:** run `ruff check --fix .`.
 - **A lint problem it cannot fix, or a mypy error:** read the message. It is almost always pointing at something real. If a rule is unclear, run `ruff rule <code>` or ask a teammate.
+
+## Further reading
+
+This is one project's take on linting, formatting, and type checking. For the scientific-Python ecosystem's own guidance on the same tools, with more configuration detail than fits here, see the [Scientific Python Development Guide's "Style and static checks" page](https://learn.scientific-python.org/development/guides/style/).

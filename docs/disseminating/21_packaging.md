@@ -35,6 +35,22 @@ A package can also declare a **command-line entry point** in `pyproject.toml`, s
 
 A collection of standalone helper scripts and training docs is not a library that other code imports; it can stay a folder of scripts on purpose. Packaging is for a project that is imported or installed elsewhere — for example, the SWIR_HDR project once its pipeline is used from other repos — not for a loose helper collection.
 
+## A lighter step before PyPI: installing straight from GitHub
+
+Once a project has a `pyproject.toml`, others can install it directly from the repository, no PyPI
+publication required:
+
+```
+pip install git+https://github.com/your-org/your-repo.git
+```
+
+This is a real, citable-in-a-README distribution method, worth adding to the README once a project
+reaches this point, well before "publish to PyPI" is on the table.
+
 ## The next step, out of scope here
 
 Once a project is packaged, versioned ([22_versioning_and_releases.md](22_versioning_and_releases.md)), and licensed and citable ([23_concluding_a_project.md](23_concluding_a_project.md)), the further step is publishing to **PyPI** so anyone can `pip install` it. That is deliberately out of scope for this track; it is named here only so you know it is the next thing that exists when you get there.
+
+## Further reading
+
+This doc covers the minimum to know whether and how to package. For deeper detail — `pyproject.toml` fields, build backends, and the compiled-extension case this doc does not cover — see the [Scientific Python Development Guide's "Simple packaging" page](https://learn.scientific-python.org/development/guides/packaging-simple/). Once a project is packaged, two tools from that same ecosystem can check and scaffold it automatically: [`sp-repo-review`](https://learn.scientific-python.org/development/guides/repo-review/) checks an existing repository against the ecosystem's packaging and CI conventions, and the [scientific-python/cookie](https://github.com/scientific-python/cookie) template scaffolds a new one already conforming to them.
