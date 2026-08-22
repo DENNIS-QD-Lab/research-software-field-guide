@@ -30,9 +30,6 @@ Every change, even a one-line fix, follows the same loop: pull the latest code, 
 work, commit, push, and open a pull request. The full loop with both the VS Code Source Control panel
 and the equivalent terminal commands is in [05_daily_workflow.md](docs/onboarding/05_daily_workflow.md).
 
-Write commit messages as one line, in the imperative present tense. Write "Fix broken link in doc 16,"
-not "Fixed a broken link." A commit message finishes the sentence "If applied, this commit will..."
-
 ## Notebooks
 
 Notebooks need one extra setup step after you clone, so that Git does not record their cell outputs and
