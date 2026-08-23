@@ -34,7 +34,7 @@ dataset or one paper belongs in that project's own experiments/ folder, not in s
 this repo's own CLAUDE.md is the source of truth for structure.>
 
 New method code goes in `src/<yourpkg>/`, following this repo's naming and docstring conventions
-(`CLAUDE.md`). A new line of inquiry gets its own `experiments/<slug>/` folder, built from
+(`CLAUDE.md`). A new line of inquiry gets its own `experiments/<theme-slug>/` folder, built from
 `experiments/_TEMPLATE.md` — see `.claude/experiments_playbook.md` for how runs are recorded. When in
 doubt about where something goes, ask in review rather than guessing.
 

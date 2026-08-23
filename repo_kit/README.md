@@ -11,7 +11,7 @@ practices what it teaches:
 | File | Audience | What it is |
 |------|----------|------------|
 | [STANDARD.md](STANDARD.md) | a researcher who already codes | The **why**: goal, repo structure, and the key decisions with their reasoning. Read once; no tutorial. |
-| [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) | Claude Code | The **how**: actionable recipes to scaffold a new repo or upgrade an existing one, each with a verify gate. |
+| [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) | your AI assistant | The **how**: actionable recipes to scaffold a new repo or upgrade an existing one, each with a verify gate. |
 | [CLAUDE.template.md](CLAUDE.template.md) | both (loaded every session) | The **standing standards**: copy to the target repo's `CLAUDE.md` and fill the placeholders. |
 
 Plus [`templates/`](templates/) — the per-repo files the playbook installs (they are project-specific,
@@ -26,8 +26,8 @@ so they ship as fill-in templates, not static files):
 ## How to use it
 
 **Adopting the standard in a repo (new or existing):** open the target repo alongside this one and ask
-Claude Code to follow [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) —
-- *New repo* → the playbook's *Mode A : Scaffold* sequence (take only the pieces you need).
+your AI assistant to follow [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) —
+- *New repo* → the playbook's *Mode A: Scaffold* sequence (take only the pieces you need).
 - *Existing repo* → *Mode B: Upgrade recipes*, à la carte (add tests, add a doc site, restructure to
   `src/` + `experiments/`, …).
 
@@ -43,3 +43,8 @@ This kit is the *summary and operational form* of the implementing and dissemina
 contradicts them. When in doubt, the tracks (docs 10–20, then 21–23) are the source of truth, and the
 config skeletons (`pyproject.toml`, `ci.yml`, `conf.py`) live there rather than being duplicated here, so
 the two cannot drift.
+
+That means `STANDARD.md` and `SETUP_PLAYBOOK.md` are read *in place*, with this guide checked out
+alongside your repo — the playbook's recipes point into `../docs/` for those skeletons. The files meant
+to be copied out are [CLAUDE.template.md](CLAUDE.template.md) and everything in [`templates/`](templates/);
+each one names what to replace at the top.
