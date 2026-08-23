@@ -10,13 +10,13 @@ This flat layout is the starting tier for every project, and a fine place to sta
 
 ## Naming conventions
 
-All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., in image-processing research like the SWIR_HDR exemplar, `hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
+All filenames use snake_case: lowercase letters and digits, words separated by underscores, no hyphens, no camelCase, no spaces. Keep names under about 30 characters. Avoid abbreviations except universally understood ones in your field (e.g., in image-processing research, `hdf5`, `hdr`, and `nir` are fine; `seg` for `segmentation` or `proc` for `processing` is not).
 
 Beyond that, we use two grammatical patterns depending on what the file does.
 
 **Verb-first names for action scripts.** If the file's purpose is to *do* a task, name it with a verb followed by what it acts on, so the name reads like a command. Examples: `show_h5_keys.py` (shows the metadata (a.k.a. keys) of an HDF5 file), `plot_spectra.py` (plots spectra), `convert_units.py` (converts units), `clean_metadata.py` (cleans metadata).
 
-**Noun-phrase names for functionality modules.** If the file's purpose is to *contain* code that other scripts import and use, name it with a noun or adjective-noun phrase describing what is inside, so the name reads like a topic. Examples: `ratio_analysis.py` (contains ratio analysis code), `hdr_processing.py` (contains HDR processing code), `broadband_segmentation.py` (contains broadband segmentation code).
+**Noun-phrase names for functionality modules.** If the file's purpose is to *contain* code that other scripts import and use, name it with a noun or adjective-noun phrase describing what is inside, so the name reads like a topic. Examples: `ratio_analysis.py` (contains ratio analysis code), `preprocessing.py` (contains preprocessing code), `peak_detection.py` (contains peak-detection code).
 
 If you are unsure which category a file falls into, ask whether a colleague seeing it at the top of their screen will more often think "I want to run this" (verb) or "I want to import from this" (noun), and pick accordingly. If it is genuinely both, lean toward the verb form and import from it when needed.
 

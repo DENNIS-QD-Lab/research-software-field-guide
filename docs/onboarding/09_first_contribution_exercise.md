@@ -1,6 +1,6 @@
 # First contribution exercise
 
-Time to try it out. The goal is to try put the concepts from docs 00 through 08: branch, commit, push, pull request, review, merge. 
+Time to try it out. The goal is to put the concepts from docs 00 through 08 into practice: branch, commit, push, pull request, review, merge.
 
 ## Get a repo to work in
 
@@ -14,7 +14,7 @@ you make your first real change. [02_using_vs_code.md](02_using_vs_code.md) cove
 **(2) You don't have a repo yet.** Start one:
 
 1. Log into GitHub, find the `+` dropdown menu at the top of your page, click **New repository**, give it a name, and check "Add a README file." Create it. If this is lab work rather than personal practice, consider creating it under your lab's GitHub Organization instead of your own account, so it stays lab property — [repo_ownership_and_visibility.md](../reference/repo_ownership_and_visibility.md) covers why.
-2. Clone it the same way you cloned this guide: `git clone` the URL GitHub gives you, into your `~/repos/` folder or wherever you keep your projects. See [GETTING_STARTED.md](../../GETTING_STARTED.md) if you need the clone steps again.
+2. ([repo_lifecycle.md](../reference/repo_lifecycle.md) covers starting a repo, forking versus branching, and public versus private visibility.) Clone it the same way you cloned this guide: `git clone` the URL GitHub gives you, into your `~/repos/` folder or wherever you keep your projects. See [GETTING_STARTED.md](../../GETTING_STARTED.md) if you need the clone steps again.
 3. Open it in VS Code: its own window, or added to this workspace alongside the guide (File > Add
    Folder to Workspace), whichever you'd rather work in.
 4. Create your first file — a script in `scripts/` or a notebook in `notebooks/` — following the
@@ -36,7 +36,7 @@ that's actually yours.
 2. **Make a branch.** Name it for what it does, e.g. `fix-h5-keys-docstring`. See
    [05_daily_workflow.md](05_daily_workflow.md) for how to create one.
 
-3. **Do the work, following the conventions from docs 00–07.** For a `.py` file: a module docstring,
+3. **Do the work, following the conventions from docs 00–08.** For a `.py` file: a module docstring,
    type hints on every function, a docstring on every function, and an `if __name__ == "__main__":`
    block if it runs from the command line. For a `.ipynb`: a markdown cell at the top describing the
    purpose, inputs, and an example call, plus docstrings on any functions it defines. Naming

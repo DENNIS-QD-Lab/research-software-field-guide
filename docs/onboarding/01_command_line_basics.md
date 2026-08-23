@@ -57,7 +57,7 @@ So practically it's helpful to:
 ## Running a script
 
 ```
-cd /Volumes/data/swir_run42
+cd /Volumes/data/run42
 python ~/repos/research-software-field-guide/scripts/show_h5_keys.py imaging.h5
 ```
 
@@ -70,11 +70,11 @@ You're in the data directory, so:
 
 ### A note on writing scripts that don't care about the working directory
 
-Well-written helper scripts take file paths as arguments and open exactly those paths, with no assumptions about where the user is standing. If you find yourself writing a script that only works when run from a specific directory, that's usually a sign to refactor: take the path as an argument instead of hardcoding it or assuming a relative location.
+Well-written scripts take file paths as arguments and open exactly those paths, with no assumptions about where the user is standing. If you find yourself writing a script that only works when run from a specific directory, that's usually a sign to refactor: take the path as an argument instead of hardcoding it or assuming a relative location.
 
 ### Why we don't put data inside the repo
 
-You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this tutorial repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, spectra, genomics data, etc, that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and naming guide both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
+You might wonder: couldn't we just keep the data in the repo with the scripts? In some projects, yes (e.g., when we're moving towards publication, have chosen what data we're including in the manuscript, and are building the specific figures for that paper; in that case the data may be included in the repo so that anyone can go from input data --> run scripts --> replicate published output). In this tutorial repo or in repos containing analysis pipelines that will be applied to large datasets, no. Real datasets may be imaging files, spectra, genomics data, etc., that don't belong in version control. This repo's [CLAUDE.md](../../CLAUDE.md) and [06_adding_a_script.md](06_adding_a_script.md) both prohibit committing substantial data files. Data lives on local and/or cloud drives; scripts live in the repo; you stand near the data and call the script.
 
 ## Troubleshooting
 

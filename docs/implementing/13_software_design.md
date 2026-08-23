@@ -58,7 +58,7 @@ Every piece is now clear on its own, `normalize` and `peak_wavelength` are pure 
 
 ## Cohesion and single responsibility
 
-Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: a function that takes a couple of inputs and returns a single number, with no side effects, is trivial to unit-test. 
+Two words name the idea. **Cohesion** is how much the parts of a function or module belong together. **Single responsibility** is the target: each function does one job, each module covers one area. A quick smell test is the word "and." If describing a function honestly needs an "and" ("it loads the data *and* normalizes it *and* saves it"), it is doing too much. Small single-purpose functions are the ideal: a function that takes a couple of inputs and returns a single number, with no side effects, is trivial to unit-test.
 
 ## When a function, when a module, when a class
 

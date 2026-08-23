@@ -89,7 +89,7 @@ other people, or a package index? Yes, if...
   not "whatever your repo's `main` looks like today."
 
 If neither applies, stop here — the local package is already doing its job, and going further is
-real overhead for no benefit. A collection of standalone helper scripts and training docs that
+real overhead for no benefit. A collection of standalone scripts and training docs that
 never adopts the `src/` + `experiments/` split doesn't need even the local package — see
 [06_adding_a_script.md](../onboarding/06_adding_a_script.md) — that's a different, equally valid
 repo shape when that's all that's needed.
