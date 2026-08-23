@@ -46,6 +46,20 @@ More terminal commands than [01_command_line_basics.md](../onboarding/01_command
 | `commandname --help` | Prints a shorter, built-in usage summary. Works for most modern tools, including this repo's own scripts ([06_adding_a_script.md](../onboarding/06_adding_a_script.md)). |
 | `which commandname` | Prints the full path to the program a command name actually runs — useful for checking whether the right environment's version is being used. |
 
+## `gh`: the GitHub CLI
+
+`gh` does from the terminal what you would otherwise click through on github.com. It comes with this
+repo's environment (`environment.yml`); run `gh auth login` once first, which opens a browser to
+authorize it against your account.
+
+| Command | What it does |
+|---|---|
+| `gh pr create` | Opens a pull request for the current branch, prompting for title and description. |
+| `gh pr list` / `gh pr view` | Lists open pull requests, or shows one in the terminal. |
+| `gh run download -n <name>` | Downloads an artifact from a CI run — how you fetch a built doc site ([20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md)). |
+| `gh workflow run <file>` | Triggers a workflow that is set up for manual dispatch. |
+| `gh release create <tag> <files>` | Creates a GitHub release from a tag and attaches files to it. |
+
 ## Reading a command an AI assistant wants to run
 
 If you're using an AI coding assistant ([ai_coding_assistants.md](ai_coding_assistants.md)), it will
