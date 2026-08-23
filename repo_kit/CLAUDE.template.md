@@ -134,6 +134,11 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - **The scientist commits.** Prepare the changes and a commit-message draft, but ask before committing,
   pushing, or opening a PR.
 - Commit messages: one line, imperative present tense ("Add dark-frame correction," not "Added …").
+- **Prompt for a commit at natural break points as a matter of course**, not only before `/compact` or
+  `/clear`: a finished task, a fixed bug, a doc section done. This matters most right before
+  implementing an approved plan — check whether the working tree already holds unrelated, uncommitted
+  work, and if so, prepare that commit (or ask the scientist to make it) before the plan's first edit,
+  so the plan lands as its own clean, reviewable diff.
 
 ## What NOT to do on main
 

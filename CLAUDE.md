@@ -80,6 +80,7 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 - The PR description should include what the helper does and an example invocation.
 
 ## Session hygiene — context and continuity
+- **Prompt for a commit at natural break points as a matter of course**, not only when a `/compact` or `/clear` is imminent — a finished task, a fixed bug, a doc section done are each a candidate. This matters most right before starting to implement an approved plan: check whether the working tree already holds unrelated, uncommitted work, and if so, suggest committing or explicitly flagging it first, so the plan's changes land as their own clean, reviewable diff instead of mixed in with what came before.
 - At natural break points — a task finished, a PR merged, a doc section done — proactively remind the contributor to `/compact` or `/clear`, whichever fits: `/compact` to keep going once a session's transcript has grown large, `/clear` when moving on to unrelated work. This is responsible token usage ([docs/reference/ai_coding_assistants.md](docs/reference/ai_coding_assistants.md)); make it a regular, gentle prompt, not a one-time note.
 - **Before recommending it, make sure a sudden clear would lose nothing.** Update the docs and any auto-memory, and commit or explicitly flag work in progress, *first* — then suggest compacting or clearing. Anything that must survive the session belongs in a file in the repo or in memory, never only in the conversation.
 
