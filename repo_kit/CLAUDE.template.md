@@ -4,7 +4,9 @@ CLAUDE.md TEMPLATE — copy this to the root of a target repo as CLAUDE.md, then
 keep it lean, because it is read at the start of every session. Delete this comment block in the copy.
 
 Fill-in checklist: <PROJECT>, <one-line purpose>, the repository-structure block, the package name in
-the paths, the domain terms allowed as abbreviations, and the "What NOT to do on main" list.
+the paths, the domain terms allowed as abbreviations, and the "What NOT to do on main" list. Also
+replace every PATH-TO-GUIDE with the path to your checkout of the research-software-field-guide, or
+delete those links if the guide is not checked out alongside this repo.
 -->
 
 # CLAUDE.md — <PROJECT>
@@ -23,23 +25,26 @@ so **prioritize readability over cleverness**.
 ```
 src/<yourpkg>/     the importable library — all method/analysis code (installed with `pip install -e .`)
 experiments/       hypothesis-driven studies; experiments/README.md is the research log,
-                     _common/ the shared harness, <slug>/ one undated, permanent folder per theme
-                     (revisited over the project's life) holding:
-                       - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
-                       - details/<YYMMDD_slug>[_NN]/         manifest/metrics/figures behind each report
+                     _common/ the shared harness, <theme-slug>/ one undated, permanent folder per
+                     theme (revisited over the project's life) holding:
+                       - README.md                      the theme's only narrative document: question,
+                                                        findings, embedded figures, interpretation —
+                                                        updated in place, never regenerated per run
+                       - details/<YYMMDD>_<slug>[_NN]/   manifest.yaml, metrics.csv, and any figure
+                                                        the README embeds — provenance, not a report
 tests/             pytest suite (unit + regression) with committed fixtures
-docs/              Sphinx doc site: API reference generated from docstrings, plus rendered
-                     experiment reports — experiment_overviews/<theme>_overview.md (one per theme,
-                     includes its README) and experiment_summaries/*.md (the reports themselves)
+docs/              Sphinx doc site: API reference generated from docstrings, plus one page per theme —
+                     experiment_overviews/<theme-slug>_overview.md, whose entire body is a MyST
+                     {include} of that theme's README, so the site holds no second copy
 figures/           (once drafting a manuscript) the paper's figure outline — same theme +
                      dated-details/ discipline as experiments/, one folder per figure; see
                      22_publishing_a_paper.md
 references.md      the reference ledger: external sources + why each mattered here
-config / local_paths.py   parameters and machine-local data paths (paths stay out of git)
+local_paths.py     machine-local data paths (gitignored; copy local_paths_example.py)
 ```
 
-Exploratory notebooks live inside the relevant `experiments/<slug>/` folder alongside its driver(s) — see
-[16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md#exploratory-notebooks-the-same-discipline-without-a-manifest).
+Exploratory notebooks live inside the relevant `experiments/<theme-slug>/` folder alongside its driver(s) — see
+[16_running_a_dry_lab_experiment.md](PATH-TO-GUIDE/docs/implementing/16_running_a_dry_lab_experiment.md#exploratory-notebooks-the-same-discipline-without-a-manifest).
 
 ## The three homes for instructions
 
@@ -66,6 +71,17 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Notebooks start with a markdown cell carrying the same information as a module docstring.
 - Comments explain *why*, not *what*. The code shows what it does.
 
+## Interpretation belongs to the scientist
+
+- **What a result *means* is written by the scientist, verbatim.** It goes in a signed blockquote
+  (`> **<initials>:** …`) in the theme README, the research log's decision entries, or a figure README.
+  Insert what the scientist actually said, unedited — do not paraphrase, tighten, or rewrite it. A
+  paraphrase quietly substitutes the assistant's voice for theirs.
+- **If there is no answer yet, say so.** Write `> **<initials>:** _pending._` rather than drafting a
+  plausible-sounding interpretation on the scientist's behalf.
+- Write for a scientist deciding what to do, not for an assistant implementing it. Describe what ran
+  and what it measured; leave what it means to the blockquote.
+
 ## Type hints
 
 - Every function signature gets type hints on parameters and return value.
@@ -78,13 +94,13 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 
 - A new function that does real computation (not just wiring, CLI glue, or I/O) gets a test in
   `tests/`, following
-  [12_testing_with_pytest.md](../docs/implementing/12_testing_with_pytest.md):
+  [12_testing_with_pytest.md](PATH-TO-GUIDE/docs/implementing/12_testing_with_pytest.md):
   `np.testing.assert_allclose` for floats, `pytest.mark.parametrize` for multiple cases.
 - When fixing a bug, add a regression test that would have caught it.
 - Tests are part of the function, not optional follow-up work to add later.
 - Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting
   code with zero tests, not a number to chase. Don't add filler tests just to raise it. See
-  [12_testing_with_pytest.md](../docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
+  [12_testing_with_pytest.md](PATH-TO-GUIDE/docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
 
 ## Naming conventions for files
 
@@ -92,30 +108,36 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Verb-first for action scripts that *do* something: `show_keys.py`, `plot_spectra.py`.
 - Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`.
 - Avoid abbreviations except universally understood domain terms (<list the ones your field accepts>).
-- **Theme folders may use hyphens; run directories may not.** `experiments/<theme-slug>/` (hyphens
-  allowed — a multi-word theme name reads better as `crf-solve-and-necessity` than as one run-together
-  word) is a standing address for one line of inquiry, revisited for as long as that inquiry stays open
-  (a theme is not "done" the day it starts) — it carries no date. A leading number
-  (`01_crf-solve-and-necessity/`) is an optional, encouraged way to order themes by conception once a
-  project has enough of them that folder order stops being obvious; it is not required. Its `README.md` is the theme's only
-  narrative document — findings, figures, interpretation — updated in place, never regenerated per run.
-  Each run's provenance follows the normal no-hyphens rule and lives one level down, name-matched to
-  nothing but itself: `details/<YYMMDD>_<slug>[_NN]/` (`manifest.yaml`, `metrics.csv`, figures) — present
-  for reproducibility, not meant to be read as a report. A run worth keeping visible gets its figure
-  embedded directly in the README, not a separate file.
+- **Theme folders may use hyphens**, as an exception to the rule above: `experiments/<theme-slug>/`
+  (a multi-word theme reads better as `dark-current-subtraction` than as one run-together word) is a
+  standing address for one line of inquiry, revisited for as long as that inquiry stays open. It
+  carries no date. A leading number (`01_dark-current-subtraction/`) is an optional, encouraged way to
+  order themes by conception once a project has enough of them that folder order stops being obvious;
+  it is not required.
+- **A theme's `README.md` is its only narrative document** — question, findings, embedded figures,
+  interpretation — updated in place, never regenerated per run.
+- **Per-run directories are dated**, one level down in `details/<YYMMDD>_<slug>[_NN]/`, holding
+  `manifest.yaml`, `metrics.csv`, and any figure the README embeds. A run directory inherits the
+  theme's slug, so it may contain hyphens too; what matters is that it carries the run date and that
+  `_02`, `_03`, … preserve reruns rather than overwriting them. This is provenance for reproducibility,
+  not a report to read. The dating rule applies to directories, not to importable `.py` module names.
 
 ## Command line interfaces
 
 - Any script runnable from the command line uses `if __name__ == "__main__":` to wire up its CLI.
 - Use `argparse` for arguments, not hand-parsing `sys.argv`.
-- Scripts take file paths as arguments. Do not hardcode paths — read them from `config`/`local_paths.py`.
+- Scripts take file paths as arguments. Do not hardcode paths — read the machine-local root from
+  `local_paths.py`.
 
 ## Data handling
 
 - Never commit data files. Data lives outside the repo; scripts take paths as arguments.
 - One exception: small *teaching and test fixtures* (a few KB to a few MB) a reader or test actually
-  needs — synthetic under `sample_data/`, test fixtures alongside the tests. The full acquired dataset
-  stays out; it bloats history permanently.
+  needs — synthetic ones under `sample_data/`, test fixtures alongside the tests. A fixture may be
+  synthetic *or* a small, curated handful of real samples; the guiding line is size and purpose, not
+  synthetic-versus-real. The full acquired dataset stays out, because it bloats history permanently.
+- If you generate intermediate files while testing, put them in a directory listed in `.gitignore` and
+  clean them up.
 - Keep machine-specific paths out of committed code and notebooks: put them in a git-ignored
   `local_paths.py` (copy `local_paths_example.py`) and import from it.
 
@@ -123,6 +145,9 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 
 - Ask before adding a new dependency. If approved, update the environment file and say why in the PR.
 - Prefer packages already in the environment; prefer conda-forge over pip when both are available.
+- Pin any tool whose version can change your results or break your checks — a linter, a formatter, a
+  doc builder — exactly, and in every place it is declared at once (the environment file *and*
+  `.pre-commit-config.yaml`'s `rev:`). Bump those pins together, deliberately, in their own commit.
 
 ## Notebooks
 

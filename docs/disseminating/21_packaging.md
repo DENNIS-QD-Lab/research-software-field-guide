@@ -33,6 +33,30 @@ Two pieces turn a folder into a package:
   rather than at the repo root stops tests and experiments from accidentally importing the
   un-installed copy, so what you test is what installs.
 
+A minimal `pyproject.toml` for a research project is short:
+
+```toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "yourpkg"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []          # conda manages these; list them here only for a pip-installable release
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+```
+
+`[build-system]` names the tool that turns the folder into an installable package — `hatchling` is a
+common, low-configuration choice. `[project]` is the metadata `pip` reads. `dependencies` can stay empty
+while conda owns the environment; fill it in when the package is meant to be installed by someone else
+([Going further](#going-further-making-the-package-installable-by-others), below). The
+`[tool.pytest.ini_options]` table is a convenient place to keep pytest's settings, so the project needs
+no separate `pytest.ini`.
+
 Install it in **editable** mode:
 
 ```

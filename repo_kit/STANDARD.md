@@ -12,7 +12,7 @@ your coding agent [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*
 
 ## What this is for
 
-Your repository is, first and foremost, a **research notebook**: a place to explore data and record
+Your repository is, first and foremost, a **lab notebook**: a place to explore data and record
 what you did and what you found, so the whole line of inquiry stays reproducible and legible — to a
 collaborator, a reviewer, or future-you — without anyone having to reconstruct it from the `git log`. Structure and
 documentation here are not bureaucracy. They make the *exploration itself* faster and more trustworthy:
@@ -21,7 +21,7 @@ you spend less time rediscovering what you already tried, and you can believe yo
 A second job appears later, and only for some projects. As results head toward publication, the same
 repo can also yield **a tagged version of the code for public release to support a publication** and/or **a library others can install and use** — pared down to the validated methods you choose to disseminate. Many projects never need this, and that is fine. The standard's core move is to let an experimental repo grow into that second job *without either job corroding the other*, while never forcing it on a project that remains exploratory.
 
-Underneath both: **tools may assist with the coding, you do the science.** Linters, formatters, tests, doc
+Underneath both: **the assistant writes code; you do the science.** Linters, formatters, tests, doc
 generators, and AI assistants accelerate the mechanical work; designing experiments, assessing results, and drawing conclusions stay with you. Everything below exists to make your scientific judgment reproducible and reviewable, not to replace it.
 
 ## The structure
@@ -32,7 +32,7 @@ package, tests, a doc site, CI) as the work earns them. A full pipeline repo wit
 
 ```
 your_repo/
-├── experiments/             question-driven studies — your reproducible research notebook
+├── experiments/             question-driven studies — your reproducible lab notebook
 │   ├── README.md            the research log: goal, open questions, decisions (read this first)
 │   ├── _TEMPLATE.md         copy it to start a new theme
 │   ├── _common/             shared harness (run logging, comparison plots) — never method code
@@ -41,15 +41,16 @@ your_repo/
 │                              16_running_a_dry_lab_experiment.md
 ├── src/yourpkg/             your method code — the importable library; studies import it, never copy
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
-├── docs/                    Sphinx site from docstrings, plus rendered experiment reports —
-│                              experiment_overviews/ + experiment_summaries/, see
+├── docs/                    Sphinx site from docstrings, plus one page per theme —
+│                              experiment_overviews/<theme-slug>_overview.md, each one just a MyST
+│                              {include} of that theme's README; see
 │                              20_documentation_and_doc_sites.md
 ├── figures/                 (once drafting a manuscript) the figure outline — same theme + details/
 │                              discipline as experiments/, one folder per figure
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
 ├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments
-├── config / local_paths.py  parameters and machine-local data paths (paths stay out of git)
+├── local_paths.py           machine-local data paths, gitignored (copy local_paths_example.py)
 └── pyproject.toml           declares the package, once the code is worth installing
 ```
 
@@ -60,16 +61,25 @@ if the abstract tree above is hard to picture filled in.
 
 ## The decisions, and why
 
-**The repo is your lab notebook: state and provenance are recorded, so that your process and results are consistently documented.** A top-level **research log** (`experiments/README.md`) holds the goal,
-the status of every open question, what's next, and a dated decision log, so the project's state and history is
-presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
-parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
-each run is at the top of the experiment run report in a protected section that AI assistants never overwrite. The code structure ensures that the results are recorded; you write what
-they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) — a space reserved for your own words, not the assistant's paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
-keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
-check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: this simple running bibliography pairs each
-external source the work builds on with a *why it mattered here* note, kept current as you go so the
-manuscript's methods and bibliography are accrued rather than reconstructed at write-up.
+**The repo is your lab notebook: state and provenance are recorded, so that your process and results
+are consistently documented.** A top-level **research log** (`experiments/README.md`) holds the goal,
+the status of every open question, what's next, and a dated decision log, so the project's state and
+history are presented with a focus on the scientific goals, hypotheses, and tests.
+
+Each run writes a small **manifest** (git commit + dirty flag, parameters, which data, a checksum) plus
+a `metrics.csv` — provenance only, no report file. The theme's own `README.md` is the one narrative
+document, and your *interpretation* of each finding goes there in a **signed blockquote**
+(`> **<initials>:** ...`), a space reserved for your own words rather than an assistant's paraphrase.
+The tooling records what ran and what it measured; you write what it means.
+
+A `dirty` flag records whether the tracked code was committed when a run executed. A run you keep is
+*finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
+check out and reproduce.
+
+A root-level **reference ledger** (`references.md`) completes the record: a running list that pairs each
+external source the work builds on with a *why it mattered here* note, kept current as you go, so the
+manuscript's methods section and its bibliography accrue as you work rather than being reconstructed at
+write-up.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
 **Look at the data at every step, and document as you explore.** Before you have a test for every step,
@@ -142,16 +152,16 @@ need a tag first to stay safe: the commit right before you trim is already perma
 its hash, the same reproducibility doc 15 already relies on. Tag that commit anyway if you want a
 memorable name for it (`pre-trim`) instead of hunting `git log` later — a nicety, not a requirement.
 Trim either directly on `main`, or on a separate branch you tag instead, leaving `main` untouched.
-`main` keeps moving regardless of which you choose. A branch or a tag is not a fork: either costs
-nothing and cannot rot. Version the trimmed result properly (semver, a single source of truth)
-before publishing it to PyPI.
+`main` keeps moving regardless of which you choose — a branch and a tag are both just named pointers
+into history you already have, so neither duplicates the repo nor needs keeping in sync. Version the
+trimmed result properly (semver, a single source of truth) before publishing it to PyPI.
 → [23_shipping_a_library.md](../docs/disseminating/23_shipping_a_library.md)
 
 ## How it fits together
 
 ```
 src/yourpkg/ (method code) — the hub.
-├─ imported directly by exploratory notebooks (experiments/<slug>/), experiment
+├─ imported directly by exploratory notebooks (experiments/<theme-slug>/), experiment
 │  drivers, figure drivers, and tests/ — the same relationship, four different jobs
 ├─ displayed in the Sphinx doc site as the API reference (from its own docstrings)
 └─ trimmed + versioned ──▶ PyPI package
