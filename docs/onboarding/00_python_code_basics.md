@@ -1,21 +1,14 @@
-# What are we doing here?
-
-Increasingly, scientists and students are able to access complex computational analysis using AI coding assistants. Accelerating scientific discovery via **vibe coding** is great, but we are still each independently responsible for our own scientific output, the repeatability of our results, and the responsible development of research software. In that context, this repo intends to give the non-computer scientist a framework and tutorial on how to (vibe) code their science rigorously, ensure the repeatability of their experiments, and be able to automatically turn their code outputs and analysis into a website for accessible viewing to facilitate discussion of the results (even with a non-coder) and/or archiving.
-
-Regardless of whether a human or AI assistant is doing the bulk of the coding, it's critical that you maintain control of the scientific questions being asked, can follow the code generated, verify it does what you actually asked, and
-run it yourself — which is exactly what this track builds toward. The coding standards and habits
-taught here, and enforced later on, exist for that same reason regardless of who typed the code: they
-let you, a reviewer, or future you tell whether a result is actually correct, not just
-plausible-looking. [18_ai_assisted_development.md](../implementing/18_ai_assisted_development.md) and
-[ai_coding_assistants.md](../reference/ai_coding_assistants.md) cover working with an assistant
-directly, once you're doing that on real work.
-
-## Python code basics
+# Python code basics
 
 *(Wondering why this doc is numbered 00, not 01? Most programming languages, including Python, count
 from zero — this guide does too, starting here.)*
 
 This doc explains how a Python file is put together and how it differs from a notebook. It references an example, `scripts/show_h5_keys.py`, to point at each piece. Open that file alongside this one.
+
+Why any of this matters when an assistant may be doing the typing is covered in
+[docs/README.md](../README.md); [18_ai_assisted_development.md](../implementing/18_ai_assisted_development.md)
+and [ai_coding_assistants.md](../reference/ai_coding_assistants.md) go into working with an assistant
+directly, once you're doing that on real work.
 
 ## The whole example, mapped
 
@@ -37,7 +30,7 @@ Use a notebook while you are figuring something out. Once the logic is settled a
 
 ## Cells inside a notebook
 
-A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing. 
+A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing.
 
 > **Tip:** These docs are markdown (`.md`) files. If you are reading this as raw text in an editor like VS Code, press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) to toggle between the raw text and the formatted preview.
 
@@ -81,5 +74,7 @@ This block runs when you execute the file directly from the command line, but no
 [06_adding_a_script.md](06_adding_a_script.md) walks through how this script does its job.
 
 ## Further reading
+
+Two references pair with this doc: [programming_jargon.md](../reference/programming_jargon.md) defines the terms of art you'll keep meeting (mutable, parse, refactor, side effect), and [markdown_formatting.md](../reference/markdown_formatting.md) covers the markdown you'll write in notebook cells, READMEs, and pull-request descriptions.
 
 This doc is a fast on-ramp for what you need in this repo. For a full self-paced lesson on Python fundamentals with more practice exercises, see Software Carpentry's [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/).
