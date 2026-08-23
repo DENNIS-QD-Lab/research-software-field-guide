@@ -60,9 +60,7 @@ def _print_attrs(obj: "h5py.Group | h5py.Dataset", indent: int) -> None:
 
 def main() -> None:
     """Parse command-line arguments and print the file's keys."""
-    parser = argparse.ArgumentParser(
-        description="Print the structure of an HDF5 file."
-    )
+    parser = argparse.ArgumentParser(description="Print the structure of an HDF5 file.")
     parser.add_argument("path", help="Path to the HDF5 file to inspect.")
     args = parser.parse_args()
     show_keys(args.path)
