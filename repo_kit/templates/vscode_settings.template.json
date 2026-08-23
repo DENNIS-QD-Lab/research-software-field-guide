@@ -1,5 +1,5 @@
 {
-  // Open Markdown files rendered by default (docs, READMEs, run reports); Cmd+Shift+V
+  // Open Markdown files rendered by default (docs, READMEs, theme pages); Cmd+Shift+V
   // (Mac) / Ctrl+Shift+V toggles to the raw source for editing. This setting is
   // window-scoped, so it only takes effect when this repo is opened as its own window —
   // it is silently ignored if this folder is opened inside a multi-root workspace

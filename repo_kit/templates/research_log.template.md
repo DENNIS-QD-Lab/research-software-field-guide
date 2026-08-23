@@ -16,9 +16,9 @@ is the goal*, *what is settled*, and *what is next* without opening anything els
 - **How to run and record an experiment** (runlog protocol, harness rules, tagging) lives in
   [`.claude/experiments_playbook.md`](../.claude/experiments_playbook.md) — durable procedure, not state.
 - **Coding standards** live in [`CLAUDE.md`](../CLAUDE.md).
-- **Rendered reports** (narrative + code + figures) live in the doc site under
-  `docs/experiment_summaries/`, nested under each theme's page in `docs/experiment_overviews/` (build with
-  `sphinx-build docs docs/_build/html`, or serve with `sphinx-autobuild`).
+- **The rendered version** of each theme's README is its page in the doc site, under
+  `docs/experiment_overviews/` — one page per theme, holding no second copy of the findings (build with
+  `sphinx-build -b html docs docs/_build/html`, or serve with `sphinx-autobuild`).
 
 ---
 
@@ -40,7 +40,7 @@ Statuses: ✅ answered · 🟡 partial · 🔲 open · ⛔ not pursued.
 
 <Optional: if the questions group into themes, add a themes table pointing at each experiment folder and
 its report(s). Planned themes can be listed with no folder yet — the roadmap lives here. Start one by
-copying `_TEMPLATE.md` to `<slug>/README.md` and adding its questions to the table above. The theme
+copying `_TEMPLATE.md` to `<theme-slug>/README.md` and adding its questions to the table above. The theme
 folder is undated and permanent — you keep adding to it for as long as that line of inquiry stays open;
 only the runs inside it are dated.>
 
@@ -71,10 +71,10 @@ this stays unambiguous once a repo has more than one contributor.
 - **`_TEMPLATE.md`** — copy it to start a new experiment folder (idea → test → outcome headings).
 - **`_common/`** — the shared harness the drivers reuse (run logging, comparison/plot helpers).
   Harness only — no method code; drivers import methods from `src/`.
-- **`<slug>/README.md`** — the one page for the experiment: motivation, hypotheses, findings with
+- **`<theme-slug>/README.md`** — the one page for the experiment: motivation, hypotheses, findings with
   their figures embedded inline, and one interpretation per finding. This is what's rendered on the
   Sphinx doc site. Written once and updated as findings accrue — not regenerated per run.
-- **`<slug>/details/<YYMMDD_slug>[_NN]/`** — the provenance behind a run: `manifest.yaml` (git commit
+- **`<theme-slug>/details/<YYMMDD>_<slug>[_NN]/`** — the provenance behind a run: `manifest.yaml` (git commit
   + dirty flag, params, inputs), `metrics.csv`, and any figures. Present for reproducibility, not meant
   to be read as a report — the README is. Preserved by default; heavy artifacts (figures, arrays) are
   git-ignored unless committed as a small report fixture.
