@@ -33,6 +33,8 @@ your_project/
 
 `src/<yourpkg>/` is the library: the pipeline code that experiments and analyses import. `experiments/` holds self-describing studies, each a standing folder you keep adding dated runs to rather than a folder you make once and leave, plus a shared `_common/` harness that the theme folders import comparison and logging code from. Crucially, **experiments import method code from `src`**; they use the library rather than carrying their own copy of it, so an experiment is a thin script that calls the library with particular inputs and records what happened. This is what keeps a comparison honest: while you are still deciding between approaches, the competing options all live in `src` together, so the experiment tests the library code and never drifts out of sync with a private copy.
 
+That import only works once `src/<yourpkg>/` is installed as an editable package (`pip install -e .`) — a one-time setup step, not a distribution decision. [21_packaging.md](../disseminating/21_packaging.md) covers it; if you're using this layout at all, you already need that part of it.
+
 A third folder, `figures/`, often joins these two once you start drafting a manuscript — the same
 theme-and-dated-runs discipline as `experiments/`, just for paper figures instead of research
 questions. [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md) covers archiving it, and why

@@ -78,10 +78,14 @@ Once you know the track, the [`repo_kit/`](../repo_kit/) folder at the repositor
 
 ## Disseminating track
 
-*(optional, docs 21–23)* — read this track when a project is actually headed for publication: sharing results, making code installable for others, or archiving a citable record. They live in [`disseminating/`](disseminating/).
+Read this track when a project is actually headed for publication or wider use. Part of it isn't
+really optional: if you're using the `src/` + `experiments/` structure from the implementing track
+at all, doc 15 already depends on the local package doc 21 covers. What's genuinely optional is
+going further — installing elsewhere, versioning for outside consumers, and freezing/citing/shipping
+a public result. They live in [`disseminating/`](disseminating/).
 
 | Doc | What it covers |
 |-----|----------------|
-| [21_packaging.md](disseminating/21_packaging.md) | When a folder of scripts should become an installable package: `pyproject.toml`, the `src/` layout, and editable installs. |
+| [21_packaging.md](disseminating/21_packaging.md) | The local package this guide's `src/` layout already needs (`pyproject.toml`, editable installs) versus the genuinely optional next step: making it installable by other repos, or eventually PyPI. |
 | [22_versioning_and_releases.md](disseminating/22_versioning_and_releases.md) | Semantic versioning, git tags and releases, a single source of truth for the version, and CHANGELOGs. |
-| [23_concluding_a_project.md](disseminating/23_concluding_a_project.md) | Concluding and disseminating: freezing the paper state, archiving to a Zenodo DOI, LICENSE and CITATION.cff, keeping a private lab notebook out of the public copy, and how the frozen record and the shipped library diverge. |
+| [23_concluding_a_project.md](disseminating/23_concluding_a_project.md) | Two independent endings: freezing a citable snapshot for a paper (Zenodo DOI, LICENSE, CITATION.cff), and trimming `src/` toward a shippable library — plus keeping a private lab notebook out of the public copy. |

@@ -151,13 +151,18 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   the point).
 - **Don't:** install packages on the runner by hand to make it pass — add them to the environment file.
 
-### B9 · Package for installation
-- **When:** other repos import this code, or you want versioned installs.
-- **Steps:** `pyproject.toml` (name, version, deps, build backend); `src/` layout; `pip install -e .`;
-  a single source of truth for the version (read back via `importlib.metadata`).
-  ([21](../docs/disseminating/21_packaging.md), [22](../docs/disseminating/22_versioning_and_releases.md))
-- **Verify:** a fresh `pip install -e .` works; `import <pkg>` and `<pkg>.__version__` resolve.
-- **Don't:** package a loose helper/script collection that nothing imports.
+### B9 · Version for outside consumers
+- **When:** other repos import this code, or you want versioned installs — going beyond the local
+  package B4 already set up (that step's `pyproject.toml` + `src/` layout + `pip install -e .` are
+  assumed done here, not repeated).
+- **Steps:** a single source of truth for the version in `pyproject.toml`, read back via
+  `importlib.metadata` rather than hardcoded a second time; tag releases (`git tag -a vX.Y.Z`); for a
+  lighter step than PyPI, note in the README that `pip install git+<url>` already works.
+  ([21](../docs/disseminating/21_packaging.md) "Going further",
+  [22](../docs/disseminating/22_versioning_and_releases.md))
+- **Verify:** `<pkg>.__version__` matches the tag just cut; a fresh clone can `pip install git+<url>`.
+- **Don't:** redo B4's `pyproject.toml`/`src/` layout from scratch — this step assumes it's already
+  there.
 
 ### B10 · Conclude & disseminate
 - **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.

@@ -38,6 +38,17 @@ a *new, empty* public repository and copy in only what should be public. That's 
 git operation, and it's the only mechanism that actually achieves partial exposure — there is no
 "publish just this tag" setting to reach for instead.
 
+The cost is a second repo to maintain, and the public copy carries no commit-by-commit history — the
+trade for keeping the messy parts genuinely private rather than merely out of the diff. If some history
+*is* worth bringing along (a clean sequence of commits you're proud to show), `git filter-repo` can
+extract specific paths with their history intact; it's a separate install and a sharper tool than this
+doc covers in depth — treat it as advanced, and double-check its output before pushing anywhere public.
+
+Note that the alternative `.gitattributes` `export-ignore` entry only filters archives you build
+yourself with `git archive` — it does not affect GitHub's auto-generated release ZIP, and it does
+nothing to hide content from anyone browsing the repo's commit history. It trims what goes into an
+archive of an otherwise-public repo; it does not make something genuinely private.
+
 ## Lab-owned, not person-owned: GitHub Organizations
 
 A physical lab notebook belongs to the lab or university, not to whichever person filled its pages. A
