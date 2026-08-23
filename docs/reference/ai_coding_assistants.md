@@ -6,7 +6,7 @@ Setup, essential commands, and cost/context management for an AI coding assistan
 
 ## Installing Claude Code
 
-Claude Code runs in a terminal and integrates with an editor; it is not itself a VS Code extension you search for in the Extensions marketplace.
+Claude Code is fundamentally a terminal tool. A VS Code extension also exists and gives it a native editor presence — same underlying engine either way, not two separate products.
 
 - **Terminal install:** follow the instructions at [claude.com/claude-code](https://claude.com/claude-code) for your OS — this typically means running an installer script or `npm install -g @anthropic-ai/claude-code`, if you have Node.js already. The first time you run it, it asks you to log in: a **paid** Claude.ai plan (Pro, Max, Team, or Enterprise) or an API key. A free Claude.ai account is not enough on its own.
 - **VS Code integration:** install the **Claude Code** extension (publisher: Anthropic) from the Extensions marketplace ([vs_code_extensions.md](vs_code_extensions.md)). It gives you a sidebar panel and inline diff review, driving the same underlying tool as the terminal version.
