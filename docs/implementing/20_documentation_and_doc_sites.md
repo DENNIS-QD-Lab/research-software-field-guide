@@ -168,7 +168,22 @@ To let others see it without waiting for a CI run, publish it with **Read the Do
 
 ## A dependency note
 
-`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies; add `myst-nb` to the `environment.yml` too if any experiment report needs executable cells (*Rendering experiment findings into the same site*, above). Per the [CLAUDE.md](../../CLAUDE.md) instructions to your AI assistant, adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
+`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are in this repo's
+`environment.yml`, pinned to exact versions. Pinning earns its keep here more than for most
+dependencies, because of the `-W` flag: it promotes every warning to an error, so a new Sphinx release
+that merely adds a deprecation notice is enough to fail a build whose content never changed. That is
+the same drift [11_code_quality_tools.md](11_code_quality_tools.md) describes for a linter, reaching
+the docs instead of the code. `myst-parser` and `furo` also each declare a supported range of Sphinx
+versions, so letting one float can force a downgrade of another. Bump the four together, deliberately.
+
+Add `myst-nb` as well if a page needs executable cells (*Rendering experiment findings into the same
+site*, above). In your own project all of these are new dependencies, so per
+[CLAUDE.md](../../CLAUDE.md) that means asking first, updating the environment file, and saying so in
+the pull request that introduces the site.
+
+The `gh` commands in the appendices below come from the **GitHub CLI**, also in `environment.yml`. Run
+`gh auth login` once before the first use; it opens a browser to authorize the CLI against your
+account.
 
 ## Appendix: building the doc site in CI
 

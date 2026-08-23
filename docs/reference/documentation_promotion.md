@@ -50,7 +50,7 @@ hand:
   relative *links* (to other docs) should resolve against.
 - `:relative-images:` does the same for image paths specifically.
 
-Under the Sphinx and myst-parser versions this guide pins (Sphinx 9.1.0, myst-parser 5.1.0), setting
+Under the Sphinx and myst-parser versions this guide pins (see `environment.yml`), setting
 both options is enough: a README written with plain paths relative to its own directory renders
 correctly both through the Sphinx include *and* when viewed directly on GitHub or in an editor. Writing
 the `../../experiments/<slug>/details/...` path directly into the README instead avoids the Sphinx-side

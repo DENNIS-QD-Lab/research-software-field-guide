@@ -16,3 +16,17 @@ dependencies:
   # testing (see docs/implementing/12_testing_with_pytest.md)
   - pytest
   - pytest-cov
+  # doc site (see docs/implementing/20_documentation_and_doc_sites.md)
+  # These four determine the built HTML, and `sphinx-build -W` turns a new
+  # deprecation warning into a failed build, so they are pinned exactly and
+  # bumped together. myst-parser and furo each declare a supported Sphinx
+  # range; floating one can force a downgrade of another.
+  # Sphinx 9.1 is the first release to require Python >=3.12, so 9.0.4 is the
+  # ceiling while this env pins python=3.11. Bump both together, deliberately.
+  - sphinx=9.0.4
+  - myst-parser=5.1.0
+  - furo=2025.12.19
+  - sphinx-autobuild=2025.8.25
+  # GitHub CLI, for the workflows in docs 14 and 20 (`gh run download`,
+  # `gh release create`). Run `gh auth login` once after installing.
+  - gh
