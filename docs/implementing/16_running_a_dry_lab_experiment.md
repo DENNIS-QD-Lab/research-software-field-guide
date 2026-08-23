@@ -57,7 +57,7 @@ points for *this* project**: why the source mattered *here*, not a general summa
 
 ## The experiment folder: idea → test → outcome
 
-Each distinct study theme gets its own self-contained folder (e.g., `experiments/01_crf-necessity/`; use the numbered prefix if you want them to appear in the order they are introduced)
+Each distinct study theme gets its own self-contained folder (e.g., `experiments/01_noise-reduction/`; use the numbered prefix if you want them to appear in the order they are introduced)
 built from a **template** so every experiment reads the same way. The theme folder is undated on purpose:
 pipeline work loops — you build one stage, add another, loop back to fix the first, add a third — so a
 theme is a standing address for a line of inquiry, revisited for as long as it stays open. Specific experiments are dated runs inside the folder (see "Save the
@@ -111,10 +111,10 @@ remembering — it happens because each run **records the state that produced it
 have it write a small **manifest** next to its outputs:
 
 ```yaml
-# crf-necessity/details/260717_crf-necessity/manifest.yaml   (one subdirectory per run)
-slug: crf-necessity
-summary: "Two-step and joint CRF solves agree once dark current is subtracted."
-driver: run_crf_necessity.py
+# noise-reduction/details/260717_noise-reduction/manifest.yaml   (one subdirectory per run)
+slug: noise-reduction
+summary: "Rolling-median and Savitzky-Golay smoothing agree once the baseline is subtracted."
+driver: run_noise_reduction.py
 created: 2026-07-17T14:02:11
 git:
   commit: 4f7675a
@@ -168,11 +168,11 @@ Everything else a run produced stays ignored and regenerable.
 The folder layout is the third thing to keep straight:
 
 ```
-crf-necessity/                      the theme: undated, permanent, one line of inquiry
+noise-reduction/                      the theme: undated, permanent, one line of inquiry
 ├── README.md                       the one narrative page: question, findings, figures, interpretation
 └── details/
-    ├── 260717_crf-necessity/       one run's provenance: manifest.yaml, metrics.csv, figures
-    └── 260717_crf-necessity_02/    the same study, re-run
+    ├── 260717_noise-reduction/       one run's provenance: manifest.yaml, metrics.csv, figures
+    └── 260717_noise-reduction_02/    the same study, re-run
 ```
 
 Runs accumulate inside the same theme folder, each as a new dated entry in `details/` — you never
@@ -180,7 +180,7 @@ create a new experiment folder just to re-run a study. The theme's `README.md` i
 document: written once, updated in place as findings accrue.
 
 **Preserve runs by default.** Re-running a study does not overwrite the previous result: the first run
-is `details/260717_crf-necessity/`, and each rerun writes the next numbered variant (`…_02`, `…_03`).
+is `details/260717_noise-reduction/`, and each rerun writes the next numbered variant (`…_02`, `…_03`).
 That is what lets you watch a metric move across reruns and catch a regression. Overwrite in place only
 for a throwaway cosmetic re-run of a deterministic result.
 
@@ -189,10 +189,11 @@ because the driver merely ran again — embed it directly in the README's Findin
 *italic* caption noting the run id and the command that reproduces it:
 
 ```markdown
-- **H1 (real data, 2026-07-17):** two-step and joint CRF solves agree to three decimals once dark current is subtracted (R² ≈ 0.985 / 0.983).
+- **H1 (real data, 2026-07-17):** rolling-median and Savitzky-Golay smoothing agree to three decimals
+  once the baseline is subtracted (R² ≈ 0.985 / 0.983).
 
-  ![](details/260717_crf-necessity/crf_fit_twostep.png)
-  *Run `260717_crf-necessity` — reproduce with `python experiments/crf-necessity/run_crf_necessity.py`.*
+  ![](details/260717_noise-reduction/method_agreement.png)
+  *Run `260717_noise-reduction` — reproduce with `python experiments/noise-reduction/run_noise_reduction.py`.*
 ```
 
 When a rerun supersedes the embedded figure, swap the image path and caption in place;
@@ -204,8 +205,8 @@ instead, citing each run by id:
 - **H2 (parameter sweep, 2026-07-20):** increasing the smoothing window reduces noise but blurs the
   edge past window = 5.
 
-  ![](details/260718_crf-necessity/window_comparison.png)
-  *Runs `260715_crf-necessity`, `260717_crf-necessity`, `260718_crf-necessity` (window = 3, 5, 8) — a
+  ![](details/260718_noise-reduction/window_comparison.png)
+  *Runs `260715_noise-reduction`, `260717_noise-reduction`, `260718_noise-reduction` (window = 3, 5, 8) — a
   small comparison script in `_common/` reads all three runs' `metrics.csv` and plots them together.*
 ```
 
