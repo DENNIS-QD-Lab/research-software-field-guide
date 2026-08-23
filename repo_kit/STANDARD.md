@@ -3,7 +3,9 @@
 This is the short read for a scientist who already codes and does not want to walk a full tutorial. It
 states the **goal**, the **repository structure**, and the **decisions** (with the reasoning) behind a
 research codebase that stays reproducible, well-documented, and efficient to explore in. Each decision
-links to the implementing-track doc that teaches it in depth, for when you want the long version.
+links to the implementing-track doc that teaches it in depth, for when you want the long version. If
+you're newer to Git, Python, or VS Code, start with the
+[onboarding track](../docs/onboarding/) instead — this doc assumes that foundation.
 
 If you want a machine to *apply* this to a repo — scaffold a new one, or upgrade an existing one — hand
 your coding agent [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*; that one is the *how*.
@@ -63,10 +65,10 @@ the status of every open question, what's next, and a dated decision log, so the
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
 each run is at the top of the experiment run report in a protected section that AI assistants never overwrite. The code structure ensures that the results are recorded; you write what
-they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) rather than the assistant's own paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
+they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) — a space reserved for your own words, not the assistant's paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
 keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
-check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
-external source the work builds on with *why it mattered here*, kept current as you go so the
+check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: this simple running bibliography pairs each
+external source the work builds on with a *why it mattered here* note, kept current as you go so the
 manuscript's methods and bibliography are accrued rather than reconstructed at write-up.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
@@ -85,7 +87,7 @@ checksum pinning *which* data a run used. The one carve-out is for small, curate
 rows — that a test or tutorial actually needs.
 → [17_working_with_large_data.md](../docs/implementing/17_working_with_large_data.md), [CLAUDE.template.md](CLAUDE.template.md)
 
-**Method code lives in `src/`; experiments are thin drivers that use it, never forking it.** The
+**Method code lives in `src/`; experiments are thin drivers that use it, never duplicating it.** The
 importable `src/` library holds the actual analysis code — including several competing approaches while
 you are still deciding between them, so they can be compared side by side without drift. An experiment
 is a short driver that imports the library and the `_common/` harness, feeds them particular inputs, and
@@ -103,7 +105,7 @@ a clean machine on every push, catching "works on my machine" fails before they 
 
 **Docstrings become a browsable Sphinx site.** A generated site turns the docstrings you already write
 into a reference you can read — useful for your own navigation during exploration, and a way for a
-reviewer to grasp the shape of an analysis at the module level without reading every line. It cannot
+reviewer (a labmate, a collaborator, your PI, a journal reviewer) to grasp the shape of an analysis at the module level without reading every line. It cannot
 drift from the code because it *is* the docstrings. Use NumPy-style docstrings; Sphinx is the
 scientific-Python norm (NumPy, SciPy, pandas all use it).
 → [20_documentation_and_doc_sites.md](../docs/implementing/20_documentation_and_doc_sites.md)
@@ -134,11 +136,15 @@ permanent **DOI** (Zenodo) — `figures/` is already most of that reproducibilit
 → [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
 
-**Shipping a library is a separate, independent decision — only after freezing, if you make it at
-all.** Trim down to the one approach you disseminate, either directly on `main`, or on a separate
-branch you tag, leaving `main` untouched. The paper's tag keeps it reproducible; `main` keeps moving
-regardless of which you choose. A branch or a tag is not a fork: either costs nothing and cannot rot.
-Version the trimmed result properly (semver, a single source of truth) before publishing it to PyPI.
+**Shipping a library is a separate, independent decision from publishing a paper — make it whenever
+it earns its keep, if at all.** Trimming `src/` down to the one approach you disseminate doesn't
+need a tag first to stay safe: the commit right before you trim is already permanently reachable by
+its hash, the same reproducibility doc 15 already relies on. Tag that commit anyway if you want a
+memorable name for it (`pre-trim`) instead of hunting `git log` later — a nicety, not a requirement.
+Trim either directly on `main`, or on a separate branch you tag instead, leaving `main` untouched.
+`main` keeps moving regardless of which you choose. A branch or a tag is not a fork: either costs
+nothing and cannot rot. Version the trimmed result properly (semver, a single source of truth)
+before publishing it to PyPI.
 → [23_shipping_a_library.md](../docs/disseminating/23_shipping_a_library.md)
 
 ## How it fits together
@@ -156,21 +162,24 @@ flowchart LR
         TEST[tests/]
         DOC["docs/<br>Sphinx site"]
     end
-    subgraph "Disseminate (optional)"
+    subgraph "Publish a paper (optional)"
         FIG["figures/<br>manuscript drafts"]
-        TAG["tag + Zenodo DOI"]
-        PKG[installable package]
+        PAPERTAG["paper tag<br>+ Zenodo DOI"]
+    end
+    subgraph "Ship a library (optional)"
+        TRIM["trim src/<br>+ version"]
+        PKG[PyPI package]
     end
 
     NB -->|"duplicate when you'd be<br>sad to lose a note"| NB
     NB -->|becomes a driver| EXP
-    EXP -->|"imports, never forks"| SRC
+    EXP -->|imports| SRC
     SRC --> DOC
     EXP -.->|"a validation run<br>becomes a regression test"| TEST
     SRC -->|"when drafting a paper"| FIG
-    FIG --> TAG
-    SRC -->|"when ready to publish"| TAG
-    TAG --> PKG
+    FIG -->|freeze| PAPERTAG
+    SRC -->|"when shipping, independently"| TRIM
+    TRIM --> PKG
 ```
 
 Nothing above forces you further right than the project needs: a folder of scripts and a notebook is a

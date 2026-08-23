@@ -29,7 +29,7 @@ Creating one costs nothing — no duplicated files, nothing to keep in sync by h
 That means one repo can hold, at the same time: `main`, the lab notebook that keeps growing for as
 long as the project continues, and a tagged snapshot (`paper-v1`) that reproduces one specific
 paper's figures, frozen forever at the state it was in when you cut it. Neither competes for space
-or attention — you check one out when you need it, by name, and go back to `main` when you don't.
+or attention — you check a tagged version out when you need it, by name, and go back to `main` when you don't.
 
 The practical sequence, once a submission is close: keep working with merges to `main` as usual,
 then decide what this *particular* paper actually needs — which experiment themes, which figures,

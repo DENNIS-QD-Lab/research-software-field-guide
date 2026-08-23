@@ -2,7 +2,7 @@
 
 This doc is about trimming the pipeline itself into something other people install and depend on —
 pared down to the approach you settled on, versioned so an upgrade's risk is knowable at a glance,
-and made approachable to someone with no interest in your research process.
+and made approachable to someone interested in the software as a finished product, with no context on the research that produced it.
 [22_publishing_a_paper.md](22_publishing_a_paper.md) covers the separate, independent case of
 freezing a citable snapshot for a publication. A project may do either, both, or neither.
 
@@ -38,9 +38,8 @@ changed in each release, grouped as Added / Changed / Fixed. The version number 
 
 [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md) steered you away
 from a permanent `dev` or release-branch model, because for an internal pipeline it is pure overhead.
-This is the point where that can change. If you begin cutting **scheduled public releases** that must
-be stabilized while development keeps going, a release-branch model may at last be worth its weight.
-The trigger is real releases to outside users, and not before.
+This is the point where that can change. If you begin cutting **public releases** that must
+be stabilized while development keeps going, a release-branch model is helpful.
 
 ## Avoiding the `__init__.py` trap
 
@@ -51,16 +50,18 @@ hidden."* Usually the hiding is done by leaving the module in place but not impo
 
 That does not work, and it's worth understanding why. **`__init__.py` controls the *exposed* public
 API, not what *installs*.** Every module in `src/` still ships, still gets imported by something
-eventually, and still has to be maintained when a dependency changes. Hiding an old approach behind
+eventually, and still has to be maintained when a dependency changes. This can force work when a CI test fails, even though that failure is related to dead code that no one will ever use. Thus, hiding an old approach behind
 `__init__.py` does not remove its cost; it just makes the cost invisible — a permanent maintenance
 tax, not a solution.
 
-The actual resolution is the tag-based mechanics from
-[22_publishing_a_paper.md](22_publishing_a_paper.md): tag the full, pre-trim state first, *then*
-strip the non-preferred approaches — on `main` or on a branch, whichever you choose. The stripped
-code is not lost: it lives on in the tag and in git history. An experiment that needs the old
-approach reproduces it by checking out that tag, not by running against whatever `src/` looks like
-now.
+The actual resolution is what
+[15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md) already
+established: every commit is already a permanent, reproducible point in history, so deleting a
+module in a new commit doesn't erase it from any earlier one. Strip the non-preferred approaches —
+on `main` or on a branch, whichever you choose — and the removed code is not lost: it lives on in
+every commit before the removal. An experiment that needs the old approach checks out that commit,
+not whatever `src/` looks like now — tag the commit first only if you'd rather have a memorable name
+to check out than a hash to look up.
 
 **The one exception.** If an alternative approach will be *deliberately used going forward* (not just
 preserved for the record), then it is a supported option, not dead code. Make it first-class: tested
@@ -96,8 +97,8 @@ example that runs. A shipped library's README leads with those, not with the res
 A small `examples/` folder (or a single `examples/quickstart.py`) — distinct from `experiments/`'s
 research-question drivers — is worth adding alongside it: a short, self-contained script showing the
 most common use case, using synthetic or bundled sample data so it runs without access to your lab's
-real datasets. Where `experiments/<theme>/` answers "does approach A beat approach B," `examples/quickstart.py`
-answers "how do I use this at all" — a different question, for a different reader.
+real datasets. Where `experiments/<theme>/` answers "does approach A beat approach B?" `examples/quickstart.py`
+answers "how do I use this?" — a different question, for a different reader.
 
 The Sphinx doc site ([20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md))
 already generates the API reference this reader needs; once shipping, it's worth the modest extra

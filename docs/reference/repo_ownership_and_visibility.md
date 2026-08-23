@@ -50,6 +50,28 @@ yourself with `git archive` — it does not affect GitHub's auto-generated relea
 nothing to hide content from anyone browsing the repo's commit history. It trims what goes into an
 archive of an otherwise-public repo; it does not make something genuinely private.
 
+## Keeping two repos in sync across revisions
+
+The privacy the two-repo pattern buys has an ongoing cost, not just an upfront one: the two repos
+have independent histories, so nothing about them stays in sync automatically. That's fine for a
+snapshot cut once and never touched again, but a paper rarely stops changing after the first tag —
+reviewer comments update a figure, a bug fix changes a number, and the version a journal eventually
+publishes is not the version a preprint server saw. Each of those leaves the public repo stale until
+someone deliberately redoes the copy.
+
+Treat that copy as a repeatable step, not a one-time migration. When the private repo's citable state
+changes again, re-run the same "copy these paths" step into the *existing* public repo and commit the
+result there as an ordinary update — the public repo accumulates its own short, honest history
+(`Initial preprint`, `Revise Figure 3 per reviewer 2`, `Final published version`), even though that
+history has no relationship to the private repo's commits. Tag each stage in both repos (`preprint`,
+`v1-published`, ...) so a reader — or you, months later — can tell which public snapshot corresponds
+to which private one, without needing shared git history to do it.
+
+If this happens more than once, script the copy: a short list of paths to include, checked into the
+private repo, run against a local checkout of the public repo. That turns "remember to re-sync" into
+"run the script," and keeps the two repos' contents from drifting apart by accident between the
+updates you do remember to make.
+
 ## Lab-owned, not person-owned: GitHub Organizations
 
 A physical lab notebook belongs to the lab or university, not to whichever person filled its pages. A

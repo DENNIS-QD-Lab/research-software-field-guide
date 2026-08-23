@@ -57,7 +57,7 @@ becomes a command you can run from any directory — the polished form of the sa
 
 Everything above is close to a requirement for this guide's structure. What follows is a genuinely
 optional decision — should code that's already a local package also be installable by other repos,
-other people, or a package index:
+other people, or a package index? Yes, if...
 
 - **Other repos import it.** You are copy-pasting the same code between projects instead of
   installing it once.
@@ -68,7 +68,7 @@ If neither applies, stop here — the local package is already doing its job, an
 real overhead for no benefit. A collection of standalone helper scripts and training docs that
 never adopts the `src/` + `experiments/` split doesn't need even the local package — see
 [06_adding_a_script.md](../onboarding/06_adding_a_script.md) — that's a different, equally valid
-repo shape, not a shortcut within this one.
+repo shape when that's all that's needed.
 
 ### A lighter step before PyPI: installing straight from GitHub
 
