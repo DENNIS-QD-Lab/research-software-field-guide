@@ -149,42 +149,30 @@ before publishing it to PyPI.
 
 ## How it fits together
 
-```mermaid
-flowchart LR
-    subgraph Explore
-        NB["Exploratory notebook<br>experiments/&lt;slug&gt;/"]
-    end
-    subgraph "Record & build"
-        EXP["Experiment run<br>report + details/"]
-        SRC["src/yourpkg/<br>method code"]
-    end
-    subgraph Trust
-        TEST[tests/]
-        DOC["docs/<br>Sphinx site"]
-    end
-    subgraph "Publish a paper (optional)"
-        FIG["figures/<br>manuscript drafts"]
-        PAPERTAG["paper tag<br>+ Zenodo DOI"]
-    end
-    subgraph "Ship a library (optional)"
-        TRIM["trim src/<br>+ version"]
-        PKG[PyPI package]
-    end
+```
+src/yourpkg/ (method code) — the hub.
+├─ imported directly by exploratory notebooks (experiments/<slug>/), experiment
+│  drivers, figure drivers, and tests/ — the same relationship, four different jobs
+├─ displayed in the Sphinx doc site as the API reference (from its own docstrings)
+└─ trimmed + versioned ──▶ PyPI package
 
-    NB -->|"duplicate when you'd be<br>sad to lose a note"| NB
-    NB -->|becomes a driver| EXP
-    EXP -->|imports| SRC
-    SRC --> DOC
-    EXP -.->|"a validation run<br>becomes a regression test"| TEST
-    SRC -->|"when drafting a paper"| FIG
-    FIG -->|freeze| PAPERTAG
-    SRC -->|"when shipping, independently"| TRIM
-    TRIM --> PKG
+experiments/ (research log + themes)
+├─ displayed in the Sphinx doc site as research log + theme overviews
+└─ archived ──▶ archived lab notebook
+
+figures/ (manuscript drafts)
+├─ displayed in the Sphinx doc site as figure overviews
+└─ frozen ──▶ paper tag + Zenodo DOI
+
+Two things mature into another, once they earn it:
+├─ an exploratory notebook becomes a driver script (duplicate it first if you'd
+│  be sad to lose an observation)
+└─ a validation run in experiments/ becomes a regression test in tests/
 ```
 
-Nothing above forces you further right than the project needs: a folder of scripts and a notebook is a
-complete, valid state to stay in. Every arrow is a *decision*, not a requirement — the "why" for each
-one is in the bullets above.
+None of the above is a ladder you're expected to climb to the top of: a folder of scripts and a
+notebook is a complete, valid state to stay in. Every branch is a decision made when it earns its
+keep, not a requirement — the "why" for each one is in the bullets above.
 
 ## Adopting it
 
