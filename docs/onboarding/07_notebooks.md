@@ -8,19 +8,13 @@ A `.ipynb` file stores not just your code but also every cell's output: printed 
 
 ## One-time setup after cloning
 
-The fix is a tool called `pre-commit`, which runs a check automatically every time you commit. Our check strips the outputs out of notebooks before they are committed. Run these two commands once, from the repository root, with the `fieldguide` environment active:
-
-```
-pip install pre-commit
-```
-
-This installs the `pre-commit` tool.
+The fix is a tool called `pre-commit`, which runs a check automatically every time you commit. Our check strips the outputs out of notebooks before they are committed. `pre-commit` is already in this repo's `environment.yml`, so with the `fieldguide` environment active ([04_environments.md](04_environments.md)) you only need to switch it on. Run this once, from the repository root:
 
 ```
 pre-commit install
 ```
 
-This activates the check in this repository, using the configuration in `.pre-commit-config.yaml`. You do this once per repository.
+This activates the check in this repository, using the configuration in `.pre-commit-config.yaml`. You do this once per repository. (In a repo whose environment does not already include it, install it first with `conda install pre-commit`.)
 
 ## What you will see when committing
 

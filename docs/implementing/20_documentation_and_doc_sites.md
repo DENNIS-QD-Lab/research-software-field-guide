@@ -186,7 +186,7 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
-          environment-file: environment.yml   # this includes sphinx, furo, myst-parser
+          environment-file: environment.yml   # must list sphinx, furo, myst-parser
           activate-environment: fieldguide
 
       - name: Install the package             # so autodoc can import it

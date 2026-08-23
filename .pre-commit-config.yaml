@@ -8,8 +8,9 @@ repos:
 
   # Lint and format Python to the standards in CLAUDE.md.
   # ruff-check fixes what it safely can; ruff-format applies the layout.
+  # rev must match the ruff version pinned in environment.yml.
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.20
+    rev: v0.15.21
     hooks:
       - id: ruff-check
         args: ["--fix"]

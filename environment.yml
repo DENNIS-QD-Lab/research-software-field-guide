@@ -9,7 +9,8 @@ dependencies:
   - jupyter
   - ipykernel
   # code-quality tooling (see docs/implementing/11_code_quality_tools.md)
-  - ruff
+  # ruff is pinned exactly, in lockstep with .pre-commit-config.yaml's rev.
+  - ruff=0.15.21
   - pre-commit
   - mypy
   # testing (see docs/implementing/12_testing_with_pytest.md)

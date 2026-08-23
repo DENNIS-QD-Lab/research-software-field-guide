@@ -4,6 +4,7 @@ message: >-
   metadata below.
 title: research-software-field-guide
 version: 0.1.0
+date-released: "2026-07-31"
 abstract: >-
   A practical guide to writing trustworthy research software, aimed at scientists who
   didn't train as software developers. Walks from first terminal use through version
@@ -15,7 +16,7 @@ authors:
     given-names: Allison
     affiliation: Northeastern University
     email: a.dennis@northeastern.edu
-repository-code: "https://github.com/AllisonMDennis/research-software-field-guide"
+repository-code: "https://github.com/DENNIS-QD-Lab/research-software-field-guide"
 license: MIT
 keywords:
   - research software
