@@ -8,19 +8,28 @@ A dry-lab experiment has the same arc as a bench experiment: you have a **questi
 a way to answer it, you **run** it, you **record** what happened, you **interpret** the result, and
 often you **repeat** it. The repo is your lab notebook. The discipline that makes it a *notebook* and
 not a pile of scripts is this: any run can be reproduced, and the whole line of inquiry can be
-followed, **without reading the git history**. Someone (including future-you) should be able to open
+followed, by viewing the results and reading your interpretation — a more scientific focus than just reading the git history. Someone (including future-you) should be able to open
 the folder and see what you asked, what you found, and what to do next.
-
-Everything below is illustrated by an example repo built to this standard, set up exactly this way.
 
 ## The pieces, at a glance
 
+What follows works at three different scales: two files you keep current for the whole project,
+a structure repeated for every line of inquiry, and a set of practices that make each individual
+result trustworthy.
+
+**Kept current for the whole project**
 - **The research log** — one file holding current state: the goal, open questions, what's next.
-- **The reference ledger** — the external knowledge (papers, specs, standards) behind your decisions.
-- **The experiment folder** — one per line of inquiry, built from a template: question → hypotheses → tests → findings.
-- **Validation** — designing an experiment whose answer can actually be trusted.
-- **Saving the state of every run** — what a run writes so it can be reproduced later.
-- **Interpretation stays with the scientist** — what gets recorded automatically, and what only you write.
+- **The reference ledger** — a running list of the external knowledge (papers, specs, standards) behind your decisions.
+
+**Repeated for each line of inquiry**
+- **The experiment folder** — one per question/study theme, built from a template: question → hypotheses → tests → findings.
+- **The run manifest** — what a run writes automatically so it can be reproduced later.
+- **What you write into the README** — which of those runs becomes a documented finding, and how much of its history stays visible.
+
+**What makes a result trustworthy**
+- **Validation** — designing an experiment whose answer can actually be checked, not just run.
+- **Looking at the data** — catching problems while they're still cheap to fix.
+- **Interpretation** — what a run records automatically, and what only you write.
 
 ## The research log: one place that holds the state
 
@@ -40,44 +49,35 @@ project's status is always clear and can be understood by consulting this one do
 
 ## The reference ledger: the knowledge behind the decisions
 
-The decision log records *what* you decided and *why* — the internal reasoning. But research decisions
+The decision log above records *what* you decided and *why*. Research decisions
 also build on **external knowledge**: a method from a paper, a published threshold, a noise model off a
-spec sheet, a standard you chose to follow. A **reference ledger** — a `references.md` at the repo root —
-records that prior knowledge alongside the work that used it. One row per source: the citation, a link
-or DOI, the date accessed (web pages change), and — the part that matters most — the **key relevant
-points for *this* project**: why the source mattered *here*, not a general summary of it.
-
-Keep it current as sources come up, not reconstructed at the end, for two reasons. First, the
-"why it mattered here" note is cheap to write while the decision is fresh and expensive to recover
-months later. Second, research code may be headed for a manuscript: a ledger that already pairs
-each source with the decision it informed is a huge help when compiling your methods section and bibliography, and is more likely to be complete when accrued as
-you went rather than reverse-engineered at the end. The ledger is the outward-facing companion to
-the decision log — the decision log says *we switched to method B because it removed the artifact*; the
-ledger says *method B is Granados et al. (2010), and here is the equation and why it applies to our
-detector*. This is a convention worth keeping in **every** research repo, so the "source + why it
-mattered here" pairing always travels with the code that used it; the payoff at write-up is covered in
-[23_concluding_a_project.md](../disseminating/23_concluding_a_project.md). This guide keeps one at its root
-([`references.md`](../../references.md)) as a worked example.
+spec sheet, a standard you chose to follow. A **reference ledger** ([references.md](../../references.md) saved at the repo root) records that prior knowledge alongside the work that used it. One row per source: the citation, a link
+or DOI, the date accessed (web pages change), and, critically, the **key relevant
+points for *this* project**: why the source mattered *here*, not a general summary of it. Keep it current as sources come up, not reconstructed at the end, for the sake of future-you as well as anyone else who may work on the project.
 
 ## The experiment folder: idea → test → outcome
 
-Each distinct study gets its own self-contained folder (`experiments/crf-necessity/` — add a numbered prefix if you want them to appear in the order they are introduced)
-built from a **template** so every experiment reads the same way. The folder is undated on purpose:
+Each distinct study theme gets its own self-contained folder (e.g., `experiments/01_crf-necessity/`; use the numbered prefix if you want them to appear in the order they are introduced)
+built from a **template** so every experiment reads the same way. The theme folder is undated on purpose:
 pipeline work loops — you build one stage, add another, loop back to fix the first, add a third — so a
 theme is a standing address for a line of inquiry, revisited for as long as it stays open. Specific experiments are dated runs inside the folder (see "Save the
-state of every run," below), documenting the chronological accrual of results or eveidence related to that theme. The exemplar's template (`experiments/_TEMPLATE.md`)
+state of every run," below), documenting the chronological accrual of results or evidence related to that theme. The exemplar's template (`experiments/_TEMPLATE.md`)
 has a fixed set of headings:
 
 - **Question / motivation** — why this experiment exists.
 - **Hypotheses** — the falsifiable claims, each with the read-out that would settle it.
 - **Tests** — a small table: hypothesis → what is run → metric → which driver script.
-- **Findings** — filled in as evidence accrues, and *dated*. A null result or a method that loses is
-  a finding, not a failure — keep it.
+- **Findings** — filled in as evidence accrues, and *dated*. A null result or a method that underperforms is a finding, not a failure — keep it.
 - **Reproduce** — the exact command, and which tag/state to check out.
 - **Status & decisions** — what is settled, what is still open.
 
 Copy the template to start a new experiment, and add a row to the research log so it shows up in the
 status table. That is the whole ritual.
+
+This README is also what other people see. It renders directly into the project's Sphinx doc site
+([20_documentation_and_doc_sites.md](20_documentation_and_doc_sites.md)), so the same file you keep
+updating as you work doubles as the easiest-to-share, easiest-to-navigate view of your lab notebook —
+no separate write-up step.
 
 [example_repo_structure.md](../reference/example_repo_structure.md) shows what several of these theme
 folders, each with multiple runs, actually look like once a project has been running for a while.
@@ -92,7 +92,7 @@ Build the check in when you design the experiment, not after:
 - **Synthetic data.** Generate inputs with the answer built in, so any deviation from it is visible and quantifiable.
 - **An independent method.** Compare against a second, unrelated route to the same quantity.
 
-A validation experiment that concludes cleanly does double duty: it answers today's question, and — once you trust it — freezing it as a regression test ([12_testing_with_pytest.md](12_testing_with_pytest.md)) is what keeps that result true as the code keeps changing.
+A validation experiment that concludes cleanly does double duty: it answers today's question, and — once you trust it — freezing it as a regression test ([12_testing_with_pytest.md](12_testing_with_pytest.md)) keeps that result true as the code keeps changing.
 
 ## Look at the data at every step
 
@@ -102,9 +102,7 @@ analysis, and catches problems early, while they are cheap to fix. Design your c
 present* its intermediate outputs often, not only the final number. Plot the intermediate arrays, their
 distributions, or the residuals — whatever shows the *shape* of the data at that step — and check how each
 step changes them. (For image processing work, for instance, look at the image **and** a histogram of its intensities
-together, so that when a step excludes data — say, by implementing a threshold-based mask — you see what it does to both.) This is the
-exploratory companion to the validation checks in [18_ai_assisted_development.md](18_ai_assisted_development.md) ("a clean run is not a correct
-analysis"): the same eyes-on-the-data instinct, applied continuously before you have tests to encode it.
+together, so that when a step excludes data — say, by implementing a threshold-based mask — you see what it does to both.) 
 
 ## Save the state of every run
 
@@ -138,8 +136,8 @@ parameters. Seeding any randomness is what lets a rerun return the *same* number
 similar ones — the same determinism a regression test relies on
 ([12_testing_with_pytest.md](12_testing_with_pytest.md)).
 
-`git.commit` and `dataset_sha256` pin *which code* and *which
-package versions* executed them — an `environment.yml` install can quietly drift as its dependencies
+`git.commit` and `dataset_sha256` pin *which code* and *which data* produced a run — but not *which
+package versions* executed them. An `environment.yml` install can quietly drift as its dependencies
 release new versions, the same drift [11_code_quality_tools.md](11_code_quality_tools.md) describes
 for a single pinned tool. For a run that needs to reproduce exactly, add a fully-resolved lockfile
 (`conda-lock`, `pip freeze`, or a project tool like Hatch or Pixi) alongside the manifest, so a rerun
@@ -149,20 +147,21 @@ pins the project to an aging dependency set nobody wants to build against later.
 
 ## Repeat runs, and track quality, without bloating the repo
 
-You will run an experiment many times. If every run committed its figures and arrays — or generated
-its own markdown report — the repo would balloon, its history would be permanently heavy, and the
+You will run an experiment many times. If every run committed its figures and arrays, or generated
+its own markdown report, the repo would balloon, its history would be permanently heavy, and the
 theme folder would fill up with dozens of near-identical files for runs that mostly just re-confirmed
-a driver still reproduced its prior output. The rule that keeps the record complete *and* the repo (and
-the folder listing) small: **a run writes provenance, not prose.**
+a driver still reproduced its prior output. Keep two things separate: what a *run* writes
+automatically, and what you choose to write into the theme's README.
 
-- **Commit the small, non-regenerable provenance:** the `manifest.yaml` and a `metrics.csv` (the
-  numbers that let you compare runs — RMSE, counts, whatever tracks quality). Nothing else is written
+A run commits only small, non-regenerable provenance:
+
+- **`manifest.yaml` and `metrics.csv`** (the numbers that let you compare runs — RMSE, counts, whatever tracks quality). Nothing else is written
   automatically.
-- **Git-ignore the heavy, regenerable artifacts:** figures (`*.png`), large arrays (`*.npy`), and any
+- **Everything heavy is git-ignored:** figures (`*.png`), large arrays (`*.npy`), and any
   scratch data. A deterministic, seeded run *reproduces* these from the committed code and manifest,
   so you are keeping the recipe, not the cake.
 
-Those two rules cover what a *run* writes. The folder layout is a third thing to keep straight:
+The folder layout is the third thing to keep straight:
 
 ```
 crf-necessity/                      the theme: undated, permanent, one line of inquiry
@@ -172,10 +171,9 @@ crf-necessity/                      the theme: undated, permanent, one line of i
     └── 260717_crf-necessity_02/    the same study, re-run
 ```
 
-The theme folder is undated and permanent, and the dates live on the runs inside `details/`. Runs
-accumulate there — you do not create a new experiment folder to re-run a study, and a run does not get
-its own report file. The theme's `README.md` is the *only* narrative document: written once, updated
-in place as findings accrue, never regenerated per run.
+Runs accumulate inside the same theme folder, each as a new dated entry in `details/` — you never
+create a new experiment folder just to re-run a study. The theme's `README.md` is the key narrative
+document: written once, updated in place as findings accrue.
 
 **Preserve runs by default.** Re-running a study does not overwrite the previous result: the first run
 is `details/260717_crf-necessity/`, and each rerun writes the next numbered variant (`…_02`, `…_03`).
@@ -187,68 +185,63 @@ because the driver merely ran again — embed it directly in the README's Findin
 *italic* caption noting the run id and the command that reproduces it:
 
 ```markdown
-- **H1 (real data, 2026-07-17):** two-step and joint CRF solves agree to three decimals once dark
-  current is subtracted (R² ≈ 0.985 / 0.983).
+- **H1 (real data, 2026-07-17):** two-step and joint CRF solves agree to three decimals once dark current is subtracted (R² ≈ 0.985 / 0.983).
 
   ![](details/260717_crf-necessity/crf_fit_twostep.png)
   *Run `260717_crf-necessity` — reproduce with `python experiments/crf-necessity/run_crf_necessity.py`.*
 ```
 
-That caption is deliberately *not* a heading. It exists so the run can be reproduced, not so it can be
-linked to or indexed — a page full of `## Provenance` sections is the same clutter problem in a
-different font. When a rerun supersedes the embedded figure, swap the image path and caption in place;
+When a rerun supersedes the embedded figure, swap the image path and caption in place;
 the superseded run's own `details/` folder is untouched and still there if you need to compare against
-it directly.
+it directly. When the comparison between runs is itself the finding, build a comparison figure
+instead, citing each run by id:
 
-In the exemplar a small `runlog.py` helper writes the manifest/metrics split, but the convention does
-not depend on that code: one folder per theme, one `README.md`, one numbered `details/` subdirectory
-per run, small provenance committed, heavy artifacts ignored. If you already have a runlog helper that
-also writes a per-run report file and other drivers depend on that shape, drop the report-writing call
-one driver at a time rather than all at once — each driver's own README absorbs that driver's findings
-whenever you touch it next, so nothing has to move in a single pass.
+```markdown
+- **H2 (parameter sweep, 2026-07-20):** increasing the smoothing window reduces noise but blurs the
+  edge past window = 5.
 
-[17_working_with_large_data.md](17_working_with_large_data.md) covers the small carve-out for committing
-a figure that cannot be regenerated in CI because it needs real data.
+  ![](details/260718_crf-necessity/window_comparison.png)
+  *Runs `260715_crf-necessity`, `260717_crf-necessity`, `260718_crf-necessity` (window = 3, 5, 8) — a
+  small comparison script in `_common/` reads all three runs' `metrics.csv` and plots them together.*
+```
+
+Which shape best supports your science — one current result, or a comparison across several — is a
+call you make per finding, not a repo-wide setting; the same README can hold both. Every run still
+gets its own manifest and metrics, preserved in `details/` regardless; there's no automated switch
+that decides for you whether a run becomes a documented finding at all — that stays your call, made
+fresh each time a run finishes.
 
 ## Interpretation stays with the scientist
 
-Automate the recording, never the conclusion. A machine can write *what ran and what it measured* —
-the manifest, the metrics, a figure — but it should never write *what a result means*. That judgment
-lives in the theme's `README.md`, in the scientist's own words, right next to the finding it belongs
-to. The machine records the numbers; the human writes what they mean. That boundary is the whole
-point: the framework exists to make your judgment reproducible and reviewable, not to replace it.
-(This division of labor is exactly the subject of [18_ai_assisted_development.md](18_ai_assisted_development.md), and it
-matters most when an assistant wrote the driver.)
+A machine can write *what ran and what it measured* — the manifest, the metrics, a figure — but only
+you can write what a result *means*. That judgment belongs in the theme's `README.md`, in your own
+words, right next to the finding it belongs to. The framework exists to make your judgment reproducible
+and reviewable, not to replace it. (This division of labor is exactly the subject of
+[18_ai_assisted_development.md](18_ai_assisted_development.md), and it matters most when an AI
+assistant wrote the driver.)
 
 A Findings bullet in an experiment README, a line in the research log's decision log, a caveat on a
 theme's Status & decisions — any of these can slide into asserting what a result *means* rather than
 what it *shows*. The lightweight tool that keeps the line visible is a **signed blockquote**, dropped
 in wherever the *why* actually belongs:
 
-> **AMD:** the CRF is adding little here that a calibrated linear model doesn't already capture.
+> **AMD:** Examination of multiple curve fits shows that the monoexponential fit was the most appropriate. The biexponential had slightly improved statistics, but based on the number of data points that we have, that appears to be overfitting the data. I'm going to continue with the monoexponential fit with baseline offset for now. Re-consider the fit after examining the standard error vs. intensity to confirm what weighting should be used for the fit.
 
-Sign it with your own initials rather than a generic "Scientist" label — nothing in the runlog or
-doc-promotion tooling parses the label text, so this is free to be as specific as a multi-contributor
-repo needs, and it reads identically on GitHub, in an editor, and in a built Sphinx site: a plain
-markdown blockquote, no color-coding or custom syntax required. Two rules keep it worth trusting:
+Sign it with your name or initials. The blockquote reads identically on GitHub, in an editor, and in a
+built Sphinx site, so your notes are always visible wherever the doc is read.
 
-- **Insert it verbatim.** If the scientist writes three words, three words is what goes in the doc — an
-  assistant tightening or rephrasing it quietly substitutes its own voice for theirs, which is exactly
-  what this convention exists to prevent.
-- **Leave a placeholder rather than guess.** When a spot calls for a judgment call nobody has made yet,
-  write `> **AMD:** _Interpretation pending._` instead of filling the gap with a plausible-sounding guess
-  or leaving it silently blank — a visible gap gets noticed and closed; an invisible one doesn't.
-
-An assistant drafting or editing these docs should hold to the same split as the driver code: its own
-prose stays to *method* (what ran, on what data and parameters) and *observed result* (what the numbers
-or a plot show); anywhere the text would otherwise assert what a result implies, what caused it, or what
-to do next, that becomes a signed blockquote instead — filled in if the scientist has already said it, a
-`_pending_` placeholder if not.
+- **Keep your own words.** Write your interpretation yourself, and if you're asking an AI assistant to
+  help draft the surrounding text, make sure it inserts what you actually said verbatim in the blockquote rather than
+  tightening or rephrasing it — a paraphrase quietly substitutes the assistant's voice for yours,
+  which is exactly what this convention exists to prevent.
+- **If you haven't decided yet, say so.** Write a placeholder like `> **AMD:** _Interpretation
+  pending._` rather than leaving the spot blank — or, if you're using an assistant, rather than
+  letting it draft a plausible-sounding guess on your behalf. A visible gap gets noticed and closed;
+  an invisible or guessed-at one doesn't.
 
 ## Exploratory notebooks: the same discipline, without a manifest
 
-A notebook exploring an idea has the same reproducibility problem a driver script solves with a
-manifest — except nothing forces you to *notice* an observation matters before you change something and
+An ipynb notebook is really powerful for exploring an idea, but it has a reproducibility problem that isn't easily solved with a driver script attaching a run manifest. While freely exploring in the notebook, nothing forces you to *notice* an observation matters before you change something and
 rerun. That is the specific failure mode worth naming: in the moment, you often cannot tell which run
 will turn out to matter later, so a rule that only kicks in "when it seems important" will not catch it.
 Two cheap habits, applied unconditionally, close most of that gap:
@@ -258,51 +251,13 @@ Two cheap habits, applied unconditionally, close most of that gap:
   filled in for real *before* the next parameter change and rerun. This is the notebook analog of the
   signed blockquote above, doing the same job: recording judgment a machine cannot write for you, at
   the moment it is cheapest to write it.
-- **Duplicate the notebook once you've written a note you'd be annoyed to lose** (`noise_test_01.ipynb`
-  → `noise_test_02.ipynb`). This is PRESERVE-by-default, ported to notebooks: it protects *what code
+- **Duplicate the notebook if you see a result you'd be annoyed to lose** (`noise_test_01.ipynb`
+  → `noise_test_02.ipynb`). This is preserve-by-default, ported to notebooks: it protects *what code
   produced what*, the same way a driver's numbered rerun does. The observation is the trigger, not a
   pre-planned sweep — you are not declaring upfront "this will be a parameter sweep," you are noticing,
   after the fact, that this particular run is worth keeping side by side with the next one.
 
-Neither habit fully solves the underlying problem — a scientist who does not yet know something matters
-cannot be forced to document it, by any tooling. That is an honest limit of exploratory work, not a gap
-to engineer around. Because an exploratory notebook has not called a runlog helper, it has no matching
-`details/` folder; a run only gets one once it is promoted to a driver script that writes a manifest.
-
-## Choosing how much gets documented
-
-Every run already gets a manifest and metrics inside `experiments/<slug>/details/` — that part is not
-optional, and doesn't change here. What *is* a judgment call is whether a run's figure and numbers are
-worth writing into the theme's `README.md` at all: not every rerun is a new finding, and most reruns
-just confirm a driver still reproduces its prior output. There is no automated switch or environment
-variable that makes this decision for you — "documenting" a run now literally means editing the README,
-so the only question is whether this run changed what you'd write there.
-
-**Early on, err toward writing more.** You often don't know in the moment which run will turn out to
-matter later — the same problem the exploratory-notebook habit above is designed around. Because
-embedding a figure is a one-line edit to a file you already have open, not a new file a tool generates,
-the cost of erring toward "write it down" is genuinely small: at worst the README grows a paragraph you
-later trim, not a pile of pages nobody reads.
-
-**As you learn what's worth keeping, prune the README down to the current evidence.** When a rerun
-supersedes an embedded figure, replace it in place rather than adding a second entry beside it — the
-superseded run's own `details/` folder is still there, untouched, if you ever need to go back to it.
-The README should always read as *the current state of the finding*, not a running log of every attempt.
-
-**Sharing outside the repo** (a PDF for a lab meeting, an external collaborator who won't clone the
-repo) is a separate, occasional need from day-to-day documentation, and doesn't require promoting every
-run automatically. Export the theme's README (or a specific figure) to PDF when you actually need to
-share it. Mechanics for that export are in
-[documentation_promotion.md](../reference/documentation_promotion.md).
-
-## How this connects
-
-- **[15_experiments_and_shipping.md](15_experiments_and_shipping.md)** — where these folders live, and
-  why method code in `src/` is safe to keep changing freely as long as each run's manifest still points
-  at the commit that produced it.
-- **[12_testing_with_pytest.md](12_testing_with_pytest.md)** — a validation experiment that concludes cleanly becomes a
-  regression test, so the result you just established stays true as the code changes.
-- **[17_working_with_large_data.md](17_working_with_large_data.md)** — how the `inputs:` block above points at real data too big to
-  commit, and how to pin *which* data a run used.
-- **[18_ai_assisted_development.md](18_ai_assisted_development.md)** — when an assistant writes the driver, this provenance and this
-  interpretation boundary are what keep the science honest.
+A scientist who does not yet know something matters cannot be forced to document it by any tooling —
+these two habits close most of that gap, not all of it. Because an exploratory notebook has not called
+a runlog helper, it has no matching `details/` folder; a run only gets one once it is promoted to a
+driver script that writes a manifest.
