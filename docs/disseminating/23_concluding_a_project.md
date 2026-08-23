@@ -46,6 +46,28 @@ going: the next experiment, the next figure, the next paper. None of this endang
 sitting in every earlier commit — a pruned tag is an additional, permanent view onto one moment of it,
 not a replacement for it.
 
+## Avoiding the `__init__.py` trap
+
+A tempting mistake, once you're ready to trim `src/` down to a clean, shippable library: *"If I delete
+the old approach, I can't reproduce the paper that used it, so I'll keep it around, just hidden."*
+Usually the hiding is done by leaving the module in place but not importing it in `__init__.py`.
+
+That does not work, and it's worth understanding why. **`__init__.py` controls the *exposed* public
+API, not what *installs*.** Every module in `src/` still ships, still gets imported by something
+eventually, and still has to be maintained when a dependency changes. Hiding an old approach behind
+`__init__.py` does not remove its cost; it just makes the cost invisible — a permanent maintenance tax,
+not a solution.
+
+The actual resolution is the pattern above: tag the full, pre-trim state first, *then* strip the
+non-preferred approaches — on `main` or on a branch, whichever you chose. The stripped code is not
+lost: it lives on in the tag and in git history. An experiment that needs the old approach reproduces
+it by checking out that tag, not by running against whatever `src/` looks like now.
+
+**The one exception.** If an alternative approach will be *deliberately used going forward* (not just
+preserved for the record), then it is a supported option, not dead code. Make it first-class: tested
+and documented, perhaps in a clearly named `legacy` subpackage. The rule is against *gated-off
+clutter*, not against genuinely supporting more than one method when you mean to.
+
 ## Keeping the lab notebook private: a clean public copy
 
 Everything above assumes the tag you freeze and archive is the same repo you have been working in
