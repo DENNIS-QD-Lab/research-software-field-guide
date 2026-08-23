@@ -1,16 +1,19 @@
 # Setup playbook — bringing a repo to the research-software standard
 
-**For the assistant (Claude Code).** This is the actionable procedure for setting up a new research
+**For your AI coding assistant.** This is the actionable procedure for setting up a new research
 repository, or upgrading an existing one, to the standard described in [STANDARD.md](STANDARD.md). Read
-STANDARD.md first for the *why*; this file is the *how*.
+STANDARD.md first for the *why*; this file is the *how*. The examples name Claude Code, but nothing here
+depends on it.
 
 Use it two ways:
-- **New repo** → follow *Mode A · Scaffold*, in order, stopping at the pieces the project actually needs.
-- **Existing repo** → *Mode B · Upgrade recipes*, à la carte — apply only the recipe(s) the scientist asks for.
+- **New repo** → follow *Mode A: Scaffold*, in order, stopping at the pieces the project actually needs.
+- **Existing repo** → *Mode B: Upgrade recipes*, à la carte — apply only the recipe(s) the scientist asks for.
 
 The config skeletons (`ci.yml`, `conf.py`, `pyproject.toml`) are not duplicated here — use the ones in
 [14](../docs/implementing/14_continuous_integration.md), [20](../docs/implementing/20_documentation_and_doc_sites.md),
-and [21](../docs/disseminating/21_packaging.md) so this kit never drifts from the tutorial.
+and [21](../docs/disseminating/21_packaging.md) so this kit never drifts from the tutorial. Those docs
+live in this guide, so keep it checked out alongside the target repo while working through these
+recipes.
 
 ## Operating rules (every task)
 
@@ -22,16 +25,24 @@ and [21](../docs/disseminating/21_packaging.md) so this kit never drifts from th
   reviewed. Confident-but-wrong is the failure mode to catch.
 - **Verify after every step (the verify gate):**
   - `ruff check .` and `ruff format --check .`
-  - `pytest` (must stay green — if you changed structure, only import lines should change)
+  - `pytest` — green once the repo has tests. Before step 4 creates `tests/`, pytest exits with code 5
+    ("no tests ran"); that is expected, not a failure. If you changed structure, only import lines
+    should change.
   - `sphinx-build -W -b html docs docs/_build/html` if the repo has a doc site (`-W` = warnings fail)
   Report what you ran and its result. Never report success you did not verify.
 - **Never trust a number without a test.** If generated code produces results, a test guards them
   ([12](../docs/implementing/12_testing_with_pytest.md)). A clean run is not a correct analysis.
 - **Ask before adding a dependency**; if approved, update the environment file and note it in the PR.
 
-## Mode A · Scaffold a new repo
+## Mode A: Scaffold a new repo
 
-Do these in order; stop wherever the project's maturity stops. Early projects often need only 1–2 and 5.
+Do these in order; stop wherever the project's maturity stops. Early projects often need only 0–2 and 5.
+
+0. **A repo and an environment to work in.** `git init` (or create the repo on GitHub and clone it), and
+   add a `.gitignore` and a root `README.md`. Then create the environment file and build it:
+   `conda env create -f environment.yml && conda activate <env-name>`. Step 2's `pre-commit install`
+   needs both a git repository and an activated environment, so neither is optional.
+   ([04_environments.md](../docs/onboarding/04_environments.md))
 
 1. **Standards file.** Copy [CLAUDE.template.md](CLAUDE.template.md) → `CLAUDE.md`; fill every
    `<PLACEHOLDER>`. This is what makes every later session follow the conventions automatically.
@@ -50,14 +61,14 @@ Do these in order; stop wherever the project's maturity stops. Early projects of
    from ruff); `pre-commit install`. ([11](../docs/implementing/11_code_quality_tools.md))
 3. **Package layout.** `src/<pkg>/` for method code + `pyproject.toml`; `pip install -e . --no-deps`.
    ([21](../docs/disseminating/21_packaging.md))
-4. **Tests.** `tests/` + `pytest.ini` (or `[tool.pytest]`); one real test that runs the code on a
+4. **Tests.** `tests/` + `pytest.ini` (or `[tool.pytest.ini_options]` in `pyproject.toml`); one real test that runs the code on a
    known input. ([12](../docs/implementing/12_testing_with_pytest.md))
 5. **Experiments framework.** See recipe *B5* below — this is the core of the research-notebook job and
    is usually worth doing even when nothing else is.
 6. **Doc site.** Recipe *B7*.
 7. **CI.** Recipe *B8*.
 
-## Mode B · Upgrade recipes
+## Mode B: Upgrade recipes
 
 Each recipe is independent: *when to use → steps → verify → don't*. Apply only what is asked.
 
@@ -106,16 +117,21 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   - Add `experiments/_common/` for shared **harness only** (run logging, comparison/plot helpers) —
     never method code; drivers import methods from `src/`.
   - Add a small `runlog` helper that writes, per run, **provenance only** — no report file — to
-    `details/<YYMMDD_slug>[_NN]/` at the theme's top level: `manifest.yaml` (git commit + dirty flag,
+    `details/<YYMMDD>_<slug>[_NN]/` at the theme's top level: `manifest.yaml` (git commit + dirty flag,
     params, inputs + checksum) and `metrics.csv`. **PRESERVE by default** (a rerun gets a fresh `_NN`;
-    never clobber). The theme's own `experiments/<slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
+    never clobber). The theme's own `experiments/<theme-slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
     narrative document — findings, embedded figures, interpretation — written once and updated in place,
     never regenerated per run. A run's figure worth keeping visible gets embedded directly in the
-    README's Findings section, from `details/<run_id>/`, with a short italic caption noting the run id
-    (not a heading — see [documentation_promotion.md](../docs/reference/documentation_promotion.md)).
+    README's Findings section, from `details/<run_id>/`, with a short italic caption noting the run id —
+    a caption rather than a heading, so it does not become a nav entry.
     ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
-  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch) under `details/`; commit only `manifest.yaml`
-    and `metrics.csv`.
+  - Also create a root-level `references.md`: the reference ledger, one row per external source with a
+    *why it mattered here* note. A table header and a first row is enough to start.
+    ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
+  - Git-ignore heavy artifacts (`*.png`, `*.npy`, scratch) under `details/`, and commit `manifest.yaml`
+    and `metrics.csv`. The one exception is a figure embedded in a theme's README: it has to be in the
+    repo for GitHub or the doc site to render it, so commit that single file with `git add -f`, since it
+    matches the ignored `*.png` pattern. Everything else a run produced stays ignored and regenerable.
 - **Verify:** run a driver; confirm the `details/` folder appears with a manifest and metrics, and a
   rerun gets a fresh `_NN` instead of overwriting it.
 - **Don't:** fork method code into a driver; overwrite a preserved run; have the driver write a
@@ -126,15 +142,20 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **When:** docstrings are missing or mixed-style (blocks a clean doc site).
 - **Steps:** add/convert to NumPy-style (summary, `Parameters`, `Returns`, `Examples`) on every public
   function and module. ([20](../docs/implementing/20_documentation_and_doc_sites.md))
-- **Verify:** `sphinx-build -W` produces no docstring warnings.
+- **Verify:** `sphinx-build -W -b html docs docs/_build/html` produces no docstring warnings.
 - **Don't:** rewrite what a function does while documenting it.
 
 ### B7 · Stand up the Sphinx doc site
 - **When:** no browsable API docs.
 - **Steps:** `docs/conf.py` with `autodoc` + `napoleon` + `intersphinx` + `myst_parser`, `furo` theme
   (skeleton in [20](../docs/implementing/20_documentation_and_doc_sites.md)); autodoc imports the
-  package, so `pip install -e .` first; add an API page via an `automodule` directive; preview with
-  `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file. For a private repo,
+  package, so `pip install -e . --no-deps` first; add an API page via an `automodule` directive; preview with
+  `sphinx-autobuild docs docs/_build/html`. If the repo has experiment themes, add one
+  `docs/experiment_overviews/<theme-slug>_overview.md` per theme, whose whole body is the MyST
+  `{include}` block from [20](../docs/implementing/20_documentation_and_doc_sites.md) (with
+  `:relative-docs:` and `:relative-images:`, or embedded figures silently fail to render), and list them
+  in `docs/index.md`'s `toctree`. Pin the new deps in the env file — `sphinx-build -W` makes any new
+  warning fatal, so an unpinned builder can fail a build whose content never changed. For a private repo,
   make the built site reachable in CI (20's two appendices): a `workflow artifact` on every push for
   day-to-day review, a `workflow_dispatch`-triggered tagged **release** for a snapshot that needs to
   outlive the artifact's retention window.
@@ -156,7 +177,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   package B4 already set up (that step's `pyproject.toml` + `src/` layout + `pip install -e .` are
   assumed done here, not repeated).
 - **Steps:** a single source of truth for the version in `pyproject.toml`, read back via
-  `importlib.metadata` rather than hardcoded a second time; tag releases (`git tag -a vX.Y.Z`); for a
+  `importlib.metadata` rather than hardcoded a second time; tag releases (`git tag -a vX.Y.Z -m "..." && git push origin vX.Y.Z`); for a
   lighter step than PyPI, note in the README that `pip install git+<url>` already works.
   ([21](../docs/disseminating/21_packaging.md) "Going further",
   [23](../docs/disseminating/23_shipping_a_library.md))
@@ -177,15 +198,17 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 
 ### B11 · Ship a library
 - **When:** the software itself is becoming a shared dependency, independent of any paper.
-- **Steps:** *only after* any paper tag from B10, trim `src/` to the disseminated method — directly
-  on `main`, or on a separate branch you tag instead, leaving `main` untouched. Version it properly
-  (B9), then publish to PyPI. Give the shipped repo its own front door: a public-facing README
+- **Steps:** trim `src/` to the disseminated method — directly on `main`, or on a separate branch you
+  tag instead, leaving `main` untouched. This does not require a paper tag first: the commit before the
+  trim stays permanently reachable by its hash, so the removed approach is never lost. Tag that commit
+  (`pre-trim`) only if you would rather have a memorable name than a hash to look up. Version it
+  properly (B9), then publish to PyPI. Give the shipped repo its own front door: a public-facing README
   (install, then a minimal example, not the research question) and a small `examples/` quickstart
   distinct from `experiments/`. ([23](../docs/disseminating/23_shipping_a_library.md))
 - **Verify:** wherever you trimmed (`main` or a branch) still builds and tests green; a fresh
   `pip install` followed by the quickstart example actually runs.
-- **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging
-  (it still installs and still costs maintenance).
+- **Don't:** hide an old approach behind `__init__.py` instead of deleting it — it still installs and
+  still costs maintenance, and the commit history already preserves it.
 
 ### B12 · Add a `figures/` folder for manuscript drafting
 - **When:** drafting a specific submission; more than a couple of ad hoc figure scripts are floating
