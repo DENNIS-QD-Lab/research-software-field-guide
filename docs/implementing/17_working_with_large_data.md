@@ -51,4 +51,4 @@ the report points at them.
 
 Reproducibility does not come from committing the data — a committed dataset bloats the repo forever
 and still does not prove *which* version a result used. It comes from **a pinned code state** (a tag;
-[22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md)) **plus a referenced, checksummed dataset**.
+[22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) **plus a referenced, checksummed dataset**.

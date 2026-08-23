@@ -130,13 +130,16 @@ figure, its driver importing from `src/` — and its `README.md` becomes the pap
 outline, with captions, reviewable by a co-author or PI without opening the repo. You then **tag** the
 exact state behind the paper (with every compared approach still present), archive that tag for a
 permanent **DOI** (Zenodo) — `figures/` is already most of that reproducibility package — and add a
-`LICENSE` and `CITATION.cff`. Only after freezing do you trim down to the one approach you
-disseminate — if disseminating a clean library is even a goal — either directly on `main`, or on a
-separate branch you tag, leaving `main` untouched. The tag keeps the paper reproducible; `main` keeps
-moving regardless of which you choose. A branch or a tag is not a fork: either costs nothing and cannot
-rot.
-→ [23_concluding_a_project.md](../docs/disseminating/23_concluding_a_project.md),
+`LICENSE` and `CITATION.cff`.
+→ [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
+
+**Shipping a library is a separate, independent decision — only after freezing, if you make it at
+all.** Trim down to the one approach you disseminate, either directly on `main`, or on a separate
+branch you tag, leaving `main` untouched. The paper's tag keeps it reproducible; `main` keeps moving
+regardless of which you choose. A branch or a tag is not a fork: either costs nothing and cannot rot.
+Version the trimmed result properly (semver, a single source of truth) before publishing it to PyPI.
+→ [23_shipping_a_library.md](../docs/disseminating/23_shipping_a_library.md)
 
 ## How it fits together
 

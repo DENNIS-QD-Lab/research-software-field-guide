@@ -2,9 +2,10 @@
 
 This is the first doc in the **disseminating track**: increasingly formal ways of letting other
 people see and depend on your work. Packaging (here) is what lets code be installed rather than
-copy-pasted; [22_versioning_and_releases.md](22_versioning_and_releases.md) is how a specific
-version gets named so something can depend on it; [23_concluding_a_project.md](23_concluding_a_project.md)
-is how a result or a library gets frozen, cited, and made public on purpose.
+copy-pasted; [22_publishing_a_paper.md](22_publishing_a_paper.md) covers freezing a citable snapshot
+for a publication; [23_shipping_a_library.md](23_shipping_a_library.md) covers trimming and
+versioning the pipeline itself into something other people install. A project may need any, all, or
+none of the latter two — they're independent of each other.
 
 **Two different questions live in this doc, and they have different answers.** The first — does
 your project need a `pyproject.toml`, a `src/` layout, and an editable install — is close to a
@@ -81,9 +82,10 @@ pip install git+https://github.com/your-org/your-repo.git
 This is a real, citable-in-a-README distribution method, worth adding to the README once a project
 reaches this point, well before "publish to PyPI" is on the table.
 
-### The next step, out of scope here
+### The next step
 
-Once a project is packaged, versioned ([22_versioning_and_releases.md](22_versioning_and_releases.md)), and licensed and citable ([23_concluding_a_project.md](23_concluding_a_project.md)), the further step is publishing to **PyPI** so anyone can `pip install` it. That is deliberately out of scope for this track; it is named here only so you know it is the next thing that exists when you get there.
+Once a project is a package, [23_shipping_a_library.md](23_shipping_a_library.md) covers the rest of
+going further: versioning it properly, and publishing it to **PyPI** so anyone can `pip install` it.
 
 ## Further reading
 

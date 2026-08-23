@@ -128,7 +128,7 @@ second kind of page. Each theme gets exactly one:
 There is no second folder of per-run report pages to keep in sync — a finding is on the site as soon
 as it's written into the theme's README, figure and all.
 
-A `figures/` folder, if you keep one for a manuscript in progress ([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)), uses the identical pattern under `docs/figure_overviews/` — see [example_repo_structure.md](../reference/example_repo_structure.md) for a worked example.
+A `figures/` folder, if you keep one for a manuscript in progress ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)), uses the identical pattern under `docs/figure_overviews/` — see [example_repo_structure.md](../reference/example_repo_structure.md) for a worked example.
 
 Wire `docs/index.md` with a `toctree` pointing at the overview pages, one per theme:
 
@@ -254,7 +254,7 @@ jobs:
             --notes "Static build of the Sphinx doc site, built from $GITHUB_SHA."
 ```
 
-Most projects want both, at different frequencies: the CI artifact on every push, catching a broken build immediately and giving the team a current copy without anyone asking for one; the tagged release on demand, for the handful of moments a copy needs to survive longer than a month or reach someone by name. Tagging a paper's code state for a DOI archive is a separate practice ([22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md), [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)) that fixes the citable state of the code itself; this workflow only preserves a copy of the rendered docs.
+Most projects want both, at different frequencies: the CI artifact on every push, catching a broken build immediately and giving the team a current copy without anyone asking for one; the tagged release on demand, for the handful of moments a copy needs to survive longer than a month or reach someone by name. Tagging a paper's code state for a DOI archive is a separate practice ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) that fixes the citable state of the code itself; this workflow only preserves a copy of the rendered docs.
 
 ## Further reading
 

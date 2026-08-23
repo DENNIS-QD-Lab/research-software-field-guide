@@ -33,7 +33,7 @@ docs/              Sphinx doc site: API reference generated from docstrings, plu
                      includes its README) and experiment_summaries/*.md (the reports themselves)
 figures/           (once drafting a manuscript) the paper's figure outline — same theme +
                      dated-details/ discipline as experiments/, one folder per figure; see
-                     23_concluding_a_project.md
+                     22_publishing_a_paper.md
 references.md      the reference ledger: external sources + why each mattered here
 config / local_paths.py   parameters and machine-local data paths (paths stay out of git)
 ```

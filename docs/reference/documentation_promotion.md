@@ -29,7 +29,7 @@ conditions turns into 8 separate nav entries, most of which nobody ever opens, f
 page's worth of content. Reach for that pattern only if your project genuinely benefits from a full,
 per-run presentation in the lab notebook — the single `{include}` above is the default for good reason.
 
-A `figures/` folder ([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)) uses
+A `figures/` folder ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) uses
 this identical mechanism: `docs/figure_overviews/<fig-slug>_overview.md` includes
 `figures/<fig-slug>/README.md` the same way an experiment overview page includes a theme's README.
 Everything below — the relative-path fix, the PDF-export option, the standalone-report exception —

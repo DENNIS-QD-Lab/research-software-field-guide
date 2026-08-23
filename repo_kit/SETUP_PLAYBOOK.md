@@ -159,24 +159,35 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   `importlib.metadata` rather than hardcoded a second time; tag releases (`git tag -a vX.Y.Z`); for a
   lighter step than PyPI, note in the README that `pip install git+<url>` already works.
   ([21](../docs/disseminating/21_packaging.md) "Going further",
-  [22](../docs/disseminating/22_versioning_and_releases.md))
+  [23](../docs/disseminating/23_shipping_a_library.md))
 - **Verify:** `<pkg>.__version__` matches the tag just cut; a fresh clone can `pip install git+<url>`.
 - **Don't:** redo B4's `pyproject.toml`/`src/` layout from scratch — this step assumes it's already
   there.
 
-### B10 · Conclude & disseminate
-- **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.
-- **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared approach
-  still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`. *Only after
-  the tag*, trim `src/` to the disseminated method — directly on `main`, or on a separate branch you
-  tag instead, leaving `main` untouched. ([23](../docs/disseminating/23_concluding_a_project.md),
-  [22](../docs/disseminating/22_versioning_and_releases.md))
-- **Verify:** the tag checks out and reproduces a figure; wherever you trimmed (`main` or a branch)
-  still builds and tests green.
-- **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging (it
-  still installs and still costs maintenance).
+### B10 · Publish a paper
+- **When:** a line of inquiry is going out as a publication.
+- **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared
+  approach still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`.
+  If the working repo shouldn't be public as-is, use the two-repo pattern: a fresh, empty public
+  repo with only what belongs in the paper's record.
+  ([22](../docs/disseminating/22_publishing_a_paper.md),
+  [repo_ownership_and_visibility](../docs/reference/repo_ownership_and_visibility.md))
+- **Verify:** the tag checks out and reproduces a figure.
+- **Don't:** archive from the private working repo without auditing its full history first.
 
-### B11 · Add a `figures/` folder for manuscript drafting
+### B11 · Ship a library
+- **When:** the software itself is becoming a shared dependency, independent of any paper.
+- **Steps:** *only after* any paper tag from B10, trim `src/` to the disseminated method — directly
+  on `main`, or on a separate branch you tag instead, leaving `main` untouched. Version it properly
+  (B9), then publish to PyPI. Give the shipped repo its own front door: a public-facing README
+  (install, then a minimal example, not the research question) and a small `examples/` quickstart
+  distinct from `experiments/`. ([23](../docs/disseminating/23_shipping_a_library.md))
+- **Verify:** wherever you trimmed (`main` or a branch) still builds and tests green; a fresh
+  `pip install` followed by the quickstart example actually runs.
+- **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging
+  (it still installs and still costs maintenance).
+
+### B12 · Add a `figures/` folder for manuscript drafting
 - **When:** drafting a specific submission; more than a couple of ad hoc figure scripts are floating
   around.
 - **Steps:** one folder per figure (or figure group) under `figures/`, same theme + `details/`
@@ -185,7 +196,7 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   README into the doc site the same way an experiment theme's is: a
   `docs/figure_overviews/<fig-slug>_overview.md` page whose body is a MyST `{include}` of the
   figure's own README, so the manuscript's whole figure outline is browsable on the same site.
-  ([23](../docs/disseminating/23_concluding_a_project.md),
+  ([22](../docs/disseminating/22_publishing_a_paper.md),
   [16](../docs/implementing/16_running_a_dry_lab_experiment.md))
 - **Verify:** the doc site renders the figures/README page with the current image and caption visible.
 - **Don't:** overwrite a figure in place when it stops earning its spot — let the superseded attempt

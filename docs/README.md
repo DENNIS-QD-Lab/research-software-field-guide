@@ -87,5 +87,5 @@ a public result. They live in [`disseminating/`](disseminating/).
 | Doc | What it covers |
 |-----|----------------|
 | [21_packaging.md](disseminating/21_packaging.md) | The local package this guide's `src/` layout already needs (`pyproject.toml`, editable installs) versus the genuinely optional next step: making it installable by other repos, or eventually PyPI. |
-| [22_versioning_and_releases.md](disseminating/22_versioning_and_releases.md) | Semantic versioning, git tags and releases, a single source of truth for the version, and CHANGELOGs. |
-| [23_concluding_a_project.md](disseminating/23_concluding_a_project.md) | Two independent endings: freezing a citable snapshot for a paper (Zenodo DOI, LICENSE, CITATION.cff), and trimming `src/` toward a shippable library — plus keeping a private lab notebook out of the public copy. |
+| [22_publishing_a_paper.md](disseminating/22_publishing_a_paper.md) | Freezing a citable snapshot for a publication: tags and releases, the freeze/archive/cite pattern, LICENSE and CITATION.cff, Zenodo/JOSS, the `figures/` folder as a reproducibility package, and keeping a private lab notebook out of the public copy. |
+| [23_shipping_a_library.md](disseminating/23_shipping_a_library.md) | Trimming the pipeline into an installable library: semantic versioning, CHANGELOGs, the `__init__.py` trap, publishing to PyPI, and making the shipped repo approachable to a new user (a public-facing README and a quickstart example). |

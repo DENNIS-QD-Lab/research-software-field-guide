@@ -40,9 +40,10 @@ A **public** repository is visible to anyone on the internet. A **private** repo
 to you and whoever you explicitly grant access — collaborators, or (for an organization repo) certain
 organization members.
 
-This guide's own [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)
-covers *when* a research repo should go public — typically at or near publication, often with a private
-lab notebook kept separate from the public, tagged snapshot. This section is only about the GitHub
+This guide's own [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md) and
+[23_shipping_a_library.md](../disseminating/23_shipping_a_library.md) cover *when* a research repo
+should go public — typically at or near a publication or a release, often with a private lab
+notebook kept separate from the public, tagged snapshot. This section is only about the GitHub
 setting itself: it lives in a repository's Settings tab, and — with a caveat that an organization owner
 can restrict who's allowed to change it — visibility can be changed after creation in either direction.
 See GitHub's [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories)

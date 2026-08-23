@@ -13,7 +13,7 @@ visibility, on different timelines, not one repo-wide setting:
   polished for an outside reader, and it often shouldn't be read by one: false starts, unfiltered
   commentary, and preliminary results that didn't hold up all belong here.
 - **Archival (the paper record)** — public, but as a curated snapshot, not the raw notebook. This is
-  the tagged, DOI'ed state [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)
+  the tagged, DOI'ed state [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)
   covers.
 - **Shippable (the library)** — often public earlier and more fully than the paper record, including
   its ordinary development history. That history isn't sensitive lab process, it's just normal software
@@ -31,8 +31,9 @@ tag public while the rest of a repo's history stays private. If the repo is priv
 branch, and tag in it is private; flip it to public, and all of that history goes public at once,
 permanently — copies, forks, and caches outlive any later attempt to undo it.
 
-This is exactly why [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)'s "clean
-public copy" pattern uses **two repositories**, not one repo with a public tag: keep the private working
+This is exactly why [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)'s and
+[23_shipping_a_library.md](../disseminating/23_shipping_a_library.md)'s "clean
+public copy" patterns use **two repositories**, not one repo with a public tag: keep the private working
 repo (full history, every experiment) as the actual notebook, and when it's time to disseminate, create
 a *new, empty* public repository and copy in only what should be public. That's a plain file copy, not a
 git operation, and it's the only mechanism that actually achieves partial exposure — there is no
@@ -112,7 +113,8 @@ assuming they're obvious:
 - **Flipping a repo's visibility setting without auditing its full history first.** The setting change
   itself takes one click; what it exposes is everything that has ever been committed, not just the
   current file tree. Decide and audit *before* the repo ever goes public, not after
-  ([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)).
+  ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md),
+  [23_shipping_a_library.md](../disseminating/23_shipping_a_library.md)).
 - **Cloning the private repo and pushing that clone to a new public remote**, instead of doing the
   clean plain-file-copy the two-repo pattern above actually calls for. This looks like "just publishing
   the code" and instead drags the entire private commit history along with it.

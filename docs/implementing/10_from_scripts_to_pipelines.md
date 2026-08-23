@@ -94,7 +94,7 @@ There is a heavier model called **Git Flow**, built around a permanent second br
 
 That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. For ongoing development, analysis, or experimental work, keep `main` as the single source of truth and use short-lived feature branches off it.
 
-The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project, discussed in [22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md).
+The trigger to reconsider heavier branching is the **distribution tier**: cutting tagged public releases of a project, discussed in [23_shipping_a_library.md](../disseminating/23_shipping_a_library.md).
 
 ## Where the sharp Git tools live
 

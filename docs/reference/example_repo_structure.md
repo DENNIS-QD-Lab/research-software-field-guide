@@ -168,7 +168,7 @@ run above:
 dated attempts (`260810_v1/`, then a revised `260815_v2/` after it was decided to switch to a log-scale
 axis), and a `README.md` that *is* the paper's actual figure-outline page for this figure, caption
 included. Nothing here is a new mechanism — it's `experiments/`'s own discipline, reused
-([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)). Its README renders into
+([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)). Its README renders into
 the doc site the same way an experiment theme's does, so the manuscript's whole figure outline is
 viewable and shareable as a Sphinx page, not just as files sitting in the repo.
 

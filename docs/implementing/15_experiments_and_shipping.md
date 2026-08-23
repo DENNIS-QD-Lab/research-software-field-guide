@@ -37,7 +37,7 @@ That import only works once `src/<yourpkg>/` is installed as an editable package
 
 A third folder, `figures/`, often joins these two once you start drafting a manuscript — the same
 theme-and-dated-runs discipline as `experiments/`, just for paper figures instead of research
-questions. [23_concluding_a_project.md](../disseminating/23_concluding_a_project.md) covers archiving it, and why
+questions. [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md) covers archiving it, and why
 keeping one pays off well beyond the writing itself.
 
 `src/`, `experiments/`, and `figures/` don't need the same visibility. The exploratory and archival work
@@ -117,7 +117,7 @@ data, produced this. Check out that commit, restore that data, rerun, and you ge
 This rewards committing often. Every commit that a run's manifest can point to is a state you can
 return to later, if needed. This logic is obvious for the big, deliberate moments like 
 cutting a `paper-v1` tag and archiving it for a permanent, citable record
-([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)), but it holds continuously, at ordinary commits, long before that.
+([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)), but it holds continuously, at ordinary commits, long before that.
 
 None of this has an equivalent in Excel, Prism, or a folder of scripts nobody is tracking. In those
 tools, keeping an old result usually means manually saving a duplicate file, and there is no compact
