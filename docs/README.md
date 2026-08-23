@@ -38,7 +38,7 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 | [ai_coding_assistants.md](reference/ai_coding_assistants.md) | Installing an AI coding assistant, essential session commands (`/clear`, `/compact`, permissions), managing context and cost, and when multi-agent delegation helps versus adds overhead. |
 | [command_line_reference.md](reference/command_line_reference.md) | More terminal commands than the onboarding doc covers, organized by category, including how to read a compound command in an AI assistant's permission prompt. |
 | [cs_jargon.md](reference/cs_jargon.md) | Programming terms of art (snake_case, mutable, parse, refactor, etc.) defined briefly. |
-| [documentation_promotion.md](reference/documentation_promotion.md) | How a theme's README becomes its doc-site page, the `{include}` options that keep embedded figures resolving correctly, and sharing a page as a PDF. |
+| [documentation_promotion.md](reference/documentation_promotion.md) | How a theme's (or figure's) README becomes its doc-site page, the `{include}` options that keep embedded figures resolving correctly, and sharing a page as a PDF. |
 | [example_repo_structure.md](reference/example_repo_structure.md) | A full, fleshed-out (synthetic) example repo: several experiment themes, multiple runs each, a `figures/` folder, and what the generated doc site looks like from all of it. |
 | [git_recovery.md](reference/git_recovery.md) | Recovering from common Git mistakes: work done on the wrong branch, a bad commit, a file you need back, and other "what just happened" moments. |
 | [git_vocabulary.md](reference/git_vocabulary.md) | Git and GitHub terms (fetch, pull, push, HEAD, origin, upstream, conflict, and others) you'll encounter. |

@@ -3,7 +3,7 @@
 This is the reference for how an experiment theme's `README.md` ends up as a page in the built Sphinx
 site, and how to keep its embedded figures resolving correctly. The practice-level view — why the
 README is the one narrative document, and how to decide what's worth writing into it — is in
-[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md#choosing-how-much-gets-documented).
+[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md#repeat-runs-and-track-quality-without-bloating-the-repo).
 
 ## One page per theme, no separate promotion step
 
@@ -23,11 +23,18 @@ gating whether a page exists. If the README has a Findings section with an embed
 figure is on the site the next time it's built — the only editorial decision is what you write into
 the README in the first place (see the practice-level doc linked above).
 
-An earlier version of this mechanism auto-generated a separate stub page under
-`docs/experiment_summaries/` for every promoted run, picked up by a `:glob:` toctree. In practice this
-produced one genuinely useful page for every several near-duplicate ones — a parameter sweep of, say,
-8 conditions became 8 separate nav entries, most never actually interpreted. That mechanism is
-retired; don't rebuild it.
+It's tempting to auto-generate a separate stub page under `docs/experiment_summaries/` for every
+promoted run instead, picked up by a `:glob:` toctree. Resist that: a parameter sweep of, say, 8
+conditions turns into 8 separate nav entries, most of which nobody ever opens, for one genuinely useful
+page's worth of content. Reach for that pattern only if your project genuinely benefits from a full,
+per-run presentation in the lab notebook — the single `{include}` above is the default for good reason.
+
+A `figures/` folder ([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)) uses
+this identical mechanism: `docs/figure_overviews/<fig-slug>_overview.md` includes
+`figures/<fig-slug>/README.md` the same way an experiment overview page includes a theme's README.
+Everything below — the relative-path fix, the PDF-export option, the standalone-report exception —
+applies to a figure's README exactly as written, with `figures/<fig-slug>/` in place of
+`experiments/<slug>/`. [example_repo_structure.md](example_repo_structure.md) shows a worked example.
 
 ## The `{include}` relative-path gotcha, and its fix
 
@@ -43,16 +50,16 @@ hand:
   relative *links* (to other docs) should resolve against.
 - `:relative-images:` does the same for image paths specifically.
 
-Confirmed empirically (Sphinx 9.1.0, myst-parser 5.1.0 — the versions this guide pins): with both
-options set, a README written with plain paths relative to its own directory renders correctly both
-through the Sphinx include *and* when viewed directly on GitHub or in an editor. Writing the
-`../../experiments/<slug>/details/...` path directly into the README instead avoids the Sphinx-side
+Under the Sphinx and myst-parser versions this guide pins (Sphinx 9.1.0, myst-parser 5.1.0), setting
+both options is enough: a README written with plain paths relative to its own directory renders
+correctly both through the Sphinx include *and* when viewed directly on GitHub or in an editor. Writing
+the `../../experiments/<slug>/details/...` path directly into the README instead avoids the Sphinx-side
 bug but breaks the second case — the path resolves outside the repository when the README is read from
 its own location. Use the include options; don't hand-rewrite the paths.
 
-If your repo pins different Sphinx/myst-parser versions, this is cheap to re-confirm: put a real image
-behind a relative link in a theme README, include it with the options above, and check the built
-page's `<img src>` actually resolves.
+If your repo pins different Sphinx/myst-parser versions, verify this directly before relying on it: put
+a real image behind a relative link in a theme README, include it with the options above, and check the
+built page's `<img src>` actually resolves.
 
 ## Sharing a page outside the repo (PDF export)
 
