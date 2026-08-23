@@ -1,4 +1,4 @@
-# Markdown Formatting
+# Markdown formatting
 
 Markdown is the text format used for `.md` files, GitHub PR descriptions, GitHub issue comments, and notebook markdown cells. This reference covers what you'll actually use.
 

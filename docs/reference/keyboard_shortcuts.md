@@ -1,10 +1,10 @@
-# Keyboard Shortcuts
+# Keyboard shortcuts
 
 VS Code shortcuts that make daily work faster. On Mac use `Cmd`; on Windows use `Ctrl` unless noted otherwise. The two are interchangeable in nearly every shortcut below.
 
 You don't need to memorize these. Pick three or four that solve a friction you currently feel, learn those, then come back for more when you notice yourself doing something repeatedly with the mouse.
 
-(Hot tip-- if you're looking at this in VS code, use Cmd+Shift+V to make the markdown render so that it's readable! (and that's your first hotkey win! smile))
+(Hot tip — if you're reading this in VS Code, press Cmd+Shift+V to render the markdown so it's readable. That's your first hotkey win.)
 
 ## File and project navigation
 

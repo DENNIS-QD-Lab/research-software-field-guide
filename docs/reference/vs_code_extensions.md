@@ -1,4 +1,4 @@
-# VS Code Extensions
+# VS Code extensions
 
 VS Code has thousands of extensions. Most of them you don't need. This is a curated list, in two tiers: install these, and consider these.
 

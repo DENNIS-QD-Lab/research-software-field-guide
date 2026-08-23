@@ -123,7 +123,7 @@ second kind of page. Each theme gets exactly one:
   own relative image links (`![](details/<run-id>/fig.png)`) against the *overview page's* directory
   instead of the README's own, and the figure silently fails to render. With them, the README's plain,
   self-relative paths work both through this include and when the README is viewed directly on GitHub.
-  Full mechanics: [documentation_promotion.md](../reference/documentation_promotion.md).
+  Full mechanics: [readme_to_doc_site.md](../reference/readme_to_doc_site.md).
 
 There is no second folder of per-run report pages to keep in sync — a finding is on the site as soon
 as it's written into the theme's README, figure and all.
@@ -146,7 +146,7 @@ experiment_overviews/theme_b_overview
 `docs/experiment_summaries/<name>.md`, optionally executable via `myst-nb`, is a reasonable exception
 for the rare read-out that's genuinely too complex for the README's figure-and-caption pattern. Keep it
 rare, and link to it from the theme's README rather than letting it replace the Findings section —
-[documentation_promotion.md](../reference/documentation_promotion.md) covers when this is actually
+[readme_to_doc_site.md](../reference/readme_to_doc_site.md) covers when this is actually
 worth it and how to build one.
 
 ## Viewing and sharing the site

@@ -1,4 +1,4 @@
-# Command Line Reference
+# Command line reference
 
 More terminal commands than [01_command_line_basics.md](../onboarding/01_command_line_basics.md) covers, organized by what they do. No reading order; skim and come back as needed.
 

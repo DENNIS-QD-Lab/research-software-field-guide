@@ -86,7 +86,7 @@ There is no promotion step or environment variable: a theme's `README.md` is inc
 doc-site page (`docs/experiment_overviews/<theme-slug>_overview.md`), so a finding is on the site as soon as
 it's written into the README, with its figure embedded from `details/<run_id>/`. Full mechanics
 (including the `{include}` options that make embedded images resolve correctly) are in
-`docs/reference/documentation_promotion.md` in the research-software-field-guide; this repo follows
+`docs/reference/readme_to_doc_site.md` in the research-software-field-guide; this repo follows
 that convention as written.
 
 ## Finalizing an experiment — clean-commit reproducibility

@@ -57,7 +57,7 @@ The embedded figure is the *current* evidence for this finding, not a running lo
 when a rerun supersedes it, swap the image path and caption in place rather than adding a second entry
 beside it. The image path is relative to this README's own location (`details/<run>/...`), which
 renders correctly both here and on the doc site — see
-`documentation_promotion.md` in the research-software-field-guide for why that only works
+`readme_to_doc_site.md` in the research-software-field-guide for why that only works
 with the right `{include}` options on the overview page. The italic caption is deliberately not a
 heading: it exists so the run can be reproduced, not so it can be linked to or indexed.
 

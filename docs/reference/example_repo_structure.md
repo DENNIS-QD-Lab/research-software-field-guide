@@ -1,4 +1,4 @@
-# Example Repo Structure
+# Example repo structure
 
 A single, extended example of what a repo built to this standard looks like once it's actually
 grown into the whole shape — several experiment themes, each with multiple runs, a `figures/` folder
@@ -33,7 +33,7 @@ your_project/
 │   ├── _common/
 │   │   ├── compare_methods.py
 │   │   ├── runlog.py
-│   │   └── report_embed.py
+│   │   └── embed_figures.py
 │   ├── 01_baseline-comparison/
 │   │   ├── README.md
 │   │   ├── run_baseline_comparison.py
@@ -177,7 +177,7 @@ viewable and shareable as a Sphinx page, not just as files sitting in the repo.
 `docs/experiment_overviews/01_baseline-comparison_overview.md` is a thin page whose entire body is a
 MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the Findings section above,
 figure and all, appears on the site exactly as written, with no separate copy to keep in sync
-([documentation_promotion.md](documentation_promotion.md)). `docs/figure_overviews/fig1_accuracy_comparison_overview.md`
+([readme_to_doc_site.md](readme_to_doc_site.md)). `docs/figure_overviews/fig1_accuracy_comparison_overview.md`
 works identically, `{include}`-ing `figures/fig1_accuracy_comparison/README.md` instead. `docs/api_reference.md`
 is the autodoc page generated from `src/yourpkg/`'s docstrings — named distinctly from the repo-root
 `references.md` ledger of external citations, so the two are never confused. Building `sphinx-build docs docs/_build/html` turns all of

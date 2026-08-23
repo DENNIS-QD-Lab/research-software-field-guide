@@ -1,4 +1,4 @@
-# Git Recovery: When You Mess Up
+# Git recovery: when you mess up
 
 Everyone messes up Git sometimes. Most mistakes look scarier than they are, and almost everything is recoverable as long as you don't make things worse with a panicked second action.
 
