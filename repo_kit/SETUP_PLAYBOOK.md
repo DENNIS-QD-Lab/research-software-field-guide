@@ -177,7 +177,9 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** one folder per figure (or figure group) under `figures/`, same theme + `details/`
   discipline as `experiments/` — a driver that imports from `src/`, dated attempts accumulating in
   `details/`, the current draft embedded in the folder's `README.md` alongside its caption. Wire the
-  README into the doc site the same way an experiment theme's is.
+  README into the doc site the same way an experiment theme's is: a
+  `docs/figure_overviews/<fig-slug>_overview.md` page whose body is a MyST `{include}` of the
+  figure's own README, so the manuscript's whole figure outline is browsable on the same site.
   ([23](../docs/disseminating/23_concluding_a_project.md),
   [16](../docs/implementing/16_running_a_dry_lab_experiment.md))
 - **Verify:** the doc site renders the figures/README page with the current image and caption visible.

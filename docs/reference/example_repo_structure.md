@@ -1,6 +1,6 @@
 # Example Repo Structure
 
-A single, fully worked example of what a repo built to this standard looks like once it's actually
+A single, extended example of what a repo built to this standard looks like once it's actually
 grown into the whole shape — several experiment themes, each with multiple runs, a `figures/` folder
 mid-manuscript, and the doc site generated from all of it. Doc 15's layout diagram shows the shape in
 the abstract; this shows one plausible, fleshed-out instance of it, so you have something concrete to
@@ -8,11 +8,7 @@ compare your own repo against.
 
 **This is a structure example, not a science example.** Every name below — module names, experiment
 themes, figure titles, even the numbers in the manifests — is generic and invented to show the shape.
-Don't look for a real result behind it. If you want to see this same structure holding real research,
-[15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md),
-[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md), and
-[20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md) are where the
-concepts behind each piece are actually taught; this page is only the map.
+
 
 ## The whole tree
 
@@ -42,9 +38,9 @@ your_project/
 │   │   ├── README.md
 │   │   ├── run_baseline_comparison.py
 │   │   └── details/
-│   │       ├── 260601_seed0_baseline/
-│   │       ├── 260601_seed0_baseline_02/
-│   │       └── 260615_seed0_baseline/
+│   │       ├── 260601_baseline/
+│   │       ├── 260601_baseline_02/
+│   │       └── 260615_baseline/
 │   └── 02_edge-case-handling/
 │       ├── README.md
 │       ├── run_edge_cases.py
@@ -71,7 +67,10 @@ your_project/
 │   ├── experiment_overviews/
 │   │   ├── 01_baseline-comparison_overview.md
 │   │   └── 02_edge-case-handling_overview.md
-│   └── experiment_summaries/
+│   ├── experiment_summaries/
+│   └── figure_overviews/
+│       ├── fig1_accuracy_comparison_overview.md
+│       └── fig2_edge_case_illustration_overview.md
 ├── sample_data/
 │   └── example.h5
 ├── .claude/
@@ -95,22 +94,25 @@ This is the part that's hard to picture from a diagram alone: a theme folder isn
 whole line of inquiry, and `details/` accumulates every run of it, preserved by default
 ([16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md)):
 
-- **`260601_seed0_baseline/`** — the first run.
-- **`260601_seed0_baseline_02/`** — a same-day rerun (a `_NN` suffix, not an overwrite) — maybe a
+- **`260601_baseline/`** — the first run.
+- **`260601_baseline_02/`** — a same-day rerun (a `_NN` suffix, not an overwrite) — maybe a
   parameter was tweaked, or the first run was rerun to confirm it.
-- **`260615_seed0_baseline/`** — a rerun two weeks later, likely after `src/core_algorithm.py` changed
+- **`260615_baseline/`** — a rerun two weeks later, likely after `src/core_algorithm.py` changed
   and the theme's README wanted a fresh number to cite.
 
-None of the earlier two are deleted when the third lands. `experiments/01_baseline-comparison/README.md`
+None of the earlier two are deleted when the third lands. The default structure of `experiments/01_baseline-comparison/README.md`
 embeds only the *current* figure and number in its Findings section — the other two runs stay on disk,
-untouched, in case anything ever needs to be checked against them.
+untouched, in case anything ever needs to be checked against them. That default fits this theme, where
+each run simply supersedes the last; when the finding is instead a comparison *across* runs,
+[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md) covers citing
+several run ids in one Findings entry instead.
 
 ## What one run's `details/` folder actually holds
 
-Expanding `details/260615_seed0_baseline/`:
+Expanding `details/260615_baseline/`:
 
 ```
-260615_seed0_baseline/
+260615_baseline/
 ├── manifest.yaml
 ├── metrics.csv
 └── comparison_plot.png
@@ -147,11 +149,11 @@ run above:
 ```markdown
 ## Findings
 
-- **H1 (synthetic baseline, seed 0, 2026-06-15):** Method A and Method B agree to within 2% on the
+- **H1 (synthetic baseline, 2026-06-15):** Method A and Method B agree to within 2% on the
   full synthetic range; Method A is roughly 3x faster.
 
-  ![](details/260615_seed0_baseline/comparison_plot.png)
-  *Run `260615_seed0_baseline` — reproduce with
+  ![](details/260615_baseline/comparison_plot.png)
+  *Run `260615_baseline` — reproduce with
   `python experiments/01_baseline-comparison/run_baseline_comparison.py`.*
 
   > **AMD:** Given the speed difference and no meaningful accuracy loss, Method A is the better default
@@ -164,17 +166,20 @@ run above:
 dated attempts (`260810_v1/`, then a revised `260815_v2/` after a caption note asked for a log-scale
 axis), and a `README.md` that *is* the paper's actual figure-outline page for this figure, caption
 included. Nothing here is a new mechanism — it's `experiments/`'s own discipline, reused
-([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)).
+([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)). Its README renders into
+the doc site the same way an experiment theme's does, so the manuscript's whole figure outline is
+viewable and shareable as a Sphinx page, not just as files sitting in the repo.
 
 ## What the doc site generates from this
 
 `docs/experiment_overviews/01_baseline-comparison_overview.md` is a thin page whose entire body is a
 MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the Findings section above,
 figure and all, appears on the site exactly as written, with no separate copy to keep in sync
-([documentation_promotion.md](documentation_promotion.md)). `docs/reference.md` is the autodoc page
+([documentation_promotion.md](documentation_promotion.md)). `docs/figure_overviews/fig1_accuracy_comparison_overview.md`
+works identically, `{include}`-ing `figures/fig1_accuracy_comparison/README.md` instead. `docs/reference.md` is the autodoc page
 generated from `src/yourpkg/`'s docstrings. Building `sphinx-build docs docs/_build/html` turns all of
-this into one browsable site: the library's API reference and the lab notebook's current findings, side
-by side, from the same commit.
+this into one browsable site: the library's API reference, the lab notebook's current findings, and the
+manuscript's figure outline, all side by side, from the same commit.
 
 ## Which parts of this would typically be private
 
