@@ -153,13 +153,17 @@ theme folder would fill up with dozens of near-identical files for runs that mos
 a driver still reproduced its prior output. Keep two things separate: what a *run* writes
 automatically, and what you choose to write into the theme's README.
 
-A run commits only small, non-regenerable provenance:
+A run writes and commits only small, non-regenerable provenance automatically:
 
-- **`manifest.yaml` and `metrics.csv`** (the numbers that let you compare runs — RMSE, counts, whatever tracks quality). Nothing else is written
-  automatically.
-- **Everything heavy is git-ignored:** figures (`*.png`), large arrays (`*.npy`), and any
-  scratch data. A deterministic, seeded run *reproduces* these from the committed code and manifest,
-  so you are keeping the recipe, not the cake.
+- **`manifest.yaml` and `metrics.csv`** (the numbers that let you compare runs — RMSE, counts, whatever tracks quality).
+- **Everything else heavy is git-ignored by default:** figures (`*.png`), large arrays (`*.npy`), and
+  any scratch data. A deterministic, seeded run *reproduces* these from the committed code and
+  manifest, so day to day you are keeping the recipe, not the cake.
+
+The one exception is a figure you promote into the README's Findings section, below — it has to
+actually be present in the repo for GitHub or the doc site to render it, so that single file gets
+committed alongside the manifest (`git add -f`, since it matches the ignored `*.png` pattern).
+Everything else a run produced stays ignored and regenerable.
 
 The folder layout is the third thing to keep straight:
 

@@ -63,7 +63,7 @@ your_project/
 ├── docs/
 │   ├── conf.py
 │   ├── index.md
-│   ├── reference.md
+│   ├── api_reference.md
 │   ├── experiment_overviews/
 │   │   ├── 01_baseline-comparison_overview.md
 │   │   └── 02_edge-case-handling_overview.md
@@ -100,12 +100,14 @@ whole line of inquiry, and `details/` accumulates every run of it, preserved by 
 - **`260615_baseline/`** — a rerun two weeks later, likely after `src/core_algorithm.py` changed
   and the theme's README wanted a fresh number to cite.
 
-None of the earlier two are deleted when the third lands. The default structure of `experiments/01_baseline-comparison/README.md`
-embeds only the *current* figure and number in its Findings section — the other two runs stay on disk,
-untouched, in case anything ever needs to be checked against them. That default fits this theme, where
-each run simply supersedes the last; when the finding is instead a comparison *across* runs,
-[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md) covers citing
-several run ids in one Findings entry instead.
+None of the earlier two are deleted when the third lands, and not all of them reach the README. Here,
+`260601_baseline_02` re-confirmed the first run without changing the answer, so neither one was ever
+cited in a Findings entry — they just sit in `details/` as provenance, in case anything ever needs to
+be checked against them. `260615_baseline` changed the result enough to matter, so it becomes the
+*current* citation, swapped in for whatever the Findings section pointed at before. When the comparison
+*across* runs is itself the finding, rather than one run superseding the last,
+[16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md) covers the
+other shape: citing several run ids in one Findings entry instead of swapping one in for another.
 
 ## What one run's `details/` folder actually holds
 
@@ -163,7 +165,7 @@ run above:
 ## `figures/` mid-manuscript
 
 `figures/fig1_accuracy_comparison/` follows the identical pattern — a driver, a `details/` folder with
-dated attempts (`260810_v1/`, then a revised `260815_v2/` after a caption note asked for a log-scale
+dated attempts (`260810_v1/`, then a revised `260815_v2/` after it was decided to switch to a log-scale
 axis), and a `README.md` that *is* the paper's actual figure-outline page for this figure, caption
 included. Nothing here is a new mechanism — it's `experiments/`'s own discipline, reused
 ([23_concluding_a_project.md](../disseminating/23_concluding_a_project.md)). Its README renders into
@@ -176,8 +178,9 @@ viewable and shareable as a Sphinx page, not just as files sitting in the repo.
 MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the Findings section above,
 figure and all, appears on the site exactly as written, with no separate copy to keep in sync
 ([documentation_promotion.md](documentation_promotion.md)). `docs/figure_overviews/fig1_accuracy_comparison_overview.md`
-works identically, `{include}`-ing `figures/fig1_accuracy_comparison/README.md` instead. `docs/reference.md` is the autodoc page
-generated from `src/yourpkg/`'s docstrings. Building `sphinx-build docs docs/_build/html` turns all of
+works identically, `{include}`-ing `figures/fig1_accuracy_comparison/README.md` instead. `docs/api_reference.md`
+is the autodoc page generated from `src/yourpkg/`'s docstrings — named distinctly from the repo-root
+`references.md` ledger of external citations, so the two are never confused. Building `sphinx-build docs docs/_build/html` turns all of
 this into one browsable site: the library's API reference, the lab notebook's current findings, and the
 manuscript's figure outline, all side by side, from the same commit.
 
@@ -185,5 +188,4 @@ manuscript's figure outline, all side by side, from the same commit.
 
 Tying back to [repo_ownership_and_visibility.md](repo_ownership_and_visibility.md): in a real project,
 `experiments/` and `figures/` (mid-draft) are usually the private, unpolished parts of this tree —
-everything else, especially `src/` once it's disseminated, is a much more natural candidate for
-visibility much earlier.
+a `src/` library that is disseminated may be visible much earlier.
