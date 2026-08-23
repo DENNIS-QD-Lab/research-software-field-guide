@@ -133,7 +133,12 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 
 - **The scientist commits.** Prepare the changes and a commit-message draft, but ask before committing,
   pushing, or opening a PR.
-- Commit messages: one line, imperative present tense ("Add dark-frame correction," not "Added …").
+- Commit messages: one line, imperative present tense ("Add dark-frame correction," not "Added …"),
+  under about 60 characters. Add a body only where the *why* isn't obvious from the subject, and keep it
+  to a few lines. Scale the message to the change: a one-line fix gets one line.
+- **Don't pad a message.** No "out of scope" or "deferred" sections, and no reporting that the linter
+  and tests passed — those have to pass on every commit. Mention a check only when its *result* is the
+  news. Spend the words on what would surprise a reviewer, not on what the diff already shows.
 - **Prompt for a commit at natural break points as a matter of course**, not only before `/compact` or
   `/clear`: a finished task, a fixed bug, a doc section done. This matters most right before
   implementing an approved plan — check whether the working tree already holds unrelated, uncommitted

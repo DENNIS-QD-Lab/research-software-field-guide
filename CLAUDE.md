@@ -79,6 +79,22 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 - If it adds a new category of functionality worth indexing, update `docs/README.md`.
 - The PR description should include what the helper does and an example invocation.
 
+## Commit and PR messages
+Keep them short. A reviewer reads these to find out what changed and why; anything else is noise they
+have to skim past.
+- One imperative-present-tense subject line, under about 60 characters: "Add dark-frame correction," not
+  "Added dark-frame correction."
+- In the body, say what changed and why — briefly, and only where the *why* isn't already obvious from
+  the subject. A few lines or a few tight bullets. Not a paragraph per file, and not a section per
+  change.
+- **Don't list what the change doesn't do.** No "out of scope," "not included," or "deferred to a
+  follow-up" sections. If a follow-up matters, it belongs in an issue or the plan, not in this message.
+- **Don't report that the checks passed.** `ruff`, `pytest`, and the pre-commit hooks have to pass on
+  every commit, so saying they did adds nothing. Report a check only when its *result* is the news —
+  a benchmark number, a newly-covered edge case, a deliberate exception.
+- Scale the message to the change. A one-line fix gets one line. Spend words on what would surprise a
+  reviewer, not on what they can see in the diff.
+
 ## Session hygiene — context and continuity
 - **Prompt for a commit at natural break points as a matter of course**, not only when a `/compact` or `/clear` is imminent — a finished task, a fixed bug, a doc section done are each a candidate. This matters most right before starting to implement an approved plan: check whether the working tree already holds unrelated, uncommitted work, and if so, suggest committing or explicitly flagging it first, so the plan's changes land as their own clean, reviewable diff instead of mixed in with what came before.
 - At natural break points — a task finished, a PR merged, a doc section done — proactively remind the contributor to `/compact` or `/clear`, whichever fits: `/compact` to keep going once a session's transcript has grown large, `/clear` when moving on to unrelated work. This is responsible token usage ([docs/reference/ai_coding_assistants.md](docs/reference/ai_coding_assistants.md)); make it a regular, gentle prompt, not a one-time note.
