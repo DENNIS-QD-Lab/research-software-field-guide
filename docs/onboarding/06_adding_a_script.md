@@ -1,12 +1,12 @@
 # Adding a script
 
-This doc covers what goes where, how to name and document a helper, and how to tell whether a piece of code belongs in this repository at all. It uses `scripts/show_h5_keys.py` as a model.
+You'll start most projects with a handful of scripts, each doing something useful: inspecting a file, plotting a result, cleaning up some data. This doc is about keeping that starting collection organized — where files go, how to name and document them, and why it's worth doing consistently from the very first script. [07_notebooks.md](07_notebooks.md) covers the same starting tier for notebooks. It uses `scripts/show_h5_keys.py` as a model.
 
 ## Where things go
 
-Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipynb` files) go in `notebooks/`. Keep the two separate so it is always clear which files are importable tools and which are exploration.
+Runnable Python scripts (`.py` files) go in `scripts/`. Jupyter notebooks (`.ipynb` files) go in `notebooks/`, covered in [07_notebooks.md](07_notebooks.md). Keep the two separate so it is always clear which files are importable tools and which are exploration.
 
-This flat layout is the starting tier, and a fine place to stay for a small collection of helpers. Once a project grows into repeated experiments, a package other code imports from, and tests, [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md) covers the structure to grow into.
+This flat layout is the starting tier for every project, and a fine place to stay for as long as you have a handful of scripts that each do their own thing. The payoff for organizing it well now comes later: once a script proves reliable and gets reused often enough that other code depends on it, it graduates into a proper package — [10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md) covers that structure — and a well-named, well-documented script graduates far more easily than one that was never organized to begin with.
 
 ## Naming conventions
 
@@ -30,25 +30,21 @@ Every script needs a docstring at the top of the file. If you are unsure what a 
 
 The top of `scripts/show_h5_keys.py` is the template to copy. It defines its terms, lists its single input, and shows both the command-line call and the import.
 
-## Does this belong here?
-
-Helpers are small, reusable, and not tied to one project. Before adding something, ask whether you would reach for it across different studies. A script that inspects any HDF5 file is a helper and belongs here. A script that only makes sense for the data of one specific experiment is project-specific and belongs in that project's own repository, not here. When you are unsure, raise it in the pull request and let the reviewer weigh in.
-
 ## Worked example: how `show_h5_keys.py` is built
 
-Open `scripts/show_h5_keys.py` and read it top to bottom. It is short and follows the pattern every helper should.
+Open `scripts/show_h5_keys.py` and read it top to bottom. It is short and follows the pattern every script should.
 
 The **module docstring** explains the script and defines the HDF5 vocabulary (groups, datasets, attributes) on first use, then shows how to run it and how to import it.
 
 The **imports** are `argparse` (to define and read the command-line argument) and `h5py` (to open the file).
 
-`show_keys(path: str) -> None` is the **importable function** that does the real work. It opens the file and walks its tree. Because the logic lives in a named function with a type-hinted signature, another script can reuse it with `from scripts.show_h5_keys import show_keys` rather than copying code. The two private helpers, `_print_group` and `_print_attrs`, keep the recursion readable; the leading underscore signals "internal detail, not part of the public interface."
+`show_keys(path: str) -> None` is the **importable function** that does the real work. It opens the file and walks its tree. Because the logic lives in a named function with a type-hinted signature, another script can reuse it with `from scripts.show_h5_keys import show_keys` rather than copying code. The two private helper functions, `_print_group` and `_print_attrs`, keep the recursion readable; the leading underscore signals "internal detail, not part of the public interface."
 
 `main()` uses `argparse` to define one argument, the file path, then reads it and calls `show_keys`. We use `argparse` rather than reading `sys.argv` by hand because it gives a clear error and usage message for free when the argument is missing, and a `--help` flag automatically. Try `python scripts/show_h5_keys.py --help` to see it.
 
 The `if __name__ == "__main__":` block at the bottom calls `main()` only when the file is run directly, so running it as a script and importing it as a library both work, as was described in [00_python_code_basics.md](00_python_code_basics.md).
 
-Copy this shape for new helpers: a module docstring, imports, one or more well-named functions with type hints and docstrings, a `main()` for the command line, and the `if __name__` block to wire it up.
+Copy this shape for new scripts: a module docstring, imports, one or more well-named functions with type hints and docstrings, a `main()` for the command line, and the `if __name__` block to wire it up.
 
 ## Further reading
 

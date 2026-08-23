@@ -3,7 +3,9 @@
 This is the short read for a scientist who already codes and does not want to walk a full tutorial. It
 states the **goal**, the **repository structure**, and the **decisions** (with the reasoning) behind a
 research codebase that stays reproducible, well-documented, and efficient to explore in. Each decision
-links to the implementing-track doc that teaches it in depth, for when you want the long version.
+links to the implementing-track doc that teaches it in depth, for when you want the long version. If
+you're newer to Git, Python, or VS Code, start with the
+[onboarding track](../docs/onboarding/) instead — this doc assumes that foundation.
 
 If you want a machine to *apply* this to a repo — scaffold a new one, or upgrade an existing one — hand
 your coding agent [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*; that one is the *how*.
@@ -33,21 +35,17 @@ your_repo/
 ├── experiments/             question-driven studies — your reproducible research notebook
 │   ├── README.md            the research log: goal, open questions, decisions (read this first)
 │   ├── _TEMPLATE.md         copy it to start a new theme
-│   ├── _common/             shared harness (run logging, comparison plots, reporting) — never method code
-│   └── <theme-slug>/        one undated, permanent folder per theme (hyphens allowed — a multi-word
-│                              theme name reads better hyphenated; revisited for as long as that
-│                              line of inquiry stays open): its README, driver(s), and
-│                              - <YYMMDD_slug>[_NN].md (or .ipynb)   dated run reports, readable at a glance
-│                              - details/<YYMMDD_slug>[_NN]/   the manifest/metrics/figures behind
-│                                each report, name-matched to it, rarely opened directly
-├── src/yourpkg/             your method code — the importable library; studies import from here and never copy it
+│   ├── _common/             shared harness (run logging, comparison plots) — never method code
+│   └── <theme-slug>/        undated, permanent per-theme folder — README, driver(s), dated runs
+│                              in details/; optional leading number for order — see
+│                              16_running_a_dry_lab_experiment.md
+├── src/yourpkg/             your method code — the importable library; studies import it, never copy
 ├── tests/                   pytest suite (unit + regression), seeded from validation experiments
-├── docs/                    Sphinx site: a browsable, always-current record generated from docstrings,
-│                              plus rendered experiment reports:
-│                              - experiment_overviews/<theme>_overview.md   one per theme, includes its
-│                                README and a toctree of that theme's reports
-│                              - experiment_summaries/*.md   the reports themselves (hand-authored and/or
-│                                promoted run stubs), flat so a glob toctree can pick them up
+├── docs/                    Sphinx site from docstrings, plus rendered experiment reports —
+│                              experiment_overviews/ + experiment_summaries/, see
+│                              20_documentation_and_doc_sites.md
+├── figures/                 (once drafting a manuscript) the figure outline — same theme + details/
+│                              discipline as experiments/, one folder per figure
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
 ├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments
@@ -56,7 +54,9 @@ your_repo/
 ```
 
 The [implementing track](../docs/implementing/) walks the whole progression, from a first script to this
-shape.
+shape. [example_repo_structure.md](../docs/reference/example_repo_structure.md) shows a fully
+fleshed-out (synthetic) instance of it — several themes, multiple runs each, and a `figures/` folder —
+if the abstract tree above is hard to picture filled in.
 
 ## The decisions, and why
 
@@ -65,10 +65,10 @@ the status of every open question, what's next, and a dated decision log, so the
 presented with a focus on the scientific goals, hypotheses, and tests. Each run writes a small **manifest** (git commit + dirty flag,
 parameters, which data, a checksum) plus metrics and a short report; the scientist's *interpretation* of
 each run is at the top of the experiment run report in a protected section that AI assistants never overwrite. The code structure ensures that the results are recorded; you write what
-they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) rather than the assistant's own paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
+they mean — there, and anywhere else these docs need a *why*, in a signed blockquote (`> **<initials>:** ...`) — a space reserved for your own words, not the assistant's paraphrase. A `dirty` flag records whether the tracked code was committed when a run executed; a run you
 keep is *finalized* by re-running it on committed code, so its manifest points at a clean commit anyone can
-check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: it pairs each
-external source the work builds on with *why it mattered here*, kept current as you go so the
+check out and reproduce. A root-level **reference ledger** (`references.md`) completes the record: this simple running bibliography pairs each
+external source the work builds on with a *why it mattered here* note, kept current as you go so the
 manuscript's methods and bibliography are accrued rather than reconstructed at write-up.
 → [16_running_a_dry_lab_experiment.md](../docs/implementing/16_running_a_dry_lab_experiment.md)
 
@@ -87,7 +87,7 @@ checksum pinning *which* data a run used. The one carve-out is for small, curate
 rows — that a test or tutorial actually needs.
 → [17_working_with_large_data.md](../docs/implementing/17_working_with_large_data.md), [CLAUDE.template.md](CLAUDE.template.md)
 
-**Method code lives in `src/`; experiments are thin drivers that use it, never forking it.** The
+**Method code lives in `src/`; experiments are thin drivers that use it, never duplicating it.** The
 importable `src/` library holds the actual analysis code — including several competing approaches while
 you are still deciding between them, so they can be compared side by side without drift. An experiment
 is a short driver that imports the library and the `_common/` harness, feeds them particular inputs, and
@@ -105,7 +105,7 @@ a clean machine on every push, catching "works on my machine" fails before they 
 
 **Docstrings become a browsable Sphinx site.** A generated site turns the docstrings you already write
 into a reference you can read — useful for your own navigation during exploration, and a way for a
-reviewer to grasp the shape of an analysis at the module level without reading every line. It cannot
+reviewer (a labmate, a collaborator, your PI, a journal reviewer) to grasp the shape of an analysis at the module level without reading every line. It cannot
 drift from the code because it *is* the docstrings. Use NumPy-style docstrings; Sphinx is the
 scientific-Python norm (NumPy, SciPy, pandas all use it).
 → [20_documentation_and_doc_sites.md](../docs/implementing/20_documentation_and_doc_sites.md)
@@ -125,48 +125,54 @@ pull request, never trust a number without a test, and validate beyond the test 
 physical plausibility, an independent method, and the intermediate outputs. The more you delegate to your AI assistant, the more scrutiny your results will need.
 → [18_ai_assisted_development.md](../docs/implementing/18_ai_assisted_development.md)
 
-**If and when a project reaches publication, the experiments become the figure pipeline — then you
-freeze it.** Up to here nothing forces a "final" state. When results are publication-ready, the experiment
-runs are what generate the figures; you then **tag** the exact state behind the paper (with every
-compared approach still present), archive that tag for a permanent **DOI** (Zenodo), and add a `LICENSE`
-and `CITATION.cff`. Only after freezing do you trim `src/` on `main` down to the one approach you
-disseminate — if disseminating a clean library is even a goal. The tag keeps the paper reproducible;
-`main` keeps moving. A tag is not a fork: it costs nothing and cannot rot.
-→ [23_concluding_a_project.md](../docs/disseminating/23_concluding_a_project.md),
+**If and when a project reaches publication, a `figures/` folder becomes the figure pipeline — then you
+freeze it.** Up to here nothing forces a "final" state. When you start drafting a specific submission, a
+`figures/` folder joins `experiments/` — same theme + dated-`details/` discipline, one folder per
+figure, its driver importing from `src/` — and its `README.md` becomes the paper's actual figure
+outline, with captions, reviewable by a co-author or PI without opening the repo. You then **tag** the
+exact state behind the paper (with every compared approach still present), archive that tag for a
+permanent **DOI** (Zenodo) — `figures/` is already most of that reproducibility package — and add a
+`LICENSE` and `CITATION.cff`.
+→ [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
+
+**Shipping a library is a separate, independent decision from publishing a paper — make it whenever
+it earns its keep, if at all.** Trimming `src/` down to the one approach you disseminate doesn't
+need a tag first to stay safe: the commit right before you trim is already permanently reachable by
+its hash, the same reproducibility doc 15 already relies on. Tag that commit anyway if you want a
+memorable name for it (`pre-trim`) instead of hunting `git log` later — a nicety, not a requirement.
+Trim either directly on `main`, or on a separate branch you tag instead, leaving `main` untouched.
+`main` keeps moving regardless of which you choose. A branch or a tag is not a fork: either costs
+nothing and cannot rot. Version the trimmed result properly (semver, a single source of truth)
+before publishing it to PyPI.
+→ [23_shipping_a_library.md](../docs/disseminating/23_shipping_a_library.md)
 
 ## How it fits together
 
-```mermaid
-flowchart LR
-    subgraph Explore
-        NB["Exploratory notebook<br>experiments/&lt;slug&gt;/"]
-    end
-    subgraph "Record & build"
-        EXP["Experiment run<br>report + details/"]
-        SRC["src/yourpkg/<br>method code"]
-    end
-    subgraph Trust
-        TEST[tests/]
-        DOC["docs/<br>Sphinx site"]
-    end
-    subgraph "Disseminate (optional)"
-        TAG["tag + Zenodo DOI"]
-        PKG[installable package]
-    end
+```
+src/yourpkg/ (method code) — the hub.
+├─ imported directly by exploratory notebooks (experiments/<slug>/), experiment
+│  drivers, figure drivers, and tests/ — the same relationship, four different jobs
+├─ displayed in the Sphinx doc site as the API reference (from its own docstrings)
+└─ trimmed + versioned ──▶ PyPI package
 
-    NB -->|"duplicate when you'd be<br>sad to lose a note"| NB
-    NB -->|becomes a driver| EXP
-    EXP -->|"imports, never forks"| SRC
-    SRC --> DOC
-    EXP -.->|"a validation run<br>becomes a regression test"| TEST
-    SRC -->|"when ready to publish"| TAG
-    TAG --> PKG
+experiments/ (research log + themes)
+├─ displayed in the Sphinx doc site as research log + theme overviews
+└─ archived ──▶ archived lab notebook
+
+figures/ (manuscript drafts)
+├─ displayed in the Sphinx doc site as figure overviews
+└─ frozen ──▶ paper tag + Zenodo DOI
+
+Two things mature into another, once they earn it:
+├─ an exploratory notebook becomes a driver script (duplicate it first if you'd
+│  be sad to lose an observation)
+└─ a validation run in experiments/ becomes a regression test in tests/
 ```
 
-Nothing above forces you further right than the project needs: a folder of scripts and a notebook is a
-complete, valid state to stay in. Every arrow is a *decision*, not a requirement — the "why" for each
-one is in the bullets above.
+None of the above is a ladder you're expected to climb to the top of: a folder of scripts and a
+notebook is a complete, valid state to stay in. Every branch is a decision made when it earns its
+keep, not a requirement — the "why" for each one is in the bullets above.
 
 ## Adopting it
 

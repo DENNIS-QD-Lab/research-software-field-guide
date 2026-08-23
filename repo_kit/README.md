@@ -27,8 +27,8 @@ so they ship as fill-in templates, not static files):
 
 **Adopting the standard in a repo (new or existing):** open the target repo alongside this one and ask
 Claude Code to follow [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) —
-- *New repo* → the playbook's *Mode A · Scaffold* sequence (take only the pieces you need).
-- *Existing repo* → *Mode B · Upgrade recipes*, à la carte (add tests, add a doc site, restructure to
+- *New repo* → the playbook's *Mode A : Scaffold* sequence (take only the pieces you need).
+- *Existing repo* → *Mode B: Upgrade recipes*, à la carte (add tests, add a doc site, restructure to
   `src/` + `experiments/`, …).
 
 **Just want the conventions?** Copy [CLAUDE.template.md](CLAUDE.template.md) into your repo as `CLAUDE.md`,

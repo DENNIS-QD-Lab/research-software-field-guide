@@ -25,7 +25,7 @@ A configuration of nbstripout that removes metadata but leaves cell outputs in t
 Each notebook has a script twin. You edit either one and jupytext regenerates the other on save. Only the `.py` is committed; the `.ipynb` is generated locally on demand.
 
 - Pros: clean text diffs, importable scripts, no output bloat, and a single source of truth.
-- Cons: students must understand the pairing relationship, it adds one more tool to the stack, and some pure-exploration notebooks gain nothing from being paired.
+- Cons: the user needs to understand the pairing relationship, it adds one more tool to the stack, and some pure-exploration notebooks gain nothing from being paired.
 
 ## Current decision
 

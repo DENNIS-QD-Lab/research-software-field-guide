@@ -134,7 +134,10 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 - **Steps:** `docs/conf.py` with `autodoc` + `napoleon` + `intersphinx` + `myst_parser`, `furo` theme
   (skeleton in [20](../docs/implementing/20_documentation_and_doc_sites.md)); autodoc imports the
   package, so `pip install -e .` first; add an API page via an `automodule` directive; preview with
-  `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file.
+  `sphinx-autobuild docs docs/_build/html`. Add the new deps to the env file. For a private repo,
+  make the built site reachable in CI (20's two appendices): a `workflow artifact` on every push for
+  day-to-day review, a `workflow_dispatch`-triggered tagged **release** for a snapshot that needs to
+  outlive the artifact's retention window.
 - **Verify:** `sphinx-build -W -b html docs docs/_build/html` builds clean.
 - **Don't:** paste a bare build path into a browser (it searches) — serve it or use a `file:///` URL.
 
@@ -148,23 +151,56 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
   the point).
 - **Don't:** install packages on the runner by hand to make it pass — add them to the environment file.
 
-### B9 · Package for installation
-- **When:** other repos import this code, or you want versioned installs.
-- **Steps:** `pyproject.toml` (name, version, deps, build backend); `src/` layout; `pip install -e .`;
-  a single source of truth for the version (read back via `importlib.metadata`).
-  ([21](../docs/disseminating/21_packaging.md), [22](../docs/disseminating/22_versioning_and_releases.md))
-- **Verify:** a fresh `pip install -e .` works; `import <pkg>` and `<pkg>.__version__` resolve.
-- **Don't:** package a loose helper/script collection that nothing imports.
+### B9 · Version for outside consumers
+- **When:** other repos import this code, or you want versioned installs — going beyond the local
+  package B4 already set up (that step's `pyproject.toml` + `src/` layout + `pip install -e .` are
+  assumed done here, not repeated).
+- **Steps:** a single source of truth for the version in `pyproject.toml`, read back via
+  `importlib.metadata` rather than hardcoded a second time; tag releases (`git tag -a vX.Y.Z`); for a
+  lighter step than PyPI, note in the README that `pip install git+<url>` already works.
+  ([21](../docs/disseminating/21_packaging.md) "Going further",
+  [23](../docs/disseminating/23_shipping_a_library.md))
+- **Verify:** `<pkg>.__version__` matches the tag just cut; a fresh clone can `pip install git+<url>`.
+- **Don't:** redo B4's `pyproject.toml`/`src/` layout from scratch — this step assumes it's already
+  there.
 
-### B10 · Conclude & disseminate
-- **When:** a line of inquiry reaches publication or the software is becoming a shared dependency.
-- **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared approach
-  still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`. *Only after
-  the tag*, trim `src/` on `main` to the disseminated method. ([23](../docs/disseminating/23_concluding_a_project.md),
-  [22](../docs/disseminating/22_versioning_and_releases.md))
-- **Verify:** the tag checks out and reproduces a figure; `main` still builds and tests green after the trim.
-- **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging (it
-  still installs and still costs maintenance).
+### B10 · Publish a paper
+- **When:** a line of inquiry is going out as a publication.
+- **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared
+  approach still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`.
+  If the working repo shouldn't be public as-is, use the two-repo pattern: a fresh, empty public
+  repo with only what belongs in the paper's record.
+  ([22](../docs/disseminating/22_publishing_a_paper.md),
+  [repo_ownership_and_visibility](../docs/reference/repo_ownership_and_visibility.md))
+- **Verify:** the tag checks out and reproduces a figure.
+- **Don't:** archive from the private working repo without auditing its full history first.
+
+### B11 · Ship a library
+- **When:** the software itself is becoming a shared dependency, independent of any paper.
+- **Steps:** *only after* any paper tag from B10, trim `src/` to the disseminated method — directly
+  on `main`, or on a separate branch you tag instead, leaving `main` untouched. Version it properly
+  (B9), then publish to PyPI. Give the shipped repo its own front door: a public-facing README
+  (install, then a minimal example, not the research question) and a small `examples/` quickstart
+  distinct from `experiments/`. ([23](../docs/disseminating/23_shipping_a_library.md))
+- **Verify:** wherever you trimmed (`main` or a branch) still builds and tests green; a fresh
+  `pip install` followed by the quickstart example actually runs.
+- **Don't:** delete the old approach before tagging; hide it behind `__init__.py` instead of tagging
+  (it still installs and still costs maintenance).
+
+### B12 · Add a `figures/` folder for manuscript drafting
+- **When:** drafting a specific submission; more than a couple of ad hoc figure scripts are floating
+  around.
+- **Steps:** one folder per figure (or figure group) under `figures/`, same theme + `details/`
+  discipline as `experiments/` — a driver that imports from `src/`, dated attempts accumulating in
+  `details/`, the current draft embedded in the folder's `README.md` alongside its caption. Wire the
+  README into the doc site the same way an experiment theme's is: a
+  `docs/figure_overviews/<fig-slug>_overview.md` page whose body is a MyST `{include}` of the
+  figure's own README, so the manuscript's whole figure outline is browsable on the same site.
+  ([22](../docs/disseminating/22_publishing_a_paper.md),
+  [16](../docs/implementing/16_running_a_dry_lab_experiment.md))
+- **Verify:** the doc site renders the figures/README page with the current image and caption visible.
+- **Don't:** overwrite a figure in place when it stops earning its spot — let the superseded attempt
+  sit in `details/`, same as any other run.
 
 ## When a repo already diverges from the standard
 

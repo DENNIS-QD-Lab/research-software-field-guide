@@ -64,6 +64,9 @@ Rewriting code to be cleaner, faster, or better organized without changing what 
 **Boilerplate**
 Repetitive code that has to be written to set things up, even though it doesn't carry the interesting logic. `if __name__ == "__main__":` blocks are boilerplate; the argparse setup is mostly boilerplate. Frameworks reduce boilerplate by providing the setup for you.
 
+**Decorator**
+A function that wraps another function to add behavior, without changing the wrapped function's own code. Written with `@` on the line above the function it modifies. `@pytest.fixture` and `@pytest.mark.parametrize` ([12_testing_with_pytest.md](../implementing/12_testing_with_pytest.md)) are both decorators pytest provides.
+
 **Idiom / idiomatic**
 A common pattern that's the "standard" way to do something in a given language. `for item in things:` is idiomatic Python; `for i in range(len(things)): item = things[i]` works but is not idiomatic. "Pythonic" means "idiomatic in Python."
 
@@ -74,6 +77,9 @@ A single Python file that can be imported. `show_h5_keys.py` is a module; you ca
 
 **Package**
 A directory of related modules with an `__init__.py` file, importable as a unit. NumPy is a package; matplotlib is a package.
+
+**Distribution**
+A built, installable artifact of a package — a wheel or source archive — that gets uploaded to an index like PyPI ([21_packaging.md](../disseminating/21_packaging.md)). Distinct from the package itself: the package is the importable code you write, the distribution is the file that gets shipped.
 
 **Library / framework**
 Library: code you call from your code. NumPy is a library — your code uses it. Framework: code that calls your code. Flask and Django are frameworks — you fill in pieces and the framework runs them. The distinction is sometimes called "inversion of control."

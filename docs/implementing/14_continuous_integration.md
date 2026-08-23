@@ -1,10 +1,10 @@
 # Continuous integration
 
-You now run tests and ruff on your own machine. **Continuous integration (CI)** runs those same checks automatically, on a fresh machine, every time you push or open a pull request. It is what catches "works on my machine" before the problem reaches `main`: a dependency you installed by hand and forgot to add to the environment file, a file you never committed, a path that only works on your laptop.
+You now run tests and ruff on your own machine. **Continuous integration (CI)** runs those same checks automatically, on a fresh machine, every time you push or open a pull request. It is what catches "works on [only] my machine" before the problem reaches `main`: a dependency you installed by hand and forgot to add to the environment file, a file you never committed, a path that only works on your laptop.
 
 ## What CI catches, and how it pairs with review
 
-CI runs your checks on a clean virtual machine that has only what your environment file declares. So it catches the gap between "my setup" and "a fresh clone," and, with a matrix (below), bugs that only appear on another operating system. [08_code_review.md](../onboarding/08_code_review.md) is the human half of the same job: CI checks the mechanical things automatically so a reviewer can spend their attention on judgment, not on "did the tests pass."
+CI runs your checks on a clean virtual machine that has only what your environment file declares. So it catches the gap between "my setup" and "a fresh clone," and, with a matrix (below), bugs that only appear on another operating system. [08_code_review.md](../onboarding/08_code_review.md) is the human half of the same job: CI checks the mechanical things automatically so a reviewer can spend their attention on loftier concerns than "did the tests pass."
 
 ## GitHub Actions basics
 
@@ -38,7 +38,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environment.yml   # build the env from the file
-          activate-environment: helper         # must match the name in that file
+          activate-environment: fieldguide     # must match the name in that file
 
       - name: Install the package
         run: pip install -e . --no-deps        # only if the project is a package
@@ -71,6 +71,24 @@ jobs:
 
 This runs the whole job twice, once on each OS, and reports each separately. You can also matrix over Python versions (`python-version: ["3.11", "3.12"]`), which matters most for pure-Python projects; when your environment file pins a specific Python, the OS matrix is the one that earns its keep.
 
+## Catching drift with a scheduled run
+
+The triggers above, `push` and `pull_request`, catch *your* changes: a broken test the moment you
+introduce it. They do not catch the world changing underneath a repo nobody has touched — a new
+release of a dependency that silently changes behavior, exactly the ruff-0.16 story in
+[11_code_quality_tools.md](11_code_quality_tools.md). A `schedule` trigger runs the same checks on a
+timer, independent of anyone pushing:
+
+```yaml
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday at 06:00 UTC
+```
+
+Add this alongside `push`/`pull_request`, not instead of them — a scheduled run against `main` on an
+unpinned environment surfaces a dependency-caused break within a week, instead of whenever someone
+next happens to push.
+
 ## Reading a failed run
 
 When CI fails, a red X appears next to the commit or on the PR. To find out why:
@@ -80,3 +98,7 @@ When CI fails, a red X appears next to the commit or on the PR. To find out why:
 3. Expand the step with the red X. The log shows exactly what your terminal would have shown, including the pytest or ruff output.
 
 The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file, as your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) requires, not to install it on the runner by hand.
+
+## Further reading
+
+This doc covers a conda-based workflow. For the scientific-Python ecosystem's own GitHub Actions guidance, including `uv`-based workflows and packaging-specific CI concerns beyond conda, see the [Scientific Python Development Guide's "GitHub Actions: Introduction" page](https://learn.scientific-python.org/development/guides/gha-basic/).

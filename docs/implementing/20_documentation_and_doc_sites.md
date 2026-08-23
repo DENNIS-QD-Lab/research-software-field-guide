@@ -1,18 +1,20 @@
 # Documentation and doc sites
 
-You already write docstrings (your project's coding-standards file, here [CLAUDE.md](../../CLAUDE.md), requires them). This doc turns them into a browsable site the whole team can read. That is not a publishing afterthought; it is a **review-and-communication tool for your team.** A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. Frame it alongside [08_code_review.md](../onboarding/08_code_review.md) and the draft-PR habit from [10_from_scripts_to_pipelines.md](10_from_scripts_to_pipelines.md): the doc site is another surface for looking at each other's work — the fastest way to grasp the shape of an analysis, and a shared vocabulary for talking about it.
+You already write docstrings (your project's coding-standards file, here [CLAUDE.md](../../CLAUDE.md), requires them). This doc turns them into a browsable site the whole team can read, useful for review as much as reference. A reviewer can walk the shape of a colleague's analysis at the doc-site level, seeing the modules and functions and how they fit, without getting lost in individual lines. It works alongside code review ([08_code_review.md](../onboarding/08_code_review.md)) and the draft-PR habit ([10_from_scripts_to_pipelines.md](10_from_scripts_to_pipelines.md)) as another surface for looking at each other's work — the fastest way to grasp the shape of an analysis, and a shared vocabulary for talking about it.
+
+The same site also holds the experiment findings from [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md) — the research log and each theme's findings — so it ends up doing two jobs at once: a browsable API reference, and a shareable, always-current lab notebook.
 
 ## The documentation hierarchy
 
 Documentation is layered onto normal work, not a separate project. From smallest to largest:
 
 - **Self-documenting names.** A well-named function needs less explanation.
-- **Comments that explain why**, not what ([CLAUDE.md](../../CLAUDE.md)).
+- **Comments that explain why**, not what.
 - **Docstrings** on every function and module.
 - **A README** that orients a newcomer to the whole repo.
 - **A generated site** that turns the docstrings into a browsable reference.
 
-Each layer builds on the one below. The site is only as good as the docstrings under it.
+Each layer builds on the one below: a generated site pulls directly from the docstrings, so a gap or a vague docstring shows up as a gap or a vague page on the site.
 
 ## Docstrings: pick one style
 
@@ -43,7 +45,7 @@ This is the same information [CLAUDE.md](../../CLAUDE.md) already asks for, in a
 
 ## Autodocumentation
 
-**Autodocumentation** means generating the browsable HTML reference straight from your docstrings, rather than writing it by hand. Its great virtue: the docs cannot drift from the code, because they *are* the code's docstrings. You write the docstring once, next to the function, and the site regenerates from it.
+**Autodocumentation** means generating the browsable HTML reference straight from your docstrings, rather than writing it by hand. The docs cannot drift from the code, because they *are* the code's docstrings: write the docstring once, next to the function, and the site regenerates from it.
 
 ## The tool: Sphinx
 
@@ -59,7 +61,7 @@ Two extensions make Sphinx fit the way your team already works:
 Documentation lives in a `docs/` folder with a `conf.py` configuration file. A minimal `docs/conf.py`:
 
 ```python
-project = "SWIR HDR"
+project = "Your Project"
 extensions = [
     "sphinx.ext.autodoc",      # generate pages from docstrings
     "sphinx.ext.napoleon",     # understand NumPy-style docstrings
@@ -79,24 +81,26 @@ Sphinx's autodoc *imports* your package to read its docstrings, so the package m
 # API reference
 
 ```{eval-rst}
-.. automodule:: swir_hdr.radiance
+.. automodule:: yourpkg.core_algorithm
    :members:
 ```
 ````
 
-The `automodule` directive renders every documented object in `swir_hdr.radiance`. Build the site, and preview it live while you edit:
+The `automodule` directive renders every documented object in `yourpkg.core_algorithm`. Build the
+site once with:
 
 ```
 sphinx-build -b html docs docs/_build/html
 ```
 
-This builds the HTML into `docs/_build/html`. For a live-reloading preview while you write:
+This builds the HTML into `docs/_build/html` and exits. While you're actively writing, rebuild on
+every save instead:
 
 ```
 sphinx-autobuild docs docs/_build/html
 ```
 
-This serves the site at `http://localhost:8000` and rebuilds as you save. Viewing a one-off build, and sharing the site, are covered next.
+This serves the site at `http://127.0.0.1:8000` and rebuilds as you save.
 
 ## Rendering experiment findings into the same site
 
@@ -124,6 +128,8 @@ second kind of page. Each theme gets exactly one:
 There is no second folder of per-run report pages to keep in sync — a finding is on the site as soon
 as it's written into the theme's README, figure and all.
 
+A `figures/` folder, if you keep one for a manuscript in progress ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)), uses the identical pattern under `docs/figure_overviews/` — see [example_repo_structure.md](../reference/example_repo_structure.md) for a worked example.
+
 Wire `docs/index.md` with a `toctree` pointing at the overview pages, one per theme:
 
 ````markdown
@@ -136,26 +142,33 @@ experiment_overviews/theme_b_overview
 ```
 ````
 
-**An optional exception: standalone deep-dive reports.** Occasionally a single read-out is too complex
-for a README's figure-and-caption pattern — a manuscript-figure-quality walkthrough with several panels
-each needing its own explanation. For that rare case, a hand-authored page under
-`docs/experiment_summaries/<name>.md` is a reasonable exception, optionally executable via `myst-nb` so
-it can render a plot from a preserved run's saved metrics at *build* time rather than embedding a static
-image (keep expensive computation in the driver script and the run's `details/`; the report cell should
-load and display, not re-run the analysis). Link to it from the theme's README rather than letting it
-replace the README's own Findings section, and keep it rare — see
-[documentation_promotion.md](../reference/documentation_promotion.md) for why this shouldn't become the
-default path for every finding.
+**An optional exception: standalone deep-dive reports.** A hand-authored page under
+`docs/experiment_summaries/<name>.md`, optionally executable via `myst-nb`, is a reasonable exception
+for the rare read-out that's genuinely too complex for the README's figure-and-caption pattern. Keep it
+rare, and link to it from the theme's README rather than letting it replace the Findings section —
+[documentation_promotion.md](../reference/documentation_promotion.md) covers when this is actually
+worth it and how to build one.
 
 ## Viewing and sharing the site
 
+The site can reach a reader at four different levels, each trading immediacy for reach:
+
+| Level | What it is | Good for | Triggered by | Find it at |
+|---|---|---|---|---|
+| Local build | `sphinx-build`/`sphinx-autobuild` on your own machine | Working on the docs yourself | Running the command | `file:///docs/_build/html/index.html`, or `sphinx-autobuild`'s live server |
+| CI artifact | A fresh build attached to each CI run | Sharing the current state with colleagues with repo access; catching a broken build immediately | Automatic, on every push | The run's Actions-tab Summary, or `gh run download` |
+| Tagged release | The same build, zipped and attached to a GitHub Release | Archiving or sharing one deliberate, polished snapshot | Manual (`workflow_dispatch`, or by hand) | The repo's Releases page |
+| GitHub Pages / Read the Docs | A hosted website built from the docs | A public project's permanent doc site | Automatic, on every push (once configured) | The Pages/Read the Docs URL — public even if the source repo is private |
+
+The rest of this section covers the first two; the appendices below cover the tagged release and the CI setup behind the artifact.
+
 `sphinx-autobuild` (above) is the easiest way to look at the site while you work: it serves it at `http://127.0.0.1:8000` and reloads on save. If you instead ran a plain `sphinx-build`, open `docs/_build/html/index.html` — but note that pasting that path into a browser's address bar often triggers a *search* rather than opening the page, so prefix it with `file:///` (three slashes), or just use `sphinx-autobuild`.
 
-To let others see it, publish it with **Read the Docs**, which builds and hosts Sphinx sites automatically on each push. If your repository is private and the work is unpublished, note that a GitHub Pages site built from it may still be publicly visible; building the HTML in a CI job and downloading it as an artifact keeps it internal (the appendix below shows the workflow).
+To let others see it without waiting for a CI run, publish it with **Read the Docs** or **GitHub Pages**, which both build and host the site automatically on every push. Both publish at a public URL regardless of whether the source repository is private — if the work is unpublished, that's the wrong tool; building the HTML in a CI job and downloading it as an artifact keeps it visible only to people with read access to the repo (the appendix below shows the workflow).
 
 ## A dependency note
 
-`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies; add `myst-nb` too if any experiment report needs executable cells (*Rendering experiment reports into the same site*, above). Per [CLAUDE.md](../../CLAUDE.md), adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
+`sphinx`, the theme (`furo`), `myst-parser`, and `sphinx-autobuild` are new dependencies; add `myst-nb` to the `environment.yml` too if any experiment report needs executable cells (*Rendering experiment findings into the same site*, above). Per the [CLAUDE.md](../../CLAUDE.md) instructions to your AI assistant, adding them means asking first and updating the environment file, and saying so in the pull request that introduces the site.
 
 ## Appendix: building the doc site in CI
 
@@ -174,7 +187,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environment.yml   # this includes sphinx, furo, myst-parser
-          activate-environment: helper
+          activate-environment: fieldguide
 
       - name: Install the package             # so autodoc can import it
         run: pip install -e . --no-deps
@@ -192,4 +205,57 @@ jobs:
 
 The build step is exactly the local command from *Setting up Sphinx*; the steps around it just recreate the environment (so autodoc can import your package) and save the result. To view it, open the run from the repo's **Actions** tab, download `docs-html` from its Summary (or run `gh run download -n docs-html`), unzip, and open `index.html`.
 
-For a *public* project you can instead deploy straight to GitHub Pages or connect Read the Docs; the artifact is the private-safe option, because the download is only available to people with read access to the repo.
+For a *public* project you can instead deploy straight to GitHub Pages or connect Read the Docs; the artifact is the private-safe option, because the download is only available to people with read access to the repo — which is also why keeping project repos under one lab organization ([repo_ownership_and_visibility.md](../reference/repo_ownership_and_visibility.md)) makes this artifact reachable lab-wide instead of one invite at a time.
+
+## Appendix: archiving a permanent snapshot
+
+The artifact above is deliberately temporary. GitHub deletes it after `retention-days`, and that is the right behavior for day-to-day review, where only the latest build matters and a private repo shouldn't quietly accumulate a large binary download from every commit. It is the wrong mechanism for a snapshot that needs to outlive that window — handing the current docs to a collaborator who doesn't have repo access to the Actions tab, or keeping a copy tied to a specific manuscript draft. An artifact built for that purpose will have expired, whether or not anyone opened it, well before anyone needed it again.
+
+For that case, attach the built site to a **GitHub Release** instead of a workflow artifact. A release has no retention limit, appears on the repo's own Releases page instead of inside a CI run, and its tag names the snapshot (`docs-260818`, or something version-like such as `docs-v1`) the same way a code release would. Unzip the download and open `index.html` directly — no Pages hosting and no Actions-tab access needed, only read access to the repo.
+
+The trade-off is the artifact's retention limit in reverse: a release does not expire, so triggering this on every push accumulates one archive per commit, most of which nobody will ever open. Trigger it deliberately instead, with `workflow_dispatch` (a button in the Actions tab, or `gh workflow run`), so a release only gets created when someone decides the current docs are worth keeping:
+
+```yaml
+name: Archive docs
+
+on:
+  workflow_dispatch:   # click "Run workflow" in the Actions tab when a snapshot is wanted
+
+jobs:
+  archive-docs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: fieldguide
+
+      - name: Install the package
+        run: pip install -e . --no-deps
+
+      - name: Build the site
+        run: sphinx-build -W -b html docs docs/_build/html
+
+      - name: Zip the built site
+        run: cd docs/_build/html && zip -rq ../../../docs-site.zip .
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="docs-$(date +%y%m%d)"
+          gh release create "$TAG" docs-site.zip \
+            --title "Doc site archive — $(date +%Y-%m-%d)" \
+            --notes "Static build of the Sphinx doc site, built from $GITHUB_SHA."
+```
+
+Most projects want both, at different frequencies: the CI artifact on every push, catching a broken build immediately and giving the team a current copy without anyone asking for one; the tagged release on demand, for the handful of moments a copy needs to survive longer than a month or reach someone by name. Tagging a paper's code state for a DOI archive is a separate practice ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) that fixes the citable state of the code itself; this workflow only preserves a copy of the rendered docs.
+
+## Further reading
+
+This doc focuses on Sphinx because it is the tool the scientific-Python ecosystem has standardized on. For the ecosystem's own documentation guide, covering the other frameworks it supports and more Sphinx configuration detail than fits here, see the [Scientific Python Development Guide's "Documentation" page](https://learn.scientific-python.org/development/guides/docs/).

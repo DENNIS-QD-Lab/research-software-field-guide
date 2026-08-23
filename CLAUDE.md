@@ -17,17 +17,41 @@ This repository is a teaching tool and portable standard for research software p
 - Notebooks get a markdown cell at the top with the same information as a module docstring.
 - Comments explain *why*, not *what*. The code itself shows what it does.
 
+## Prose in the guide's own docs (`docs/`, `repo_kit/`)
+These docs are the product: a scientist teaching her team. They should read as explanation, not as a
+manifesto. Every rule below is here because generated drafts violated it repeatedly.
+- **Explain the mechanism; don't compress it into a maxim.** No aphoristic one-liners ("a result you
+  cannot reproduce is an anecdote, not a measurement"), and no "X, not Y" antithesis as a section opener
+  or closer. Say what happens and why, in plain sentences, even when that takes more words. Prefer
+  naming the thing ("this tagged, DOI'ed version of the repo") over a pronoun ("that is how").
+- **Don't let a document talk about itself.** Cut commentary on its own rhetoric or its place in the
+  guide: "that is the whole point," "worth naming," "the single place this is defined in this track."
+- **Don't argue with an imagined critic.** No pre-emptive defenses like "that's a real cost, not a free
+  safety net."
+- **One idea per paragraph.** If a paragraph runs past ~6 lines, or stacks more than two em-dash asides,
+  split it — or make it a list, a table, or a file-tree diagram.
+- **The scientist is the actor.** Write for a scientist deciding what to do, not for an assistant
+  implementing it. Keep implementation notes ("verified with a throwaway spike") out of reader-facing
+  prose.
+
 ## Type hints
 - Every function signature gets type hints on parameters and return value.
 - Use the modern syntax: `list[int]` not `List[int]`, `dict[str, float]` not `Dict[str, float]`, `X | None` not `Optional[X]`.
 - Python does not enforce type hints at runtime; they're for human readers and static checkers. Don't add runtime type assertions unless there's a specific reason.
+
+## Testing requirements
+- A new function that does real computation (not just wiring, CLI glue, or I/O) gets a test in `tests/`, following [12_testing_with_pytest.md](docs/implementing/12_testing_with_pytest.md): `np.testing.assert_allclose` for floats, `pytest.mark.parametrize` for multiple cases.
+- When fixing a bug, add a regression test that would have caught it.
+- Tests are part of the function, not optional follow-up work to add later.
+- Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting code with zero tests, not a number to chase. Don't add filler tests just to raise it. See [12_testing_with_pytest.md](docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
 
 ## Naming conventions for files
 - snake_case, lowercase, no hyphens, under about 30 characters.
 - Verb-first for action scripts that *do* something when run: `show_keys.py`, `plot_spectra.py`, `convert_units.py`.
 - Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`, `hdr_processing.py`, `broadband_segmentation.py`.
 - Avoid abbreviations except universally understood domain terms (`hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` is not).
-- **Dated experiment and run directories** are the exception to the "no hyphens" rule above: prefix them with a `YYMMDD` date so they sort chronologically. Experiment folders are `YYMMDD-<slug>/` (e.g. `260717-crf-necessity/`, using the study's start date); per-run output directories are `YYMMDD_<slug>[_NN]/` (the run date, with `_02`, `_03`, … preserving reruns). This applies to dated directories, not to importable `.py` module names.
+- **Experiment (and figure) theme folders are undated and permanent**, an exception to the "no hyphens" rule above: `experiments/<theme-slug>/` (e.g. `crf-necessity/`, hyphens allowed) is a standing address for one line of inquiry, revisited for as long as it stays open — it carries no date. A leading number (`01_crf-necessity/`, `02_dynamic-range-scenarios/`) is an optional, encouraged way to order themes by when they were conceived, useful once a project has enough of them that folder order stops being obvious; it is not required.
+- **Per-run directories, inside a theme's `details/`, are dated** — the exception that actually needs it, since these accumulate over the theme's whole life: `YYMMDD_<slug>[_NN]/` (the run date, with `_02`, `_03`, … preserving reruns). This applies to dated directories, not to importable `.py` module names.
 
 ## Command line interfaces
 - Any script that can be run from the command line uses `if __name__ == "__main__":` to wire up its CLI.
@@ -56,6 +80,7 @@ This repository is a teaching tool and portable standard for research software p
 - The PR description should include what the helper does and an example invocation.
 
 ## Session hygiene — context and continuity
+- **Prompt for a commit at natural break points as a matter of course**, not only when a `/compact` or `/clear` is imminent — a finished task, a fixed bug, a doc section done are each a candidate. This matters most right before starting to implement an approved plan: check whether the working tree already holds unrelated, uncommitted work, and if so, suggest committing or explicitly flagging it first, so the plan's changes land as their own clean, reviewable diff instead of mixed in with what came before.
 - At natural break points — a task finished, a PR merged, a doc section done — proactively remind the contributor to `/compact` or `/clear`, whichever fits: `/compact` to keep going once a session's transcript has grown large, `/clear` when moving on to unrelated work. This is responsible token usage ([docs/reference/ai_coding_assistants.md](docs/reference/ai_coding_assistants.md)); make it a regular, gentle prompt, not a one-time note.
 - **Before recommending it, make sure a sudden clear would lose nothing.** Update the docs and any auto-memory, and commit or explicitly flag work in progress, *first* — then suggest compacting or clearing. Anything that must survive the session belongs in a file in the repo or in memory, never only in the conversation.
 

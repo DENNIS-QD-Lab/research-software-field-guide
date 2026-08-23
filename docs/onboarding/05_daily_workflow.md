@@ -4,6 +4,14 @@ This is the loop you repeat for every change. This can be managed through the VS
 
 If you mess up the workflow at any point (worked on the wrong branch, committed the wrong thing, anything that feels broken), see [git_recovery.md](../reference/git_recovery.md). Don't panic and don't delete anything until you've checked your options.
 
+## The loop, at a glance
+
+1. **Pull the latest changes.**
+2. **Make a branch.**
+3. **Do the work, then commit.**
+4. **Push.**
+5. **Open a pull request.**
+
 ## Starting new work
 
 Whether you just finished merging a PR or you're sitting down for a fresh session, run these three commands before making any changes:

@@ -1,6 +1,6 @@
 # AI-assisted development
 
-Many research teams use AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the principles here are vendor-neutral, but the examples reflect this repo's actual setup.
+Many research teams use AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the examples reflect this repo's actual setup, but the principles here are vendor-neutral.
 
 Using AI appropriately in research comes down to the division of labor: **the assistant writes code; you do the science.** Designing the experiment, judging whether a result is real, and drawing the conclusion are the scientist's responsibility; the assistant is a tool that makes building and running the experiment more efficient. That split is not a nicety — it is what keeps the work trustworthy, and it matters *more*, not less, the more of the implementation you hand over.
 
@@ -13,7 +13,7 @@ Your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) states
 A standards file is one of *three* kinds of instruction a research repo keeps, and it helps to keep them separate. Two are written mainly for the assistant and the team, one is written mainly for humans:
 
 - **State — for humans.** The research log ([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)): the goal, what has been found, what is next. The assistant reads it for context, but people own it and it is updated every session to reflect experimental/scientific progress.
-- **Durable procedure — for the assistant.** How *this* repo runs and records experiments (the run-provenance and folder conventions of [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)), written down so the assistant follows the same discipline every session instead of improvising. In the exemplar this is a short `experiments_playbook.md` that the assistant reads alongside the standards file.
+- **Durable procedure — for the assistant.** How *this* repo runs and records experiments (the run-provenance and folder conventions of [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)), written down so the assistant follows the same discipline every session instead of improvising. In the exemplar this is a short `experiments_playbook.md` that the assistant reads alongside the standards file. As you have edits to the repo structure or experiment templates, etc., to better suit the needs of your particular project, these details can be added to the `experiments_playbook.md` for the AI assistant to follow.
 - **Standards — for both.** [CLAUDE.md](../../CLAUDE.md): the coding conventions, applied equally to human- and AI-written code.
 
 Keeping these apart is what stops any one file from sprawling into an unreadable mix of findings, procedure, and rules — and it means the assistant is told *how we work here* without burying the researcher-facing record of *what we found*.
@@ -22,16 +22,16 @@ Keeping these apart is what stops any one file from sprawling into an unreadable
 
 The assistant's working scope is the set of folders open to it — in the VS Code integration, the repos in your workspace ([10_from_scripts_to_pipelines.md](10_from_scripts_to_pipelines.md)). Use that deliberately:
 
-- **A multi-repo workspace gives context, not a fence.** Opening an exemplar repo beside the one you are building lets the assistant *read* its structure and mirror it — the quickest way to say "follow this repo's layout." But every repo in scope is also one it can *edit*, so include only what you need: a reference to read, or a repo you are genuinely co-editing. Adding repos widens what it can change; it does not wall anything off.
-- **Isolation comes from narrowing, not bundling.** To keep edits out of the wrong place, open only the target repo, or instruct "read X, edit only Y" and review each repo's diff on its own (each is its own git root). For a real sandbox, use a **git worktree** — a second working directory attached to the same repository but checked out to its own branch, so the assistant's changes happen in an isolated copy on disk that you then merge or discard. It shares the repo's history, so it is far cheaper than a full clone (catalogued in [advanced_git.md](../reference/advanced_git.md)).
+- **Every repo open in the workspace is one the assistant can both read and edit.** Opening an exemplar repo beside the one you are building lets the assistant read its structure and mirror it — the quickest way to say "follow this repo's layout." Include only what you actually need open: a reference repo to read, or a repo you are genuinely co-editing, since anything in scope can also be changed.
+- **Narrow what's open to keep edits out of the wrong place.** Open only the target repo, or instruct "read X, edit only Y" and review each repo's diff on its own (each is its own git root). For a real sandbox, use a **git worktree** — a second working directory attached to the same repository but checked out to its own branch, so the assistant's changes happen in an isolated copy on disk that you then merge or discard. It shares the repo's history, so it is far cheaper than a full clone (catalogued in [advanced_git.md](../reference/advanced_git.md)).
 
 ## Review every generated change
 
-The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read every change before it lands, exactly as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a colleague without reading it, do not merge it from an assistant.
+The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read changes before they land, as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a colleague without reading it, do not merge it from an assistant.
 
 ## Never trust numbers without a test
 
-The rule that matters most for *research* code: if generated or edited code produces numbers, a test guards them ([12_testing_with_pytest.md](12_testing_with_pytest.md)). "Did this change the result?" is answered by a test, not by the assistant's reassurance. An assistant can produce code that runs cleanly and returns a plausible, wrong answer; a test on a known-good case is what catches it.
+For research code, if generated or edited code produces numbers, a test guards them ([12_testing_with_pytest.md](12_testing_with_pytest.md)). An assistant can produce code that runs cleanly and returns a plausible, wrong answer; a test on a known-good case is what actually catches that, rather than a description of the diff that sounds right.
 
 ## A clean run is not a correct analysis
 
@@ -45,9 +45,9 @@ An assistant clears the first bar effortlessly and can miss the second entirely 
 - **Check a known-good case** whose answer you can get independently.
 - **Check physical plausibility** — are the magnitudes, signs, and units what the science requires?
 - **Cross-check against an independent method** — a second route to the same number is strong evidence; a rough hand calculation often suffices.
-- **Inspect the intermediate outputs**, not only the final figure. Errors hide in the middle. (In exploratory work, before you have tests, this eyes-on-the-data habit is itself the method — see [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md).)
+- **Inspect the intermediate outputs**, not only the final figure. Errors hide in the middle. In exploratory work, before you have tests, this eyes-on-the-data habit is itself the method.
 
-Scale your scrutiny to how much you delegated: the more of the implementation an assistant wrote, the *more* of this the result is owed, precisely because you were not watching each line as it went in. Examining results critically is ordinary research hygiene; it becomes non-negotiable when a machine wrote the code that produced them.
+Scale your scrutiny to how much you delegated: the more of the implementation an assistant wrote, the *more* scrutiny the result requires, precisely because you were not watching each line as it went in.
 
 ## What to delegate, and what to keep
 

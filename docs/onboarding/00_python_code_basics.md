@@ -1,9 +1,31 @@
-# Python code basics
+# What are we doing here?
+
+Increasingly, scientists and students are able to access complex computational analysis using AI coding assistants. Accelerating scientific discovery via **vibe coding** is great, but we are still each independently responsible for our own scientific output, the repeatability of our results, and the responsible development of research software. In that context, this repo intends to give the non-computer scientist a framework and tutorial on how to (vibe) code their science rigorously, ensure the repeatability of their experiments, and be able to automatically turn their code outputs and analysis into a website for accessible viewing to facilitate discussion of the results (even with a non-coder) and/or archiving.
+
+Regardless of whether a human or AI assistant is doing the bulk of the coding, it's critical that you maintain control of the scientific questions being asked, can follow the code generated, verify it does what you actually asked, and
+run it yourself — which is exactly what this track builds toward. The coding standards and habits
+taught here, and enforced later on, exist for that same reason regardless of who typed the code: they
+let you, a reviewer, or future you tell whether a result is actually correct, not just
+plausible-looking. [18_ai_assisted_development.md](../implementing/18_ai_assisted_development.md) and
+[ai_coding_assistants.md](../reference/ai_coding_assistants.md) cover working with an assistant
+directly, once you're doing that on real work.
+
+## Python code basics
 
 *(Wondering why this doc is numbered 00, not 01? Most programming languages, including Python, count
 from zero — this guide does too, starting here.)*
 
 This doc explains how a Python file is put together and how it differs from a notebook. It references an example, `scripts/show_h5_keys.py`, to point at each piece. Open that file alongside this one.
+
+## The whole example, mapped
+
+In `scripts/show_h5_keys.py`:
+
+- The triple-quoted text at the very top is the **module docstring**.
+- `import argparse` and `import h5py` are the **imports**.
+- `def show_keys(path: str) -> None:` is a **function** with **type hints** and its own **docstring**.
+- `pad = "  " * indent` inside it is a **variable**.
+- The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
 ## `.py` files versus `.ipynb` files
 
@@ -17,7 +39,7 @@ Use a notebook while you are figuring something out. Once the logic is settled a
 
 A notebook has two kinds of cells. A *code cell* holds Python and runs when you press Shift+Enter. A *markdown cell* holds formatted text (headings, notes, explanations) using the same markdown syntax as these docs. Markdown cells are how you narrate what the code cells are doing. 
 
-**Tip:** These docs are markdown (`.md`) files. If you are reading this as raw text in an editor like VS Code, press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) to toggle between the raw text and the formatted preview.
+> **Tip:** These docs are markdown (`.md`) files. If you are reading this as raw text in an editor like VS Code, press Cmd+Shift+V (Mac) or Ctrl+Shift+V (Windows) to toggle between the raw text and the formatted preview.
 
 ## Anatomy of a Python file
 
@@ -55,16 +77,6 @@ if __name__ == "__main__":
 ```
 
 This block runs when you execute the file directly from the command line, but not when you `import` it from another script. It is the standard way to make a file usable both as a library and as a script. Running `python scripts/show_h5_keys.py data.h5` triggers the block and calls `main()`, thereby running the module show_h5_keys.py on the file data.h5. Writing `from scripts.show_h5_keys import show_keys` in another file imports the function `show_keys` without running it.
-
-## The whole example, mapped
-
-In `scripts/show_h5_keys.py`:
-
-- The triple-quoted text at the very top is the **module docstring**.
-- `import argparse` and `import h5py` are the **imports**.
-- `def show_keys(path: str) -> None:` is a **function** with **type hints** and its own **docstring**.
-- `pad = "  " * indent` inside it is a **variable**.
-- The `if __name__ == "__main__":` block at the bottom is the **command-line entry point**.
 
 [06_adding_a_script.md](06_adding_a_script.md) walks through how this script does its job.
 

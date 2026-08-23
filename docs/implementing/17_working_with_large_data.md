@@ -1,9 +1,7 @@
 # Working with data too big to commit
 
 The data rule ([CLAUDE.md](../../CLAUDE.md), [04_environments.md](../onboarding/04_environments.md)) is simple: **data lives outside
-the repo, and scripts take paths.** A real experiment, though, runs on gigabytes of acquired data
-that live on a shared server or an external drive and sit in a different place on every machine. That
-raises the question [16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md) depends on: if the inputs are not in git,
+the repo, and scripts take paths.** If the inputs are not in git,
 how is a run reproducible? The answer is to reference the data by a **stable identifier** and to
 **pin which data a run used** — not to drag the data into the repo.
 
@@ -20,7 +18,7 @@ Two good ways to name where the data is, depending on its stage:
   bytes forever, which a local path never can.
 
 Either way, the experiment's `README` should say, in words, **where the canonical copy lives** (which
-server/share, and where the backup is) so a teammate can actually obtain it.
+server/share, and where the backup is) so a colleague (or future-you) can actually obtain it.
 
 ## Pin *which* data a run used
 
@@ -37,7 +35,7 @@ inputs:
 For a multi-file dataset, commit a small **data manifest** — a text file listing each file with its
 size and `sha256` — instead of the data itself. The manifest is a few kilobytes, it *is*
 reproducible provenance, and it lets anyone verify their local copy matches the one behind your
-result. This is the large-data analog of seeding: same inputs in, same numbers out.
+result.
 
 ## The small carve-out, and CI
 
@@ -53,5 +51,4 @@ the report points at them.
 
 Reproducibility does not come from committing the data — a committed dataset bloats the repo forever
 and still does not prove *which* version a result used. It comes from **a pinned code state** (a tag;
-[22_versioning_and_releases.md](../disseminating/22_versioning_and_releases.md)) **plus a referenced, checksummed dataset**. Freeze the code, name
-and hash the data, and the result is reproducible without a single gigabyte in git.
+[22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) **plus a referenced, checksummed dataset**.

@@ -1,40 +1,92 @@
-# Packaging: when a folder becomes an installable package
+# Packaging: the local package, and going further
 
-*Distribution tier, optional.* This doc is for when you are wondering whether a collection of code should become an installable package. Most code never needs this, so treat it as "read when the question comes up," not a required step.
+This is the first doc in the **disseminating track**: increasingly formal ways of letting other
+people see and depend on your work. Packaging (here) is what lets code be installed rather than
+copy-pasted; [22_publishing_a_paper.md](22_publishing_a_paper.md) covers freezing a citable snapshot
+for a publication; [23_shipping_a_library.md](23_shipping_a_library.md) covers trimming and
+versioning the pipeline itself into something other people install. A project may need any, all, or
+none of the latter two — they're independent of each other.
 
-## When does a folder of scripts become a package?
+**Two different questions live in this doc, and they have different answers.** The first — does
+your project need a `pyproject.toml`, a `src/` layout, and an editable install — is close to a
+foregone conclusion if you're using this guide's structure at all:
+[15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md)'s central move,
+`experiments/` importing method code from `src/`, only works once the package is installed. That's
+**the local package**, and most readers of this guide already need it. The second question —
+should this package be installable by *other* repos, other people, or eventually PyPI — is the
+actual distribution decision, and it's genuinely optional: most research code never needs it.
 
-A folder of scripts ([06_adding_a_script.md](../onboarding/06_adding_a_script.md)) is the right form for most work. Consider packaging only when you see these signals:
+## What a package is
 
-- **Other repos import it.** You are copy-pasting the same code between projects instead of installing it once.
-- **You want versioned installs.** A project depends on "version 2.1 of this," not "whatever is in the folder today."
-- **You want to run it from wherever your data lives.** This one is easy to miss if you are a scientist first, not a software engineer. A folder of scripts effectively has to be run from the code's own directory, or with fragile `sys.path` and path juggling. An *installed* package is importable and runnable from **any** directory, so you can `cd` into the folder where a dataset sits and have the tool read its inputs and write its outputs right there. It decouples "where the code lives" from "where you run it" — exactly what you want when data is scattered across many directories. (For example, the SWIR_HDR project's pipeline, designed to run in each data folder, is a case in point.)
+A **package** is a directory of code that Python's import system and its installer (`pip`) both
+recognize as a single, named, versioned unit. Install it once, and `import yourpkg` works from
+anywhere — the same way `import numpy` does — rather than only from inside the one folder the code
+happens to sit in.
 
-If none of these apply, do not package. It is real overhead for no benefit.
+## The local package: `pyproject.toml`, the `src/` layout, and an editable install
 
-## What a package is: `pyproject.toml` and the `src/` layout
+Two pieces turn a folder into a package:
 
-Two pieces turn a folder into a package.
+- **`pyproject.toml`** declares the package: its name, version, dependencies, and build backend. It
+  is the modern standard and replaces the older `setup.py`.
+- **The `src/` layout** puts the importable code under `src/yourpkg/`. Keeping it under `src/`
+  rather than at the repo root stops tests and experiments from accidentally importing the
+  un-installed copy, so what you test is what installs.
 
-- **`pyproject.toml`** declares the package: its name, version, dependencies, and build backend. It is the modern standard and replaces the older `setup.py`.
-- **The `src/` layout** puts the importable code under `src/yourlib/`. Keeping it under `src/` rather than at the repo root stops tests and experiments from accidentally importing the un-installed copy, so what you test is what installs.
-
-For example, a pipeline organized this way puts its importable code under `src/<package>/` with a `pyproject.toml` declaring its `name` and version. The SWIR_HDR project is a worked instance: [15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md) moved it to exactly this shape, with `src/swir_hdr/` and a `pyproject.toml` declaring `name = "swir_hdr"` and its version.
-
-## Editable installs for development
+Install it in **editable** mode:
 
 ```
 pip install -e .
 ```
 
-This installs the package in **editable** mode: `import yourpkg` works from anywhere, but your edits to the source take effect immediately, with no reinstall. It is the standard local-development setup, and it is what lets the tests, the experiments, and the doc site ([20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md)) all import the library the same way. In a conda environment, add `--no-deps` so pip installs only your package and leaves the conda-managed dependencies alone.
+`import yourpkg` now works from anywhere, and edits to the source take effect immediately, with no
+reinstall. This is what lets the tests, the experiments, and the doc site
+([20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md)) all import
+the library the same way — it's the missing piece behind doc 15's `experiments/` → `src/` import
+pattern. In a conda environment, add `--no-deps` so pip installs only your package and leaves the
+conda-managed dependencies alone.
 
-A package can also declare a **command-line entry point** in `pyproject.toml`, so that a name like `your-tool` becomes a command you can run from any directory. That is the polished form of "run it where the data lives": the user works in their data folder and calls the command, with no `cd` into the code and no path juggling.
+One incidental benefit worth knowing about: an installed package is importable and runnable from
+**any** directory, not just its own. A folder of scripts effectively has to be run from the code's
+own directory, or with fragile `sys.path` juggling; once installed, you can `cd` into the folder
+where a dataset sits and have the tool read its inputs and write its outputs right there. A package
+can also declare a **command-line entry point** in `pyproject.toml`, so a name like `your-tool`
+becomes a command you can run from any directory — the polished form of the same idea.
 
-## Some repos are intentionally not packaged
+## Going further: making the package installable by others
 
-A collection of standalone helper scripts and training docs is not a library that other code imports; it can stay a folder of scripts on purpose. Packaging is for a project that is imported or installed elsewhere — for example, the SWIR_HDR project once its pipeline is used from other repos — not for a loose helper collection.
+Everything above is close to a requirement for this guide's structure. What follows is a genuinely
+optional decision — should code that's already a local package also be installable by other repos,
+other people, or a package index? Yes, if...
 
-## The next step, out of scope here
+- **Other repos import it.** You are copy-pasting the same code between projects instead of
+  installing it once.
+- **You want versioned installs consumed elsewhere.** A project depends on "version 2.1 of this,"
+  not "whatever your repo's `main` looks like today."
 
-Once a project is packaged, versioned ([22_versioning_and_releases.md](22_versioning_and_releases.md)), and licensed and citable ([23_concluding_a_project.md](23_concluding_a_project.md)), the further step is publishing to **PyPI** so anyone can `pip install` it. That is deliberately out of scope for this track; it is named here only so you know it is the next thing that exists when you get there.
+If neither applies, stop here — the local package is already doing its job, and going further is
+real overhead for no benefit. A collection of standalone helper scripts and training docs that
+never adopts the `src/` + `experiments/` split doesn't need even the local package — see
+[06_adding_a_script.md](../onboarding/06_adding_a_script.md) — that's a different, equally valid
+repo shape when that's all that's needed.
+
+### A lighter step before PyPI: installing straight from GitHub
+
+Once a project has a `pyproject.toml`, others can install it directly from the repository, no PyPI
+publication required:
+
+```
+pip install git+https://github.com/your-org/your-repo.git
+```
+
+This is a real, citable-in-a-README distribution method, worth adding to the README once a project
+reaches this point, well before "publish to PyPI" is on the table.
+
+### The next step
+
+Once a project is a package, [23_shipping_a_library.md](23_shipping_a_library.md) covers the rest of
+going further: versioning it properly, and publishing it to **PyPI** so anyone can `pip install` it.
+
+## Further reading
+
+This doc covers the minimum to know whether and how to package. For deeper detail — `pyproject.toml` fields, build backends, and the compiled-extension case this doc does not cover — see the [Scientific Python Development Guide's "Simple packaging" page](https://learn.scientific-python.org/development/guides/packaging-simple/). Once a project is packaged, two tools from that same ecosystem can check and scaffold it automatically: [`sp-repo-review`](https://learn.scientific-python.org/development/guides/repo-review/) checks an existing repository against the ecosystem's packaging and CI conventions, and the [scientific-python/cookie](https://github.com/scientific-python/cookie) template scaffolds a new one already conforming to them.

@@ -15,7 +15,7 @@ Two reasons, both aimed at how research code actually goes wrong.
 - **Integration test:** checks several pieces working together, such as load then calibrate then compute.
 - **Regression test:** pins a specific known-good result so that a bug, once fixed, stays fixed, or a verified approach stays verified.
 
-Most of your tests will be unit and regression tests. Do not overthink the taxonomy.
+Most of your tests will be unit and regression tests. Don't overthink the taxonomy.
 
 ## Anatomy of a test
 
@@ -112,8 +112,36 @@ def test_peak_is_one(sample_spectrum):
 
 Fixtures needed across more than one test file go in a file named `conftest.py` inside `tests/`. pytest finds it automatically; you do not import it.
 
+## Code coverage: a signal, not a target
+
+`pytest-cov` (`pytest --cov=scripts tests/`) reports **coverage**: the percentage of lines your test
+suite actually executes. It is a real signal — a module at 0% coverage definitely has no tests
+protecting it — and an easy number to compute and report. But it is not the same thing as *good*
+tests: a test can execute every line of a function and still assert nothing meaningful about the
+result, so 100% coverage is compatible with a suite that would not catch a real bug. Use coverage to
+find code nobody has tested yet, not as a target to maximize for its own sake; the
+`np.testing.assert_allclose` habit above is what actually catches a wrong answer.
+
 ## Where tests live, and two habits
 
 - Tests live in a `tests/` directory at the repo root. Test files are named `test_*.py` and test functions `test_*`; pytest discovers them by those names.
 - **When you fix a bug, add a test that would have caught it.** That regression test keeps the bug from creeping back.
 - **When an experiment establishes that an approach is correct, turn it into a test.** "This input should produce this result" becomes a `test_` function guarding the shipped code forever. This is how a validation experiment graduates into a permanent safeguard, and it depends on the experiment being reproducible in the first place — the seeding ([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)) and pinning ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)) that make a run repeatable.
+
+## What to expect if an AI assistant writes the code
+
+This repo's [CLAUDE.md](../../CLAUDE.md) is what tells an assistant to follow these conventions — but
+only for what it actually says. Its **Testing requirements** section states this concretely: a new
+function that does real computation gets a test in `tests/` following the patterns in this doc
+(`assert_allclose` for floats, `parametrize` for multiple cases), and a bug fix gets a regression test
+that would have caught it. That's why asking for a function here should also produce a test, unprompted.
+
+Your own project's `CLAUDE.md` only does the same if it says so.
+[repo_kit/CLAUDE.template.md](../../repo_kit/CLAUDE.template.md) carries the identical rule, ready to
+copy in; without it, an assistant may hand back a clean, documented, type-hinted function with nothing
+testing it. Until your standards file has this section, ask for the test directly: "add a test for
+this, following this repo's conventions."
+
+Either way, read what comes back the way you'd read the function it covers: does it assert something
+meaningful, on the case that actually matters to your science, not just the easy one.
+[18_ai_assisted_development.md](18_ai_assisted_development.md) covers this verification habit in full.

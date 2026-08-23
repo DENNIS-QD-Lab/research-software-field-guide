@@ -19,6 +19,9 @@ The default name Git gives to the remote copy of your repo on GitHub. When you s
 **clone**
 The act of making a local copy of a remote repository. `git clone <url>` downloads the entire repo and its history onto your computer.
 
+**Fork**
+A copy of someone else's repository, made under your own GitHub account, used when you don't have write access to the original. See [repo_lifecycle.md](repo_lifecycle.md) for when to fork versus when to just branch.
+
 ## Commits and changes
 
 **Commit (noun)**

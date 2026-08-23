@@ -8,7 +8,7 @@ A `.ipynb` file stores not just your code but also every cell's output: printed 
 
 ## One-time setup after cloning
 
-The fix is a tool called `pre-commit`, which runs a check automatically every time you commit. Our check strips the outputs out of notebooks before they are committed. Run these two commands once, from the repository root, with the `helper` environment active:
+The fix is a tool called `pre-commit`, which runs a check automatically every time you commit. Our check strips the outputs out of notebooks before they are committed. Run these two commands once, from the repository root, with the `fieldguide` environment active:
 
 ```
 pip install pre-commit
@@ -28,13 +28,13 @@ When you commit a notebook, the hook strips its outputs from the version that ge
 
 ## When to pair a `.py` and a `.ipynb`
 
-Some helpers exist as a single file. Some exist as both a `.py` and a `.ipynb`. Which to use is a judgment call, not a rule.
+Some work exists as a single file. Some exists as both a `.py` and a `.ipynb`. Which to use is a judgment call, not a rule.
 
 **Use just a notebook (`.ipynb`)** when the work is genuinely exploratory: loading a file to see what's in it, trying a plot to see if the data looks right, sketching an analysis you may or may not keep. The notebook *is* the deliverable; there's nothing to import.
 
-**Use just a script (`.py`)** when the helper does one well-defined thing that you'd call from the command line or from other code: `show_h5_keys.py` is a good example. No interactive exploration is needed; you just want to run it.
+**Use just a script (`.py`)** when it does one well-defined thing that you'd call from the command line or from other code: `show_h5_keys.py` is a good example. No interactive exploration is needed; you just want to run it.
 
-**Use both** when a helper has stable, reusable logic *and* a benefit from interactive use. The pattern: the script holds the canonical function. The notebook imports that function and uses it, plus does whatever ad-hoc poking only makes sense by hand. Because the notebook imports from the script rather than duplicating the code, the two stay in sync: edit the script, restart the kernel, and the notebook picks up the change.
+**Use both** when the underlying logic is stable and reusable, and also benefits from interactive use. The pattern: the script holds the canonical function. The notebook imports that function and uses it, plus does whatever ad-hoc poking only makes sense by hand. Because the notebook imports from the script rather than duplicating the code, the two stay in sync: edit the script, restart the kernel, and the notebook picks up the change.
 
 `scripts/show_h5_keys.py` and `notebooks/show_h5_keys.ipynb` are the model for the third pattern. The script defines `show_keys`. The notebook imports it and uses it interactively, then opens one dataset by hand to check its range — the kind of thing you wouldn't bake into a reusable function.
 

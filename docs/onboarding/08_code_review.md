@@ -8,7 +8,7 @@ You do not need to audit a change line by line. Check four things:
 
 - **Does it run?** Pull the branch, activate the appropriate environment, and run the script or notebook on a real file. Confirm it does what the description says.
 - **Does it have a docstring?** Every script needs purpose, inputs, and an example call at the top. See [06_adding_a_script.md](06_adding_a_script.md).
-- **Does the name make sense?** A helper should be named `verb_noun.py` and read clearly. If you cannot tell what it does from the name, say so.
+- **Does the name make sense?** A script file should be named `verb_noun.py` and read clearly. If you cannot tell what it does from the name, say so.
 - **Is it duplicating existing code?** If a script already does this, the change should extend it rather than add a near-copy.
 
 ## Tone
@@ -19,7 +19,7 @@ Ask questions rather than issue commands. "What happens if the file path does no
 
 Suggest, do not demand. Offer a change as a recommendation the author can weigh, not an order. Mark genuinely optional thoughts as optional.
 
-Assume good intent. The author did their best with what they knew. Review is collaborative problem-solving, not gatekeeping. Praise what is good, not only what needs fixing.
+Assume good intent. The author did their best with what they knew. Review is collaborative problem-solving, not gatekeeping. Praise what is good in addition to discussing what needs fixing.
 
 ## How to approve and merge
 
