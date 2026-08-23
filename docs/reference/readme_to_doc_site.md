@@ -11,9 +11,9 @@ A theme's `experiments/<slug>/README.md` *is* its doc-site page. `docs/experimen
 does nothing but include it:
 
 ````{code-block} markdown
-:caption: docs/experiment_overviews/crf-necessity_overview.md
-```{include} ../../experiments/crf-necessity/README.md
-:relative-docs: ../../experiments/crf-necessity/
+:caption: docs/experiment_overviews/noise-reduction_overview.md
+```{include} ../../experiments/noise-reduction/README.md
+:relative-docs: ../../experiments/noise-reduction/
 :relative-images:
 ```
 ````

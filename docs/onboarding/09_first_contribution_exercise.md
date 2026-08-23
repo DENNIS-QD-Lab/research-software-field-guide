@@ -59,7 +59,7 @@ Every later contribution — to this repo, your own, or your team's — is a rep
 ## What good looks like
 
 A clear pull request description tells the reviewer what changed and how to verify it, without making
-them read the code first. Here is a small one, from this guide's own history, for reference:
+them read the code first. Here is a small one for reference:
 
 > **Title:** Add byte-size formatting to show_h5_keys output
 >
