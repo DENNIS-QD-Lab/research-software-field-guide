@@ -7,21 +7,21 @@ doesn't need contribution norms written down for itself. Delete this comment blo
 # Contributing to <PROJECT>
 
 This is the short version of how we work in this repo. The reasoning behind each step lives in the
-research-software-field-guide's [onboarding](<path-to-guide>/docs/onboarding/) and
-[implementing](<path-to-guide>/docs/implementing/) docs, linked below where relevant.
+research-software-field-guide's [onboarding](PATH-TO-GUIDE/docs/onboarding/) and
+[implementing](PATH-TO-GUIDE/docs/implementing/) docs, linked below where relevant.
 
 ## Before you start
 
 Work inside the shared environment (`conda activate <env-name>`; see
-[04_environments.md](<path-to-guide>/docs/onboarding/04_environments.md) if you haven't made it yet).
+[04_environments.md](PATH-TO-GUIDE/docs/onboarding/04_environments.md) if you haven't made it yet).
 Confirm the repo lives in a normal local folder, not inside OneDrive/iCloud/Dropbox — see
-[03_getting_started_with_git.md](<path-to-guide>/docs/onboarding/03_getting_started_with_git.md).
+[03_getting_started_with_git.md](PATH-TO-GUIDE/docs/onboarding/03_getting_started_with_git.md).
 
 ## The workflow
 
 Every change, even a one-line fix, follows the same loop: pull the latest code, make a branch, do the
 work, commit, push, open a pull request. Full loop with VS Code and terminal equivalents:
-[05_daily_workflow.md](<path-to-guide>/docs/onboarding/05_daily_workflow.md). We branch for every
+[05_daily_workflow.md](PATH-TO-GUIDE/docs/onboarding/05_daily_workflow.md). We branch for every
 change so `main` keeps working and everyone has a safe place to experiment.
 
 Commit messages: one line, imperative present tense — "Add dark-frame correction," not "Added dark-frame
@@ -43,11 +43,11 @@ doubt about where something goes, ask in review rather than guessing.
 Notebooks need one setup step after cloning, so Git doesn't record cell outputs and execution counts:
 `pip install pre-commit && pre-commit install`, once. After that, outputs strip from the committed
 version automatically while your local copy keeps them.
-See [07_notebooks.md](<path-to-guide>/docs/onboarding/07_notebooks.md).
+See [07_notebooks.md](PATH-TO-GUIDE/docs/onboarding/07_notebooks.md).
 
 ## Code review
 
 Every pull request gets one reviewer. The reviewer checks that the code runs, has a docstring, follows
 `CLAUDE.md`, and does not duplicate something already in `src/`. Reviews are collegial: ask questions
 rather than issue commands, suggest rather than demand, assume the author did their best.
-See [08_code_review.md](<path-to-guide>/docs/onboarding/08_code_review.md).
+See [08_code_review.md](PATH-TO-GUIDE/docs/onboarding/08_code_review.md).

@@ -33,8 +33,8 @@ and the equivalent terminal commands is in [05_daily_workflow.md](docs/onboardin
 ## Notebooks
 
 Notebooks need one extra setup step after you clone, so that Git does not record their cell outputs and
-execution counts. Run `pip install pre-commit` and then `pre-commit install` once. After that, the
-outputs are stripped from the committed version automatically while your local copy keeps them. The
+execution counts. With the `fieldguide` environment active, run `pre-commit install` once. After that,
+the outputs are stripped from the committed version automatically while your local copy keeps them. The
 reasoning is in [07_notebooks.md](docs/onboarding/07_notebooks.md).
 
 ## Code review
