@@ -28,7 +28,7 @@ At the bottom of the Explorer sidebar is the Outline view (expand the "Outline" 
 
 ## The integrated terminal
 
-Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown. 
+Terminal > New Terminal opens a shell at the repository root. This is the same terminal used for the `git`, `conda`, and `python` commands throughout these docs. You can open several at once with the + icon in the terminal panel and switch between them with the dropdown.
 
 ## The Source Control panel
 
@@ -72,6 +72,8 @@ Dragging a tracked file to a new folder in the Explorer works, but Git sees it a
 Cmd+B (Mac) or Ctrl+B (Windows) hides and shows the sidebar. This is useful when you want maximum screen space for reading or focused editing.
 
 ## Keyboard shortcuts worth memorizing
+
+A fuller list, organized by category, is in [keyboard_shortcuts.md](../reference/keyboard_shortcuts.md); the extensions worth installing are in [vs_code_extensions.md](../reference/vs_code_extensions.md).
 
 - Cmd+P / Ctrl+P: Go to File (fuzzy file search across the workspace)
 - Cmd+Shift+F / Ctrl+Shift+F: Find in Files (search file contents across the workspace)

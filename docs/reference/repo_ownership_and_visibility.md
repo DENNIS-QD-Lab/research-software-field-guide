@@ -1,7 +1,7 @@
-# Repo Ownership and Visibility
+# Repo ownership and visibility
 
-Who owns a repo, who can see it, and what changes as a project moves from lab notebook to published
-paper to shipped tool discussed below. No reading order; skim and come back when one of these comes up.
+Who owns a repo, who can see it, and and what changes as a project moves from lab notebook to
+published paper to shipped tool. No reading order; skim and come back when one of these comes up.
 
 ## The three visibility postures
 
@@ -93,8 +93,8 @@ individual's account — including repos with one primary contributor. "Just one
 right now" is not a reason to own it personally; the point is what happens later, when that stops being
 true.
 
-The org benefits are reenforced by the autodoc habits promoted in this guide
-[20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md): wherever org
+The org benefits are reinforced by the autodoc habits promoted in this guide
+([20_documentation_and_doc_sites.md](../implementing/20_documentation_and_doc_sites.md)): wherever org
 visibility is turned on, anyone with org access can reach each repo's auto-generated Sphinx
 site — the running lab notebook — without being individually invited to that specific repo. Kept under
 personal accounts instead, each site stays reachable only by whoever was explicitly added to that one

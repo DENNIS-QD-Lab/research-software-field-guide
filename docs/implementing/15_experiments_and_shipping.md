@@ -13,7 +13,7 @@ This is the repo-level counterpart to [13_software_design.md](13_software_design
 
 ## The tension
 
-Experiments used to develop a model or analyze data are iterative and comprise many intermediate steps; a good experimental record is worth keeping regardless of the results: it documents the process and informs your scientific decision-making. Code and figures for publication are the polished part of the scientific record, need to be reproducible and rigorous, and tracable figure generation will avoid massive headaches if a reviewer asks you to reproduce or modify it a year later. The shipped library, meanwhile, should typically be narrowed to sharable methods, meaning reliable code that consistently performs as expected using the method you settled on through your experimental process. Left in one flat pile, these goals compete and corrode each other as the shipped code slowly accumulates dead alternatives nobody dares delete, and the experiments quietly stop running because the code moved under them. The structure proposed below organizes your repo to support each of those goals when you need it.
+Experiments used to develop a model or analyze data are iterative and comprise many intermediate steps; a good experimental record is worth keeping regardless of the results: it documents the process and informs your scientific decision-making. Code and figures for publication are the polished part of the scientific record, need to be reproducible and rigorous, and traceable figure generation will avoid massive headaches if a reviewer asks you to reproduce or modify it a year later. The shipped library, meanwhile, should typically be narrowed to shareable methods, meaning reliable code that consistently performs as expected using the method you settled on through your experimental process. Left in one flat pile, these goals compete and corrode each other as the shipped code slowly accumulates dead alternatives nobody dares delete, and the experiments quietly stop running because the code moved under them. The structure proposed below organizes your repo to support each of those goals when you need it.
 
 ## The layout
 
@@ -53,10 +53,10 @@ A repo built this way is doing three jobs, and they are not sequential stages yo
 behind. At any given time a project may be doing some of each, and all three draw on the same
 `src/`.
 
-**Exploratory** work applies evolving methods, examines different input data, and tries different data visualizations and statistical analyses. The functions and modules underpinning these analyses is the evolving source code, kept in `src/`. This code base is changing throughout the experimental process, but keeping it organized in a centralized manner is exactly what lets an experiment compare approaches with a clean, tracable record and without drift. In practice this may mean that  competing methods sit together in a library module, and the comparison in `experiments/` imports them from there. Alternatively one approach may be iterated upon, meaning that a module stored in `src/` changes between experimental runs. These independent runs are kept reliable and repeatable by commiting the code between runs, so the exact code version that produced a result can always be retrieved.
+**Exploratory** work applies evolving methods, examines different input data, and tries different data visualizations and statistical analyses. The functions and modules underpinning these analyses are the evolving source code, kept in `src/`. This code base is changing throughout the experimental process, but keeping it organized in a centralized manner is exactly what lets an experiment compare approaches with a clean, traceable record and without drift. In practice this may mean that competing methods sit together in a library module, and the comparison in `experiments/` imports them from there. Alternatively one approach may be iterated upon, meaning that a module stored in `src/` changes between experimental runs. These independent runs are kept reliable and repeatable by committing the code between runs, so the exact code version that produced a result can always be retrieved.
 
 **Archival** work is preparing a specific set of results for a manuscript, storing outputs of experiments that have reached a reportable conclusion in `figures/` while exploration of other, still-open questions
-continues elsewhere in the same repo. The outputs saved in `figures/` alongside the details needed to regenerate them serves as an evolving manuscript outline with the figures updated or reordered throughout the writing process.
+continues elsewhere in the same repo. The outputs saved in `figures/`, alongside the details needed to regenerate them, serve as an evolving manuscript outline with the figures updated or reordered throughout the writing process.
 
 **Shippable** work is a trimmed library containing the approach(es) you've settled on, for people who
 just want to install and use polished code rather than see the development work and methods comparison
@@ -115,7 +115,7 @@ commit hash, its inputs, and its data checksum together describe exactly which c
 data, produced this. Check out that commit, restore that data, rerun, and you get the same result back.
 
 This rewards committing often. Every commit that a run's manifest can point to is a state you can
-return to later, if needed. This logic is obvious for the big, deliberate moments like 
+return to later, if needed. This logic is obvious for the big, deliberate moments like
 cutting a `paper-v1` tag and archiving it for a permanent, citable record
 ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)), but it holds continuously, at ordinary commits, long before that.
 

@@ -48,9 +48,9 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 ## Naming conventions for files
 - snake_case, lowercase, no hyphens, under about 30 characters.
 - Verb-first for action scripts that *do* something when run: `show_keys.py`, `plot_spectra.py`, `convert_units.py`.
-- Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`, `hdr_processing.py`, `broadband_segmentation.py`.
-- Avoid abbreviations except universally understood domain terms (`hdf5`, `hdr`, `nir`, `qd`, `swir` are fine; `seg` for `segmentation` is not).
-- **Experiment (and figure) theme folders are undated and permanent**, an exception to the "no hyphens" rule above: `experiments/<theme-slug>/` (e.g. `crf-necessity/`, hyphens allowed) is a standing address for one line of inquiry, revisited for as long as it stays open — it carries no date. A leading number (`01_crf-necessity/`, `02_dynamic-range-scenarios/`) is an optional, encouraged way to order themes by when they were conceived, useful once a project has enough of them that folder order stops being obvious; it is not required.
+- Noun phrases for modules that *contain* importable functionality: `ratio_analysis.py`, `preprocessing.py`, `peak_detection.py`.
+- Avoid abbreviations except universally understood domain terms in your own field (`hdf5` is fine anywhere; `seg` for `segmentation` is not). This guide's own examples stay generic, since its readers span fields.
+- **Experiment (and figure) theme folders are undated and permanent**, an exception to the "no hyphens" rule above: `experiments/<theme-slug>/` (e.g. `dark-current-subtraction/`, hyphens allowed) is a standing address for one line of inquiry, revisited for as long as it stays open — it carries no date. A leading number (`01_dark-current-subtraction/`, `02_dynamic-range-scenarios/`) is an optional, encouraged way to order themes by when they were conceived, useful once a project has enough of them that folder order stops being obvious; it is not required.
 - **Per-run directories, inside a theme's `details/`, are dated** — the exception that actually needs it, since these accumulate over the theme's whole life: `<YYMMDD>_<slug>[_NN]/` (the run date, with `_02`, `_03`, … preserving reruns). This applies to dated directories, not to importable `.py` module names.
 
 ## Command line interfaces
@@ -75,10 +75,10 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 - A notebook should run top to bottom without errors. If a cell depends on a previous cell, it must appear after that cell.
 - Each notebook starts with a markdown cell describing purpose, inputs, and an example invocation.
 
-## When adding a new helper
+## When adding a new script or notebook
 - Place it in `scripts/` (for `.py`) or `notebooks/` (for `.ipynb`).
 - If it adds a new category of functionality worth indexing, update `docs/README.md`.
-- The PR description should include what the helper does and an example invocation.
+- The PR description should include what it does and an example invocation.
 
 ## Commit and PR messages
 Keep them short. A reviewer reads these to find out what changed and why; anything else is noise they

@@ -102,7 +102,7 @@ analysis, and catches problems early, while they are cheap to fix. Design your c
 present* its intermediate outputs often, not only the final number. Plot the intermediate arrays, their
 distributions, or the residuals — whatever shows the *shape* of the data at that step — and check how each
 step changes them. (For image processing work, for instance, look at the image **and** a histogram of its intensities
-together, so that when a step excludes data — say, by implementing a threshold-based mask — you see what it does to both.) 
+together, so that when a step excludes data — say, by implementing a threshold-based mask — you see what it does to both.)
 
 ## Save the state of every run
 

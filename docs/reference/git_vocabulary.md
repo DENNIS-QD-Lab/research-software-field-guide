@@ -1,4 +1,4 @@
-# Git and GitHub Vocabulary
+# Git and GitHub vocabulary
 
 A reference for the terms you'll encounter while using Git and GitHub. You don't need to memorize this. Skim it once, then come back when a term confuses you.
 

@@ -1,6 +1,6 @@
 # Code quality tools: linting, formatting, and type checking
 
-Long before AI, automated tools were helping coders check and fix their code by enforcing certain coding standards. For example, this project's coding-standards file ([CLAUDE.md](../../CLAUDE.md)) says code follows PEP 8 and is formatted with ruff. This doc explains what that tooling actually does, how to run it yourself, and adds mypy, for type checking. If you choose to implement this repo structure and work with an AI agent for your coding, much of this will be implemented automatically each time that you commit code, ensuring that appropriate standards are maintained from early in the repo development and avoiding major rewrites later. 
+Long before AI, automated tools were helping coders check and fix their code by enforcing certain coding standards. For example, this project's coding-standards file ([CLAUDE.md](../../CLAUDE.md)) says code follows PEP 8 and is formatted with ruff. This doc explains what that tooling actually does, how to run it yourself, and adds mypy, for type checking. If you choose to implement this repo structure and work with an AI agent for your coding, much of this will be implemented automatically each time that you commit code, ensuring that appropriate standards are maintained from early in the repo development and avoiding major rewrites later.
 
 ## Three tools, three jobs
 

@@ -20,11 +20,11 @@ Do not put the repository inside OneDrive, iCloud Drive, or Dropbox. Those servi
 
 ## The daily mental model
 
-Four words: pull, work, commit, push.   
-**Pull** the latest changes from GitHub so you start current.  
-**Work** on the files.  
-**Commit** to record your changes in Git's history with a short message.  
-**Push** to send those commits up to GitHub so others have them.  
+Four words: pull, work, commit, push.
+**Pull** the latest changes from GitHub so you start current.
+**Work** on the files.
+**Commit** to record your changes in Git's history with a short message.
+**Push** to send those commits up to GitHub so others have them.
 
 ## Branches
 
@@ -41,6 +41,10 @@ When you commit on a branch, the commit is recorded only on that branch until yo
 "Adding a new file on a branch" is shorthand for a sequence: switch to the branch, create the file in your working directory, then stage and commit it. The branch itself does not hold just that one file. It holds the whole repository state, now including your new file.
 
 We make a branch for every change, even a one-file addition, because the workflow is the practice. The cost of branching is almost nothing, and the habit is what matters when changes get larger. [05_daily_workflow.md](05_daily_workflow.md) shows the mechanics of making, using, and merging a branch.
+
+## Where to look things up
+
+Three reference docs cover Git beyond this walkthrough: [git_vocabulary.md](../reference/git_vocabulary.md) defines the terms you'll meet in error messages and GitHub's interface, [git_recovery.md](../reference/git_recovery.md) is the what-just-happened guide for when something feels broken, and [advanced_git.md](../reference/advanced_git.md) catalogs the sharper tools (`git stash`, `git rebase`, `git cherry-pick`) you'll want later. Skim the first; come back to the other two when you need them.
 
 ## Further reading
 

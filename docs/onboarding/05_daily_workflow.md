@@ -67,8 +67,8 @@ In VS Code: in the Source Control panel, the changed files appear under "Changes
 In the terminal:
 
 ```
-git add scripts/plot_qd_spectra.py
-git commit -m "Add QD spectra plotter"
+git add scripts/plot_spectra.py
+git commit -m "Add spectra plotter"
 ```
 
 `git add` stages a file; `git commit` records the staged files with a message.

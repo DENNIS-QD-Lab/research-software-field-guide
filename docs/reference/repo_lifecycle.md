@@ -1,4 +1,4 @@
-# Repo Lifecycle Reference
+# Repo lifecycle
 
 Starting a repo, getting a copy of someone else's, and deciding who can see it. No reading order; skim
 and come back when one of these comes up. This is not a full GitHub manual — for the exact click paths,

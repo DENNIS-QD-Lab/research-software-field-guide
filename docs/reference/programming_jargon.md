@@ -1,4 +1,4 @@
-# Programming Jargon
+# Programming jargon
 
 Terms of art from software development that aren't obvious until someone defines them. Not exhaustive. Add to this list when you encounter a term that confuses you and learn what it means.
 
@@ -50,7 +50,7 @@ Mutable: can be changed after creation. Lists, dicts, sets in Python. Immutable:
 To repeat an operation over a sequence. A `for` loop iterates over a list. "The script iterates over the keys in the HDF5 file" means "the script processes each key, one at a time."
 
 **Recursion / recursive**
-A function that calls itself. The HDF5 inspector walks groups recursively because groups can contain groups can contain groups. Each recursive call handles one level.
+A function that calls itself. The HDF5 inspector walks groups recursively because groups can contain groups, which can contain groups. Each recursive call handles one level.
 
 **Parse / parser / parsing**
 Taking raw text and turning it into structured data your program can work with. argparse parses command-line arguments. JSON parsers parse JSON text into dicts and lists.
@@ -102,7 +102,7 @@ Anything not in the standard library. NumPy, matplotlib, h5py are third-party pa
 ## Files and data
 
 **Path**
-The location of a file. Absolute paths start from the root of the filesystem (`/Users/allison/data/run42.h5`). Relative paths start from the current directory (`./data/run42.h5` or just `data/run42.h5`).
+The location of a file. Absolute paths start from the root of the filesystem (`/Users/yourname/data/run42.h5`). Relative paths start from the current directory (`./data/run42.h5` or just `data/run42.h5`).
 
 **Extension**
 The part of a filename after the last dot. `show_h5_keys.py` has extension `.py`. Conventions tie extensions to file types but Python doesn't actually require them.

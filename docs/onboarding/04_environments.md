@@ -72,7 +72,7 @@ A notebook keeps everything you have run in memory, which is convenient until th
 - After editing a module you imported, so the notebook loads the new version instead of the old one held in memory.
 - When variables are in a confusing state and you cannot tell why.
 
-The "Restart and Run All" button restarts the kernel and re-runs every cell from a clean slate. This is akin to the troubleshooting advice 'turn it off and turn it back on again'-- resets help. When something seems wrong for no clear reason, try restarting the kernel. 
+The "Restart and Run All" button restarts the kernel and re-runs every cell from a clean slate. This is akin to the troubleshooting advice "turn it off and turn it back on again" — resets help. When something seems wrong for no clear reason, try restarting the kernel.
 
 ## Further reading
 

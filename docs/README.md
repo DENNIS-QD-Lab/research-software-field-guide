@@ -1,6 +1,42 @@
 # research-software-field-guide documentation
 
-This folder onboards newcomers from near-zero software experience to confident contributor. Read the onboarding docs in order; they build on each other and define every term on first use. Doc 09 is a hands-on exercise to do once you have read them. The reference docs are for later: skim once so you know what's there, then come back as needed. Once you are a confident contributor, the **implementing track** (docs 10–20) covers the next tier: intermediate research-software engineering for when scripts grow into real pipelines and research projects. When a project is actually headed for publication, the separate **disseminating track** (docs 21–23) picks up from there. If you are already an experienced developer and just want to apply this standard to a repository, the [`repo_kit/`](../repo_kit/) folder at the repository root is a portable kit for exactly that: setting up a new repo, or bringing an existing one up to standard.
+## What are we doing here?
+
+Increasingly, scientists and students are able to access complex computational analysis using AI coding
+assistants. Accelerating scientific discovery via **vibe coding** is great, but we are still each
+independently responsible for our own scientific output, the repeatability of our results, and the
+responsible development of research software.
+
+In that context, this repo intends to give the non-computer scientist a framework and tutorial on how to
+(vibe) code their science rigorously, ensure the repeatability of their experiments, and be able to
+automatically turn their code outputs and analysis into a website for accessible viewing — to facilitate
+discussion of the results (even with a non-coder) and archiving.
+
+Regardless of whether a human or AI assistant is doing the bulk of the coding, it's critical that you
+maintain control of the scientific questions being asked, can follow the code generated, verify it does
+what you actually asked, and run it yourself. The coding standards and habits taught here, and enforced
+later on, exist for that same reason regardless of who typed the code: they let you, a reviewer, or
+future you tell whether a result is actually correct, not just plausible-looking.
+[18_ai_assisted_development.md](implementing/18_ai_assisted_development.md) and
+[ai_coding_assistants.md](reference/ai_coding_assistants.md) cover working with an assistant directly,
+once you're doing that on real work.
+
+## How this guide is organized
+
+The **onboarding track** (docs 00–09) takes a newcomer from near-zero software experience to confident
+contributor. Read those in order; they build on each other and define every term on first use. Doc 09 is
+a hands-on exercise to do once you have read the rest.
+
+The **implementing track** (docs 10–20) covers the next tier: intermediate research-software engineering
+for when scripts grow into real pipelines and research projects. When a project is actually headed for
+publication, the separate **disseminating track** (docs 21–23) picks up from there.
+
+The **reference docs** are for later. Skim the list once so you know what's there, then come back as
+needed.
+
+If you are already an experienced developer and just want to apply this standard to a repository, the
+[`repo_kit/`](../repo_kit/) folder at the repository root is a portable kit for exactly that: setting up
+a new repo, or bringing an existing one up to standard.
 
 ## Before you start
 
@@ -21,33 +57,30 @@ Read these in order. They live in [`onboarding/`](onboarding/).
 | [06_adding_a_script.md](onboarding/06_adding_a_script.md) | Where files go, the naming conventions, the docstring requirement, and a walkthrough of the worked example. |
 | [07_notebooks.md](onboarding/07_notebooks.md) | Why notebooks need special handling, the one-time pre-commit setup, and the `.py` / `.ipynb` pairing convention. |
 | [08_code_review.md](onboarding/08_code_review.md) | What a reviewer checks, the tone norms, and how to approve and merge. |
-
-## Practice
-
-| Doc | What it covers |
-|-----|----------------|
-| [09_first_contribution_exercise.md](onboarding/09_first_contribution_exercise.md) | A walkthrough exercise for your first contribution. Recommended after reading 00 through 08. |
+| [09_first_contribution_exercise.md](onboarding/09_first_contribution_exercise.md) | A hands-on exercise: run the whole loop on a real change of your own. Do this once you have read 00 through 08. |
 
 ## Reference
 
-Topical references you'll return to. They live in [`reference/`](reference/). No reading order; skim the list and come back as needed. (Use Ctl/Cmd+Shift+F to search the whole repository for keywords as needed.)
+Topical references you'll return to. They live in [`reference/`](reference/). No reading order; skim the list and come back as needed. (Use Ctrl/Cmd+Shift+F to search the whole repository for keywords as needed.)
 
 | Doc | What it covers |
 |-----|----------------|
 | [advanced_git.md](reference/advanced_git.md) | Sharp Git tools for longer-lived branches: `git stash`, `git rebase` (defensively), `git cherry-pick`, and keeping a feature branch current. A catalog to look things up in, not a tutorial. |
 | [ai_coding_assistants.md](reference/ai_coding_assistants.md) | Installing an AI coding assistant, essential session commands (`/clear`, `/compact`, permissions), managing context and cost, and when multi-agent delegation helps versus adds overhead. |
 | [command_line_reference.md](reference/command_line_reference.md) | More terminal commands than the onboarding doc covers, organized by category, including how to read a compound command in an AI assistant's permission prompt. |
-| [cs_jargon.md](reference/cs_jargon.md) | Programming terms of art (snake_case, mutable, parse, refactor, etc.) defined briefly. |
-| [documentation_promotion.md](reference/documentation_promotion.md) | How a theme's (or figure's) README becomes its doc-site page, the `{include}` options that keep embedded figures resolving correctly, and sharing a page as a PDF. |
 | [example_repo_structure.md](reference/example_repo_structure.md) | A full, fleshed-out (synthetic) example repo: several experiment themes, multiple runs each, a `figures/` folder, and what the generated doc site looks like from all of it. |
 | [git_recovery.md](reference/git_recovery.md) | Recovering from common Git mistakes: work done on the wrong branch, a bad commit, a file you need back, and other "what just happened" moments. |
 | [git_vocabulary.md](reference/git_vocabulary.md) | Git and GitHub terms (fetch, pull, push, HEAD, origin, upstream, conflict, and others) you'll encounter. |
 | [keyboard_shortcuts.md](reference/keyboard_shortcuts.md) | VS Code shortcuts worth memorizing, organized by category. |
 | [markdown_formatting.md](reference/markdown_formatting.md) | Markdown syntax for docs, README files, PR descriptions, and notebook cells. |
 | [notebook_sync_alternatives.md](reference/notebook_sync_alternatives.md) | Notebook version control approaches considered and why nbstripout was picked for now. |
+| [programming_jargon.md](reference/programming_jargon.md) | Programming terms of art (snake_case, mutable, parse, refactor, etc.) defined briefly. |
+| [readme_to_doc_site.md](reference/readme_to_doc_site.md) | How a theme's (or figure's) README becomes its doc-site page, the `{include}` options that keep embedded figures resolving correctly, and sharing a page as a PDF. |
 | [repo_lifecycle.md](reference/repo_lifecycle.md) | Starting a new repo, cloning, forking versus branching directly, and public versus private visibility. |
 | [repo_ownership_and_visibility.md](reference/repo_ownership_and_visibility.md) | Owning lab repos through a GitHub Organization instead of a personal account, why visibility can't be set per-tag, and models for sharing a repo across contributors. |
 | [vs_code_extensions.md](reference/vs_code_extensions.md) | Recommended VS Code extensions for this repo, with notes on what each does. |
+
+One more file worth knowing about: [`references.md`](../references.md) at the repository root is this guide's own **reference ledger**, and a worked example of the convention [16_running_a_dry_lab_experiment.md](implementing/16_running_a_dry_lab_experiment.md) teaches — one row per external source, paired with why it mattered here.
 
 ## Implementing track
 
