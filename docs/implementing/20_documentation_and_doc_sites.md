@@ -279,16 +279,6 @@ jobs:
             --notes "Static build of the Sphinx doc site, built from $GITHUB_SHA."
 ```
 
-Creating a release is never something an assistant does on its own initiative, or folds quietly into
-a larger pull request's own summary — it gets asked about explicitly, every time, regardless of how
-routine or safe it looks in the moment.
-
-A GitHub Environment with a required reviewer can make GitHub itself pause a `workflow_dispatch` run
-until a named person approves it, adding a technical backstop on top of that habit. Required-reviewer
-protection on a private repository needs GitHub's Pro, Team, or Enterprise plan, though — the Free
-plan rejects the setup outright (a 422 error naming the plan requirement), so on a free private repo
-the explicit-ask habit above is the only safeguard in place.
-
 Most projects want both, at different frequencies: the CI artifact on every push, catching a broken build immediately and giving the team a current copy without anyone asking for one; the tagged release on demand, for the handful of moments a copy needs to survive longer than a month or reach someone by name. Tagging a paper's code state for a DOI archive is a separate practice ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) that fixes the citable state of the code itself; this workflow only preserves a copy of the rendered docs.
 
 ## Further reading
