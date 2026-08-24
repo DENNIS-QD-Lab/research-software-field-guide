@@ -19,7 +19,18 @@ OUT = Path(__file__).resolve().parent / "example.h5"
 
 
 def main() -> None:
-    """Write the synthetic example file to sample_data/example.h5."""
+    """Write the synthetic example file to sample_data/example.h5.
+
+    Returns
+    -------
+    None
+        Writes ``sample_data/example.h5`` for its side effect; nothing is
+        returned.
+
+    Examples
+    --------
+    >>> main()
+    """
     rng = np.random.default_rng(0)
     wavelength_nm = np.linspace(400.0, 720.0, 32)
 
