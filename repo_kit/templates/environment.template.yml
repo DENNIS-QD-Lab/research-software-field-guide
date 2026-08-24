@@ -1,0 +1,28 @@
+# ENVIRONMENT TEMPLATE — copy to the root of a target repo as environment.yml, then
+# fill <env-name> and add whatever packages the analysis actually needs. Build it
+# with `conda env create -f environment.yml && conda activate <env-name>`.
+
+name: <env-name>
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  # Common starting point for a research-Python project — trim or extend
+  # to what this analysis actually needs.
+  - numpy
+  - matplotlib
+  - jupyter
+  - ipykernel
+  # code-quality tooling (see docs/implementing/11_code_quality_tools.md)
+  # ruff is pinned exactly, in lockstep with .pre-commit-config.yaml's rev.
+  - ruff=0.15.21
+  - pre-commit
+  - mypy
+  # testing (see docs/implementing/12_testing_with_pytest.md)
+  - pytest
+  - pytest-cov
+  # needed by experiments/_common/runlog.py, once B5 adds it, to write manifest.yaml
+  - pyyaml
+  # Add a doc-site block (sphinx, furo, myst-parser, sphinx-autobuild), pinned
+  # together and bumped together, when adopting B7 — see
+  # docs/implementing/20_documentation_and_doc_sites.md.

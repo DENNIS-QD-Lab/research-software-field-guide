@@ -1,0 +1,51 @@
+# GITIGNORE TEMPLATE — copy to the root of a target repo as .gitignore. This is a
+# short, research-repo-specific list, not a generic Python .gitignore — add other
+# tool-specific entries as the repo picks up more tooling.
+
+# Byte-compiled Python
+__pycache__/
+*.py[cod]
+
+# Environments
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tooling caches and coverage
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Sphinx build output (see docs/implementing/20_documentation_and_doc_sites.md)
+docs/_build/
+
+# OS
+.DS_Store
+
+# VS Code: share settings.json and extensions.json, ignore everything else
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Data: never commit real data files (CLAUDE.md's Data handling section).
+*.h5
+*.hdf5
+*.nc
+# Exception: small teaching/test fixtures under sample_data/ are committed.
+!sample_data/
+!sample_data/**
+
+# Experiment/figure run artifacts: manifest.yaml and metrics.csv are small text
+# files and commit by default; heavy, regenerable outputs do not
+# (see docs/implementing/16_running_a_dry_lab_experiment.md). A figure worth
+# keeping visible in a theme's README is committed deliberately with
+# `git add -f`, which overrides these two patterns for that one file.
+**/details/**/*.png
+**/details/**/*.npy
+
+# Machine-specific paths — never committed (copy local_paths_example.py).
+/local_paths.py

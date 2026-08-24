@@ -17,11 +17,17 @@ practices what it teaches:
 Plus [`templates/`](templates/) — the per-repo files the playbook installs (they are project-specific,
 so they ship as fill-in templates, not static files):
 
+- [gitignore.template](templates/gitignore.template) → target `.gitignore`
+- [environment.template.yml](templates/environment.template.yml) → target `environment.yml`
+- [pre_commit_config.template.yaml](templates/pre_commit_config.template.yaml) → target `.pre-commit-config.yaml`
+- [local_paths_example.py](templates/local_paths_example.py) → target `local_paths_example.py` (committed as-is; each machine copies it to its own git-ignored `local_paths.py`)
 - [research_log.template.md](templates/research_log.template.md) → target `experiments/README.md` (state)
 - [experiment_readme.template.md](templates/experiment_readme.template.md) → target `experiments/_TEMPLATE.md`
 - [experiments_playbook.template.md](templates/experiments_playbook.template.md) → target `.claude/experiments_playbook.md` (procedure)
+- [runlog.template.py](templates/runlog.template.py) → target `experiments/_common/runlog.py` (per-run manifest + metrics)
 - [vscode_settings.template.json](templates/vscode_settings.template.json) → target `.vscode/settings.json` (Markdown renders by default)
 - [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → target `CONTRIBUTING.md` (only once more than one person works in the repo)
+- [CITATION.template.cff](templates/CITATION.template.cff) → target `CITATION.cff` (once publishing — see [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md))
 
 ## How to use it
 

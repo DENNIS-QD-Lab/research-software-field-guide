@@ -1,0 +1,23 @@
+# CITATION.cff TEMPLATE — copy to the root of a target repo as CITATION.cff, then
+# fill every <PLACEHOLDER>. Add this once the repo is ready to be cited: a tagged
+# release with a LICENSE already in place (see 22_publishing_a_paper.md). Delete
+# this comment block in the copy.
+
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it using the metadata below.
+title: <PROJECT>
+version: <X.Y.Z>
+date-released: "<YYYY-MM-DD>"
+abstract: >-
+  <One or two sentences: what this repository is and what it does.>
+authors:
+  - family-names: <Last>
+    given-names: <First>
+    affiliation: <Institution>
+    email: <email>
+repository-code: "https://github.com/<org-or-user>/<repo>"
+license: <SPDX-license-id>
+keywords:
+  - <keyword>
+  - <keyword>
