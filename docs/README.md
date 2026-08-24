@@ -40,11 +40,19 @@ a new repo, or bringing an existing one up to standard.
 
 ## How your repo gets organized
 
-Once a repo adopts this guide's structure, every new line of inquiry follows the same shape: a
-dedicated, undated folder for the question, a research log tracking what's settled and what's still
-open, and dated runs underneath recording what each attempt actually did. The diagram below shows how
-those pieces — `src/`, `experiments/`, `tests/`, and the doc site — fit together once a repo has grown
-into this shape.
+Once a repo adopts this guide's structure, the source code (`src/`) is the hub everything else grows
+from — tests, exploratory notebooks, experiment drivers, and figure drivers all import it rather than
+duplicating it.
+
+Each new line of inquiry gets its own dedicated, undated folder under `experiments/`, with a research
+log tracking what's settled and what's still open, and dated runs underneath recording what each
+attempt actually did.
+
+Figures follow the same discipline once a manuscript is underway, and both experiments and figures
+feed the Sphinx doc site, which renders into a browsable lab notebook. From there, two further paths
+are optional: a trimmed `src/` can ship as a PyPI package, and `figures/` can freeze into a paper tag
+archived to Zenodo. The diagram below shows how all of it fits together once a repo has grown into
+this shape.
 
 ![How this guide structures a repo](_static/repo_structure.png)
 
@@ -54,7 +62,7 @@ it, if you'd rather see it filled in than read it in the abstract.
 
 ## Before you start
 
-The onboarding docs assume VS Code, Git, and conda are installed and that you have already cloned the repository. If that is not yet true, work through [GETTING_STARTED.md](root/getting_started.md) (`GETTING_STARTED.md` at the repository root) first — it is the from-scratch setup sheet that gets you to an open workspace.
+The onboarding docs assume VS Code, Git, and conda are installed and that you have already cloned the repository. If that is not yet true, work through [GETTING_STARTED.md](root/getting_started.md) (at the repository root) first — it is the from-scratch setup sheet that gets you to an open workspace.
 
 ## Full table of contents
 
