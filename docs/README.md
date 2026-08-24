@@ -46,9 +46,7 @@ open, and dated runs underneath recording what each attempt actually did. The di
 those pieces — `src/`, `experiments/`, `tests/`, and the doc site — fit together once a repo has grown
 into this shape.
 
-<!-- TODO: add the repo-structure flowchart here once it exists, e.g.:
 ![How this guide structures a repo](_static/repo_structure.png)
--->
 
 [repo_kit/STANDARD.md](repo_kit/standard.md#the-structure) shows the same shape as a file tree, and
 [example_repo_structure.md](reference/example_repo_structure.md) walks a fully worked-out instance of
