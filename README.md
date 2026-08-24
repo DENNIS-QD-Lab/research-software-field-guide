@@ -6,7 +6,7 @@ This guide and its templates are intended to onboard scientists to some standard
 
 It is written with the assumption that many scientists will pursue increasingly sophisticated code-driven analyses using AI coding assistants to speed the process; these AI coders will handle many details of code structure and syntax, while the scientist must retain scientific leadership as well as responsibility for the integrity of the process and the data interpretation. In that context, the guide docs are written to be human-facing overviews, while the portable standard ([`repo_kit/`](repo_kit/)) has templates and instructions to help the scientist and their AI assistants initiate new projects or update an existing research repository to the same practices.
 
-The structure and standard that this repo teaches is summarized in [`repo_kit/STANDARD.md`](repo_kit/STANDARD.md). The full table of contents for the guide is in [`docs/README.md`](docs/README.md).
+The structure and standard that this repo teaches is summarized in [`repo_kit/STANDARD.md`](repo_kit/STANDARD.md). The full table of contents for the guide is in [`docs/table_of_contents.md`](docs/table_of_contents.md).
 
 ## Where to start...
 
