@@ -156,7 +156,7 @@ The site can reach a reader at four different levels, each trading immediacy for
 | Level | What it is | Good for | Triggered by | Find it at |
 |---|---|---|---|---|
 | Local build | `sphinx-build`/`sphinx-autobuild` on your own machine | Working on the docs yourself | Running the command | `file:///docs/_build/html/index.html`, or `sphinx-autobuild`'s live server |
-| CI artifact | A fresh build attached to each CI run | Sharing the current state with colleagues with repo access; catching a broken build immediately | Automatic, on every push | The run's Actions-tab Summary, or `gh run download` |
+| CI artifact | A fresh build attached to each CI run | Sharing the current state with colleagues with repo access; catching a broken build immediately | Automatic, on every push | **Actions** tab → the run → **Artifacts** → `docs-html`, or `gh run download`; see the appendix below for the full path |
 | Tagged release | The same build, zipped and attached to a GitHub Release | Archiving or sharing one deliberate, polished snapshot | Manual (`workflow_dispatch`, or by hand) | The repo's Releases page |
 | GitHub Pages / Read the Docs | A hosted website built from the docs | A public project's permanent doc site | Automatic, on every push (once configured) | The Pages/Read the Docs URL — public even if the source repo is private |
 
@@ -218,7 +218,7 @@ jobs:
           retention-days: 30
 ```
 
-The build step is exactly the local command from *Setting up Sphinx*; the steps around it just recreate the environment (so autodoc can import your package) and save the result. To view it, open the run from the repo's **Actions** tab, download `docs-html` from its Summary (or run `gh run download -n docs-html`), unzip, and open `index.html`.
+The build step is exactly the local command from *Setting up Sphinx*; the steps around it just recreate the environment (so autodoc can import your package) and save the result. To find the built site: open the repo's **Actions** tab, click the most recent workflow run (usually the one for your push or pull request), scroll down to **Artifacts**, and click `docs-html` to download it. Unzip it and open `index.html` — or any other page inside it directly, such as `api_reference.html`. `gh run download -n docs-html` does the same download from the terminal.
 
 For a *public* project you can instead deploy straight to GitHub Pages or connect Read the Docs; the artifact is the private-safe option, because the download is only available to people with read access to the repo — which is also why keeping project repos under one lab organization ([repo_ownership_and_visibility.md](../reference/repo_ownership_and_visibility.md)) makes this artifact reachable lab-wide instead of one invite at a time.
 

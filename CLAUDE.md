@@ -77,7 +77,7 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 
 ## When adding a new script or notebook
 - Place it in `scripts/` (for `.py`) or `notebooks/` (for `.ipynb`).
-- If it adds a new category of functionality worth indexing, update `docs/README.md`.
+- If it adds a new category of functionality worth indexing, update `docs/table_of_contents.md`.
 - The PR description should include what it does and an example invocation.
 
 ## Commit and PR messages

@@ -3,6 +3,13 @@
 
 ```{toctree}
 :hidden:
+:caption: Contents
+
+table_of_contents
+```
+
+```{toctree}
+:hidden:
 :caption: Onboarding
 
 onboarding/00_python_code_basics
