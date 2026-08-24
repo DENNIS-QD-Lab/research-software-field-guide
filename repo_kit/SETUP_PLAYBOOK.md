@@ -38,8 +38,10 @@ recipes.
 
 Do these in order; stop wherever the project's maturity stops. Early projects often need only 0–2 and 5.
 
-0. **A repo and an environment to work in.** `git init` (or create the repo on GitHub and clone it), and
-   add a `.gitignore` and a root `README.md`. Then create the environment file and build it:
+0. **A repo and an environment to work in.** `git init` (or create the repo on GitHub and clone it).
+   Copy [gitignore.template](templates/gitignore.template) → `.gitignore`, and add a root `README.md`.
+   Copy [environment.template.yml](templates/environment.template.yml) → `environment.yml`, fill
+   `<env-name>` and adjust the package list, then build it:
    `conda env create -f environment.yml && conda activate <env-name>`. Step 2's `pre-commit install`
    needs both a git repository and an activated environment, so neither is optional.
    ([04_environments.md](../docs/onboarding/04_environments.md))
@@ -56,9 +58,10 @@ Do these in order; stop wherever the project's maturity stops. Early projects of
    one person will work in this repo, also copy
    [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → `CONTRIBUTING.md` and fill it in
    from the repo's actual scope; skip it for a solo project.
-2. **Environment + code quality.** Create the environment file; add `ruff` and `pre-commit`; write
-   `.pre-commit-config.yaml` (ruff check + ruff format; nbstripout for notebooks, excluding `.ipynb`
-   from ruff); `pre-commit install`. ([11](../docs/implementing/11_code_quality_tools.md))
+2. **Code quality.** Copy [pre_commit_config.template.yaml](templates/pre_commit_config.template.yaml) →
+   `.pre-commit-config.yaml` (ruff check + ruff format, `rev:` pinned to match `environment.yml`'s
+   `ruff=` from step 0; nbstripout for notebooks, excluding `.ipynb` from ruff); `pre-commit install`;
+   `pre-commit run --all-files` once. ([11](../docs/implementing/11_code_quality_tools.md))
 3. **Package layout.** `src/<pkg>/` for method code + `pyproject.toml`; `pip install -e . --no-deps`.
    ([21](../docs/disseminating/21_packaging.md))
 4. **Tests.** `tests/` + `pytest.ini` (or `[tool.pytest.ini_options]` in `pyproject.toml`); one real test that runs the code on a
@@ -83,7 +86,9 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 
 ### B2 · Wire code-quality tools
 - **When:** no ruff / pre-commit.
-- **Steps:** add `ruff` + `pre-commit` to the env; add `.pre-commit-config.yaml`;
+- **Steps:** add `ruff` (pinned exactly) and `pre-commit` to the existing environment file; copy
+  [pre_commit_config.template.yaml](templates/pre_commit_config.template.yaml) →
+  `.pre-commit-config.yaml`, matching its `rev:` to the pin just added;
   `pre-commit run --all-files` once to bring the whole tree up to standard; fix what it flags.
   ([11](../docs/implementing/11_code_quality_tools.md))
 - **Verify:** `ruff check .` and `ruff format --check .` both clean.
@@ -115,11 +120,13 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
     and [experiments_playbook.template.md](templates/experiments_playbook.template.md) →
     `.claude/experiments_playbook.md`. Fill their placeholders.
   - Add `experiments/_common/` for shared **harness only** (run logging, comparison/plot helpers) —
-    never method code; drivers import methods from `src/`.
-  - Add a small `runlog` helper that writes, per run, **provenance only** — no report file — to
-    `details/<YYMMDD>_<slug>[_NN]/` at the theme's top level: `manifest.yaml` (git commit + dirty flag,
-    params, inputs + checksum) and `metrics.csv`. **PRESERVE by default** (a rerun gets a fresh `_NN`;
-    never clobber). The theme's own `experiments/<theme-slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
+    never method code; drivers import methods from `src/`. Copy
+    [runlog.template.py](templates/runlog.template.py) → `experiments/_common/runlog.py` (needs
+    `pyyaml`; add it to the environment file if not already present). It writes, per run,
+    **provenance only** — no report file — to `details/<YYMMDD>_<slug>[_NN]/` at the theme's top level:
+    `manifest.yaml` (git commit + dirty flag, params, inputs + checksum) and `metrics.csv`. **PRESERVE
+    by default** (a rerun gets a fresh `_NN`; pass `overwrite=True` to refresh a run in place instead).
+    The theme's own `experiments/<theme-slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
     narrative document — findings, embedded figures, interpretation — written once and updated in place,
     never regenerated per run. A run's figure worth keeping visible gets embedded directly in the
     README's Findings section, from `details/<run_id>/`, with a short italic caption noting the run id —
@@ -188,7 +195,8 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 ### B10 · Publish a paper
 - **When:** a line of inquiry is going out as a publication.
 - **Steps:** freeze — **tag** the exact state behind the paper (`paper-v1`) with every compared
-  approach still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`.
+  approach still present; **archive** the tag to a DOI (Zenodo); add `LICENSE` and `CITATION.cff`
+  (copy [CITATION.template.cff](templates/CITATION.template.cff), fill placeholders).
   If the working repo shouldn't be public as-is, use the two-repo pattern: a fresh, empty public
   repo with only what belongs in the paper's record.
   ([22](../docs/disseminating/22_publishing_a_paper.md),

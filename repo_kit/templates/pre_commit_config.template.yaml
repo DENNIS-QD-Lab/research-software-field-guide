@@ -1,0 +1,23 @@
+# PRE-COMMIT CONFIG TEMPLATE — copy to the root of a target repo as
+# .pre-commit-config.yaml. The ruff `rev:` below must match the `ruff` version pinned
+# in environment.yml, exactly, or the two disagree about what a clean commit looks
+# like (see 11_code_quality_tools.md). Bump both together, deliberately, in their own
+# commit — never let one drift ahead of the other.
+
+repos:
+  # Strip notebook outputs and execution counts before commit.
+  # See docs/onboarding/07_notebooks.md for why.
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout
+
+  # Lint and format Python to the standards in CLAUDE.md.
+  # ruff-check fixes what it safely can; ruff-format applies the layout.
+  # rev must match the ruff version pinned in environment.yml.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.21
+    hooks:
+      - id: ruff-check
+        args: ["--fix"]
+      - id: ruff-format
