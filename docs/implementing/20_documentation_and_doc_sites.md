@@ -134,13 +134,20 @@ Wire `docs/index.md` with a `toctree` pointing at the overview pages, one per th
 
 ````markdown
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: Experiments
 
 experiment_overviews/theme_a_overview
 experiment_overviews/theme_b_overview
 ```
 ````
+
+Keep `maxdepth` at 1 here. Every theme's README shares the same template headings — Question,
+Hypotheses, Tests, Findings, Reproduce, Status & decisions (see
+[16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)) — so a deeper toctree
+repeats those six identical sub-headings under every theme in the sidebar once a repo has more than
+a couple of them. The API reference's own toctree can go deeper: module and function names there are
+genuinely distinct from each other.
 
 **An optional exception: standalone deep-dive reports.** A hand-authored page under
 `docs/experiment_summaries/<name>.md`, optionally executable via `myst-nb`, is a reasonable exception
@@ -236,6 +243,9 @@ name: Archive docs
 on:
   workflow_dispatch:   # click "Run workflow" in the Actions tab when a snapshot is wanted
 
+permissions:
+  contents: write   # gh release create needs this; the default token is read-only
+
 jobs:
   archive-docs:
     runs-on: ubuntu-latest
@@ -268,6 +278,16 @@ jobs:
             --title "Doc site archive — $(date +%Y-%m-%d)" \
             --notes "Static build of the Sphinx doc site, built from $GITHUB_SHA."
 ```
+
+Creating a release is never something an assistant does on its own initiative, or folds quietly into
+a larger pull request's own summary — it gets asked about explicitly, every time, regardless of how
+routine or safe it looks in the moment.
+
+A GitHub Environment with a required reviewer can make GitHub itself pause a `workflow_dispatch` run
+until a named person approves it, adding a technical backstop on top of that habit. Required-reviewer
+protection on a private repository needs GitHub's Pro, Team, or Enterprise plan, though — the Free
+plan rejects the setup outright (a 422 error naming the plan requirement), so on a free private repo
+the explicit-ask habit above is the only safeguard in place.
 
 Most projects want both, at different frequencies: the CI artifact on every push, catching a broken build immediately and giving the team a current copy without anyone asking for one; the tagged release on demand, for the handful of moments a copy needs to survive longer than a month or reach someone by name. Tagging a paper's code state for a DOI archive is a separate practice ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) that fixes the citable state of the code itself; this workflow only preserves a copy of the rendered docs.
 
