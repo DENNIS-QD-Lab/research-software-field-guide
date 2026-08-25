@@ -60,7 +60,7 @@ Each distinct study theme gets its own self-contained folder (e.g., `experiments
 built from a **template** so every experiment reads the same way. The theme folder is undated on purpose:
 pipeline work loops — you build one stage, add another, loop back to fix the first, add a third — so a
 theme is a standing address for a line of inquiry, revisited for as long as it stays open. Specific experiments are dated runs inside the folder (see "Save the
-state of every run," below), documenting the chronological accrual of results or evidence related to that theme. The exemplar's template (`experiments/_TEMPLATE.md`)
+state of every run," below), documenting the chronological accrual of results or evidence related to that theme. The template (`experiments/_TEMPLATE.md`)
 has a fixed set of headings:
 
 - **Question / motivation** — why this experiment exists.
