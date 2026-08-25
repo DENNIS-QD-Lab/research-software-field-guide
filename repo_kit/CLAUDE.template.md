@@ -157,7 +157,9 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 ## Commit discipline
 
 - **The scientist commits.** Prepare the changes and a commit-message draft, but ask before committing,
-  pushing, or opening a PR.
+  pushing, opening a PR, or creating a tag or release.
+- **A tag or release is never folded into another task's summary.** Ask about it on its own, every
+  time, regardless of how routine or safe it looks in the moment.
 - Commit messages: one line, imperative present tense ("Add dark-frame correction," not "Added …"),
   under about 60 characters. Add a body only where the *why* isn't obvious from the subject, and keep it
   to a few lines. Scale the message to the change: a one-line fix gets one line.
