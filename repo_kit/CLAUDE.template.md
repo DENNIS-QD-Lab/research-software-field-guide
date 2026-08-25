@@ -100,7 +100,7 @@ This repo keeps three kinds of written guidance separate so no file sprawls:
 - Tests are part of the function, not optional follow-up work to add later.
 - Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting
   code with zero tests, not a number to chase. Don't add filler tests just to raise it. See
-  [12_testing_with_pytest.md](PATH-TO-GUIDE/docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
+  [12_testing_with_pytest.md](PATH-TO-GUIDE/docs/implementing/12_testing_with_pytest.md#code-coverage-is-informative-but-not-the-real-goal).
 
 ## Naming conventions for files
 

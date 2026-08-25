@@ -89,9 +89,7 @@ for the complete walkthrough once you're actually at this point.
 ## Making a shipped repo approachable
 
 A repo built for your own lab notebook and a repo built to hand to a stranger want different front
-doors. The root `README.md` this whole guide has been building toward is written for a collaborator
-who already knows the project's goals; someone `pip install`-ing your package from PyPI or GitHub has
-none of that context and wants three things, fast: what this does, how to install it, and a minimal
+doors. The root `README.md` for your lab notebook is not going to have the content someone `pip install`-ing your package from PyPI or GitHub needs: what this package does, how to install it, and a minimal
 example that runs. A shipped library's README leads with those, not with the research question.
 
 A small `examples/` folder (or a single `examples/quickstart.py`) — distinct from `experiments/`'s

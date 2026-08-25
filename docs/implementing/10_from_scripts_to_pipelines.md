@@ -88,9 +88,9 @@ The first line makes sure you are on your feature branch; the second brings `mai
 
 **Open a draft PR early.** A *draft PR* is a pull request marked "not ready to merge." Open one as soon as you have something worth showing, even half-finished, so a colleague can look while the work is in progress rather than only at the very end. On GitHub, click the arrow next to the "Create pull request" button and choose "Create draft pull request." This pairs with the doc-site review habit in [20_documentation_and_doc_sites.md](20_documentation_and_doc_sites.md).
 
-## Add complexity if distribution requires it, not before
+## Keep it simple while you can
 
-There is a heavier model called **Git Flow**, built around a permanent second branch (often named `dev` or `develop`) that work piles onto before it is released. You have probably seen it mentioned. Do not adopt it here.
+There is a heavier model called **Git Flow**, built around a permanent second branch (often named `dev` or `develop`) that work piles onto before it is released. You have probably seen it mentioned. It's not recommended here.
 
 That machinery exists to manage **scheduled, versioned releases to outside users**, holding finished work back until a release date. An internal pipeline has no release date; `main` *is* the live pipeline. A permanent `dev` branch would just add a step and give work a place to rot. For ongoing development, analysis, or experimental work, keep `main` as the single source of truth and use short-lived feature branches off it.
 

@@ -13,7 +13,7 @@ This is the repo-level counterpart to [13_software_design.md](13_software_design
 
 ## The tension
 
-Experiments used to develop a model or analyze data are iterative and comprise many intermediate steps; a good experimental record is worth keeping regardless of the results: it documents the process and informs your scientific decision-making. Code and figures for publication are the polished part of the scientific record, need to be reproducible and rigorous, and traceable figure generation will avoid massive headaches if a reviewer asks you to reproduce or modify it a year later. The shipped library, meanwhile, should typically be narrowed to shareable methods, meaning reliable code that consistently performs as expected using the method you settled on through your experimental process. Left in one flat pile, these goals compete and corrode each other as the shipped code slowly accumulates dead alternatives nobody dares delete, and the experiments quietly stop running because the code moved under them. The structure proposed below organizes your repo to support each of those goals when you need it.
+Experiments used to develop a model or analyze data are iterative and involve many intermediate steps. A good experimental record is worth keeping regardless of the results: it documents the process and informs your scientific decision-making. Code and figures for publication are the polished part of the scientific record, need to be reproducible and rigorous, and traceable figure generation will avoid massive headaches if a reviewer asks you to reproduce or modify it a year later. The shipped library, meanwhile, should typically be narrowed to shareable methods, meaning reliable code that consistently performs as expected using the method you settled on through your experimental process. Left in one flat pile, these goals compete and corrode each other as the shipped code slowly accumulates dead alternatives nobody dares delete, and the experiments quietly stop running because the code moved under them. The structure proposed below organizes your repo to support each of those goals when you need it.
 
 ## The layout
 
@@ -80,7 +80,7 @@ It's tempting to develop a new method inside an experiment folder first, and onl
 once you're confident it's right — "graduating" it once it has earned a place in the real library.
 Resist that. It doesn't remove the decision, it just moves it: instead of deciding when a document is
 finished enough to save as `_final`, you're now deciding when a method is finished enough to earn a
-place in `src/`. That's the same up-front confidence this guide keeps arguing you shouldn't need. Use
+place in `src/`. Instead, use
 feature branches to write method code in `src/` from the start, even while it's still visibly wrong or
 half-working; experiments then always import the current, real state of your thinking, and there is
 nothing separate left to decide to graduate.

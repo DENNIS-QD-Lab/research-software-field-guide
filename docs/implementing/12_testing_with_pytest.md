@@ -41,7 +41,7 @@ def test_normalize_scales_peak_to_one():
     assert result == [0.25, 0.5, 1.0]
 ```
 
-`assert` is a plain Python statement: if the expression after it is false, the test fails. The test feeds a known input and states the known correct output. That is the whole idea.
+`assert` is a plain Python statement: if the expression after it is false, the test fails. The test feeds a known input and states the known correct output. If they match, the test passes.
 
 ## Running your tests
 
@@ -112,7 +112,7 @@ def test_peak_is_one(sample_spectrum):
 
 Fixtures needed across more than one test file go in a file named `conftest.py` inside `tests/`. pytest finds it automatically; you do not import it.
 
-## Code coverage: a signal, not a target
+## Code coverage is informative, but not the real goal
 
 `pytest-cov` (`pytest --cov=scripts tests/`) reports **coverage**: the percentage of lines your test
 suite actually executes. It is a real signal — a module at 0% coverage definitely has no tests

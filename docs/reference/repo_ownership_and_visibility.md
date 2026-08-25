@@ -23,7 +23,7 @@ Treat "when do we go public" as two separate decisions, not one: a tool can be w
 before the paper that used it is submitted, and a paper's clean snapshot can go public while the
 pipeline behind it stays an internal, unreleased part of the lab's infrastructure.
 
-## Visibility is per-repository, not per-tag or per-branch
+## Private vs. Public visibility is determined per-repository
 
 This is the constraint that shapes everything else here, and it's easy to assume otherwise coming from
 Git's branch/tag model: GitHub visibility is a setting on the *whole repository*. You cannot make one
@@ -72,7 +72,7 @@ private repo, run against a local checkout of the public repo. That turns "remem
 "run the script," and keeps the two repos' contents from drifting apart by accident between the
 updates you do remember to make.
 
-## Lab-owned, not person-owned: GitHub Organizations
+## GitHub Organizations: Lab notebooks are lab owned
 
 A physical lab notebook belongs to the lab or university, not to whichever person filled its pages. A
 repo under someone's personal GitHub account has no equivalent institutional claim: if the person who

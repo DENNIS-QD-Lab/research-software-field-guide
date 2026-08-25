@@ -15,13 +15,13 @@ your coding agent [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md). This file is the *why*
 Your repository is, first and foremost, a **lab notebook**: a place to explore data and record
 what you did and what you found, so the whole line of inquiry stays reproducible and legible — to a
 collaborator, a reviewer, or future-you — without anyone having to reconstruct it from the `git log`. Structure and
-documentation here are not bureaucracy. They make the *exploration itself* faster and more trustworthy:
+documentation make the *exploration itself* faster and more trustworthy:
 you spend less time rediscovering what you already tried, and you can believe your own results.
 
 A second job appears later, and only for some projects. As results head toward publication, the same
 repo can also yield **a tagged version of the code for public release to support a publication** and/or **a library others can install and use** — pared down to the validated methods you choose to disseminate. Many projects never need this, and that is fine. The standard's core move is to let an experimental repo grow into that second job *without either job corroding the other*, while never forcing it on a project that remains exploratory.
 
-Underneath both: **the assistant writes code; you do the science.** Linters, formatters, tests, doc
+Underneath both: **AI writes code; you do the science.** Linters, formatters, tests, doc
 generators, and AI assistants accelerate the mechanical work; designing experiments, assessing results, and drawing conclusions stay with you. Everything below exists to make your scientific judgment reproducible and reviewable, not to replace it.
 
 ## The structure
@@ -196,5 +196,4 @@ keep, not a requirement — the "why" for each one is in the bullets above.
 
 The full, worked tutorial behind every decision above is the research-software-field-guide
 [implementing track](../docs/implementing/) (docs 10–20) plus, once a project is headed for
-publication, the [disseminating track](../docs/disseminating/) (docs 21–23). This page is its
-executive summary.
+publication, the [disseminating track](../docs/disseminating/) (docs 21–23). 

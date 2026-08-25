@@ -3,7 +3,7 @@
 ## What are we doing here?
 
 Increasingly, scientists and students are able to access complex computational analysis using AI coding
-assistants. Accelerating scientific discovery via **vibe coding** is great, but we are still each
+assistants. Even as coding tools make building bespoke analysis pipeline accessible to a broader swath of scientists, we are still each
 independently responsible for our own scientific output, the repeatability of our results, and the
 responsible development of research software.
 
