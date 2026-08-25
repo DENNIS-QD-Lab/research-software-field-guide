@@ -134,13 +134,20 @@ Wire `docs/index.md` with a `toctree` pointing at the overview pages, one per th
 
 ````markdown
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: Experiments
 
 experiment_overviews/theme_a_overview
 experiment_overviews/theme_b_overview
 ```
 ````
+
+Keep `maxdepth` at 1 here. Every theme's README shares the same template headings — Question,
+Hypotheses, Tests, Findings, Reproduce, Status & decisions (see
+[16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)) — so a deeper toctree
+repeats those six identical sub-headings under every theme in the sidebar once a repo has more than
+a couple of them. The API reference's own toctree can go deeper: module and function names there are
+genuinely distinct from each other.
 
 **An optional exception: standalone deep-dive reports.** A hand-authored page under
 `docs/experiment_summaries/<name>.md`, optionally executable via `myst-nb`, is a reasonable exception
@@ -235,6 +242,9 @@ name: Archive docs
 
 on:
   workflow_dispatch:   # click "Run workflow" in the Actions tab when a snapshot is wanted
+
+permissions:
+  contents: write   # gh release create needs this; the default token is read-only
 
 jobs:
   archive-docs:

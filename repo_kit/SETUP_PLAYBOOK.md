@@ -20,7 +20,9 @@ recipes.
 - **Read first:** STANDARD.md, the target repo's `CLAUDE.md` (its standards), and — if touching
   experiments — its `.claude/experiments_playbook.md`. Follow the repo's own standards over any default.
 - **The scientist commits.** Prepare changes and a commit-message draft; **ask before committing,
-  pushing, or opening a PR**. Work on a feature branch, never directly on `main`.
+  pushing, opening a PR, or creating a tag or release**. Work on a feature branch, never directly on
+  `main`. A tag or release is never folded into another task's summary — ask about it on its own,
+  every time, no matter how routine it looks.
 - **Every change is a draft, not a commit.** Surface a diff for review the way a colleague's PR is
   reviewed. Confident-but-wrong is the failure mode to catch.
 - **Verify after every step (the verify gate):**
