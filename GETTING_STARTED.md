@@ -8,15 +8,6 @@ inside the repository and keep going from there.
 If a step takes more than about 10 minutes of fighting, stop and ask in your
 team's chat. These tools are finicky, and asking is faster than thrashing.
 
-> Throughout, `<owner>/<repo>` stands for this repository's location on GitHub.
-> Whoever manages the repository will send you the exact clone command; it looks
-> like the one in step 6.
-
-<!-- TODO(public-launch): once this repo is public, step 2 and step 6 below still
-assume a private, invite-only repo (an org invite, a clone URL sent by a manager).
-Rewrite step 2 to drop the invite language and step 6 to give the real public
-clone URL directly. -->
-
 ## 1. Install VS Code
 
 Download from <https://code.visualstudio.com> and install with the defaults. VS
@@ -40,8 +31,8 @@ The fuller list, with notes on what each does, is in
 Go to <https://github.com> and sign up. A university email works and makes you
 eligible for GitHub's free educational benefits, but any email is fine.
 
-Send your GitHub username to whoever manages the repository. They will add you
-to the organization that hosts it, so you can see and clone the repository.
+You don't need an account to browse or clone this repo — it's public. You'll want one once you're
+ready to save your own repo or contribute here.
 
 ## 3. Install Git
 
@@ -94,17 +85,16 @@ cd ~/repos
 ## 6. Clone the repository
 
 "Cloning" means making a local copy of a GitHub repository on your computer. From
-inside your `repos/` folder, run the command you were sent, which will look like:
+inside your `repos/` folder, run:
 
 ```
-git clone https://github.com/<owner>/<repo>.git
+git clone https://github.com/DENNIS-QD-Lab/research-software-field-guide.git
 ```
 
-This creates a folder named after the repository inside `repos/`. Move into it
-(substitute the real name):
+This creates a folder named `research-software-field-guide` inside `repos/`. Move into it:
 
 ```
-cd <repo>
+cd research-software-field-guide
 ```
 
 ## 7. Open the repository in VS Code
