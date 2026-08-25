@@ -43,7 +43,7 @@ manifesto. Every rule below is here because generated drafts violated it repeate
 - A new function that does real computation (not just wiring, CLI glue, or I/O) gets a test in `tests/`, following [12_testing_with_pytest.md](docs/implementing/12_testing_with_pytest.md): `np.testing.assert_allclose` for floats, `pytest.mark.parametrize` for multiple cases.
 - When fixing a bug, add a regression test that would have caught it.
 - Tests are part of the function, not optional follow-up work to add later.
-- Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting code with zero tests, not a number to chase. Don't add filler tests just to raise it. See [12_testing_with_pytest.md](docs/implementing/12_testing_with_pytest.md#code-coverage-a-signal-not-a-target).
+- Checking coverage (`pytest --cov`, via `pytest-cov`) is optional and occasional — good for spotting code with zero tests, not a number to chase. Don't add filler tests just to raise it. See [12_testing_with_pytest.md](docs/implementing/12_testing_with_pytest.md#code-coverage-is-informative-but-not-the-real-goal).
 
 ## Naming conventions for files
 - snake_case, lowercase, no hyphens, under about 30 characters.

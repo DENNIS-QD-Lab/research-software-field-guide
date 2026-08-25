@@ -4,9 +4,9 @@
 
 Getting an assistant installed and running, and the concrete commands for managing a session (`/clear`, `/compact`, permissions, cost) are covered in [ai_coding_assistants.md](../reference/ai_coding_assistants.md) — start there if you don't have one set up yet. This doc assumes a working session and picks up from there.
 
-## Write the standards file to be followed, not skimmed
+## Start with a standards file
 
-A standards file only does its job if the assistant's output actually matches it. Three habits keep it that way:
+A standards file (e.g., `claude.md`) is kept in a repository to instruct AI coding assistants on project rules, file structures, and coding style. A standards file only does its job if the assistant's output actually matches it. Three habits keep it that way:
 
 - **State rules, not aspirations.** "Every function gets type hints" is followed. "Try to write clean code" is not — it is too vague to act on. If a rule in your file has never once changed generated output, rewrite it or cut it.
 - **Keep it short enough to actually govern behavior.** A 900-line standards file gets skimmed, not applied — the assistant (and any human reader) loses the specific rules in the volume. If it grows past a page or two of real content, split it: durable procedure and research state belong in their own files, not folded into the standards file (see the three-way split in [18_ai_assisted_development.md](18_ai_assisted_development.md)).

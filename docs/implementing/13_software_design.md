@@ -1,6 +1,6 @@
 # Software design: keeping code clean and easy to follow
 
-There is one goal behind everything in this doc: **keep the code easy to follow.** When a script grows into a tangle you feel the cost directly. To change one line you have to hold the whole file in your head, and every edit risks breaking something three functions away. Good design is what keeps code clean and clear as it grows.
+All of the recommendations here are made to **keep the code easy to follow.** When a script grows into a tangle you feel the cost directly. To change one line you have to hold the whole file in your head, and every edit risks breaking something three functions away. Good design is what keeps code clean and clear as it grows.
 
 This doc is about design *within* a codebase, at the level of functions and modules. Organizing the repository as a whole is a separate topic, covered later ([15_experiments_and_shipping.md](15_experiments_and_shipping.md)).
 
@@ -70,8 +70,8 @@ Two words name the idea. **Cohesion** is how much the parts of a function or mod
 
 These are pointers, not lessons. Learn them when you hit the situation they solve.
 
-- **Dataclasses** group related values that always travel together into one named object. If you find yourself passing the same cluster of calibration values (say `gain, offset, dark_level, exposure_times`) into function after function, a small `@dataclass` holding them turns four arguments into one and gives the bundle a name. That is the moment to look them up.
-- **Abstract base classes** define a shared interface that several variants must all provide, so the rest of the code can treat them interchangeably. If you have multiple data sources, or multiple interchangeable methods that must expose the same call, an ABC pins down the shape they share. One paragraph is all it deserves here; do not turn a two-source problem into a class hierarchy.
+- **Dataclasses** group related values that always travel together into one named object. If you find yourself passing the same cluster of calibration values (say `gain, offset, dark_level, exposure_times`) into function after function, a small `@dataclass` holding them turns four arguments into one and gives the bundle a name. 
+- **Abstract base classes** define a shared interface that several variants must all provide, so the rest of the code can treat them interchangeably. If you have multiple data sources, or multiple interchangeable methods that must expose the same call, an ABC pins down the shape they share. 
 
 ## Design and tests reinforce each other
 
@@ -85,7 +85,7 @@ something unrelated breaks. Newer models and tools are noticeably better at scop
 actually asked, so this happens less often than it used to. But the underlying reason decomposition
 helps has not gone away, and it was never really about model quality:
 
-- **Blast radius is a property of the code, not of who is editing it.** A change to a well-isolated,
+- **Overly complicated functions are an edit risk regardless of who is editing it.** A change to a well-isolated,
   single-purpose function only requires reasoning about that function's own inputs and outputs. A change
   buried inside a `process_spectrum`-style function that does four things at once requires reasoning
   about all four — whether the one making the change is a person or a model.
@@ -98,5 +98,4 @@ helps has not gone away, and it was never really about model quality:
   the AI-assisted instance of the design-and-tests loop above.
 
 None of this replaces reviewing what an assistant produces. It means well-decomposed code keeps an
-assistant's edits where you asked them to be, and keeps your review of that edit small enough to
-actually do carefully — which matters more, not less, the more of the typing you hand off.
+assistant's edits where you asked them to be, and keeps your review of that edit small enough to do carefully. This skeptical review confirming that your code is generating the scietific analysis that you want it to generate is even more important when the actual scripting is delegated.

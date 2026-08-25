@@ -6,9 +6,8 @@
 
 A dry-lab experiment has the same arc as a bench experiment: you have a **question**, you **design**
 a way to answer it, you **run** it, you **record** what happened, you **interpret** the result, and
-often you **repeat** it. The repo is your lab notebook. The discipline that makes it a *notebook* and
-not a pile of scripts is this: any run can be reproduced, and the whole line of inquiry can be
-followed, by viewing the results and reading your interpretation — a more scientific focus than just reading the git history. Someone (including future-you) should be able to open
+often you **repeat** it. The repo is your ***lab notebook***: any run can be reproduced, and the whole line of inquiry can be
+followed, by viewing the results and reading your interpretation, which allows for a more scientific focus than just reading the git history. Someone (including future-you) should be able to open
 the folder and see what you asked, what you found, and what to do next.
 
 ## The pieces, at a glance
@@ -72,7 +71,7 @@ has a fixed set of headings:
 - **Status & decisions** — what is settled, what is still open.
 
 Copy the template to start a new experiment, and add a row to the research log so it shows up in the
-status table. That is the whole ritual.
+status table. Rinse and repeat.
 
 This README is also what other people see. It renders directly into the project's Sphinx doc site
 ([20_documentation_and_doc_sites.md](20_documentation_and_doc_sites.md)), so the same file you keep
@@ -106,7 +105,7 @@ together, so that when a step excludes data — say, by implementing a threshold
 
 ## Save the state of every run
 
-A result you cannot reproduce is an anecdote, not a measurement. Reproducibility does not happen by
+Reproducibility does not happen by
 remembering — it happens because each run **records the state that produced it**. When a driver runs,
 have it write a small **manifest** next to its outputs:
 
@@ -156,7 +155,7 @@ automatically, and what you choose to write into the theme's README.
 A run writes and commits only small, non-regenerable provenance automatically:
 
 - **`manifest.yaml` and `metrics.csv`** (the numbers that let you compare runs — RMSE, counts, whatever tracks quality).
-- **Everything else heavy is git-ignored by default:** figures (`*.png`), large arrays (`*.npy`), and
+- **Everything else heavy is git-ignored by default**, including figures (`*.png`), large arrays (`*.npy`), and
   any scratch data. A deterministic, seeded run *reproduces* these from the committed code and
   manifest, so day to day you are keeping the recipe, not the cake.
 
@@ -237,19 +236,16 @@ built Sphinx site, so your notes are always visible wherever the doc is read.
 
 - **Keep your own words.** Write your interpretation yourself, and if you're asking an AI assistant to
   help draft the surrounding text, make sure it inserts what you actually said verbatim in the blockquote rather than
-  tightening or rephrasing it — a paraphrase quietly substitutes the assistant's voice for yours,
-  which is exactly what this convention exists to prevent.
-- **If you haven't decided yet, say so.** Write a placeholder like `> **AMD:** _Interpretation
-  pending._` rather than leaving the spot blank — or, if you're using an assistant, rather than
-  letting it draft a plausible-sounding guess on your behalf. A visible gap gets noticed and closed;
-  an invisible or guessed-at one doesn't.
+  tightening or rephrasing it — a paraphrase quietly substitutes the assistant's voice for yours and over time erodes your scientific story.
+- **If you haven't decided yet, say so.** Write a placeholder like 
+> **AMD:** _Interpretation pending._
+
+rather than leaving the spot blank — or, if you're using an assistant, rather than
+  letting it draft a plausible-sounding guess on your behalf. You can't come back to fill a hole you don't know is there.
 
 ## Exploratory notebooks: the same discipline, without a manifest
 
-An ipynb notebook is really powerful for exploring an idea, but it has a reproducibility problem that isn't easily solved with a driver script attaching a run manifest. While freely exploring in the notebook, nothing forces you to *notice* an observation matters before you change something and
-rerun. That is the specific failure mode worth naming: in the moment, you often cannot tell which run
-will turn out to matter later, so a rule that only kicks in "when it seems important" will not catch it.
-Two cheap habits, applied unconditionally, close most of that gap:
+An ipynb notebook is really powerful for exploring an idea, but it has a reproducibility problem that isn't easily solved with a driver script attaching a run manifest. While freely exploring in the notebook, nothing forces you to *notice* an observation matters before you change something and rerun. Two cheap habits, applied unconditionally, close most of that gap:
 
 - **A top-cell note, written before you touch anything else.** A markdown cell at the very top of the
   notebook with "What / why" (what you're testing this run, and why) and "Observed" (what you saw) —

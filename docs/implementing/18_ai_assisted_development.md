@@ -2,7 +2,7 @@
 
 Many research teams use AI coding assistants (Claude Code, in this repo). This doc is about using them *responsibly* for research software: where they help, where they do not, and the norms that keep AI-assisted research honest and reproducible. The tool will change; the examples reflect this repo's actual setup, but the principles here are vendor-neutral.
 
-Using AI appropriately in research comes down to the division of labor: **the assistant writes code; you do the science.** Designing the experiment, judging whether a result is real, and drawing the conclusion are the scientist's responsibility; the assistant is a tool that makes building and running the experiment more efficient. That split is not a nicety — it is what keeps the work trustworthy, and it matters *more*, not less, the more of the implementation you hand over.
+Using AI appropriately in research comes down to the division of labor: **AI writes code; you do the science.** Designing the experiment, judging whether a result is real, and drawing the conclusion are the scientist's responsibility; the assistant is a tool that makes building and running the experiment more efficient. Maintaining these clear roles keeps the work trustworthy, and it matters *more*, not less, the more of the implementation you hand over.
 
 ## The standards file does the heavy lifting
 
@@ -27,7 +27,7 @@ The assistant's working scope is the set of folders open to it — in the VS Cod
 
 ## Review every generated change
 
-The non-negotiable rule: **AI-generated code is a draft, not a commit.** Read changes before they land, as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a colleague without reading it, do not merge it from an assistant.
+Read changes before they land, as you would a colleague's pull request ([08_code_review.md](../onboarding/08_code_review.md)). Assistants are fast and *confident*, and confident-but-wrong is precisely the failure mode review exists to catch. If you would not merge it from a colleague without reading it, do not merge it from an assistant.
 
 ## Never trust numbers without a test
 
@@ -69,7 +69,7 @@ The assistant accelerates the typing, not the thinking. It is a very fast pair o
 
 ## Reproducibility and honesty
 
-- **Seed and record.** AI-generated code is no exception to the seeding and provenance rules ([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)). Determinism does not care who wrote the code.
+- **Seed and record.** AI-generated code is no exception to the seeding and provenance rules ([16_running_a_dry_lab_experiment.md](16_running_a_dry_lab_experiment.md)). Knowing the seed is still required to precisely replicate a previous result.
 - **The standards apply to AI output too.** Generated code does not get to commit data, add a silent dependency, or skip a docstring ([CLAUDE.md](../../CLAUDE.md)). Review holds it to the same bar as yours.
 - **Verify, do not trust.** An assistant can invent an API that does not exist, a citation that was never written, or a number that looks right. Check against reality: run it, test it, read the docs it claims to use.
 - **Be honest about its role.** Disclose AI assistance where the norms of your field or venue ask for it, the same as any other methods detail. Be explicit about the AI contributions in discussions with your PI and collaborators — co-authors on manuscripts, for example, should be aware of AI contributions.

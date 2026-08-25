@@ -52,7 +52,6 @@ The end-to-end pattern:
 This tagged, DOI'ed version of the repo ensures that a publication stays reproducible against a
 specific, frozen version of the code that produced its results, even if/when the library keeps
 moving forward on `main` ([15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md)).
-Reproducibility comes from the archived snapshot, not from freezing the live code.
 
 ### Why this matters beyond the DOI
 

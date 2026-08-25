@@ -5,7 +5,7 @@ index: every doc, in reading order, with what it covers.
 
 ## Onboarding sequence
 
-Read these in order. They live in [`onboarding/`](onboarding/).
+For those who need the quickstart intro to the jargon and workflow that is standard for coders, which will be critically helpful even if you're primarily vibe coding, the onboarding documents are intended to be read in sequence. They live in [`onboarding/`](onboarding/).
 
 | Doc | What it covers |
 |-----|----------------|
@@ -22,7 +22,7 @@ Read these in order. They live in [`onboarding/`](onboarding/).
 
 ## Implementing track
 
-The implementing track ([`implementing/`](implementing/)) picks up where onboarding leaves off: the intermediate research-software-engineering skills for when your scripts grow into real pipelines and research projects. Read the onboarding track first. It is organized in two parts, read in order: **build code you can trust** and **run experiments rigorously**. Doc 10 is the bridge from scripts to pipelines and sets up the workflow the rest of the track assumes, so it comes first. Docs 16–19 are the dry-lab research framework — how to run and record experiments so they stay reproducible, and how to use AI assistants responsibly and effectively within it. Documentation and doc sites (20) closes the track: turning your docstrings into a browsable site the whole team can use for review as well as reference.
+The implementing track ([`implementing/`](implementing/)) picks up where onboarding leaves off: the intermediate research-software-engineering skills for when your scripts grow into real pipelines and research projects. It is organized in two parts, read in order: **build code you can trust** and **run experiments rigorously**. Doc 10 is the bridge from scripts to pipelines and sets up the workflow the rest of the track assumes, so it comes first. Docs 16–19 are the dry-lab research framework — how to run and record experiments so they stay reproducible, and how to use AI assistants responsibly and effectively within it. Documentation and doc sites (20) closes the track: turning your docstrings, research log, experiment summaries, and figure drafts into a browsable site that functions as a lab notebook that your whole team can use for review as well as reference.
 
 Once you know the track, the [`repo_kit/`](../repo_kit/) folder at the repository root distills it into a portable kit — a summary of the decisions, an AI setup/upgrade playbook, and a `CLAUDE.md` template — that you can drop into another repository to bring it up to the same standard.
 
@@ -40,9 +40,9 @@ Once you know the track, the [`repo_kit/`](../repo_kit/) folder at the repositor
 
 | Doc | What it covers |
 |-----|----------------|
-| [15_experiments_and_shipping.md](implementing/15_experiments_and_shipping.md) | One repo, three overlapping jobs — exploring, archiving a paper's record, and shipping a clean library — kept reproducible by commits and manifests rather than by gatekeeping what changes in `src/`. |
+| [15_experiments_and_shipping.md](implementing/15_experiments_and_shipping.md) | One repo, three overlapping jobs — experimenting, archiving a paper's record, and shipping a clean library — kept reproducible by commits and manifests rather than by gatekeeping what changes in `src/`. |
 | [16_running_a_dry_lab_experiment.md](implementing/16_running_a_dry_lab_experiment.md) | Running a computational experiment as a lab notebook: the research log, the experiment-folder template, and saving each run's state (commit, inputs, parameters) so results reproduce and stay trackable without bloating the repo. |
-| [17_working_with_large_data.md](implementing/17_working_with_large_data.md) | Experiments on real datasets too big to commit: referencing data by a machine-local root or a DOI, and pinning *which* data a run used with checksums. |
+| [17_working_with_large_data.md](implementing/17_working_with_large_data.md) | Experiments on real datasets too big to commit: referencing data by a machine-local root or a DOI, and pinning which data a run used with checksums. |
 | [18_ai_assisted_development.md](implementing/18_ai_assisted_development.md) | Using AI assistants responsibly: the standards file, reviewing every change, validation vs. verification, and the state/procedure/standards instruction split. AI writes code; you do the science. |
 | [19_driving_an_ai_assistant.md](implementing/19_driving_an_ai_assistant.md) | The practical companion to 18: writing a standards file that actually gets followed, scoping a session on purpose, planning before diffing, and a playbook for catching specific ways confident AI output fails silently. |
 | [20_documentation_and_doc_sites.md](implementing/20_documentation_and_doc_sites.md) | Turning docstrings into a browsable Sphinx site as a core review-and-communication tool: NumPy docstrings, autodoc, and local preview. |
