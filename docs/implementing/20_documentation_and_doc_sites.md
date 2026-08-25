@@ -227,7 +227,62 @@ jobs:
 
 The build step is exactly the local command from *Setting up Sphinx*; the steps around it just recreate the environment (so autodoc can import your package) and save the result. To find the built site: open the repo's **Actions** tab, click the most recent workflow run (usually the one for your push or pull request), scroll down to **Artifacts**, and click `docs-html` to download it. Unzip it and open `index.html` — or any other page inside it directly, such as `api_reference.html`. `gh run download -n docs-html` does the same download from the terminal.
 
-For a *public* project you can instead deploy straight to GitHub Pages or connect Read the Docs; the artifact is the private-safe option, because the download is only available to people with read access to the repo — which is also why keeping project repos under one lab organization ([repo_ownership_and_visibility.md](../reference/repo_ownership_and_visibility.md)) makes this artifact reachable lab-wide instead of one invite at a time.
+For a *public* project you can instead deploy straight to GitHub Pages (the appendix right below shows
+the workflow) or connect Read the Docs; the artifact is the private-safe option, because the download
+is only available to people with read access to the repo — which is also why keeping project repos
+under one lab organization ([repo_ownership_and_visibility.md](../reference/repo_ownership_and_visibility.md))
+makes this artifact reachable lab-wide instead of one invite at a time.
+
+## Appendix: publishing to GitHub Pages
+
+Once a project is public, GitHub can host the built site permanently at its own URL instead of behind
+a CI artifact's temporary download link. Turn it on once, in the repo's **Settings → Pages → Build and
+deployment → Source**, by choosing **GitHub Actions** (not "Deploy from a branch") — or from the
+command line, `gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow`.
+
+Add a `deploy-pages` job to the same `docs.yml`, gated to pushes on `main` so a pull request's build
+never overwrites the live site:
+
+```yaml
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-docs:
+    # ...the same steps as the CI-artifact job above, plus:
+    steps:
+      # ...
+      - name: Upload the built site (Pages artifact)
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+
+  deploy-pages:
+    if: github.ref == 'refs/heads/main'
+    needs: build-docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+The `permissions` block is what lets the workflow's own token publish to Pages, and `concurrency` stops
+two overlapping pushes from deploying out of order. `upload-pages-artifact` and `deploy-pages` are both
+official GitHub actions, packaging the built HTML the way Pages expects and then publishing it. The
+`if` conditions matter: without them, opening a pull request would deploy that PR's docs straight to
+the live public site before anyone reviewed it. The site then lives at
+`https://<org>.github.io/<repo>/`, rebuilding on every push to `main`.
 
 ## Appendix: archiving a permanent snapshot
 
