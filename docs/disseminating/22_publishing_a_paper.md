@@ -90,8 +90,9 @@ toward being citable.
 
 [15_experiments_and_shipping.md](../implementing/15_experiments_and_shipping.md) and
 [16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md) cover
-keeping a `figures/` folder while drafting a manuscript — the same theme-and-dated-runs discipline as
-`experiments/`, applied to paper figures. That folder turns out to be most of what Zenodo wants
+keeping a `figures/` folder while drafting a manuscript: one root `README.md` as the whole figure
+outline, captions included, and the `experiments/`-style dated `details/` discipline reused inside
+each figure's own subfolder once it has real generation code. That folder turns out to be most of what Zenodo wants
 already: archiving *before* you submit, not after, gives you your own deposited record, under your
 own account, ahead of any copyright agreement a journal attaches to the accepted manuscript. A common
 shape for the archived snapshot is three folders — `data/`, `plotting_scripts/`, and `figures/` —

@@ -45,8 +45,8 @@ your_repo/
 │                              experiment_overviews/<theme-slug>_overview.md, each one just a MyST
 │                              {include} of that theme's README; see
 │                              20_documentation_and_doc_sites.md
-├── figures/                 (once drafting a manuscript) the figure outline — same theme + details/
-│                              discipline as experiments/, one folder per figure
+├── figures/                 (once drafting a manuscript) README.md is the whole figure outline;
+│                              figures/<fig-slug>/ holds generation code once a figure is built
 ├── CLAUDE.md                coding standards, read by humans and the AI every session
 ├── references.md            the reference ledger: external sources + why each mattered here
 ├── .claude/experiments_playbook.md   how this repo runs and records experiments
@@ -137,12 +137,14 @@ physical plausibility, an independent method, and the intermediate outputs. The 
 
 **If and when a project reaches publication, a `figures/` folder becomes the figure pipeline — then you
 freeze it.** Up to here nothing forces a "final" state. When you start drafting a specific submission, a
-`figures/` folder joins `experiments/` — same theme + dated-`details/` discipline, one folder per
-figure, its driver importing from `src/` — and its `README.md` becomes the paper's actual figure
-outline, with captions, reviewable by a co-author or PI without opening the repo. You then **tag** the
-exact state behind the paper (with every compared approach still present), archive that tag for a
-permanent **DOI** (Zenodo) — `figures/` is already most of that reproducibility package — and add a
-`LICENSE` and `CITATION.cff`.
+`figures/` folder joins `experiments/`: its root `README.md` becomes the paper's actual figure
+outline — every figure, in order, with its caption — reviewable by a co-author or PI without opening
+the repo. Once a figure has real generation code, it gets its own `figures/<fig-slug>/` folder — the
+same dated `details/` discipline as `experiments/`, driver importing from `src/` — but no separate
+README; the caption stays authored once, in the root outline. You then **tag** the exact state behind
+the paper (with every compared approach still present), archive that tag for a permanent **DOI**
+(Zenodo) — `figures/` is already most of that reproducibility package — and add a `LICENSE` and
+`CITATION.cff`.
 → [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md),
 [15_experiments_and_shipping.md](../docs/implementing/15_experiments_and_shipping.md)
 
@@ -170,8 +172,8 @@ experiments/ (research log + themes)
 ├─ displayed in the Sphinx doc site as research log + theme overviews
 └─ archived ──▶ archived lab notebook
 
-figures/ (manuscript drafts)
-├─ displayed in the Sphinx doc site as figure overviews
+figures/ (README.md is the whole outline; figures/<fig-slug>/ holds generation code)
+├─ displayed in the Sphinx doc site as one figure-outline page
 └─ frozen ──▶ paper tag + Zenodo DOI
 
 Two things mature into another, once they earn it:

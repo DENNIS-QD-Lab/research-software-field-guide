@@ -30,11 +30,11 @@ page's worth of content. Reach for that pattern only if your project genuinely b
 per-run presentation in the lab notebook — the single `{include}` above is the default for good reason.
 
 A `figures/` folder ([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)) uses
-this identical mechanism: `docs/figure_overviews/<fig-slug>_overview.md` includes
-`figures/<fig-slug>/README.md` the same way an experiment overview page includes a theme's README.
-Everything below — the relative-path fix, the PDF-export option, the standalone-report exception —
-applies to a figure's README exactly as written, with `figures/<fig-slug>/` in place of
-`experiments/<slug>/`. [example_repo_structure.md](example_repo_structure.md) shows a worked example.
+this identical mechanism, but with one page for the whole outline rather than one per theme:
+`docs/figure_overviews/figures_overview.md` includes the single root `figures/README.md`. Everything
+below — the relative-path fix, the PDF-export option, the standalone-report exception — applies to
+that root README exactly as written, with `figures/` in place of `experiments/<slug>/`.
+[example_repo_structure.md](example_repo_structure.md) shows a worked example.
 
 ## The `{include}` relative-path gotcha, and its fix
 

@@ -36,8 +36,9 @@ tests/             pytest suite (unit + regression) with committed fixtures
 docs/              Sphinx doc site: API reference generated from docstrings, plus one page per theme —
                      experiment_overviews/<theme-slug>_overview.md, whose entire body is a MyST
                      {include} of that theme's README, so the site holds no second copy
-figures/           (once drafting a manuscript) the paper's figure outline — same theme +
-                     dated-details/ discipline as experiments/, one folder per figure; see
+figures/           (once drafting a manuscript) README.md is the whole figure outline, captions
+                     included; figures/<fig-slug>/ holds generation code (driver + dated details/,
+                     same discipline as experiments/) once a figure is built; see
                      22_publishing_a_paper.md
 references.md      the reference ledger: external sources + why each mattered here
 local_paths.py     machine-local data paths (gitignored; copy local_paths_example.py)
