@@ -109,7 +109,7 @@ jobs:
 
 The `test` job carries no `if`, so it runs on every trigger, including the weekly schedule. That means the same cron entry also catches dependency drift (below) on the cheap runner, at no extra cost.
 
-An organization owner can see which repository and which workflow is actually spending the allotment under the organization's Settings → Billing and plans → Usage. That page is the fastest way to find the real cost center once a monthly allotment runs out early: usage is rarely spread evenly across repos, and is often concentrated in one matrix job whose expensive steps — a full docs build or a slow test suite — run duplicated across every OS leg instead of once.
+An organization owner can see which repository and which workflow is actually spending the allotment under the organization's Settings → Billing and plans → Usage. That page is the fastest way to find the real cost center once a monthly allotment runs out early: usage is rarely spread evenly across repos, and is often concentrated in one matrix job whose expensive steps — a full docs build, a slow test suite — run duplicated across every OS leg instead of once.
 
 ## Catching drift with a scheduled run
 
