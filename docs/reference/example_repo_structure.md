@@ -100,12 +100,12 @@ whole line of inquiry, and `details/` accumulates every run of it, preserved by 
 
 None of the earlier two are deleted when the third lands, and not all of them reach the README. Here,
 `260601_baseline_02` re-confirmed the first run without changing the answer, so neither one was ever
-cited in a Findings entry — they just sit in `details/` as provenance, in case anything ever needs to
+cited in a log entry — they just sit in `details/` as provenance, in case anything ever needs to
 be checked against them. `260615_baseline` changed the result enough to matter, so it becomes the
-*current* citation, swapped in for whatever the Findings section pointed at before. When the comparison
+*current* citation, swapped in for whatever the README pointed at before. When the comparison
 *across* runs is itself the finding, rather than one run superseding the last,
 [16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md) covers the
-other shape: citing several run ids in one Findings entry instead of swapping one in for another.
+other shape: citing several run ids in one entry instead of swapping one in for another.
 
 ## What one run's `details/` folder actually holds
 
@@ -143,21 +143,21 @@ output.
 
 ## What a theme's `README.md` looks like, filled in
 
-An excerpt from `experiments/01_baseline-comparison/README.md`, showing the Findings section citing the
-run above:
+An excerpt from `experiments/01_baseline-comparison/README.md` — a dated log entry citing the run
+above, not a heading called "Findings":
 
 ```markdown
-## Findings
+## 260615 — Method A vs. Method B on the full synthetic range
 
-- **H1 (synthetic baseline, 2026-06-15):** Method A and Method B agree to within 2% on the
-  full synthetic range; Method A is roughly 3x faster.
+Method A and Method B agree to within 2% on the full synthetic range; Method A is roughly 3x
+faster.
 
-  ![](details/260615_baseline/comparison_plot.png)
-  *Run `260615_baseline` — reproduce with
-  `python experiments/01_baseline-comparison/run_baseline_comparison.py`.*
+![](details/260615_baseline/comparison_plot.png)
+*Run `260615_baseline` — reproduce with
+`python experiments/01_baseline-comparison/run_baseline_comparison.py`.*
 
-  > **AMD:** Given the speed difference and no meaningful accuracy loss, Method A is the better default
-  > going forward.
+> **AMD:** Given the speed difference and no meaningful accuracy loss, Method A is the better default
+> going forward.
 ```
 
 ## `figures/` mid-manuscript
@@ -175,7 +175,7 @@ outline is viewable and shareable as a Sphinx page, not just as files sitting in
 ## What the doc site generates from this
 
 `docs/experiment_overviews/01_baseline-comparison_overview.md` is a thin page whose entire body is a
-MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the Findings section above,
+MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the log entry above,
 figure and all, appears on the site exactly as written, with no separate copy to keep in sync
 ([readme_to_doc_site.md](readme_to_doc_site.md)). `docs/figure_overviews/figures_overview.md`
 works identically, `{include}`-ing the single root `figures/README.md` instead — one page for the

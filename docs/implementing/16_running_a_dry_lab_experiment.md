@@ -21,7 +21,7 @@ result trustworthy.
 - **The reference ledger** — a running list of the external knowledge (papers, specs, standards) behind your decisions.
 
 **Repeated for each line of inquiry**
-- **The experiment folder** — one per question/study theme, built from a template: question → hypotheses → tests → findings.
+- **The experiment folder** — one per question/study theme, a chronological log of what was tried and what came of it.
 - **The run manifest** — what a run writes automatically so it can be reproduced later.
 - **What you write into the README** — which of those runs becomes a documented finding, and how much of its history stays visible.
 
@@ -54,21 +54,25 @@ spec sheet, a standard you chose to follow. A **reference ledger** ([references.
 or DOI, the date accessed (web pages change), and, critically, the **key relevant
 points for *this* project**: why the source mattered *here*, not a general summary of it. Keep it current as sources come up, not reconstructed at the end, for the sake of future-you as well as anyone else who may work on the project.
 
-## The experiment folder: idea → test → outcome
+## The experiment folder: a chronological log, not a fixed form
 
 Each distinct study theme gets its own self-contained folder (e.g., `experiments/01_noise-reduction/`; use the numbered prefix if you want them to appear in the order they are introduced)
 built from a **template** so every experiment reads the same way. The theme folder is undated on purpose:
 pipeline work loops — you build one stage, add another, loop back to fix the first, add a third — so a
 theme is a standing address for a line of inquiry, revisited for as long as it stays open. Specific experiments are dated runs inside the folder (see "Save the
-state of every run," below), documenting the chronological accrual of results or evidence related to that theme. The template (`experiments/_TEMPLATE.md`)
-has a fixed set of headings:
+state of every run," below), documenting the chronological accrual of results or evidence related to that theme.
 
-- **Question / motivation** — why this experiment exists.
-- **Hypotheses** — the falsifiable claims, each with the read-out that would settle it.
-- **Tests** — a small table: hypothesis → what is run → metric → which driver script.
-- **Findings** — filled in as evidence accrues, and *dated*. A null result or a method that underperforms is a finding, not a failure — keep it.
-- **Reproduce** — the exact command, and which tag/state to check out.
-- **Status & decisions** — what is settled, what is still open.
+The template (`experiments/_TEMPLATE.md`) is deliberately *not* a fixed set of headings
+(Question → Hypotheses → Tests → Findings → Status) — real research doesn't arrive in that
+order, and sorting it into those categories after the fact divides your actual train of thought
+from the record of it. Instead the README is a **chronological log**: a dated `##` section per
+episode, in the order things actually happened, each a short prose narration of what was tried and
+what came of it (a null result or a method that underperforms is a finding, not a failure — keep
+it), plus your own interpretation in a signed blockquote right where it belongs. A **bottom-line
+blockquote near the top**, in your own words, gives a reader the current state without making them
+read the whole log first. Two standing sections close the file — `## Reproduce` (the exact command
+and which tag/state to check out) and `## Open items` (a short tracker of what's unresolved) — and
+those two aren't part of the log itself.
 
 Copy the template to start a new experiment, and add a row to the research log so it shows up in the
 status table. Rinse and repeat.
@@ -159,7 +163,7 @@ A run writes and commits only small, non-regenerable provenance automatically:
   any scratch data. A deterministic, seeded run *reproduces* these from the committed code and
   manifest, so day to day you are keeping the recipe, not the cake.
 
-The one exception is a figure you promote into the README's Findings section, below — it has to
+The one exception is a figure you promote into the theme's README, below — it has to
 actually be present in the repo for GitHub or the doc site to render it, so that single file gets
 committed alongside the manifest (`git add -f`, since it matches the ignored `*.png` pattern).
 Everything else a run produced stays ignored and regenerable.
@@ -168,7 +172,7 @@ The folder layout is the third thing to keep straight:
 
 ```
 noise-reduction/                      the theme: undated, permanent, one line of inquiry
-├── README.md                       the one narrative page: question, findings, figures, interpretation
+├── README.md                       the one narrative page: chronological log, figures, interpretation
 └── details/
     ├── 260717_noise-reduction/       one run's provenance: manifest.yaml, metrics.csv, figures
     └── 260717_noise-reduction_02/    the same study, re-run
@@ -184,15 +188,18 @@ That is what lets you watch a metric move across reruns and catch a regression. 
 for a throwaway cosmetic re-run of a deterministic result.
 
 When a run's figure is worth keeping visible — because it's the current evidence for a finding, not
-because the driver merely ran again — embed it directly in the README's Findings section, with a short
+because the driver merely ran again — embed it directly in the theme's README, with a short
 *italic* caption noting the run id and the command that reproduces it:
 
 ```markdown
-- **H1 (real data, 2026-07-17):** rolling-median and Savitzky-Golay smoothing agree to three decimals
-  once the baseline is subtracted (R² ≈ 0.985 / 0.983).
+## 260717 — rolling-median vs. Savitzky-Golay agreement
 
-  ![](details/260717_noise-reduction/method_agreement.png)
-  *Run `260717_noise-reduction` — reproduce with `python experiments/noise-reduction/run_noise_reduction.py`.*
+Both smoothing methods agree to three decimals once the baseline is subtracted (R² ≈ 0.985/0.983).
+
+![](details/260717_noise-reduction/method_agreement.png)
+*Run `260717_noise-reduction` — reproduce with `python experiments/noise-reduction/run_noise_reduction.py`.*
+
+> **AMD:** _what it means — pending._
 ```
 
 When a rerun supersedes the embedded figure, swap the image path and caption in place;
@@ -201,12 +208,15 @@ it directly. When the comparison between runs is itself the finding, build a com
 instead, citing each run by id:
 
 ```markdown
-- **H2 (parameter sweep, 2026-07-20):** increasing the smoothing window reduces noise but blurs the
-  edge past window = 5.
+## 260720 — window-size sweep
 
-  ![](details/260718_noise-reduction/window_comparison.png)
-  *Runs `260715_noise-reduction`, `260717_noise-reduction`, `260718_noise-reduction` (window = 3, 5, 8) — a
-  small comparison script in `_common/` reads all three runs' `metrics.csv` and plots them together.*
+Increasing the smoothing window reduces noise but blurs the edge past window = 5.
+
+![](details/260718_noise-reduction/window_comparison.png)
+*Runs `260715_noise-reduction`, `260717_noise-reduction`, `260718_noise-reduction` (window = 3, 5, 8) — a
+small comparison script in `_common/` reads all three runs' `metrics.csv` and plots them together.*
+
+> **AMD:** _what it means — pending._
 ```
 
 Which shape best supports your science — one current result, or a comparison across several — is a
@@ -237,8 +247,8 @@ and reviewable, not to replace it. (This division of labor is exactly the subjec
 [18_ai_assisted_development.md](18_ai_assisted_development.md), and it matters most when an AI
 assistant wrote the driver.)
 
-A Findings bullet in an experiment README, a line in the research log's decision log, a caveat on a
-theme's Status & decisions — any of these can slide into asserting what a result *means* rather than
+A dated entry in an experiment README, a line in the research log's decision log, a note on a
+theme's open items — any of these can slide into asserting what a result *means* rather than
 what it *shows*. The lightweight tool that keeps the line visible is a **signed blockquote**, dropped
 in wherever the *why* actually belongs:
 
