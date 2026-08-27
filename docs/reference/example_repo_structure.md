@@ -49,14 +49,13 @@ your_project/
 │       └── details/
 │           └── 260701_edge_case_sweep/
 ├── figures/
+│   ├── README.md
 │   ├── fig1_accuracy_comparison/
-│   │   ├── README.md
 │   │   ├── make_fig1.py
 │   │   └── details/
 │   │       ├── 260810_v1/
 │   │       └── 260815_v2/
 │   └── fig2_edge_case_illustration/
-│       ├── README.md
 │       ├── make_fig2.py
 │       └── details/
 │           └── 260812_v1/
@@ -69,8 +68,7 @@ your_project/
 │   │   └── 02_edge-case-handling_overview.md
 │   ├── experiment_summaries/
 │   └── figure_overviews/
-│       ├── fig1_accuracy_comparison_overview.md
-│       └── fig2_edge_case_illustration_overview.md
+│       └── figures_overview.md
 ├── sample_data/
 │   └── example.h5
 ├── .claude/
@@ -164,21 +162,24 @@ run above:
 
 ## `figures/` mid-manuscript
 
-`figures/fig1_accuracy_comparison/` follows the identical pattern — a driver, a `details/` folder with
-dated attempts (`260810_v1/`, then a revised `260815_v2/` after it was decided to switch to a log-scale
-axis), and a `README.md` that *is* the paper's actual figure-outline page for this figure, caption
-included. Nothing here is a new mechanism — it's `experiments/`'s own discipline, reused
-([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)). Its README renders into
-the doc site the same way an experiment theme's does, so the manuscript's whole figure outline is
-viewable and shareable as a Sphinx page, not just as files sitting in the repo.
+`figures/README.md` is the paper's actual figure outline — every figure and supplementary figure, in
+order, with its full caption, written once. `figures/fig1_accuracy_comparison/` holds only the
+generation code, once that figure is built: a driver and a `details/` folder with dated attempts
+(`260810_v1/`, then a revised `260815_v2/` after it was decided to switch to a log-scale axis) — no
+separate README, so the caption is never duplicated. The `details/` discipline itself is nothing new
+— it's `experiments/`'s own convention, reused
+([22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)). `figures/README.md` renders
+into the doc site the same way an experiment theme's README does, so the manuscript's whole figure
+outline is viewable and shareable as a Sphinx page, not just as files sitting in the repo.
 
 ## What the doc site generates from this
 
 `docs/experiment_overviews/01_baseline-comparison_overview.md` is a thin page whose entire body is a
 MyST `{include}` of `experiments/01_baseline-comparison/README.md` — so the Findings section above,
 figure and all, appears on the site exactly as written, with no separate copy to keep in sync
-([readme_to_doc_site.md](readme_to_doc_site.md)). `docs/figure_overviews/fig1_accuracy_comparison_overview.md`
-works identically, `{include}`-ing `figures/fig1_accuracy_comparison/README.md` instead. `docs/api_reference.md`
+([readme_to_doc_site.md](readme_to_doc_site.md)). `docs/figure_overviews/figures_overview.md`
+works identically, `{include}`-ing the single root `figures/README.md` instead — one page for the
+whole figure outline, not one per figure. `docs/api_reference.md`
 is the autodoc page generated from `src/yourpkg/`'s docstrings — named distinctly from the repo-root
 `references.md` ledger of external citations, so the two are never confused. Building `sphinx-build docs docs/_build/html` turns all of
 this into one browsable site: the library's API reference, the lab notebook's current findings, and the

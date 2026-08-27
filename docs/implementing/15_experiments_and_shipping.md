@@ -27,7 +27,8 @@ your_project/
 │   ├── _common/          shared harness: comparison, plotting, logging scripts — not method code
 │   └── <topic>/          theme folder: README, driver script(s) for this study, nested dated runs
 ├── docs/               autodoc doc site for the library (20_documentation_and_doc_sites.md)
-├── figures/            (once drafting a manuscript) same theme + dated-runs discipline as experiments/
+├── figures/            (once drafting a manuscript) README.md is the whole figure outline;
+│                         figures/<fig-slug>/ holds generation code once a figure is built
 └── pyproject.toml
 ```
 
@@ -35,10 +36,12 @@ your_project/
 
 That import only works once `src/<yourpkg>/` is installed as an editable package (`pip install -e .`) — a one-time setup step, not a distribution decision. [21_packaging.md](../disseminating/21_packaging.md) covers it; if you're using this layout at all, you already need that part of it.
 
-A third folder, `figures/`, often joins these two once you start drafting a manuscript — the same
-theme-and-dated-runs discipline as `experiments/`, just for paper figures instead of research
-questions. [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md) covers archiving it, and why
-keeping one pays off well beyond the writing itself.
+A third folder, `figures/`, often joins these two once you start drafting a manuscript. Its
+`README.md` is the whole figure outline — every figure and supplementary figure, in order, with its
+full caption — written once, not duplicated per figure. Once a figure has real generation code, it
+gets its own `figures/<fig-slug>/` folder for the driver and dated `details/`, the same discipline as
+`experiments/`, but no separate narrative file. [22_publishing_a_paper.md](../disseminating/22_publishing_a_paper.md)
+covers archiving it, and why keeping one pays off well beyond the writing itself.
 
 `src/`, `experiments/`, and `figures/` don't need the same visibility. The exploratory and archival work
 in this doc is usually private for a long time; the shipped library it eventually produces is often

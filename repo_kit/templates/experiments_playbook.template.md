@@ -62,6 +62,23 @@ a second entry beside the first. The signed-blockquote convention (`> **<initial
 with a `_pending_` placeholder when there's no answer yet) carries the *why* wherever it belongs:
 a README finding, or an entry in the research log's decision log.
 
+`figures/README.md` is the manuscript's whole figure outline — every figure and supplementary
+figure, in order, with its full caption — not a per-figure file. Once a figure has real generation
+code, give it its own `figures/<fig-slug>/` folder for the driver and `details/` provenance only; the
+caption stays authored once, in the root README, never duplicated there. Your job on this file is
+placement and verbatim captioning, not narration: drop in the figure the scientist specifies with the
+caption they give you, and don't add your own description, rationale, or commentary on what's
+missing.
+
+## Writing register
+
+Whatever text you write into a README — a Findings bullet, a figure-outline entry, a status note —
+keep it short and factual: what ran, on what data, with what read-out, in about the length a
+scientist writing it by hand would use. Leave commentary on gaps, next steps, or what a result means
+to the scientist, in their own words, in the signed blockquote above — see
+`16_running_a_dry_lab_experiment.md` → "Keep the assistant's writing short and factual" in the
+research-software-field-guide.
+
 ## Exploratory notebooks
 
 A notebook exploring an idea has the same reproducibility problem a driver script solves with

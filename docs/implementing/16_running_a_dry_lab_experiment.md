@@ -215,6 +215,19 @@ gets its own manifest and metrics, preserved in `details/` regardless; there's n
 that decides for you whether a run becomes a documented finding at all — that stays your call, made
 fresh each time a run finishes.
 
+## Keep the assistant's writing short and factual
+
+An assistant filling in a README tends to write more than the record needs: a paragraph of framing
+before the point, a recap of context the file already shows two lines up, or a list of gaps and open
+questions nobody asked for. Each of those sentences is something the scientist has to read past to
+find the actual result, and a README that takes ten minutes to read stops getting read — and,
+eventually, stops getting written by the person who owns it.
+
+Ask the assistant for exactly what belongs in the record: what ran, on what data, with what
+read-out, in one or two sentences — about the length a scientist writing it by hand would use. A
+running commentary on what looks unresolved or worth trying next is the scientist's call, made in
+their own words, in the signed blockquote below.
+
 ## Interpretation stays with the scientist
 
 A machine can write *what ran and what it measured* — the manifest, the metrics, a figure — but only

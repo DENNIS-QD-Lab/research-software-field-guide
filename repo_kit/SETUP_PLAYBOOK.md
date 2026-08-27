@@ -223,17 +223,21 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
 ### B12 · Add a `figures/` folder for manuscript drafting
 - **When:** drafting a specific submission; more than a couple of ad hoc figure scripts are floating
   around.
-- **Steps:** one folder per figure (or figure group) under `figures/`, same theme + `details/`
-  discipline as `experiments/` — a driver that imports from `src/`, dated attempts accumulating in
-  `details/`, the current draft embedded in the folder's `README.md` alongside its caption. Wire the
-  README into the doc site the same way an experiment theme's is: a
-  `docs/figure_overviews/<fig-slug>_overview.md` page whose body is a MyST `{include}` of the
-  figure's own README, so the manuscript's whole figure outline is browsable on the same site.
+- **Steps:** one root `figures/README.md` as the whole figure outline — every figure and
+  supplementary figure, in order, with its full caption, written once (copy
+  [figures_readme.template.md](templates/figures_readme.template.md)). Once a figure has real
+  generation code, give it its own `figures/<fig-slug>/` folder — the same `details/` discipline as
+  `experiments/`, a driver that imports from `src/`, dated attempts accumulating in `details/` — but
+  no separate README; the caption stays authored once, in the root outline. Wire the outline into the
+  doc site as a single `docs/figure_overviews/figures_overview.md` page whose body is a MyST
+  `{include}` of `figures/README.md`.
   ([22](../docs/disseminating/22_publishing_a_paper.md),
   [16](../docs/implementing/16_running_a_dry_lab_experiment.md))
-- **Verify:** the doc site renders the figures/README page with the current image and caption visible.
-- **Don't:** overwrite a figure in place when it stops earning its spot — let the superseded attempt
-  sit in `details/`, same as any other run.
+- **Verify:** the doc site renders the figures/README page with every current caption visible.
+- **Don't:** let generation code grow its own README that duplicates the caption — the root outline
+  is the only narrative copy. Don't overwrite a figure's source data/plot in place when a driver's
+  rerun stops earning its spot, either — let the superseded attempt sit in `details/`, same as any
+  other run.
 
 ## When a repo already diverges from the standard
 
