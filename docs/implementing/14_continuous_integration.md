@@ -56,7 +56,7 @@ Each step must succeed for the job to pass. `ruff format --check` reports format
 
 ## Test on more than one operating system
 
-Teammates often work on a mix of macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. So a matrix over operating systems is **strongly recommended.** A *matrix* runs the same job once per combination you list:
+Teammates often work on a mix of macOS and Windows, and OS-specific bugs are real: path separators (`/` versus `\`), line endings, and small floating-point differences all cause code that passes on one to fail on the other. A *matrix* runs the same job once per combination you list, so it catches those bugs before a teammate does:
 
 ```yaml
 jobs:
@@ -71,30 +71,61 @@ jobs:
 
 This runs the whole job twice, once on each OS, and reports each separately. You can also matrix over Python versions (`python-version: ["3.11", "3.12"]`), which matters most for pure-Python projects; when your environment file pins a specific Python, the OS matrix is the one that earns its keep.
 
-## Catching drift with a scheduled run
+### A caveat on the cost of the CI testing
 
-The triggers above, `push` and `pull_request`, catch *your* changes: a broken test the moment you
-introduce it. They do not catch the world changing underneath a repo nobody has touched — a new
-release of a dependency that silently changes behavior, exactly the ruff-0.16 story in
-[11_code_quality_tools.md](11_code_quality_tools.md). A `schedule` trigger runs the same checks on a
-timer, independent of anyone pushing:
+GitHub host servers perform workflow Actions such as the CI testing and generating Sphinx doc sites (covered in 20) for free... to a point. Knowing your own repo/organization limits will help you choose which workflows to run at what frequency (i.e., run the cheap workflows automatically every PR, save the expensive ones for when they matter to you).
+
+GitHub meters runner time against a monthly minutes allotment, and the meter runs at different speeds depending on the operating system: a Linux runner counts each minute as 1 minute, Windows as 2, and macOS as 10. A test job that takes six real minutes costs 6 minutes of the allotment on Linux, 12 on Windows, and 60 on macOS. That allotment is shared organization-wide, not per repository: every private repo draws against the same monthly pool, 2,000 minutes on GitHub's Free plan. Public repositories are exempt from the pool; GitHub-hosted runners are free and unlimited for public repositories, so this only matters for private repos (like internally shared lab notebook repos).
+
+Run the macOS and Windows legs on every push and every commit to an open pull request, across a few private repos in the same organization, and the monthly allotment is gone within days, before anyone even gets to a release.
+
+### Minutes management strategy
+
+To test early and often while stretching those Action minutes, keep `ubuntu-latest` on `push` and `pull_request`: 1x cost, and it catches the large majority of real bugs. Move macOS and Windows to a trigger that fires far less often, for example a weekly `schedule` and/or a `workflow_dispatch` to run the full matrix by hand before tagging a release.
 
 ```yaml
 on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
   schedule:
-    - cron: "0 6 * * 1" # every Monday at 06:00 UTC
+    - cron: "0 6 * * 1"   # every Monday at 06:00 UTC
+
+jobs:
+  test:                          # every push and PR: cheap, catches most bugs
+    runs-on: ubuntu-latest
+    # ...the same steps as the minimal workflow above
+
+  test-multios:                  # weekly, or on demand before a release
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    # ...the same steps as the minimal workflow above
 ```
 
-Add this alongside `push`/`pull_request`, not instead of them — a scheduled run against `main` on an
-unpinned environment surfaces a dependency-caused break within a week, instead of whenever someone
-next happens to push.
+The `test` job carries no `if`, so it runs on every trigger, including the weekly schedule. That means the same cron entry also catches dependency drift (below) on the cheap runner, at no extra cost.
+
+An organization owner can see which repository and which workflow is actually spending the allotment under the organization's Settings → Billing and plans → Usage. That page is the fastest way to find the real cost center once a monthly allotment runs out early: usage is rarely spread evenly across repos, and is often concentrated in one matrix job whose expensive steps — a full docs build or a slow test suite — run duplicated across every OS leg instead of once.
+
+## Catching drift with a scheduled run
+
+The triggers above, `push` and `pull_request`, catch *your* changes: a broken test the moment you
+introduce it. They do not catch the world changing underneath a repo nobody has touched: a new
+release of a dependency that silently changes behavior, exactly the ruff-0.16 story in
+[11_code_quality_tools.md](11_code_quality_tools.md). The `schedule` trigger added above runs the same
+checks on a timer, independent of anyone pushing, so a dependency-caused break surfaces within a week
+instead of whenever someone next happens to push.
 
 ## Reading a failed run
 
 When CI fails, a red X appears next to the commit or on the PR. To find out why:
 
 1. Click the red X, or open the repo's **Actions** tab and click the failing run.
-2. Click the job that failed (for example `test (windows-latest)`).
+2. Click the job that failed (for example `test-multios (windows-latest)`).
 3. Expand the step with the red X. The log shows exactly what your terminal would have shown, including the pytest or ruff output.
 
 The most common first failure is a real "works on my machine" bug: a package that ran locally because you had it installed, but is missing from the environment file. The fix is to add it to the environment file, as your project's coding-standards file (here, [CLAUDE.md](../../CLAUDE.md)) requires, not to install it on the runner by hand.
