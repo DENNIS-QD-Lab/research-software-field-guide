@@ -4,9 +4,41 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday at 06:00 UTC
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0} # login shell, so `conda activate` works
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: fieldguide
+
+      - name: Lint and format check
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Run tests
+        run: pytest
+
+  # macOS and Windows runners bill against a shared minutes pool at 10x and 2x the Linux
+  # rate (docs/implementing/14_continuous_integration.md, "Why the matrix costs more than
+  # it looks like"), so this leg runs weekly and on demand instead of on every push.
+  test-multios:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -14,7 +46,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        shell: bash -l {0} # login shell, so `conda activate` works
+        shell: bash -l {0}
     steps:
       - uses: actions/checkout@v4
 
