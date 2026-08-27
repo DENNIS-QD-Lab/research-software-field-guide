@@ -71,17 +71,17 @@ jobs:
 
 This runs the whole job twice, once on each OS, and reports each separately. You can also matrix over Python versions (`python-version: ["3.11", "3.12"]`), which matters most for pure-Python projects; when your environment file pins a specific Python, the OS matrix is the one that earns its keep.
 
-### Why the matrix costs more than it looks like
+### A caveat on the cost of the CI testing
 
-GitHub meters runner time against a monthly minutes allotment, and the meter runs at different speeds depending on the operating system: a Linux runner counts each minute as 1 minute, Windows as 2, and macOS as 10. A test job that takes six real minutes costs 6 minutes of the allotment on Linux, 12 on Windows, and 60 on macOS.
+GitHub host servers perform workflow Actions such as the CI testing and generating Sphinx doc sites (covered in 20) for free... to a point. Knowing your own repo/organization limits will help you choose which workflows to run at what frequency (i.e., run the cheap workflows automatically every PR, save the expensive ones for when they matter to you).
 
-That allotment is shared organization-wide, not per repository: every private repo draws against the same monthly pool, 2,000 minutes on GitHub's Free plan. Public repositories are exempt from the pool; GitHub-hosted runners are free and unlimited there, so this only matters once a repo goes private.
+GitHub meters runner time against a monthly minutes allotment, and the meter runs at different speeds depending on the operating system: a Linux runner counts each minute as 1 minute, Windows as 2, and macOS as 10. A test job that takes six real minutes costs 6 minutes of the allotment on Linux, 12 on Windows, and 60 on macOS. That allotment is shared organization-wide, not per repository: every private repo draws against the same monthly pool, 2,000 minutes on GitHub's Free plan. Public repositories are exempt from the pool; GitHub-hosted runners are free and unlimited for public repositories, so this only matters for private repos (like internally shared lab notebook repos).
 
 Run the macOS and Windows legs on every push and every commit to an open pull request, across a few private repos in the same organization, and the monthly allotment is gone within days, before anyone even gets to a release.
 
-### Gate the expensive legs instead of running them on every push
+### Minutes management strategy
 
-Keep `ubuntu-latest` on `push` and `pull_request`: 1x cost, and it catches the large majority of real bugs. Move macOS and Windows to a trigger that fires far less often, a weekly `schedule`, plus `workflow_dispatch` so someone can run the full matrix by hand before tagging a release.
+To test early and often while stretching those Action minutes, keep `ubuntu-latest` on `push` and `pull_request`: 1x cost, and it catches the large majority of real bugs. Move macOS and Windows to a trigger that fires far less often, for example a weekly `schedule` and/or a `workflow_dispatch` to run the full matrix by hand before tagging a release.
 
 ```yaml
 on:
