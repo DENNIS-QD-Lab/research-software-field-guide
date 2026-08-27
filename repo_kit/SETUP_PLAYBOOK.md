@@ -129,10 +129,10 @@ Each recipe is independent: *when to use → steps → verify → don't*. Apply 
     `manifest.yaml` (git commit + dirty flag, params, inputs + checksum) and `metrics.csv`. **PRESERVE
     by default** (a rerun gets a fresh `_NN`; pass `overwrite=True` to refresh a run in place instead).
     The theme's own `experiments/<theme-slug>/README.md` (from B5's `_TEMPLATE.md`) is the one
-    narrative document — findings, embedded figures, interpretation — written once and updated in place,
-    never regenerated per run. A run's figure worth keeping visible gets embedded directly in the
-    README's Findings section, from `details/<run_id>/`, with a short italic caption noting the run id —
-    a caption rather than a heading, so it does not become a nav entry.
+    narrative document — a chronological log, embedded figures, interpretation — written once and
+    updated in place, never regenerated per run. A run's figure worth keeping visible gets embedded
+    directly in the theme's README, from `details/<run_id>/`, with a short italic caption noting the
+    run id — a caption rather than a heading, so it does not become a nav entry.
     ([16](../docs/implementing/16_running_a_dry_lab_experiment.md))
   - Also create a root-level `references.md`: the reference ledger, one row per external source with a
     *why it mattered here* note. A table header and a first row is enough to start.

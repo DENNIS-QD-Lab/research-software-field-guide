@@ -19,7 +19,7 @@ does nothing but include it:
 ````
 
 There is no separate "promote this run" step, no per-run stub page, and no environment variable
-gating whether a page exists. If the README has a Findings section with an embedded figure, that
+gating whether a page exists. If the README has a dated entry with an embedded figure, that
 figure is on the site the next time it's built — the only editorial decision is what you write into
 the README in the first place (see the practice-level doc linked above).
 
@@ -79,9 +79,9 @@ when you actually need to share something.
 
 Occasionally a single read-out is genuinely too complex for a README's figure-and-caption pattern — a
 manuscript-figure-quality walkthrough with several panels, each needing its own explanation, meant to
-be a citable, occasionally-updated centerpiece rather than one Findings entry among several. For that
+be a citable, occasionally-updated centerpiece rather than one entry among several. For that
 rare case, a hand-authored page under `docs/experiment_summaries/<name>.md` (optionally executable via
 myst-nb, dynamically locating its run rather than hardcoding a run id — see your repo's
 `experiments/_common/` for a worked example if one exists) is a reasonable, deliberate exception.
-Link to it from the theme's README rather than letting it replace the README's own Findings section,
+Link to it from the theme's README rather than letting it replace the README's own log,
 and keep it rare: if every finding gets one of these, the clutter this doc describes is back.
