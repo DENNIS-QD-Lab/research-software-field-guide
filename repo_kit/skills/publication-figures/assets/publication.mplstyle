@@ -1,0 +1,58 @@
+# publication.mplstyle — brand-neutral defaults for print-ready scientific figures.
+#
+# Load once, before building a figure:
+#     import matplotlib.pyplot as plt
+#     plt.style.use("path/to/publication.mplstyle")
+#
+# These are STARTING defaults, chosen to be defensible for most journals. Edit the palette, the
+# font, the sizes, and the widths for your target journal or lab, then re-check the palette with
+# scripts/check_palette.py. references/layout.md and references/palette.md explain the reasoning
+# behind each value.
+
+# --- Font -------------------------------------------------------------------------------------
+# A sans-serif stack that degrades gracefully: Arial or Helvetica when installed, otherwise
+# DejaVu Sans, which ships with matplotlib so a figure built on any machine still renders. To make
+# math text match the same font, set mathtext.fontset to custom and point the mathtext.* families
+# at it; the DejaVu default below is chosen only because it is always present.
+font.family: sans-serif
+font.sans-serif: Arial, Helvetica, DejaVu Sans
+font.size: 10
+mathtext.fontset: dejavusans
+mathtext.default: regular
+
+# --- Type sizes -------------------------------------------------------------------------------
+# Points, read at the figure's final printed size. Because the sizes are tied to that size, a
+# post-hoc crop or resize (see savefig.bbox) changes them on the page; set figsize once instead.
+axes.titlesize: 11
+axes.titleweight: bold
+axes.labelsize: 11
+axes.labelweight: bold
+xtick.labelsize: 10
+ytick.labelsize: 10
+legend.fontsize: 9
+
+# --- Color ------------------------------------------------------------------------------------
+# Categorical cycle: the Okabe & Ito colorblind-safe set. Continuous default: viridis, which is
+# perceptually uniform and colorblind-safe. references/palette.md gives the names and the reasons.
+axes.prop_cycle: cycler('color', ['0072B2', 'E69F00', '009E73', 'D55E00', '56B4E9', 'CC79A7', 'F0E442', '000000'])
+image.cmap: viridis
+
+# --- Lines and axes ---------------------------------------------------------------------------
+lines.linewidth: 1.5
+lines.markersize: 5
+axes.linewidth: 0.8
+axes.spines.top: False
+axes.spines.right: False
+legend.frameon: False
+axes.grid: False
+
+# --- Export -----------------------------------------------------------------------------------
+# A high-resolution raster for quick viewing plus, separately, a vector PDF for the manuscript.
+# fonttype 42 embeds the real font outlines rather than Type 3, so text stays selectable and
+# renders identically on a reviewer's machine. bbox standard keeps the size you set at creation.
+savefig.dpi: 600
+savefig.bbox: standard
+savefig.transparent: False
+pdf.fonttype: 42
+ps.fonttype: 42
+figure.dpi: 150
