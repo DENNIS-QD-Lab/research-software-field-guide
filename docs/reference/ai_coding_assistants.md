@@ -32,6 +32,18 @@ There are two separate memory mechanisms, and it helps not to confuse them:
 
 In this context, your research cannot rely on the local AI auto-memory. Anything that needs to be shared, reviewed, or reproduced like a result, a research decision, or an experimental plan belongs in a file that is actually in the repo (the standards file, or the research log of [16_running_a_dry_lab_experiment.md](../implementing/16_running_a_dry_lab_experiment.md)). 
 
+## Skills: a procedure the assistant loads only when it applies
+
+`CLAUDE.md` is read into every session, which is right for a small set of standards that are always relevant but wrong for a long procedure you only reach for occasionally — the steps for building a publication figure, a release checklist, a data-import routine. A **skill** is where that kind of procedure lives. It is a folder containing a `SKILL.md` file: a one-line description of when the skill applies, followed by the instructions themselves. The assistant keeps only the description in view during a normal session and reads the full instructions when a task matches, so a long procedure costs almost nothing until the moment it is needed.
+
+Skills live in the same two places as `CLAUDE.md`, with the same sharing behavior. A **project skill** sits in the repo at `.claude/skills/<name>/` and is committed, so everyone who clones the repo has it. A **personal skill** sits at `~/.claude/skills/<name>/` on your own machine and applies across all of your projects. Claude Code also ships some skills built in, and others can be installed as plugins, so a few are available without belonging to any repo.
+
+The assistant applies a skill on its own when a task matches the description, and you can also invoke one directly by typing `/<name>`. Because that description is what the assistant matches against, a skill is reached for only when its description says plainly *when* it applies, in the concrete terms a real request would use.
+
+A skill can carry more than instructions. Beside `SKILL.md` it can bundle reference pages the assistant opens only when relevant, scripts it runs, and files it copies into the work — a style file, a template, a checker. The [`repo_kit/skills/publication-figures/`](../../repo_kit/skills/publication-figures/SKILL.md) skill in this repo is a worked example: a workflow for building a manuscript figure, a matplotlib style file, reference pages on color and layout, and a script that checks a palette for colorblind legibility. Copying that folder into a repo's `.claude/skills/` gives every figure the same standard, with the palette and column widths edited to the target journal. The tool's own [skills documentation](https://code.claude.com/docs/en/skills) has the exact `SKILL.md` fields.
+
+Use a skill for a multi-step procedure that should run the same way each time and that you would otherwise re-explain; keep a single standing fact or naming rule in `CLAUDE.md`, where it stays in view every session.
+
 ## Using this guide as a live reference while you build
 
 A useful setup for your own repos: open **this field guide alongside the repo you are building** in one multi-root workspace, so the assistant can read both at once ([10_from_scripts_to_pipelines.md](../implementing/10_from_scripts_to_pipelines.md) covers multi-root workspaces). This guide then acts as the reference — the assistant reads its docs and `repo_kit/` for how to set things up and what the standards are, while nearly all the actual editing happens in your new repo.
