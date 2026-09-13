@@ -68,7 +68,7 @@ Topical references you'll return to. They live in [`reference/`](reference/). No
 | Doc | What it covers |
 |-----|----------------|
 | [advanced_git.md](reference/advanced_git.md) | Sharp Git tools for longer-lived branches: `git stash`, `git rebase` (defensively), `git cherry-pick`, and keeping a feature branch current. A catalog to look things up in, not a tutorial. |
-| [ai_coding_assistants.md](reference/ai_coding_assistants.md) | Installing an AI coding assistant, essential session commands (`/clear`, `/compact`, permissions), managing context and cost, and when multi-agent delegation helps versus adds overhead. |
+| [ai_coding_assistants.md](reference/ai_coding_assistants.md) | Installing an AI coding assistant, essential session commands (`/clear`, `/compact`, permissions), managing context and cost, packaging a repeatable procedure as a skill, and when multi-agent delegation helps versus adds overhead. |
 | [command_line_reference.md](reference/command_line_reference.md) | More terminal commands than the onboarding doc covers, organized by category, including how to read a compound command in an AI assistant's permission prompt. |
 | [example_repo_structure.md](reference/example_repo_structure.md) | A full, fleshed-out (synthetic) example repo: several experiment themes, multiple runs each, a `figures/` folder, and what the generated doc site looks like from all of it. |
 | [git_recovery.md](reference/git_recovery.md) | Recovering from common Git mistakes: work done on the wrong branch, a bad commit, a file you need back, and other "what just happened" moments. |

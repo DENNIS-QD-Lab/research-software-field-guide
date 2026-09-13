@@ -29,6 +29,16 @@ so they ship as fill-in templates, not static files):
 - [CONTRIBUTING.template.md](templates/CONTRIBUTING.template.md) → target `CONTRIBUTING.md` (only once more than one person works in the repo)
 - [CITATION.template.cff](templates/CITATION.template.cff) → target `CITATION.cff` (once publishing — see [22_publishing_a_paper.md](../docs/disseminating/22_publishing_a_paper.md))
 
+Plus [`skills/`](skills/) — installable Claude Code skills (a `SKILL.md` instruction set the
+assistant loads on demand when a task matches its description), copied into a target repo's
+`.claude/skills/` and committed, so a whole team inherits them on clone:
+
+- [publication-figures/](skills/publication-figures/) → target `.claude/skills/publication-figures/` —
+  a brand-neutral standard for publication-ready figures: a colorblind-safe palette, single- and
+  double-column widths, A/B/C panel labels, journal typography, and vector export, bundled with a
+  matplotlib style file and a palette checker. It loads whenever a manuscript figure is being built.
+  Edit its palette, widths, and fonts for your own journal or lab.
+
 ## How to use it
 
 **Adopting the standard in a repo (new or existing):** open the target repo alongside this one and ask
@@ -39,6 +49,10 @@ your AI assistant to follow [SETUP_PLAYBOOK.md](SETUP_PLAYBOOK.md) —
 
 **Just want the conventions?** Copy [CLAUDE.template.md](CLAUDE.template.md) into your repo as `CLAUDE.md`,
 fill the `<placeholders>`, and the assistant follows it every session — no other setup required.
+
+**Want the figure standard?** Copy [`skills/publication-figures/`](skills/publication-figures/) into
+your repo's `.claude/skills/`; the assistant applies it whenever it builds a manuscript figure, and
+you edit the palette, widths, and fonts to match your journal.
 
 **Want the reasoning first?** Read [STANDARD.md](STANDARD.md); it links each decision to the
 implementing-track doc that teaches it in full.
