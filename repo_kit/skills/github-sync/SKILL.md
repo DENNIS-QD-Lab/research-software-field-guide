@@ -30,10 +30,17 @@ access before reporting anything about the remote:
   permitted"), this session cannot reach GitHub.
 - Run `gh auth status`. If it fails, this session cannot open or edit pull requests.
 
+A session that runs commands in a sandbox may let network commands out only when each one is sent
+on its own. Before concluding that GitHub is out of reach, change into the repository's directory
+with one command, then run `git fetch` (and later each `git push` or `gh` command) as a separate
+command by itself. The same command chained after `cd … &&`, given `-C <path>`, or placed inside a
+loop can run inside the sandbox and fail on credentials, which looks exactly like having no access.
+
 Then work in one of two modes:
 
-- **Direct.** Fetch the repositories yourself. Pushes, pull requests, and branch deletions are
-  visible to other people, so describe them and get the person's agreement before running them.
+- **Direct.** Fetch the repositories yourself, one standalone command per repository. Pushes, pull
+  requests, and branch deletions are visible to other people, so describe them and get the
+  person's agreement before running them.
 - **Hand-off.** Ask the person to fetch, and wait for them to say it is done before reading
   anything. Give them one command that covers every repository, for example
   `for r in ~/code/analysis ~/code/pipeline; do git -C "$r" fetch --all --prune; done`.

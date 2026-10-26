@@ -49,6 +49,11 @@ data files committed again each time they are remade.
    git ls-remote origin <branch>
    ```
 
+   If the session's sandbox exempts only standalone git commands (SKILL.md, step 1), a loop like
+   this runs inside the sandbox and cannot authenticate. Send each stage as its own
+   `git push origin "<commit>:refs/heads/<branch>"` command instead, or give the loop to the person
+   to run.
+
    Two details matter. Write `"${c}:refs/…"` with braces: in zsh, an unbraced `$c:r…` is read as a
    filename modifier and the commit id is mangled. And when resuming after a stage fails, start the
    list at the first commit the remote does not have (check with `git ls-remote`). Pushing a commit

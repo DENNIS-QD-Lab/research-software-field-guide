@@ -11,6 +11,8 @@ section that does not apply to you.
   (`direct`: the assistant can fetch, push, and use `gh` itself, after asking.
   `hand-off`: the assistant cannot reach GitHub from its session, so it asks me to fetch and gives
   me every push and `gh` command to run.)
+- Sandbox: network git and `gh` are exempt only as standalone commands run from the repository's
+  directory (delete this line if you don't use a sandbox).
 
 ## Shell
 
