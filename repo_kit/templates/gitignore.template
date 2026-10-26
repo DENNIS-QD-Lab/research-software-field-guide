@@ -49,3 +49,8 @@ docs/_build/
 
 # Machine-specific paths — never committed (copy local_paths_example.py).
 /local_paths.py
+
+# Claude Code: personal settings stay on your machine. Shared skills under
+# .claude/skills/ are committed; a personal LOCAL.md beside one is not.
+.claude/settings.local.json
+.claude/skills/*/LOCAL.md

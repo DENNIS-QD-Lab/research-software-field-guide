@@ -253,6 +253,9 @@ $RECYCLE.BIN/
 # Claude Code local settings: personal permission allowlists, not shared.
 .claude/settings.json
 .claude/settings.local.json
+# Personal settings beside a shared skill (e.g. github-sync's LOCAL.md), not shared.
+.claude/skills/*/LOCAL.md
+repo_kit/skills/*/LOCAL.md
 
 # Local pre-release review scratch files: never committed.
 PRE_RELEASE_REVIEW.md
