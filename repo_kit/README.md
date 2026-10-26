@@ -38,6 +38,13 @@ assistant loads on demand when a task matches its description), copied into a ta
   double-column widths, A/B/C panel labels, journal typography, and vector export, bundled with a
   matplotlib style file and a palette checker. It loads whenever a manuscript figure is being built.
   Edit its palette, widths, and fonts for your own journal or lab.
+- [github-sync/](skills/github-sync/) → target `~/.claude/skills/github-sync/` (personal, since it
+  works across all your repos) or a repo's `.claude/skills/github-sync/` — finds what is unpushed,
+  unmerged, or stale across your repos, writes the push and pull-request commands with real titles
+  and descriptions, and cleans up after merges, bundled with a repo survey script and a guide to
+  pushes that fail partway. Your own setup (whether the assistant can reach GitHub, your shell,
+  network limits, other people's branches) goes in a personal `LOCAL.md` beside it, copied from
+  `LOCAL.example.md`.
 
 ## How to use it
 
@@ -53,6 +60,10 @@ fill the `<placeholders>`, and the assistant follows it every session — no oth
 **Want the figure standard?** Copy [`skills/publication-figures/`](skills/publication-figures/) into
 your repo's `.claude/skills/`; the assistant applies it whenever it builds a manuscript figure, and
 you edit the palette, widths, and fonts to match your journal.
+
+**Want help getting your repos onto GitHub?** Copy [`skills/github-sync/`](skills/github-sync/)
+into `~/.claude/skills/`, then copy its `LOCAL.example.md` to `LOCAL.md` and fill in your own
+setup; ask "what needs to be pushed?" and the assistant surveys your repos and writes the commands.
 
 **Want the reasoning first?** Read [STANDARD.md](STANDARD.md); it links each decision to the
 implementing-track doc that teaches it in full.
